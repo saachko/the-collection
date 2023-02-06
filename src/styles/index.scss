@@ -59,7 +59,9 @@ footer {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   font-weight: $fontWeightBold;
   color: var(--title-color);
 }
@@ -76,6 +78,8 @@ h3 {
   font-size: $fontSizeH3;
 }
 
-h4 {
+h4,
+h5,
+h6 {
   font-size: $fontSizeH4;
 }
