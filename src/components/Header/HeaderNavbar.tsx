@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React, { memo } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 
 import { navLinks } from '../../utils/constants';
@@ -10,6 +11,7 @@ import styles from './Header.module.scss';
 function HeaderNavbar() {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { t } = useTranslation('translation');
 
   return (
     <Navbar>
@@ -27,7 +29,7 @@ function HeaderNavbar() {
                 [styles.active]: currentPath === link.path,
               })}
             >
-              {link.name}
+              {t(link.name)}
             </NavLink>
           ))}
         </Nav>

@@ -7,6 +7,7 @@
   border-radius: 0;
   border-color: var(--primary-color);
   transition: $transition;
+  min-width: 137px;
 
   &:hover {
     opacity: $hoverOpacity;
@@ -27,6 +28,7 @@
   border-color: var(--text-color);
   transition: $transition;
   color: var(--text-color);
+  min-width: 137px;
 
   &:hover {
     opacity: $hoverOpacity;

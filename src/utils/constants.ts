@@ -3,19 +3,19 @@ import NavLink from 'ts/interfaces';
 const navLinks: NavLink[] = [
   {
     id: '1',
-    name: 'Home',
+    name: 'header.home',
     path: '/',
   },
   {
     id: '2',
-    name: 'Collections',
+    name: 'header.collections',
     path: '/collections',
   },
 ];
 
 const privateLink: NavLink = {
   id: '3',
-  name: 'Users',
+  name: 'header.users',
   path: '/users',
 };
 

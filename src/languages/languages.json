@@ -1,0 +1,24 @@
+{
+  "en": {
+    "translation": {
+      "header": {
+        "home": "Home",
+        "collections": "Collections",
+        "users": "Users",
+        "signin": "Sign In",
+        "signup": "Sign Up"
+      }
+    }
+  },
+  "ru": {
+    "translation": {
+      "header": {
+        "home": "Главная",
+        "collections": "Коллекции",
+        "users": "Пользователи",
+        "signin": "Вход",
+        "signup": "Регистрация"
+      }
+    }
+  }
+}
