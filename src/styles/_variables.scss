@@ -11,6 +11,7 @@ html[data-theme='light'] {
   --text-color: #555671;
   --text-color-light: #9797a1;
   --text-color-button: #ffffff;
+  --transparent: transparent;
 }
 
 html[data-theme='dark'] {
@@ -26,6 +27,7 @@ html[data-theme='dark'] {
   --text-color: #555671;
   --text-color-light: #9797a1;
   --text-color-button: #ffffff;
+  --transparent: transparent;
 }
 
 $fontInter: 'Inter', sans-serif;
@@ -45,3 +47,5 @@ $fontWeightMedium: 500;
 $fontWeightBold: 700;
 
 $transition: all 0.2s ease-out;
+$hoverOpacity: 0.8;
+$activeOpacity: 0.5;
