@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function HomePage() {
   return <main>HomePage</main>;
 }
 
-export default HomePage;
+export default memo(HomePage);

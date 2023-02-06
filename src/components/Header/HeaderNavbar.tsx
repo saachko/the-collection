@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { memo } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -33,4 +33,4 @@ function HeaderNavbar() {
   );
 }
 
-export default HeaderNavbar;
+export default memo(HeaderNavbar);

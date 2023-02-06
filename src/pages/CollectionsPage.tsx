@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function CollectionsPage() {
   return <div>CollectionsPage</div>;
 }
 
-export default CollectionsPage;
+export default memo(CollectionsPage);

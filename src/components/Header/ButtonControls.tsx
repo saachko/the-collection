@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function ButtonControls() {
   return <div>ButtonControls</div>;
 }
 
-export default ButtonControls;
+export default memo(ButtonControls);

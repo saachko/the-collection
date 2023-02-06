@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function SignUpPage() {
   return <div>SignUpPage</div>;
 }
 
-export default SignUpPage;
+export default memo(SignUpPage);

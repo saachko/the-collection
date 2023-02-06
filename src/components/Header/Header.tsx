@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import ButtonControls from './ButtonControls';
 import styles from './Header.module.scss';
@@ -15,4 +15,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);

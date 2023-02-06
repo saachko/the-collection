@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function NotFoundPage() {
   return <div>NotFoundPage</div>;
 }
 
-export default NotFoundPage;
+export default memo(NotFoundPage);
