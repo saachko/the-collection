@@ -35,6 +35,8 @@ header {
   display: grid;
   grid-template: auto / 1fr minmax(300px, 1440px) 1fr;
   grid-template-areas: '. headerContent .';
+  background-color: var(--background-primary-color);
+  border-bottom: 1px solid var(--lines-color);
 }
 
 main {

@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import Header from './components/Header/Header';
 import useTheme from './hooks/useTheme';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -13,15 +14,19 @@ function App() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Suspense fallback="LOADING...">
-      <Routes>
-        <Route index path="/" element={<HomePage />} />
-        <Route path="signin" element={<SignInPage />} />
-        <Route path="signup" element={<SignUpPage />} />
-        <Route path="collections" element={<CollectionsPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Suspense>
+    <>
+      <Header />
+      <Suspense fallback="LOADING...">
+        <Routes>
+          <Route index path="/" element={<HomePage />} />
+          <Route path="signin" element={<SignInPage />} />
+          <Route path="signup" element={<SignUpPage />} />
+          <Route path="collections" element={<CollectionsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+      <footer>Footer</footer>
+    </>
   );
 }
 
