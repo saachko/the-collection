@@ -15,17 +15,17 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-  --primary-color: #ff7549;
-  --primary-color-light: #f9dbcf;
-  --secondary-color: #233b99;
-  --secondary-color-light: #3f51a0;
-  --light-color: #cddceb;
-  --background-primary-color: #ffffff;
-  --background-secondary-color: #f0efec;
-  --lines-color: #dad9d6;
-  --title-color: #181a3f;
-  --text-color: #555671;
-  --text-color-light: #9797a1;
+  --primary-color: #ed8c6c;
+  --primary-color-light: #f3d4c7;
+  --secondary-color: #3953b9;
+  --secondary-color-light: #5d70c5;
+  --light-color: #c3cbd1;
+  --background-primary-color: #2e353e;
+  --background-secondary-color: #3b3b3b;
+  --lines-color: #6d6d6c;
+  --title-color: #ececec;
+  --text-color: #d2d2d2;
+  --text-color-light: #5c5c62;
   --text-color-button: #ffffff;
   --transparent: transparent;
 }
@@ -47,5 +47,6 @@ $fontWeightMedium: 500;
 $fontWeightBold: 700;
 
 $transition: all 0.2s ease-out;
+$themeTransition: background-color 0.2s linear;
 $hoverOpacity: 0.8;
 $activeOpacity: 0.5;
