@@ -1,0 +1,47 @@
+html[data-theme='light'] {
+  --primary-color: #ff7549;
+  --primary-color-light: #f9dbcf;
+  --secondary-color: #233b99;
+  --secondary-color-light: #3f51a0;
+  --light-color: #cddceb;
+  --background-primary-color: #ffffff;
+  --background-secondary-color: #f0efec;
+  --lines-color: #dad9d6;
+  --title-color: #181a3f;
+  --text-color: #555671;
+  --text-color-light: #9797a1;
+  --text-color-button: #ffffff;
+}
+
+html[data-theme='dark'] {
+  --primary-color: #ff7549;
+  --primary-color-light: #f9dbcf;
+  --secondary-color: #233b99;
+  --secondary-color-light: #3f51a0;
+  --light-color: #cddceb;
+  --background-primary-color: #ffffff;
+  --background-secondary-color: #f0efec;
+  --lines-color: #dad9d6;
+  --title-color: #181a3f;
+  --text-color: #555671;
+  --text-color-light: #9797a1;
+  --text-color-button: #ffffff;
+}
+
+$fontInter: 'Inter, sans-serif';
+$fontArvo: 'Arvo, serif';
+
+$fontSizeH1: '54px';
+$fontSizeH2: '40px';
+$fontSizeH3: '36px';
+$fontSizeH4: '28px';
+$fontSizeButton: '20px';
+$fontSizeText: '18px';
+$fontSizeSmall: '16px';
+
+$fontWeightLight: 300;
+$fontWeightRegular: 400;
+$fontWeightMedium: 500;
+$fontWeightBold: 700;
+
+$transition: 'all 0.2s ease-out';
