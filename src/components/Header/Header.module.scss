@@ -20,3 +20,13 @@
     color: var(--primary-color);
   }
 }
+
+.themeButton {
+  border: none;
+  background-color: var(--transparent);
+  transition: $transition;
+
+  &:hover {
+    opacity: $hoverOpacity;
+  }
+}

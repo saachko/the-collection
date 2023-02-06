@@ -2,11 +2,7 @@
 
 .primary-button,
 .primary-button:hover,
-.primary-button:focus,
-.switch-on,
-.switch-on:hover,
-.switch-on:focus,
-.switch-on:active {
+.primary-button:focus {
   background-color: var(--primary-color);
   border-radius: 0;
   border-color: var(--primary-color);
