@@ -7,6 +7,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage'));
 const SignInPage = lazy(() => import('./pages/SignInPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const CollectionsPage = lazy(() => import('./pages/CollectionsPage'));
 
 function App() {
   const { theme, setTheme } = useTheme();
@@ -17,6 +18,7 @@ function App() {
         <Route index path="/" element={<HomePage />} />
         <Route path="signin" element={<SignInPage />} />
         <Route path="signup" element={<SignUpPage />} />
+        <Route path="collections" element={<CollectionsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
