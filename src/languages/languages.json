@@ -10,6 +10,11 @@
       },
       "footer": {
         "copyright": "Anastasiya Sachko © 2023"
+      },
+      "home": {
+        "mainTitle": "The most valuable things are kept in The Collection",
+        "mainText": "The Collection app is a convenient way to manage your personal collections. You can create any collection you want, configure and add items in it and, of course, get inspired by other people's collections.",
+        "browseButton": "Browse all collections"
       }
     }
   },
@@ -24,6 +29,11 @@
       },
       "footer": {
         "copyright": "Анастасия Сачко © 2023"
+      },
+      "home": {
+        "mainTitle": "Все самое ценное собрано в The Collection",
+        "mainText": "Приложение The Collection - это удобный способ управления личными коллекциями. Вы можете создавать коллекции, настраивать и добавлять в них элементы и, конечно же, вдохновляться коллекциями других.",
+        "browseButton": "Посмотреть коллекции"
       }
     }
   }

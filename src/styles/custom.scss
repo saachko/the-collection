@@ -1,5 +1,9 @@
 @import './variables.scss';
 
+.mt--10 {
+  margin-top: -10%;
+}
+
 .primary-button,
 .primary-button:hover,
 .primary-button:focus {
@@ -39,4 +43,9 @@
     background-color: var(--text-color);
     border-color: var(--text-color);
   }
+}
+
+.content {
+  grid-area: content;
+  padding: $paddingPage;
 }
