@@ -4,4 +4,11 @@ interface NavLink {
   path: string;
 }
 
-export default NavLink;
+interface Contact {
+  id: string;
+  link: string;
+  icon: JSX.Element;
+  title: string;
+}
+
+export type { NavLink, Contact };

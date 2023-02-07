@@ -2,7 +2,7 @@
 
 .headerContent {
   grid-area: headerContent;
-  padding: 10px 15px;
+  padding: $paddingPage;
   display: flex;
   justify-content: space-between;
   align-items: center;

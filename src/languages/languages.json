@@ -7,6 +7,9 @@
         "users": "Users",
         "signin": "Sign In",
         "signup": "Sign Up"
+      },
+      "footer": {
+        "copyright": "Anastasiya Sachko © 2023"
       }
     }
   },
@@ -18,6 +21,9 @@
         "users": "Пользователи",
         "signin": "Вход",
         "signup": "Регистрация"
+      },
+      "footer": {
+        "copyright": "Анастасия Сачко © 2023"
       }
     }
   }

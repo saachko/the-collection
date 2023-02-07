@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.footerContent {
+  grid-area: footerContent;
+  padding: $paddingPage;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  gap: 10px;
+
+  svg {
+    color: var(--text-color);
+    transition: $transition;
+    font-size: $fontSizeButton;
+
+    &:hover {
+      opacity: $hoverOpacity;
+      color: var(--secondary-color-light);
+    }
+  }
+}
+
+.copyright {
+  font-size: $fontSizeExtraSmall;
+  margin: 0;
+}
