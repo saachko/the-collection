@@ -11,6 +11,11 @@
       "footer": {
         "copyright": "Anastasiya Sachko © 2023"
       },
+      "notFound": {
+        "title": "Something went wrong!",
+        "text": "Unfortunately, this page doesn't exist.",
+        "buttonText": "Return to the Home page"
+      },
       "home": {
         "mainTitle": "The most valuable things are kept in The Collection",
         "mainText": "The Collection app is a convenient way to manage your personal collections. You can create any collection you want, configure and add items in it and, of course, get inspired by other people's collections.",
@@ -32,6 +37,11 @@
       },
       "footer": {
         "copyright": "Анастасия Сачко © 2023"
+      },
+      "notFound": {
+        "title": "Что-то пошло не так!",
+        "text": "К сожалению, данной страницы не существует.",
+        "buttonText": "Вернуться на Главную"
       },
       "home": {
         "mainTitle": "Все самое ценное собрано в The Collection",
