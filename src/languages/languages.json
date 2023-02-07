@@ -15,6 +15,9 @@
         "mainTitle": "The most valuable things are kept in The Collection",
         "mainText": "The Collection app is a convenient way to manage your personal collections. You can create any collection you want, configure and add items in it and, of course, get inspired by other people's collections.",
         "browseButton": "Browse all collections"
+      },
+      "collections": {
+        "empty": "There're no collections yet. Create the first one!"
       }
     }
   },
@@ -34,6 +37,9 @@
         "mainTitle": "Все самое ценное собрано в The Collection",
         "mainText": "Приложение The Collection - это удобный способ управления личными коллекциями. Вы можете создавать коллекции, настраивать и добавлять в них элементы и, конечно же, вдохновляться коллекциями других.",
         "browseButton": "Посмотреть коллекции"
+      },
+      "collections": {
+        "empty": "Коллекций пока что нет. Создайте первую!"
       }
     }
   }

@@ -16,13 +16,15 @@ function App() {
     <>
       <Header />
       <Suspense fallback={<Loader />}>
-        <Routes>
-          <Route index path="/" element={<HomePage />} />
-          <Route path="signin" element={<SignInPage />} />
-          <Route path="signup" element={<SignUpPage />} />
-          <Route path="collections" element={<CollectionsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route index path="/" element={<HomePage />} />
+            <Route path="signin" element={<SignInPage />} />
+            <Route path="signup" element={<SignUpPage />} />
+            <Route path="collections" element={<CollectionsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
       </Suspense>
       <Footer />
     </>
