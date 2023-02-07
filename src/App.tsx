@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import Loader from './components/Loader/Loader';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const SignUpPage = lazy(() => import('./pages/SignUpPage'));
@@ -14,7 +15,7 @@ function App() {
   return (
     <>
       <Header />
-      <Suspense fallback="LOADING...">
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route index path="/" element={<HomePage />} />
           <Route path="signin" element={<SignInPage />} />
