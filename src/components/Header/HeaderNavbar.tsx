@@ -16,9 +16,7 @@ function HeaderNavbar() {
   return (
     <Navbar>
       <Container className="p-0">
-        <Navbar.Brand href="/">
-          <Logo />
-        </Navbar.Brand>
+        <Logo />
         <Nav className="d-flex gap-2">
           {navLinks.map((link) => (
             <NavLink
