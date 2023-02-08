@@ -50,4 +50,6 @@ const authorsContacts: Contact[] = [
   },
 ];
 
-export { navLinks, privateLink, authorsContacts };
+const emailValidation = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+
+export { navLinks, privateLink, authorsContacts, emailValidation };

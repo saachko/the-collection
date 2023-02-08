@@ -13,7 +13,7 @@ const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
 
 function App() {
-  const { isShown } = useAppSelector((state) => state.authModal);
+  const { isShown: isModalAuthShown } = useAppSelector((state) => state.authModal);
 
   return (
     <>
@@ -28,7 +28,7 @@ function App() {
         </main>
       </Suspense>
       <Footer />
-      {isShown && <ModalAuth />}
+      {isModalAuthShown && <ModalAuth />}
     </>
   );
 }

@@ -4,12 +4,19 @@ import { initReactI18next } from 'react-i18next';
 
 import languages from './languages.json';
 
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false;
+  }
+}
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources: languages,
     fallbackLng: 'en',
+    returnNull: false,
     debug: true,
     detection: {
       order: ['localStorage'],
