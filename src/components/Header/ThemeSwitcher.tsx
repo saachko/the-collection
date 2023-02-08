@@ -1,7 +1,8 @@
 import React from 'react';
 import { BsFillMoonFill, BsFillSunFill } from 'react-icons/bs';
 
-import useTheme from '../../hooks/useTheme';
+import useTheme from 'hooks/useTheme';
+
 import styles from './Header.module.scss';
 
 function ThemeSwitcher() {

@@ -1,8 +1,10 @@
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { authorsContacts } from '../../utils/constants';
-import Logo from '../Logo/Logo';
+import Logo from 'components/Logo/Logo';
+
+import { authorsContacts } from 'utils/constants';
+
 import styles from './Footer.module.scss';
 
 function Footer() {

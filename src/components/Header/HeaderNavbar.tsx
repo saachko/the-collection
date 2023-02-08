@@ -4,8 +4,10 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { navLinks } from '../../utils/constants';
-import Logo from '../Logo/Logo';
+import Logo from 'components/Logo/Logo';
+
+import { navLinks } from 'utils/constants';
+
 import styles from './Header.module.scss';
 
 function HeaderNavbar() {

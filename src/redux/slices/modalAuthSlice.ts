@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { AuthModal } from '../../ts/types';
+import { AuthModal } from 'ts/types';
 
 interface AuthModalState {
   id: AuthModal;

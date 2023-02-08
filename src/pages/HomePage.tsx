@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import WelcomeSection from '../components/WelcomeSection/WelcomeSection';
+import WelcomeSection from 'components/WelcomeSection/WelcomeSection';
 
 function HomePage() {
   return (
