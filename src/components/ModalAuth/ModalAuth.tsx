@@ -16,7 +16,7 @@ function ModalAuth() {
   return (
     <Modal show={isShown} onHide={() => dispatch(closeModal())} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{t(`${id}`)}</Modal.Title>
+        <Modal.Title style={{ color: '#181a3f' }}>{t(`${id}`)}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <AuthForm />
