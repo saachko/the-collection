@@ -1,4 +1,5 @@
-import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Switcher from 'bootstrap-switch-button-react';
 import i18next from 'i18next';
 import React, { useCallback } from 'react';
 
@@ -8,6 +9,10 @@ function LanguageSwitcher() {
   const changeLanguage = useCallback((language: string) => {
     i18n.changeLanguage(language);
   }, []);
+
+  const BootstrapSwitchButton = (Switcher as any).default
+    ? (Switcher as any).default
+    : Switcher;
 
   return (
     <BootstrapSwitchButton
