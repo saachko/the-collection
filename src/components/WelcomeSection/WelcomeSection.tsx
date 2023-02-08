@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
-import WelcomeSvg from './ WelcomeSvg';
+import WelcomeSvg from './WelcomeSvg';
 
 function WelcomeSection() {
   const { t } = useTranslation('translation', { keyPrefix: 'home' });
