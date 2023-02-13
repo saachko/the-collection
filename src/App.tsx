@@ -11,6 +11,7 @@ import { useAppSelector } from 'hooks/useRedux';
 const HomePage = lazy(() => import('pages/HomePage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
+const ProfilePage = lazy(() => import('pages/ProfilePage'));
 
 function App() {
   const { isShown: isModalAuthShown } = useAppSelector((state) => state.authModal);
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route index path="/" element={<HomePage />} />
             <Route path="collections" element={<CollectionsPage />} />
+            <Route path="profile" element={<ProfilePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
