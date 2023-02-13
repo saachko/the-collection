@@ -11,6 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import apiSlice from './api/apiSlice';
 import authModalReducer from './slices/modalAuthSlice';
 import userSlice from './slices/userSlice';
 
@@ -31,6 +32,8 @@ const userConfig = {
 const rootReducer = combineReducers({
   authModal: authModalReducer,
   user: persistReducer(userConfig, userSlice),
+
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
