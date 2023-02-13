@@ -4,6 +4,8 @@ import { FaTelegramPlane } from 'react-icons/fa';
 
 import { Contact, NavLink } from 'ts/interfaces';
 
+const baseUrl = 'http://localhost:3001/';
+
 const navLinks: NavLink[] = [
   {
     id: '1',
@@ -52,4 +54,4 @@ const authorsContacts: Contact[] = [
 
 const emailValidation = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
 
-export { navLinks, privateLink, authorsContacts, emailValidation };
+export { baseUrl, navLinks, privateLink, authorsContacts, emailValidation };
