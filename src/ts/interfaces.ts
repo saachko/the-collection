@@ -11,4 +11,16 @@ interface Contact {
   title: string;
 }
 
-export type { NavLink, Contact };
+interface User {
+  _id: string;
+  username: string;
+  email: string;
+  password: string;
+  avatar: string;
+  roles: string[];
+  isBlocked: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type { NavLink, Contact, User };
