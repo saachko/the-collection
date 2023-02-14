@@ -29,4 +29,9 @@ interface UserAuthFormValues {
   password: string;
 }
 
-export type { NavLink, Contact, User, UserAuthFormValues };
+interface UserResponse {
+  user: User;
+  token: string;
+}
+
+export type { NavLink, Contact, User, UserAuthFormValues, UserResponse };

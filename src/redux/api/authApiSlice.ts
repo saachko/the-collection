@@ -1,11 +1,11 @@
 import { Endpoints, Methods } from 'ts/enums';
-import { User, UserAuthFormValues } from 'ts/interfaces';
+import { UserAuthFormValues, UserResponse } from 'ts/interfaces';
 
 import apiSlice from './apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    signUp: builder.mutation<{ user: User; token: string }, UserAuthFormValues>({
+    signUp: builder.mutation<UserResponse, UserAuthFormValues>({
       query: (body: UserAuthFormValues) => ({
         url: `${Endpoints.signUp}`,
         method: Methods.post,
@@ -17,7 +17,7 @@ const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    signIn: builder.mutation<{ user: User; token: string }, UserAuthFormValues>({
+    signIn: builder.mutation<UserResponse, UserAuthFormValues>({
       query: (body: UserAuthFormValues) => ({
         url: `${Endpoints.signIn}`,
         method: Methods.post,
