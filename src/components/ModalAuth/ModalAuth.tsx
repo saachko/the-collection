@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -25,4 +25,4 @@ function ModalAuth() {
   );
 }
 
-export default ModalAuth;
+export default memo(ModalAuth);

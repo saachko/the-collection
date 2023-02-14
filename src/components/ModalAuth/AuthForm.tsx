@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Button, ButtonToolbar, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +20,7 @@ function AuthForm() {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { isLoggedIn } = useAppSelector((state) => state.user);
   const { onSignUp, onSignIn, isLoadingAuth } = useAuth();
   const {
     register,
@@ -48,10 +49,15 @@ function AuthForm() {
     } else {
       await onSignIn(formValues);
     }
-    reset();
-    dispatch(closeModal());
-    navigate('/profile');
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      reset();
+      dispatch(closeModal());
+      navigate('/profile');
+    }
+  }, [isLoggedIn]);
 
   return (
     <Form
@@ -120,4 +126,4 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export default memo(AuthForm);
