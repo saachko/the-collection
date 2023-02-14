@@ -25,7 +25,6 @@ const persistConfig = {
 const userConfig = {
   key: 'user',
   storage,
-  version: 1,
   whitelist: ['token'],
 };
 

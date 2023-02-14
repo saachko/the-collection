@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, ButtonToolbar, Form } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import { closeModal } from 'redux/slices/modalAuthSlice';
 
 import { defaultUserFormValues, emailValidation } from 'utils/constants';
 
+import useAuth from 'hooks/useAuth';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { UserAuthFormValues } from 'ts/interfaces';
@@ -17,7 +18,7 @@ function AuthForm() {
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const user = useAppSelector((state) => state.user);
+  const { onSignUp, onSignIn, isLoadingAuth } = useAuth();
   const {
     register,
     handleSubmit,
@@ -29,13 +30,12 @@ function AuthForm() {
     reValidateMode: 'onSubmit',
     defaultValues: defaultUserFormValues,
   });
-  const isFormValid = Object.values(errors).every((error) => !error?.message);
 
-  const submitForm = () => {
+  const submitForm: SubmitHandler<UserAuthFormValues> = async ({ ...formValues }) => {
     if (id === 'signUp') {
-      console.log('sign up');
+      await onSignUp(formValues);
     } else {
-      console.log('sign in');
+      await onSignIn(formValues);
     }
     reset();
     dispatch(closeModal());
@@ -61,7 +61,7 @@ function AuthForm() {
               maxLength: 30,
               onChange: () => errors && clearErrors('username'),
             })}
-            // disabled={isLoadingAuth}
+            disabled={isLoadingAuth}
           />
         </Form.Group>
       )}
@@ -77,8 +77,9 @@ function AuthForm() {
             pattern: emailValidation,
             onChange: () => errors && clearErrors('email'),
           })}
-          // disabled={isLoadingAuth}
+          disabled={isLoadingAuth}
         />
+        <p>{errors.username?.message}</p>
       </Form.Group>
       <Form.Group className="mb-3" controlId={`${id}formPassword`}>
         <Form.Label>{t('password')}</Form.Label>
@@ -91,19 +92,14 @@ function AuthForm() {
             maxLength: 50,
             onChange: () => errors && clearErrors('password'),
           })}
-          // disabled={isLoadingAuth}
+          disabled={isLoadingAuth}
         />
       </Form.Group>
       <ButtonToolbar className="justify-content-end gap-2 mt-4 mb-3">
         <Button className="secondary-button" onClick={() => dispatch(closeModal())}>
           {t('cancelButton')}
         </Button>
-        <Button
-          className="primary-button"
-          type="submit"
-          disabled={!isFormValid}
-          // disabled={isLoadingAuth || !isFormValid}
-        >
+        <Button className="primary-button" type="submit" disabled={isLoadingAuth}>
           {t('submitButton')}
         </Button>
       </ButtonToolbar>
