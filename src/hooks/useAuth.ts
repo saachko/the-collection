@@ -8,8 +8,9 @@ import { UserAuthFormValues } from 'ts/interfaces';
 
 import { useAppDispatch } from './useRedux';
 
-const useAuth = () => {
+const useAuth = (id: string) => {
   const dispatch = useAppDispatch();
+
   const [
     signUp,
     {
@@ -34,7 +35,7 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    if (signUpData) {
+    if (signUpData && !isErrorSignUp) {
       dispatch(setUser(signUpData.user));
       dispatch(setToken(signUpData.token));
       dispatch(setLoggedIn(true));
@@ -46,21 +47,26 @@ const useAuth = () => {
   };
 
   useEffect(() => {
-    if (signInData) {
+    if (signInData && !isErrorSignIn) {
       dispatch(setUser(signInData.user));
       dispatch(setToken(signInData.token));
       dispatch(setLoggedIn(true));
     }
   }, [signInData]);
 
+  const submitForm: SubmitHandler<UserAuthFormValues> = async ({ ...formValues }) => {
+    if (id === 'signUp') {
+      await onSignUp(formValues);
+    } else {
+      await onSignIn(formValues);
+    }
+  };
+
   const isLoadingAuth = isLoadingSignUp || isLoadingSignIn;
 
   return {
-    onSignUp,
-    onSignIn,
+    submitForm,
     isLoadingAuth,
-    isErrorSignUp,
-    isErrorSignIn,
     signUpErrorMessage,
     signInErrorMessage,
   };

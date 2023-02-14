@@ -8,20 +8,23 @@ import { closeModal } from 'redux/slices/modalAuthSlice';
 
 import { defaultUserFormValues, emailValidation } from 'utils/constants';
 
-import useAuth from 'hooks/useAuth';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { UserAuthFormValues } from 'ts/interfaces';
 
 import ValidationError from './ValidationError';
 
-function AuthForm() {
+interface AuthFormProps {
+  submitForm: SubmitHandler<UserAuthFormValues>;
+  isLoadingAuth: boolean;
+}
+
+function AuthForm({ submitForm, isLoadingAuth }: AuthFormProps) {
   const { id } = useAppSelector((state) => state.authModal);
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isLoggedIn } = useAppSelector((state) => state.user);
-  const { onSignUp, onSignIn, isLoadingAuth } = useAuth();
   const {
     register,
     handleSubmit,
@@ -42,14 +45,6 @@ function AuthForm() {
       setFocus('email');
     }
   }, []);
-
-  const submitForm: SubmitHandler<UserAuthFormValues> = async ({ ...formValues }) => {
-    if (id === 'signUp') {
-      await onSignUp(formValues);
-    } else {
-      await onSignIn(formValues);
-    }
-  };
 
   useEffect(() => {
     if (isLoggedIn) {

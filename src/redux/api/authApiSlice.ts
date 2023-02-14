@@ -27,6 +27,18 @@ const authApiSlice = apiSlice.injectEndpoints({
         },
         body,
       }),
+      transformErrorResponse: ({ status }) => {
+        switch (status) {
+          case 404:
+            return "User doesn't exist";
+          case 401:
+            return 'Incorrect password!';
+          case 403:
+            return 'User is blocked!';
+          default:
+            return 'Unexpected authorization error';
+        }
+      },
     }),
   }),
 });
