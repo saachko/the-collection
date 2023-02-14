@@ -29,6 +29,7 @@
     "no-underscore-dangle": "off",
     "no-extraneous-dependencies": "off",
     "import/no-cycle": "off",
+    "react/jsx-props-no-spreading": "off",
     "no-param-reassign": [
       "error",
       { "props": true, "ignorePropertyModificationsFor": ["state"] }

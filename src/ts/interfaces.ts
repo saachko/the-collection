@@ -23,4 +23,10 @@ interface User {
   updatedAt: string;
 }
 
-export type { NavLink, Contact, User };
+interface UserAuthFormValues {
+  username?: string;
+  email: string;
+  password: string;
+}
+
+export type { NavLink, Contact, User, UserAuthFormValues };
