@@ -15,6 +15,14 @@ const authApiSlice = apiSlice.injectEndpoints({
         },
         body,
       }),
+      transformErrorResponse: ({ status }) => {
+        switch (status) {
+          case 403:
+            return 'User already exists';
+          default:
+            return 'Unexpected registration error';
+        }
+      },
     }),
 
     signIn: builder.mutation<UserResponse, UserAuthFormValues>({

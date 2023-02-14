@@ -15,12 +15,24 @@ function ModalAuth() {
   const { id, isShown } = useAppSelector((state) => state.authModal);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+  const [isSignUpErrorShown, setSignUpErrorShown] = useState(false);
   const [isSignInErrorShown, setSignInErrorShown] = useState(false);
-  const { submitForm, isLoadingAuth, signInErrorMessage } = useAuth(id);
+  const { submitForm, isLoadingAuth, signUpErrorMessage, signInErrorMessage } =
+    useAuth(id);
+
+  const closeSignUpErrorNotification = () => {
+    setSignUpErrorShown(false);
+  };
 
   const closeSignInErrorNotification = () => {
     setSignInErrorShown(false);
   };
+
+  useEffect(() => {
+    if (signUpErrorMessage) {
+      setSignUpErrorShown(true);
+    }
+  }, [signUpErrorMessage]);
 
   useEffect(() => {
     if (signInErrorMessage) {
@@ -38,6 +50,11 @@ function ModalAuth() {
           <AuthForm submitForm={submitForm} isLoadingAuth={isLoadingAuth} />
         </Modal.Body>
       </Modal>
+      <ErrorNotification
+        errorMessage={`${signUpErrorMessage}`}
+        closeErrorNotification={closeSignUpErrorNotification}
+        isShown={isSignUpErrorShown}
+      />
       <ErrorNotification
         errorMessage={`${signInErrorMessage}`}
         closeErrorNotification={closeSignInErrorNotification}

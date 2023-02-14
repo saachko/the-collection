@@ -43,7 +43,7 @@ function ErrorNotification({
             onClose={() => setMountNotification(false)}
             dismissible
           >
-            <Alert.Heading>Error!</Alert.Heading>
+            <Alert.Heading style={{ fontSize: '20px' }}>Error!</Alert.Heading>
             <p>{errorMessage}</p>
           </Alert>
         )}
