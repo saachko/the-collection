@@ -6,7 +6,9 @@
         "collections": "Collections",
         "users": "Users",
         "signin": "Sign In",
-        "signup": "Sign Up"
+        "signup": "Sign Up",
+        "profile": "My profile",
+        "logout": "Log out"
       },
       "footer": {
         "copyright": "Anastasiya Sachko © 2023"
@@ -44,7 +46,9 @@
         "collections": "Коллекции",
         "users": "Пользователи",
         "signin": "Вход",
-        "signup": "Регистрация"
+        "signup": "Регистрация",
+        "profile": "Мой профиль",
+        "logout": "Выход"
       },
       "footer": {
         "copyright": "Анастасия Сачко © 2023"
