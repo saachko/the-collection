@@ -15,7 +15,7 @@
   border-radius: 0;
   border-color: var(--primary-color);
   transition: $transition;
-  min-width: 137px;
+  min-width: 143px;
 
   &:hover {
     opacity: $hoverOpacity;
@@ -28,6 +28,10 @@
   }
 }
 
+.primary-button:disabled {
+  background-color: var(--primary-color-light);
+}
+
 .secondary-button,
 .secondary-button:hover,
 .secondary-button:focus {
@@ -36,9 +40,10 @@
   border-color: var(--text-color);
   transition: $transition;
   color: var(--text-color);
-  min-width: 137px;
+  min-width: 143px;
 
-  &:hover {
+  &:hover,
+  &:disabled {
     opacity: $hoverOpacity;
     border-color: var(--text-color-light);
   }
@@ -55,7 +60,25 @@
 .btn-close:active {
   border-color: var(--primary-color);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem var(--primary-color-light);
+  box-shadow: 0 0 0 0.25rem #f9dbcf;
+}
+
+.form-group {
+  position: relative;
+}
+
+.invalid-feedback {
+  display: block;
+  position: absolute;
+  bottom: -20px;
+  text-align: right;
+  font-size: $fontSizeExtraSmall;
+
+  &#usernameru {
+    @media (max-width: 400px) {
+      bottom: -40px;
+    }
+  }
 }
 
 .content {

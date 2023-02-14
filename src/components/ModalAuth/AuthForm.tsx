@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, ButtonToolbar, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +13,8 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { UserAuthFormValues } from 'ts/interfaces';
 
+import ValidationError from './ValidationError';
+
 function AuthForm() {
   const { id } = useAppSelector((state) => state.authModal);
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
@@ -23,6 +25,7 @@ function AuthForm() {
     register,
     handleSubmit,
     clearErrors,
+    setFocus,
     formState: { errors },
     reset,
   } = useForm<UserAuthFormValues>({
@@ -30,6 +33,14 @@ function AuthForm() {
     reValidateMode: 'onSubmit',
     defaultValues: defaultUserFormValues,
   });
+
+  useEffect(() => {
+    if (id === 'signUp') {
+      setFocus('username');
+    } else {
+      setFocus('email');
+    }
+  }, []);
 
   const submitForm: SubmitHandler<UserAuthFormValues> = async ({ ...formValues }) => {
     if (id === 'signUp') {
@@ -50,7 +61,7 @@ function AuthForm() {
       onSubmit={handleSubmit(submitForm)}
     >
       {id === 'signUp' && (
-        <Form.Group className="mb-3" controlId={`${id}formUsername`}>
+        <Form.Group className="mb-3 form-group" controlId={`${id}formUsername`}>
           <Form.Label>{t('username')}</Form.Label>
           <Form.Control
             type="text"
@@ -58,14 +69,15 @@ function AuthForm() {
             {...register('username', {
               required: true,
               minLength: 2,
-              maxLength: 30,
+              maxLength: 50,
               onChange: () => errors && clearErrors('username'),
             })}
             disabled={isLoadingAuth}
           />
+          {errors.username && <ValidationError errors={errors} field="username" />}
         </Form.Group>
       )}
-      <Form.Group className="mb-3" controlId={`${id}formEmail`}>
+      <Form.Group className="mb-3 form-group" controlId={`${id}formEmail`}>
         <Form.Label>{t('email')}</Form.Label>
         <Form.Control
           type="email"
@@ -79,9 +91,9 @@ function AuthForm() {
           })}
           disabled={isLoadingAuth}
         />
-        <p>{errors.username?.message}</p>
+        {errors.email && <ValidationError errors={errors} field="email" />}
       </Form.Group>
-      <Form.Group className="mb-3" controlId={`${id}formPassword`}>
+      <Form.Group className="mb-3 form-group" controlId={`${id}formPassword`}>
         <Form.Label>{t('password')}</Form.Label>
         <Form.Control
           type="password"
@@ -94,8 +106,9 @@ function AuthForm() {
           })}
           disabled={isLoadingAuth}
         />
+        {errors.password && <ValidationError errors={errors} field="password" />}
       </Form.Group>
-      <ButtonToolbar className="justify-content-end gap-2 mt-4 mb-3">
+      <ButtonToolbar className="justify-content-end gap-2 mt-5 mb-3">
         <Button className="secondary-button" onClick={() => dispatch(closeModal())}>
           {t('cancelButton')}
         </Button>
