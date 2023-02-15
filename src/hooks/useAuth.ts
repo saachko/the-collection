@@ -37,7 +37,7 @@ const useAuth = (id: string) => {
   useEffect(() => {
     if (signUpData && !isErrorSignUp) {
       dispatch(setUser(signUpData.user));
-      dispatch(setToken(signUpData.token));
+      dispatch(setToken({ token: signUpData.token, id: signUpData.user._id }));
       dispatch(setLoggedIn(true));
     }
   }, [signUpData]);
@@ -49,7 +49,7 @@ const useAuth = (id: string) => {
   useEffect(() => {
     if (signInData && !isErrorSignIn) {
       dispatch(setUser(signInData.user));
-      dispatch(setToken(signInData.token));
+      dispatch(setToken({ token: signInData.token, id: signInData.user._id }));
       dispatch(setLoggedIn(true));
     }
   }, [signInData]);

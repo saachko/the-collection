@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { User } from 'ts/interfaces';
+import { Token, User } from 'ts/interfaces';
 
 interface UserState {
   user: User | null;
-  token: string | null;
+  token: Token | null;
   isLoggedIn: boolean;
 }
 
@@ -22,7 +22,7 @@ const userSlice = createSlice({
       state.user = payload;
     },
 
-    setToken(state, { payload }: PayloadAction<string | null>) {
+    setToken(state, { payload }: PayloadAction<Token | null>) {
       state.token = payload;
     },
 

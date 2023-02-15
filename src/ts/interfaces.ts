@@ -34,4 +34,25 @@ interface UserResponse {
   token: string;
 }
 
-export type { NavLink, Contact, User, UserAuthFormValues, UserResponse };
+interface Token {
+  token: string;
+  id: string;
+}
+
+interface ParsedToken {
+  id: string;
+  roles: string[];
+  isBlocked: boolean;
+  iat: number;
+  exp: number;
+}
+
+export type {
+  NavLink,
+  Contact,
+  User,
+  UserAuthFormValues,
+  UserResponse,
+  Token,
+  ParsedToken,
+};
