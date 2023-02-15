@@ -4,8 +4,6 @@ import { FaTelegramPlane } from 'react-icons/fa';
 
 import { Contact, NavLink, UserAuthFormValues } from 'ts/interfaces';
 
-const baseUrl = 'http://localhost:3001/';
-
 const navLinks: NavLink[] = [
   {
     id: '1',
@@ -60,11 +58,4 @@ const defaultUserFormValues: UserAuthFormValues = {
 
 const emailValidation = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-export {
-  baseUrl,
-  navLinks,
-  privateLink,
-  authorsContacts,
-  emailValidation,
-  defaultUserFormValues,
-};
+export { navLinks, privateLink, authorsContacts, emailValidation, defaultUserFormValues };
