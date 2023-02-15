@@ -4,12 +4,12 @@ import { Navigate } from 'react-router-dom';
 import { useAppSelector } from 'hooks/useRedux';
 
 function ProfilePage() {
-  const { isLoggedIn } = useAppSelector((state) => state.user);
+  const { isLoggedIn, user } = useAppSelector((state) => state.user);
 
   if (!isLoggedIn) {
     return <Navigate to="/" />;
   }
-  return <div>ProfilePage</div>;
+  return <div>Hello, {user?.username}</div>;
 }
 
 export default ProfilePage;

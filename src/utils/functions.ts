@@ -1,3 +1,5 @@
+import { ParsedToken } from 'ts/interfaces';
+
 const parseJwt = (tokenToParse: string) => {
   const base64Url = tokenToParse.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -12,4 +14,17 @@ const parseJwt = (tokenToParse: string) => {
   return JSON.parse(jsonPayload);
 };
 
-export default parseJwt;
+const checkToken = (userToken: string) => {
+  try {
+    const parsedToken: ParsedToken = parseJwt(userToken);
+    const nowTimestamp = Math.floor(Date.now() / 1000);
+    if (!parsedToken.isBlocked && parsedToken.exp > nowTimestamp) {
+      return parsedToken.id;
+    }
+    return false;
+  } catch (error) {
+    return false;
+  }
+};
+
+export default checkToken;
