@@ -8,10 +8,15 @@
         "signin": "Sign In",
         "signup": "Sign Up",
         "profile": "My profile",
-        "logout": "Log out"
+        "logout": "Log out",
+        "confirmLogOut": "Are you sure you want to log out?"
       },
       "footer": {
         "copyright": "Anastasiya Sachko © 2023"
+      },
+      "confirmNotification": {
+        "cancel": "Cancel",
+        "confirm": "Confirm"
       },
       "notFound": {
         "title": "Something went wrong!",
@@ -59,10 +64,15 @@
         "signin": "Вход",
         "signup": "Регистрация",
         "profile": "Мой профиль",
-        "logout": "Выход"
+        "logout": "Выход",
+        "confirmLogOut": "Вы уверены, что хотите выйти?"
       },
       "footer": {
         "copyright": "Анастасия Сачко © 2023"
+      },
+      "confirmNotification": {
+        "cancel": "Отмена",
+        "confirm": "Подтвердить"
       },
       "notFound": {
         "title": "Что-то пошло не так!",

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { showModal } from 'redux/slices/modalAuthSlice';
 import { setLoggedOut } from 'redux/slices/userSlice';
 
+import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
+
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function ButtonControls() {
   const { t } = useTranslation('translation', { keyPrefix: 'header' });
   const { isLoggedIn } = useAppSelector((state) => state.user);
+  const [confirmLogOutNotification, setConfirmLogOutNotification] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -31,12 +34,21 @@ function ButtonControls() {
   }
   return (
     <div>
-      <Button className="secondary-button me-2" onClick={() => dispatch(setLoggedOut())}>
+      <Button
+        className="secondary-button me-2"
+        onClick={() => setConfirmLogOutNotification(true)}
+      >
         {t('logout')}
       </Button>
       <Button className="primary-button" onClick={() => navigate('/profile')}>
         {t('profile')}
       </Button>
+      <ConfirmNotification
+        isShown={confirmLogOutNotification}
+        setShown={setConfirmLogOutNotification}
+        onConfirm={() => dispatch(setLoggedOut())}
+        text={t('confirmLogOut')}
+      />
     </div>
   );
 }

@@ -80,6 +80,10 @@ html[data-theme='dark'] {
   }
 }
 
+.modal-footer {
+  background-color: var(--background-primary-color);
+}
+
 .form-group {
   position: relative;
 }
