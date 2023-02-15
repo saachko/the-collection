@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { memo, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +11,7 @@ import useAuth from 'hooks/useAuth';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import AuthForm from './AuthForm';
+import styles from './ModalAuth.module.scss';
 
 function ModalAuth() {
   const { id, isShown } = useAppSelector((state) => state.authModal);
@@ -43,10 +45,13 @@ function ModalAuth() {
   return (
     <>
       <Modal show={isShown} onHide={() => dispatch(closeModal())} centered>
-        <Modal.Header closeButton>
-          <Modal.Title style={{ color: '#181a3f' }}>{t(`${id}`)}</Modal.Title>
+        <Modal.Header
+          closeButton
+          className={clsx(styles.modalBackground, styles.modalHeader)}
+        >
+          <Modal.Title>{t(`${id}`)}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className={clsx(styles.modalBackground, styles.modalBody)}>
           <AuthForm submitForm={submitForm} isLoadingAuth={isLoadingAuth} />
         </Modal.Body>
       </Modal>
