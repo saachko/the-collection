@@ -22,6 +22,8 @@ function ModalAuth() {
   const { submitForm, isLoadingAuth, signUpErrorMessage, signInErrorMessage } =
     useAuth(id);
 
+  const isButtonDisabled = isSignUpErrorShown || isSignInErrorShown || isLoadingAuth;
+
   const closeSignUpErrorNotification = () => {
     setSignUpErrorShown(false);
   };
@@ -52,7 +54,11 @@ function ModalAuth() {
           <Modal.Title>{t(`${id}`)}</Modal.Title>
         </Modal.Header>
         <Modal.Body className={clsx(styles.modalBackground, styles.modalBody)}>
-          <AuthForm submitForm={submitForm} isLoadingAuth={isLoadingAuth} />
+          <AuthForm
+            submitForm={submitForm}
+            isInputDisabled={isLoadingAuth}
+            isButtonDisabled={isButtonDisabled}
+          />
         </Modal.Body>
       </Modal>
       <ErrorNotification

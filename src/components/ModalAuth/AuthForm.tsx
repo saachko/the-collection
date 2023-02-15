@@ -16,10 +16,11 @@ import ValidationError from './ValidationError';
 
 interface AuthFormProps {
   submitForm: SubmitHandler<UserAuthFormValues>;
-  isLoadingAuth: boolean;
+  isInputDisabled: boolean;
+  isButtonDisabled: boolean;
 }
 
-function AuthForm({ submitForm, isLoadingAuth }: AuthFormProps) {
+function AuthForm({ submitForm, isInputDisabled, isButtonDisabled }: AuthFormProps) {
   const { id } = useAppSelector((state) => state.authModal);
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ function AuthForm({ submitForm, isLoadingAuth }: AuthFormProps) {
               maxLength: 50,
               onChange: () => errors && clearErrors('username'),
             })}
-            disabled={isLoadingAuth}
+            disabled={isInputDisabled}
           />
           {errors.username && <ValidationError errors={errors} field="username" />}
         </Form.Group>
@@ -90,7 +91,7 @@ function AuthForm({ submitForm, isLoadingAuth }: AuthFormProps) {
             pattern: emailValidation,
             onChange: () => errors && clearErrors('email'),
           })}
-          disabled={isLoadingAuth}
+          disabled={isInputDisabled}
         />
         {errors.email && <ValidationError errors={errors} field="email" />}
       </Form.Group>
@@ -105,7 +106,7 @@ function AuthForm({ submitForm, isLoadingAuth }: AuthFormProps) {
             maxLength: 50,
             onChange: () => errors && clearErrors('password'),
           })}
-          disabled={isLoadingAuth}
+          disabled={isInputDisabled}
         />
         {errors.password && <ValidationError errors={errors} field="password" />}
       </Form.Group>
@@ -113,7 +114,7 @@ function AuthForm({ submitForm, isLoadingAuth }: AuthFormProps) {
         <Button className="secondary-button" onClick={() => dispatch(closeModal())}>
           {t('cancelButton')}
         </Button>
-        <Button className="primary-button" type="submit" disabled={isLoadingAuth}>
+        <Button className="primary-button" type="submit" disabled={isButtonDisabled}>
           {t('submitButton')}
         </Button>
       </ButtonToolbar>

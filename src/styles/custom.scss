@@ -30,6 +30,7 @@
 
 .primary-button:disabled {
   background-color: var(--primary-color-light);
+  border-color: var(--primary-color);
 }
 
 .secondary-button,
