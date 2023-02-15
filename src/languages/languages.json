@@ -36,7 +36,14 @@
         "required": "{{value}} can't be empty",
         "minLength": "{{value}} can't be less than 2 symbols",
         "maxLength": "{{value}} can't be more than 50 symbols",
-        "patternEmail": "Please check your e-mail"
+        "patternEmail": "Please check your e-mail",
+        "error": "Error!",
+        "signUpError": "Unexpected registration error",
+        "signUpError403": "User already exists",
+        "signInError": "Unexpected authorization error",
+        "signInError404": "User doesn't exist",
+        "signInError403": "User is blocked!",
+        "signInError401": "Incorrect password!"
       },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
@@ -80,7 +87,14 @@
         "required": "{{value}} не может быть пустым",
         "minLength": "{{value}} не может быть короче 2 символов",
         "maxLength": "{{value}} не может быть длиннее 50 символов",
-        "patternEmail": "Пожалуйста, проверьте ваш e-mail"
+        "patternEmail": "Пожалуйста, проверьте ваш e-mail",
+        "error": "Ошибка!",
+        "signUpError": "Ошибка регистрации",
+        "signUpError403": "Пользователь уже существует",
+        "signInError": "Ошибка авторизации",
+        "signInError404": "Пользователь не существует",
+        "signInError403": "Пользователь заблокирован!",
+        "signInError401": "Неверный пароль!"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

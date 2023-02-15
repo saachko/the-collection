@@ -18,9 +18,9 @@ const authApiSlice = apiSlice.injectEndpoints({
       transformErrorResponse: ({ status }) => {
         switch (status) {
           case 403:
-            return 'User already exists';
+            return 'signUpError403';
           default:
-            return 'Unexpected registration error';
+            return 'signUpError';
         }
       },
     }),
@@ -38,13 +38,13 @@ const authApiSlice = apiSlice.injectEndpoints({
       transformErrorResponse: ({ status }) => {
         switch (status) {
           case 404:
-            return "User doesn't exist";
+            return 'signInError404';
           case 401:
-            return 'Incorrect password!';
+            return 'signInError401';
           case 403:
-            return 'User is blocked!';
+            return 'signInError403';
           default:
-            return 'Unexpected authorization error';
+            return 'signInError';
         }
       },
     }),

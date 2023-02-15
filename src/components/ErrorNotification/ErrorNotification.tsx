@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
 
 interface ErrorNotificationProps {
@@ -13,6 +14,7 @@ function ErrorNotification({
   closeErrorNotification,
   isShown,
 }: ErrorNotificationProps) {
+  const { t } = useTranslation('translation', { keyPrefix: 'auth' });
   const [mountNotification, setMountNotification] = useState(false);
   const alertRef = useRef(null);
   useEffect(() => {
@@ -43,8 +45,8 @@ function ErrorNotification({
             onClose={() => setMountNotification(false)}
             dismissible
           >
-            <Alert.Heading style={{ fontSize: '20px' }}>Error!</Alert.Heading>
-            <p>{errorMessage}</p>
+            <Alert.Heading style={{ fontSize: '20px' }}>{t('error')}</Alert.Heading>
+            <p>{t(errorMessage)}</p>
           </Alert>
         )}
       </div>

@@ -100,7 +100,7 @@ html[data-theme='dark'] {
 
 .alert-danger {
   background-color: var(--danger-alert);
-  width: 290px;
+  min-width: 290px;
   position: absolute;
   top: 15px;
   right: 10px;
