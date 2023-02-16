@@ -52,7 +52,9 @@
       },
       "profilePage": {
         "user": "Collector",
-        "admin": "Administrator"
+        "admin": "Administrator",
+        "userEdit": "Edit my data",
+        "userDelete": "Delete my profile"
       },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
@@ -112,7 +114,9 @@
       },
       "profilePage": {
         "user": "Коллекционер",
-        "admin": "Администратор"
+        "admin": "Администратор",
+        "userEdit": "Редактировать",
+        "userDelete": "Удалить профиль"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

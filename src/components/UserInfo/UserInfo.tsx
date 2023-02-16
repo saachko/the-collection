@@ -16,8 +16,8 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
 
   const editActions: EditDropdownItem[] = [
-    { id: '1', title: 'Edit my data', action: () => console.log('edit') },
-    { id: '2', title: 'Delete my profile', action: () => console.log('delete') },
+    { id: '1', title: `${t('userEdit')}`, action: () => console.log('edit') },
+    { id: '2', title: `${t('userDelete')}`, action: () => console.log('delete') },
   ];
 
   return (

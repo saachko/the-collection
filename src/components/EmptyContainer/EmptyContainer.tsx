@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import styles from './EmptyContainer.module.scss';
 
@@ -14,4 +14,4 @@ function EmptyContainer({ text }: EmptyContainerProps) {
   );
 }
 
-export default EmptyContainer;
+export default memo(EmptyContainer);
