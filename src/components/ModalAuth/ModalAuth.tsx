@@ -67,7 +67,7 @@ function ModalAuth() {
         isShown={isSignUpErrorShown}
       />
       <ErrorNotification
-        errorMessage={`${signInErrorMessage}`}
+        errorMessage={`auth.${signInErrorMessage}`}
         closeErrorNotification={closeSignInErrorNotification}
         isShown={isSignInErrorShown}
       />

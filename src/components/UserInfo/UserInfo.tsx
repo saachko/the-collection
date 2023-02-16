@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
+import ErrorNotification from 'components/ErrorNotification/ErrorNotification';
 import Loader from 'components/Loader/Loader';
+import ModalUserUpdate from 'components/ModalUserUpdate/ModalUserUpdate';
 
 import useDeleteUser from 'hooks/useDeleteUser';
 
@@ -18,11 +20,13 @@ interface UserInfoProps {
 
 function UserInfo({ avatar, username, roles }: UserInfoProps) {
   const [confirmLogOutNotification, setConfirmLogOutNotification] = useState(false);
+  const [isUpdateUserModalShown, setUpdateUserModalShown] = useState(false);
+  const [isUpdateErrorShown, setUpdateErrorShown] = useState(false);
   const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
   const { deleteUser, isDeleteUserLoading } = useDeleteUser();
 
   const editActions: EditDropdownItem[] = [
-    { id: '1', title: `${t('userEdit')}`, action: () => console.log('edit') },
+    { id: '1', title: `${t('userEdit')}`, action: () => setUpdateUserModalShown(true) },
     {
       id: '2',
       title: `${t('userDelete')}`,
@@ -31,31 +35,43 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
   ];
 
   return (
-    <div className="d-flex gap-4 justify-content-between">
-      <div className="d-flex gap-4">
-        <div className="avatar position-relative">
-          <div className="avatar loading-skeleton position-absolute" />
-          <Image src={avatar} alt="avatar" className="avatar position-absolute" />
+    <>
+      <div className="d-flex gap-4 justify-content-between">
+        <div className="d-flex gap-4">
+          <div className="avatar position-relative">
+            <div className="avatar loading-skeleton position-absolute" />
+            <Image src={avatar} alt="avatar" className="avatar position-absolute" />
+          </div>
+          <div>
+            <h1 className="mb-0">{username}</h1>
+            <p className="mt-0">
+              <em>{t(`${roles?.includes('admin') ? `admin` : `user`}`)}</em>
+            </p>
+          </div>
         </div>
-        <div>
-          <h1 className="mb-0">{username}</h1>
-          <p className="mt-0">
-            <em>{t(`${roles?.includes('admin') ? `admin` : `user`}`)}</em>
-          </p>
-        </div>
+        <EditDropdown dropdownItems={editActions} />
+        <ConfirmNotification
+          isShown={confirmLogOutNotification}
+          setShown={setConfirmLogOutNotification}
+          onConfirm={() => {
+            deleteUser();
+            setConfirmLogOutNotification(false);
+          }}
+          text={t('userDeleteConfirm')}
+        />
+        <ModalUserUpdate
+          isShown={isUpdateUserModalShown}
+          setShown={setUpdateUserModalShown}
+          setUpdateErrorShown={setUpdateErrorShown}
+        />
+        {isDeleteUserLoading && <Loader />}
       </div>
-      <EditDropdown dropdownItems={editActions} />
-      <ConfirmNotification
-        isShown={confirmLogOutNotification}
-        setShown={setConfirmLogOutNotification}
-        onConfirm={() => {
-          deleteUser();
-          setConfirmLogOutNotification(false);
-        }}
-        text={t('userDeleteConfirm')}
+      <ErrorNotification
+        errorMessage="profilePage.userUpdateError"
+        closeErrorNotification={() => setUpdateErrorShown(false)}
+        isShown={isUpdateErrorShown}
       />
-      {isDeleteUserLoading && <Loader />}
-    </div>
+    </>
   );
 }
 

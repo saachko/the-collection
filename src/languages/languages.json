@@ -55,7 +55,9 @@
         "admin": "Administrator",
         "userEdit": "Edit user data",
         "userDelete": "Delete profile",
-        "userDeleteConfirm": "Are you sure you want to delete profile?"
+        "userDeleteConfirm": "Are you sure you want to delete profile?",
+        "userUpdateTitle": "Edit user data",
+        "userUpdateError": "Unexpected error! Please try again later"
       },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
@@ -118,7 +120,9 @@
         "admin": "Администратор",
         "userEdit": "Редактировать",
         "userDelete": "Удалить профиль",
-        "userDeleteConfirm": "Вы уверены, что хотите удалить профиль?"
+        "userDeleteConfirm": "Вы уверены, что хотите удалить профиль?",
+        "userUpdateTitle": "Редактировать пользователя",
+        "userUpdateError": "Ошибка! Пожалуйста, повторите попытку позже"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

@@ -14,7 +14,7 @@ function ErrorNotification({
   closeErrorNotification,
   isShown,
 }: ErrorNotificationProps) {
-  const { t } = useTranslation('translation', { keyPrefix: 'auth' });
+  const { t } = useTranslation('translation');
   const [mountNotification, setMountNotification] = useState(false);
   const alertRef = useRef(null);
   useEffect(() => {
@@ -45,7 +45,7 @@ function ErrorNotification({
             onClose={() => setMountNotification(false)}
             dismissible
           >
-            <Alert.Heading style={{ fontSize: '20px' }}>{t('error')}</Alert.Heading>
+            <Alert.Heading style={{ fontSize: '20px' }}>{t('auth.error')}</Alert.Heading>
             <p>{t(errorMessage)}</p>
           </Alert>
         )}

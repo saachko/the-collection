@@ -27,4 +27,7 @@ const checkToken = (userToken: string) => {
   }
 };
 
-export default checkToken;
+const createUserAvatar = (username: string, email: string) =>
+  `https://source.boringavatars.com/beam/120/${username}%20${email}?colors=F97D58,CDDCEB,F9DBCF,33B99,5D70C5&square`;
+
+export { checkToken, createUserAvatar };

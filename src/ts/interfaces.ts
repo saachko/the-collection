@@ -53,6 +53,12 @@ interface EditDropdownItem {
   action: () => void;
 }
 
+interface UpdateUserFormValues {
+  username: string;
+  email: string;
+  avatar: string;
+}
+
 export type {
   NavLink,
   Contact,
@@ -62,4 +68,5 @@ export type {
   Token,
   ParsedToken,
   EditDropdownItem,
+  UpdateUserFormValues,
 };
