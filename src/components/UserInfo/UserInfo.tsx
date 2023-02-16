@@ -33,7 +33,10 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
   return (
     <div className="d-flex gap-4 justify-content-between">
       <div className="d-flex gap-4">
-        <Image src={avatar} />
+        <div className="avatar position-relative">
+          <div className="avatar loading-skeleton position-absolute" />
+          <Image src={avatar} alt="avatar" className="avatar position-absolute" />
+        </div>
         <div>
           <h1 className="mb-0">{username}</h1>
           <p className="mt-0">
