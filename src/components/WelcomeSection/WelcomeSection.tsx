@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
@@ -22,4 +22,4 @@ function WelcomeSection() {
   );
 }
 
-export default WelcomeSection;
+export default memo(WelcomeSection);

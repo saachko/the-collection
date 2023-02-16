@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function LogoSvg() {
   return (
@@ -60,4 +60,4 @@ function LogoSvg() {
   );
 }
 
-export default LogoSvg;
+export default memo(LogoSvg);
