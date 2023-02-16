@@ -1,0 +1,53 @@
+@import '../../styles/variables.scss';
+
+.dropdownButton,
+.dropdownButton:hover,
+.dropdownButton:active,
+.dropdownButton:focus {
+  color: var(--text-color);
+  background-color: var(--transparent);
+  border: none;
+  transition: $transition;
+
+  &:hover {
+    background-color: var(--background-secondary-color);
+  }
+
+  &::after {
+    display: none;
+  }
+
+  svg {
+    transform: scale(2);
+    margin-top: -3px;
+  }
+
+  &:checked + .btn,
+  :not(.btn-check) + .btn:active,
+  .btn:first-child:active,
+  .btn.active,
+  .btn.show {
+    background-color: var(--transparent);
+  }
+}
+
+.dropdownMenu {
+  background-color: var(--background-primary-color);
+  border-color: var(--lines-color);
+}
+
+.dropdownItem {
+  color: var(--text-color);
+  transition: $transition;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--background-secondary-color);
+    color: var(--text-color);
+  }
+
+  &:active {
+    opacity: $activeOpacity;
+  }
+}

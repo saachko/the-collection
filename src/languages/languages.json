@@ -50,6 +50,10 @@
         "signInError403": "User is blocked!",
         "signInError401": "Incorrect password!"
       },
+      "profilePage": {
+        "user": "Collector",
+        "admin": "Administrator"
+      },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
       }
@@ -105,6 +109,10 @@
         "signInError404": "Пользователь не существует",
         "signInError403": "Пользователь заблокирован!",
         "signInError401": "Неверный пароль!"
+      },
+      "profilePage": {
+        "user": "Коллекционер",
+        "admin": "Администратор"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

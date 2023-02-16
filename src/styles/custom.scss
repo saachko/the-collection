@@ -33,6 +33,10 @@
   border-color: var(--primary-color);
 }
 
+.btn-primary {
+  --bs-btn-active-bg: var(--transparent);
+}
+
 .secondary-button,
 .secondary-button:hover,
 .secondary-button:focus {

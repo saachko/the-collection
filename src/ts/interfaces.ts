@@ -47,6 +47,12 @@ interface ParsedToken {
   exp: number;
 }
 
+interface EditDropdownItem {
+  id: string;
+  title: string;
+  action: () => void;
+}
+
 export type {
   NavLink,
   Contact,
@@ -55,4 +61,5 @@ export type {
   UserResponse,
   Token,
   ParsedToken,
+  EditDropdownItem,
 };
