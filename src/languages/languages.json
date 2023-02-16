@@ -57,7 +57,11 @@
         "userDelete": "Delete profile",
         "userDeleteConfirm": "Are you sure you want to delete profile?",
         "userUpdateTitle": "Edit user data",
-        "userUpdateError": "Unexpected error! Please try again later"
+        "userUpdateError": "Unexpected error! Please try again later",
+        "avatar": "Avatar",
+        "noFile": "No file uploaded yet",
+        "file": "File name: ",
+        "defaultAvatar": "set default avatar"
       },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
@@ -122,7 +126,11 @@
         "userDelete": "Удалить профиль",
         "userDeleteConfirm": "Вы уверены, что хотите удалить профиль?",
         "userUpdateTitle": "Редактировать пользователя",
-        "userUpdateError": "Ошибка! Пожалуйста, повторите попытку позже"
+        "userUpdateError": "Ошибка! Пожалуйста, повторите попытку позже",
+        "avatar": "Аватар",
+        "noFile": "Файл отсутствует",
+        "file": "Имя файла: ",
+        "defaultAvatar": "стандартный аватар"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

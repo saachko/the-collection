@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.fileUploader {
+  div span {
+    color: var(--text-color);
+  }
+
+  label {
+    border-color: var(--primary-color);
+  }
+
+  svg {
+    path {
+      fill: var(--primary-color);
+    }
+  }
+
+  p {
+    color: var(--text-color);
+    font-size: $fontSizeExtraSmall;
+    text-align: right;
+  }
+}

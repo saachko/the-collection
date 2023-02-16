@@ -58,4 +58,16 @@ const defaultUserFormValues: UserAuthFormValues = {
 
 const emailValidation = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-export { navLinks, privateLink, authorsContacts, emailValidation, defaultUserFormValues };
+const imageFileTypes = ['JPEG', 'PNG', 'GIF'];
+
+const userAvatarBaseUrl = 'https://source.boringavatars.com/beam/';
+
+export {
+  navLinks,
+  privateLink,
+  authorsContacts,
+  emailValidation,
+  defaultUserFormValues,
+  imageFileTypes,
+  userAvatarBaseUrl,
+};

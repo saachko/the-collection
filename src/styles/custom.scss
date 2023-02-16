@@ -74,13 +74,19 @@
 }
 
 html[data-theme='dark'] {
-  .form-control {
+  .form-control,
+  .form-check-input {
     background-color: var(--light-color);
+  }
+
+  .form-check-input:checked {
+    background-color: var(--primary-color);
   }
 
   .form-control:focus,
   .btn-close:focus,
-  .btn-close:active {
+  .btn-close:active,
+  .form-check-input:focus {
     box-shadow: 0 0 0 0.25rem #f9dbcfb5;
   }
 }
@@ -91,6 +97,25 @@ html[data-theme='dark'] {
 
 .form-group {
   position: relative;
+}
+
+.form-check-label {
+  color: var(--text-color);
+}
+
+.form-check-input:checked {
+  background-color: var(--primary-color-light);
+  border-color: var(--primary-color);
+}
+
+.form-check-input,
+.form-check-input:active,
+.form-check-input:focus {
+  border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem #f9dbcf;
 }
 
 .invalid-feedback {

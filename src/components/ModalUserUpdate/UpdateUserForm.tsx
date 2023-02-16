@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Button, ButtonToolbar, Form } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -6,9 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { useUpdateUserByIdMutation } from 'redux/api/userApiSlice';
 import { setUser } from 'redux/slices/userSlice';
 
+import DragAndDropFileUploader from 'components/DragAndDropFileUploader/DragAndDropFileUploader';
 import ValidationError from 'components/ModalAuth/ValidationError';
 
-import { emailValidation } from 'utils/constants';
+import { emailValidation, userAvatarBaseUrl } from 'utils/constants';
+import { createUserAvatar } from 'utils/functions';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -23,6 +25,8 @@ interface UpdateUserFormProps {
 function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormProps) {
   const { user } = useAppSelector((state) => state.user);
   const { t } = useTranslation('translation');
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const [isDefaultAvatar, setDefaultAvatar] = useState(false);
 
   const defaultFormValues: UpdateUserFormValues = {
     username: user?.username || '',
@@ -46,6 +50,10 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
   useEffect(() => {
     setFocus('username');
   }, []);
+
+  const changeAvatar = (file: File) => {
+    setAvatar(file);
+  };
 
   const dispatch = useAppDispatch();
 
@@ -78,6 +86,14 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
       setModalShown(false);
     }
   }, [updatedUser]);
+
+  useEffect(() => {
+    if (isDefaultAvatar) {
+      setValue('avatar', createUserAvatar(user?.username, user?.email));
+    } else {
+      setValue('avatar', '');
+    }
+  }, [isDefaultAvatar]);
 
   return (
     <Form
@@ -117,7 +133,25 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
         />
         {errors.email && <ValidationError errors={errors} field="email" />}
       </Form.Group>
-      <ButtonToolbar className="justify-content-end gap-2 mt-5 mb-3">
+      <Form.Group className="mb-3 form-group" controlId="updateUserFormAvatar">
+        <p className="mb-2">{t('profilePage.avatar')}</p>
+        <DragAndDropFileUploader
+          changeFile={changeAvatar}
+          name="avatar"
+          fileName={avatar?.name}
+          caption={avatar ? 'profilePage.file' : 'profilePage.noFile'}
+        />
+      </Form.Group>
+      {!user?.avatar.includes(userAvatarBaseUrl) && (
+        <Form.Check
+          type="switch"
+          id="defaultAvatar"
+          label={t('profilePage.defaultAvatar')}
+          checked={isDefaultAvatar}
+          onChange={() => setDefaultAvatar(!isDefaultAvatar)}
+        />
+      )}
+      <ButtonToolbar className="justify-content-end gap-2 mt-4 mb-3">
         <Button className="secondary-button" onClick={() => setModalShown(false)}>
           {t('auth.cancelButton')}
         </Button>
