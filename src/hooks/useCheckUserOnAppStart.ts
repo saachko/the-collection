@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useLazyGetUserByIdQuery } from 'redux/api/userApiSlice';
 import { setLoggedIn, setToken, setUser } from 'redux/slices/userSlice';
 
-import checkToken from 'utils/functions';
+import { checkToken } from 'utils/functions';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
