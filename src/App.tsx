@@ -16,12 +16,13 @@ const ProfilePage = lazy(() => import('pages/ProfilePage'));
 
 function App() {
   const { isShown: isModalAuthShown } = useAppSelector((state) => state.authModal);
-  useCheckUserOnAppStart();
+  const { isGetUserLoading } = useCheckUserOnAppStart();
 
   return (
     <>
       <Header />
       <Suspense fallback={<Loader />}>
+        {isGetUserLoading && <Loader />}
         <main>
           <Routes>
             <Route index path="/" element={<HomePage />} />

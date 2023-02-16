@@ -11,7 +11,12 @@ const useCheckUserOnAppStart = () => {
   const { token } = useAppSelector((state) => state.user);
   const [
     getUserById,
-    { data: currentUser, isSuccess: isSuccessGetUser, status: getUserStatus },
+    {
+      data: currentUser,
+      isSuccess: isSuccessGetUser,
+      isLoading: isGetUserLoading,
+      status: getUserStatus,
+    },
   ] = useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
 
@@ -36,6 +41,8 @@ const useCheckUserOnAppStart = () => {
       dispatch(setToken(null));
     }
   }, [getUserStatus]);
+
+  return { isGetUserLoading };
 };
 
 export default useCheckUserOnAppStart;
