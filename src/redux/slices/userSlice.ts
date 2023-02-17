@@ -6,12 +6,14 @@ interface UserState {
   user: User | null;
   token: Token | null;
   isLoggedIn: boolean;
+  isAdmin: boolean;
 }
 
 const initialState: UserState = {
   user: null,
   token: null,
   isLoggedIn: false,
+  isAdmin: false,
 };
 
 const userSlice = createSlice({
@@ -20,6 +22,7 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, { payload }: PayloadAction<User | null>) {
       state.user = payload;
+      state.isAdmin = payload?.roles.includes('admin') || false;
     },
 
     setToken(state, { payload }: PayloadAction<Token | null>) {
@@ -34,6 +37,7 @@ const userSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isLoggedIn = false;
+      state.isAdmin = false;
     },
   },
 });

@@ -10,9 +10,10 @@ import useCheckUserOnAppStart from 'hooks/useCheckUserOnAppStart';
 import { useAppSelector } from 'hooks/useRedux';
 
 const HomePage = lazy(() => import('pages/HomePage'));
-const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage'));
+const UsersPage = lazy(() => import('pages/UsersPage'));
+const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
   const { isShown: isModalAuthShown } = useAppSelector((state) => state.authModal);
@@ -28,6 +29,7 @@ function App() {
             <Route index path="/" element={<HomePage />} />
             <Route path="collections" element={<CollectionsPage />} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="users" element={<UsersPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

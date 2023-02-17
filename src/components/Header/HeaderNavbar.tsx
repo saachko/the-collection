@@ -6,11 +6,14 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import Logo from 'components/Logo/Logo';
 
-import { navLinks } from 'utils/constants';
+import { navLinks, privateLink } from 'utils/constants';
+
+import { useAppSelector } from 'hooks/useRedux';
 
 import styles from './Header.module.scss';
 
 function HeaderNavbar() {
+  const { isLoggedIn, isAdmin } = useAppSelector((state) => state.user);
   const location = useLocation();
   const currentPath = location.pathname;
   const { t } = useTranslation('translation');
@@ -32,6 +35,17 @@ function HeaderNavbar() {
               {t(link.name)}
             </NavLink>
           ))}
+          {isLoggedIn && isAdmin && (
+            <NavLink
+              to={privateLink.path}
+              end
+              className={clsx(styles.headerNavLink, {
+                [styles.active]: currentPath === privateLink.path,
+              })}
+            >
+              {t(privateLink.name)}
+            </NavLink>
+          )}
         </Nav>
       </Container>
     </Navbar>
