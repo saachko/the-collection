@@ -2,18 +2,20 @@ import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import { useUpdateUserByIdMutation } from 'redux/api/userApiSlice';
+import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setUser } from 'redux/slices/userSlice';
 
 import { UpdateUserFormValues, User } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
-import { useAppDispatch } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useUpdateUser = (
   user: User | null,
   setModalShown: SetState<boolean>,
   setUpdateErrorShown: SetState<boolean>
 ) => {
+  const { selectedUser } = useAppSelector((state) => state.admin);
   const dispatch = useAppDispatch();
   const [
     updateUserById,
@@ -40,7 +42,11 @@ const useUpdateUser = (
 
   useEffect(() => {
     if (updatedUser && !isUpdateUserError) {
-      dispatch(setUser(updatedUser));
+      if (!selectedUser) {
+        dispatch(setUser(updatedUser));
+      } else {
+        dispatch(setSelectedUser(updatedUser));
+      }
       setModalShown(false);
     }
   }, [updatedUser]);

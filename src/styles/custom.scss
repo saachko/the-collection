@@ -151,6 +151,21 @@ html[data-theme='dark'] {
   object-fit: cover;
 }
 
+.link {
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: var(--text-color-light);
+  font-weight: $fontWeightMedium;
+  transition: $transition;
+
+  &:hover {
+    color: var(--secondary-color-light);
+    background-color: var(--background-secondary-color);
+  }
+}
+
 .content {
   grid-area: content;
   padding: $paddingPage;

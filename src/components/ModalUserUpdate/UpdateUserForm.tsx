@@ -23,16 +23,17 @@ interface UpdateUserFormProps {
 
 function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormProps) {
   const { user } = useAppSelector((state) => state.user);
+  const { selectedUser } = useAppSelector((state) => state.admin);
   const { t } = useTranslation('translation');
   const { submitUpdate, isUpdateUserLoading } = useUpdateUser(
-    user,
+    selectedUser || user,
     setModalShown,
     setUpdateErrorShown
   );
 
   const defaultFormValues: UpdateUserFormValues = {
-    username: user?.username || '',
-    email: user?.email || '',
+    username: selectedUser?.username || user?.username || '',
+    email: selectedUser?.email || user?.email || '',
     avatar: '',
   };
 
@@ -54,7 +55,7 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
   }, []);
 
   const { avatar, changeAvatar, isDefaultAvatar, setDefaultAvatar, isAvatarLoading } =
-    useUpdateUserAvatar(user, setValue);
+    useUpdateUserAvatar(selectedUser || user, setValue);
 
   return (
     <>
@@ -106,7 +107,7 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
             isDisabled={isDefaultAvatar}
           />
         </Form.Group>
-        {!user?.avatar.includes(userAvatarBaseUrl) && (
+        {!(selectedUser || user)?.avatar.includes(userAvatarBaseUrl) && (
           <Form.Check
             type="switch"
             id="defaultAvatar"

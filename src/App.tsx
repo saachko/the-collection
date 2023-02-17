@@ -13,6 +13,7 @@ const HomePage = lazy(() => import('pages/HomePage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage'));
 const UsersPage = lazy(() => import('pages/UsersPage'));
+const UserPage = lazy(() => import('pages/UserPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="collections" element={<CollectionsPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="users" element={<UsersPage />} />
+            <Route path="users/:userId" element={<UserPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

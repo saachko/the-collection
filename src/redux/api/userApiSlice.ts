@@ -10,11 +10,10 @@ const userApiSlice = apiSlice.injectEndpoints({
         url: `${Endpoints.users}`,
         method: Methods.get,
       }),
-      providesTags: ['User'],
-      // providesTags: (result) =>
-      //   result
-      //     ? [...result.map(({ user }) => ({ type: 'User' as const, id: user._id })), 'User']
-      //     : ['User'],
+      providesTags: (result) =>
+        result
+          ? [...result.map((user) => ({ type: 'User' as const, id: user._id })), 'User']
+          : ['User'],
     }),
     getUserById: builder.query<User, string>({
       query: (id: string) => ({
@@ -33,6 +32,7 @@ const userApiSlice = apiSlice.injectEndpoints({
           accept: 'application/json',
         },
       }),
+      invalidatesTags: ['User'],
     }),
 
     updateUserById: builder.mutation<User, { id: string; body: User }>({
@@ -45,6 +45,7 @@ const userApiSlice = apiSlice.injectEndpoints({
         },
         body,
       }),
+      invalidatesTags: ['User'],
     }),
   }),
 });

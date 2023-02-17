@@ -70,7 +70,8 @@
         "email": "E-mail",
         "createdAt": "Registration date & time",
         "admin": "administrator",
-        "blocked": "blocked"
+        "blocked": "blocked",
+        "return": "Return to the users' table"
       },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
@@ -148,7 +149,8 @@
         "email": "E-mail",
         "createdAt": "Дата и время регистрации",
         "admin": "администратор",
-        "blocked": "заблокирован"
+        "blocked": "заблокирован",
+        "return": "Вернуться к таблице пользователей"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

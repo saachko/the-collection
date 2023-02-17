@@ -2,9 +2,14 @@ import React, { memo } from 'react';
 import { OverlayTrigger, Table, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock, AiFillStar } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+
+import { setSelectedUser } from 'redux/slices/adminSlice';
 
 import { usersTableHeadings } from 'utils/constants';
 import { formatDate } from 'utils/functions';
+
+import { useAppDispatch } from 'hooks/useRedux';
 
 import { User } from 'ts/interfaces';
 
@@ -16,6 +21,16 @@ interface UsersTableProps {
 
 function UsersTable({ users }: UsersTableProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'usersPage' });
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const selectUser = (userId: string) => {
+    const selectedUser = users?.find((user) => user._id === userId);
+    if (selectedUser) {
+      dispatch(setSelectedUser(selectedUser));
+      navigate(`/users/${userId}`);
+    }
+  };
 
   return (
     <div>
@@ -29,7 +44,7 @@ function UsersTable({ users }: UsersTableProps) {
         </thead>
         <tbody>
           {users?.map((user, index) => (
-            <tr key={user._id}>
+            <tr key={user._id} onClick={() => selectUser(user._id)}>
               <td>{index + 1}</td>
               <OverlayTrigger placement="right" overlay={<Tooltip>{user._id}</Tooltip>}>
                 <td>{user._id.slice(0, 7)}...</td>
