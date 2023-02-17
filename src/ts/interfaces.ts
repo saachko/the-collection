@@ -59,6 +59,11 @@ interface UpdateUserFormValues {
   avatar: string;
 }
 
+interface TableHeading {
+  id: string;
+  headingName: string;
+}
+
 export type {
   NavLink,
   Contact,
@@ -69,4 +74,5 @@ export type {
   ParsedToken,
   EditDropdownItem,
   UpdateUserFormValues,
+  TableHeading,
 };

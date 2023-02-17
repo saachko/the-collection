@@ -30,4 +30,10 @@ const checkToken = (userToken: string) => {
 const createUserAvatar = (username: string | undefined, email: string | undefined) =>
   `https://source.boringavatars.com/beam/120/${username}%20${email}?colors=F97D58,CDDCEB,F9DBCF,33B99,5D70C5&square`;
 
-export { checkToken, createUserAvatar };
+const formatDate = (stringDate: string) => {
+  const timestamp = Date.parse(stringDate);
+  const date = new Date(timestamp);
+  return date.toLocaleString();
+};
+
+export { checkToken, createUserAvatar, formatDate };

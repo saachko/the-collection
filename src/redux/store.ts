@@ -12,8 +12,9 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import apiSlice from './api/apiSlice';
+import adminReducer from './slices/adminSlice';
 import authModalReducer from './slices/modalAuthSlice';
-import userSlice from './slices/userSlice';
+import userReducer from './slices/userSlice';
 
 const persistConfig = {
   key: 'root',
@@ -25,12 +26,13 @@ const persistConfig = {
 const userConfig = {
   key: 'user',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'isAdmin'],
 };
 
 const rootReducer = combineReducers({
   authModal: authModalReducer,
-  user: persistReducer(userConfig, userSlice),
+  user: persistReducer(userConfig, userReducer),
+  admin: adminReducer,
 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });

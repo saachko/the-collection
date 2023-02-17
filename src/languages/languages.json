@@ -63,6 +63,15 @@
         "file": "File name: ",
         "defaultAvatar": "set default avatar"
       },
+      "usersPage": {
+        "#": "#",
+        "id": "id",
+        "username": "Username",
+        "email": "E-mail",
+        "createdAt": "Registration date & time",
+        "admin": "administrator",
+        "blocked": "blocked"
+      },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
       }
@@ -131,6 +140,15 @@
         "noFile": "Файл отсутствует",
         "file": "Имя файла: ",
         "defaultAvatar": "стандартный аватар"
+      },
+      "usersPage": {
+        "#": "#",
+        "id": "id",
+        "username": "Имя пользователя",
+        "email": "E-mail",
+        "createdAt": "Дата и время регистрации",
+        "admin": "администратор",
+        "blocked": "заблокирован"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

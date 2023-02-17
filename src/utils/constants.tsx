@@ -2,7 +2,7 @@ import React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiTwotoneMail } from 'react-icons/ai';
 import { FaTelegramPlane } from 'react-icons/fa';
 
-import { Contact, NavLink, UserAuthFormValues } from 'ts/interfaces';
+import { Contact, NavLink, TableHeading, UserAuthFormValues } from 'ts/interfaces';
 
 const navLinks: NavLink[] = [
   {
@@ -62,6 +62,29 @@ const imageFileTypes = ['JPEG', 'JPG', 'PNG', 'GIF'];
 
 const userAvatarBaseUrl = 'https://source.boringavatars.com/beam/';
 
+const usersTableHeadings: TableHeading[] = [
+  {
+    id: '1',
+    headingName: '#',
+  },
+  {
+    id: '2',
+    headingName: 'id',
+  },
+  {
+    id: '3',
+    headingName: 'username',
+  },
+  {
+    id: '4',
+    headingName: 'email',
+  },
+  {
+    id: '5',
+    headingName: 'createdAt',
+  },
+];
+
 export {
   navLinks,
   privateLink,
@@ -70,4 +93,5 @@ export {
   defaultUserFormValues,
   imageFileTypes,
   userAvatarBaseUrl,
+  usersTableHeadings,
 };
