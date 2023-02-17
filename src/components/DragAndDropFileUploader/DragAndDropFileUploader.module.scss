@@ -3,6 +3,10 @@
 .fileUploader {
   div span {
     color: var(--text-color);
+
+    &:nth-child(2) {
+      max-width: 110px;
+    }
   }
 
   label {

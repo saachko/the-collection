@@ -11,6 +11,7 @@ interface DragAndDropFileUploaderProps {
   name: string;
   fileName: string | undefined;
   caption: string;
+  isDisabled: boolean;
 }
 
 function DragAndDropFileUploader({
@@ -18,12 +19,19 @@ function DragAndDropFileUploader({
   name,
   fileName,
   caption,
+  isDisabled,
 }: DragAndDropFileUploaderProps) {
   const { t } = useTranslation('translation');
 
   return (
     <div className={styles.fileUploader}>
-      <FileUploader handleChange={changeFile} name={name} types={imageFileTypes} />
+      <FileUploader
+        handleChange={changeFile}
+        name={name}
+        types={imageFileTypes}
+        hoverTitle=" "
+        disabled={isDisabled}
+      />
       <p className="mb-0">
         <em>
           {t(caption)}
