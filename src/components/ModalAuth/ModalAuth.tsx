@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { closeModal } from 'redux/slices/modalAuthSlice';
 
 import ErrorNotification from 'components/ErrorNotification/ErrorNotification';
+import Loader from 'components/Loader/Loader';
 
 import useAuth from 'hooks/useAuth';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -71,6 +72,7 @@ function ModalAuth() {
         closeErrorNotification={closeSignInErrorNotification}
         isShown={isSignInErrorShown}
       />
+      {isLoadingAuth && <Loader />}
     </>
   );
 }
