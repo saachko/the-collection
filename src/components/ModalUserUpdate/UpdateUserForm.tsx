@@ -1,24 +1,19 @@
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Button, ButtonToolbar, Form } from 'react-bootstrap';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { v4 } from 'uuid';
-
-import { useUpdateUserByIdMutation } from 'redux/api/userApiSlice';
-import { setUser } from 'redux/slices/userSlice';
 
 import DragAndDropFileUploader from 'components/DragAndDropFileUploader/DragAndDropFileUploader';
 import Loader from 'components/Loader/Loader';
 import ValidationError from 'components/ModalAuth/ValidationError';
 
 import { emailValidation, userAvatarBaseUrl } from 'utils/constants';
-import storage from 'utils/firebase';
-import { createUserAvatar } from 'utils/functions';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useAppSelector } from 'hooks/useRedux';
+import useUpdateUser from 'hooks/useUpdateUser';
+import useUpdateUserAvatar from 'hooks/useUpdateUserAvatar';
 
-import { UpdateUserFormValues, User } from 'ts/interfaces';
+import { UpdateUserFormValues } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
 interface UpdateUserFormProps {
@@ -29,9 +24,11 @@ interface UpdateUserFormProps {
 function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormProps) {
   const { user } = useAppSelector((state) => state.user);
   const { t } = useTranslation('translation');
-  const [avatar, setAvatar] = useState<File | null>(null);
-  const [isAvatarLoading, setAvatarLoading] = useState(false);
-  const [isDefaultAvatar, setDefaultAvatar] = useState(false);
+  const { submitUpdate, isUpdateUserLoading } = useUpdateUser(
+    user,
+    setModalShown,
+    setUpdateErrorShown
+  );
 
   const defaultFormValues: UpdateUserFormValues = {
     username: user?.username || '',
@@ -56,68 +53,8 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
     setFocus('username');
   }, []);
 
-  const changeAvatar = (file: File) => {
-    setAvatar(file);
-  };
-
-  const dispatch = useAppDispatch();
-
-  const [
-    updateUserById,
-    { data: updatedUser, isLoading: isUpdateUserLoading, isError: isUpdateUserError },
-  ] = useUpdateUserByIdMutation();
-
-  const uploadAvatar = () => {
-    if (avatar) {
-      const avatarRef = ref(storage, `usersAvatars/${avatar.name + v4()}`);
-      uploadBytes(avatarRef, avatar).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setValue('avatar', url);
-          setAvatarLoading(false);
-        });
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (avatar) {
-      setAvatarLoading(true);
-      uploadAvatar();
-    }
-  }, [avatar]);
-
-  const submitUpdate: SubmitHandler<UpdateUserFormValues> = async ({ ...formValues }) => {
-    if (user) {
-      const updatedUserBody: User = {
-        ...user,
-        username: formValues.username,
-        email: formValues.email,
-        avatar: formValues.avatar || user.avatar,
-      };
-      await updateUserById({ id: user?._id, body: updatedUserBody });
-    }
-  };
-
-  useEffect(() => {
-    if (isUpdateUserError) {
-      setUpdateErrorShown(true);
-    }
-  }, [isUpdateUserError]);
-
-  useEffect(() => {
-    if (updatedUser && !isUpdateUserError) {
-      dispatch(setUser(updatedUser));
-      setModalShown(false);
-    }
-  }, [updatedUser]);
-
-  useEffect(() => {
-    if (isDefaultAvatar) {
-      setValue('avatar', createUserAvatar(user?.username, user?.email));
-    } else {
-      setValue('avatar', '');
-    }
-  }, [isDefaultAvatar]);
+  const { avatar, changeAvatar, isDefaultAvatar, setDefaultAvatar, isAvatarLoading } =
+    useUpdateUserAvatar(user, setValue);
 
   return (
     <>
