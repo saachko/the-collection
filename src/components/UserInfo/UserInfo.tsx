@@ -25,19 +25,20 @@ interface UserInfoProps {
 
 function UserInfo({ avatar, username, roles }: UserInfoProps) {
   const { selectedUser } = useAppSelector((state) => state.admin);
-  const [confirmLogOutNotification, setConfirmLogOutNotification] = useState(false);
+  const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
   const [isUpdateUserModalShown, setUpdateUserModalShown] = useState(false);
   const [isUpdateErrorShown, setUpdateErrorShown] = useState(false);
+  const [isDeleteErrorShown, setDeleteErrorShown] = useState(false);
   const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
   const location = useLocation();
-  const { deleteUser, isDeleteUserLoading } = useDeleteUser();
+  const { deleteUser, isDeleteUserLoading } = useDeleteUser(setDeleteErrorShown);
 
   const editActions: EditDropdownItem[] = [
     { id: '1', title: `${t('userEdit')}`, action: () => setUpdateUserModalShown(true) },
     {
       id: '2',
       title: `${t('userDelete')}`,
-      action: () => setConfirmLogOutNotification(true),
+      action: () => setConfirmDeleteNotification(true),
     },
   ];
 
@@ -75,11 +76,11 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
         </div>
         <EditDropdown dropdownItems={setEditActions()} />
         <ConfirmNotification
-          isShown={confirmLogOutNotification}
-          setShown={setConfirmLogOutNotification}
+          isShown={confirmDeleteNotification}
+          setShown={setConfirmDeleteNotification}
           onConfirm={() => {
             deleteUser();
-            setConfirmLogOutNotification(false);
+            setConfirmDeleteNotification(false);
           }}
           text={t('userDeleteConfirm')}
         />
@@ -94,6 +95,11 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
         errorMessage="profilePage.userUpdateError"
         closeErrorNotification={() => setUpdateErrorShown(false)}
         isShown={isUpdateErrorShown}
+      />
+      <ErrorNotification
+        errorMessage="profilePage.adminDeleteError"
+        closeErrorNotification={() => setDeleteErrorShown(false)}
+        isShown={isDeleteErrorShown}
       />
     </>
   );

@@ -7,7 +7,10 @@ import { setLoggedOut } from 'redux/slices/userSlice';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
-const useDeleteUser = () => {
+import { SetState } from 'ts/types';
+
+const useDeleteUser = (setDeleteErrorShown: SetState<boolean>) => {
+  const { users } = useAppSelector((state) => state.admin);
   const { user } = useAppSelector((state) => state.user);
   const { selectedUser } = useAppSelector((state) => state.admin);
   const dispatch = useAppDispatch();
@@ -18,6 +21,13 @@ const useDeleteUser = () => {
   const navigate = useNavigate();
 
   const deleteUser = async () => {
+    if (users) {
+      const admins = users.filter((currentUser) => currentUser.roles.includes('admin'));
+      if (admins.length < 2) {
+        setDeleteErrorShown(true);
+        return;
+      }
+    }
     if (user?._id) {
       await deleteUserById(selectedUser?._id || user?._id);
     }
