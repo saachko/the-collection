@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { setSelectedUser } from 'redux/slices/adminSlice';
 import { showModal } from 'redux/slices/modalAuthSlice';
 import { setLoggedOut } from 'redux/slices/userSlice';
 
@@ -46,7 +47,10 @@ function ButtonControls() {
       <ConfirmNotification
         isShown={confirmLogOutNotification}
         setShown={setConfirmLogOutNotification}
-        onConfirm={() => dispatch(setLoggedOut())}
+        onConfirm={() => {
+          dispatch(setLoggedOut());
+          dispatch(setSelectedUser(null));
+        }}
         text={t('confirmLogOut')}
       />
     </div>

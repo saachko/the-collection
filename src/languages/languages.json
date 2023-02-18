@@ -55,13 +55,17 @@
         "admin": "Administrator",
         "userEdit": "Edit user data",
         "userDelete": "Delete profile",
+        "userAdmin": "Make user administrator",
+        "userBlock": "Block user",
+        "userUnblock": "Unblock user",
         "userDeleteConfirm": "Are you sure you want to delete profile?",
         "userUpdateTitle": "Edit user data",
         "userUpdateError": "Unexpected error! Please try again later",
         "avatar": "Avatar",
         "noFile": "No file uploaded yet",
         "file": "File name: ",
-        "defaultAvatar": "set default avatar"
+        "defaultAvatar": "set default avatar",
+        "blocked": "blocked"
       },
       "usersPage": {
         "#": "#",
@@ -134,13 +138,17 @@
         "admin": "Администратор",
         "userEdit": "Редактировать",
         "userDelete": "Удалить профиль",
+        "userAdmin": "Сделать администратором",
+        "userBlock": "Заблокировать",
+        "userUnblock": "Разблокировать",
         "userDeleteConfirm": "Вы уверены, что хотите удалить профиль?",
         "userUpdateTitle": "Редактировать пользователя",
         "userUpdateError": "Ошибка! Пожалуйста, повторите попытку позже",
         "avatar": "Аватар",
         "noFile": "Файл отсутствует",
         "file": "Имя файла: ",
-        "defaultAvatar": "стандартный аватар"
+        "defaultAvatar": "стандартный аватар",
+        "blocked": "заблокирован"
       },
       "usersPage": {
         "#": "#",

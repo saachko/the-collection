@@ -34,7 +34,12 @@ const useCheckUserOnAppStart = () => {
 
   useEffect(() => {
     if (getUserStatus === 'fulfilled' && currentUser && isSuccessGetUser) {
-      dispatch(setUser(currentUser));
+      if (currentUser.isBlocked) {
+        dispatch(setLoggedIn(false));
+        dispatch(setToken(null));
+      } else {
+        dispatch(setUser(currentUser));
+      }
     }
     if (getUserStatus === 'rejected') {
       dispatch(setLoggedIn(false));

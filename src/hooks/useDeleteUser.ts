@@ -29,7 +29,7 @@ const useDeleteUser = () => {
         navigate('/');
         dispatch(setLoggedOut());
       } else {
-        navigate(-1);
+        navigate('/users');
         dispatch(setSelectedUser(null));
       }
     }
