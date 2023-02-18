@@ -1,12 +1,9 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock } from 'react-icons/ai';
 import { useLocation } from 'react-router-dom';
-
-import { useUpdateUserByIdMutation } from 'redux/api/userApiSlice';
-import { setSelectedUser } from 'redux/slices/adminSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
@@ -15,7 +12,8 @@ import Loader from 'components/Loader/Loader';
 import ModalUserUpdate from 'components/ModalUserUpdate/ModalUserUpdate';
 
 import useDeleteUser from 'hooks/useDeleteUser';
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useAppSelector } from 'hooks/useRedux';
+import useUpdateUserByAdmin from 'hooks/useUpdateUserByAdmin';
 
 import { EditDropdownItem } from 'ts/interfaces';
 
@@ -26,14 +24,12 @@ interface UserInfoProps {
 }
 
 function UserInfo({ avatar, username, roles }: UserInfoProps) {
-  const { user, isAdmin } = useAppSelector((state) => state.user);
   const { selectedUser } = useAppSelector((state) => state.admin);
   const [confirmLogOutNotification, setConfirmLogOutNotification] = useState(false);
   const [isUpdateUserModalShown, setUpdateUserModalShown] = useState(false);
   const [isUpdateErrorShown, setUpdateErrorShown] = useState(false);
   const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
   const location = useLocation();
-  const dispatch = useAppDispatch();
   const { deleteUser, isDeleteUserLoading } = useDeleteUser();
 
   const editActions: EditDropdownItem[] = [
@@ -45,49 +41,10 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
     },
   ];
 
-  const [updateUserById, { data: updatedUser, isLoading: isUpdateUserLoading }] =
-    useUpdateUserByIdMutation();
-
-  const blockOrUnblockUser = async () => {
-    if (selectedUser) {
-      const toBlock = !selectedUser.isBlocked;
-      await updateUserById({
-        id: selectedUser._id,
-        body: { ...selectedUser, isBlocked: toBlock },
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (updatedUser) {
-      dispatch(setSelectedUser(updatedUser));
-    }
-  }, [updatedUser]);
-
-  const editActionsForAdmin: EditDropdownItem[] = [
-    { id: '3', title: `${t('userAdmin')}`, action: () => console.log('aaaa') },
-    {
-      id: '4',
-      title: `${
-        selectedUser && selectedUser?.isBlocked
-          ? `${t('userUnblock')}`
-          : `${t('userBlock')}`
-      }`,
-      action: () => blockOrUnblockUser(),
-    },
-  ];
-
-  const setEditActions = () => {
-    if (
-      isAdmin &&
-      selectedUser &&
-      selectedUser._id !== user?._id &&
-      location.pathname !== '/profile'
-    ) {
-      return editActions.concat(editActionsForAdmin);
-    }
-    return editActions;
-  };
+  const { setEditActions, isUpdateUserLoading } = useUpdateUserByAdmin(
+    selectedUser,
+    editActions
+  );
 
   return (
     <>
