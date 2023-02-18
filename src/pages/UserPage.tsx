@@ -11,8 +11,8 @@ import UserInfo from 'components/UserInfo/UserInfo';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function UserPage() {
-  const { isAdmin } = useAppSelector((state) => state.user);
-  const { selectedUser } = useAppSelector((state) => state.admin);
+  const isAdmin = useAppSelector((state) => state.user.isAdmin);
+  const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const { t } = useTranslation('translation');
   const location = useLocation();
   const [getUserById, { data: currentUser, isSuccess: isSuccessGetUser }] =

@@ -13,7 +13,8 @@ import { useAppSelector } from 'hooks/useRedux';
 import styles from './Header.module.scss';
 
 function HeaderNavbar() {
-  const { isLoggedIn, isAdmin } = useAppSelector((state) => state.user);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const location = useLocation();
   const currentPath = location.pathname;
   const { t } = useTranslation('translation');

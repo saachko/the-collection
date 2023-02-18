@@ -24,7 +24,7 @@ interface UserInfoProps {
 }
 
 function UserInfo({ avatar, username, roles }: UserInfoProps) {
-  const { selectedUser } = useAppSelector((state) => state.admin);
+  const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
   const [isUpdateUserModalShown, setUpdateUserModalShown] = useState(false);
   const [isUpdateErrorShown, setUpdateErrorShown] = useState(false);

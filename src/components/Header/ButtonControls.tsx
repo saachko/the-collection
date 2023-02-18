@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function ButtonControls() {
   const { t } = useTranslation('translation', { keyPrefix: 'header' });
-  const { isLoggedIn } = useAppSelector((state) => state.user);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const [confirmLogOutNotification, setConfirmLogOutNotification] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

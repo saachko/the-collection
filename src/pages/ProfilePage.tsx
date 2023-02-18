@@ -9,7 +9,8 @@ import { useAppSelector } from 'hooks/useRedux';
 import UserInfo from '../components/UserInfo/UserInfo';
 
 function ProfilePage() {
-  const { isLoggedIn, user } = useAppSelector((state) => state.user);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const user = useAppSelector((state) => state.user.user);
   const { t } = useTranslation('translation');
 
   if (!isLoggedIn) {

@@ -22,8 +22,8 @@ interface UpdateUserFormProps {
 }
 
 function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormProps) {
-  const { user } = useAppSelector((state) => state.user);
-  const { selectedUser } = useAppSelector((state) => state.admin);
+  const user = useAppSelector((state) => state.user.user);
+  const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const { t } = useTranslation('translation');
   const { submitUpdate, isUpdateUserLoading } = useUpdateUser(
     selectedUser || user,

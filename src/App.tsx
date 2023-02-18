@@ -17,7 +17,7 @@ const UserPage = lazy(() => import('pages/UserPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
-  const { isShown: isModalAuthShown } = useAppSelector((state) => state.authModal);
+  const isModalAuthShown = useAppSelector((state) => state.authModal.isShown);
   const { isGetUserLoading } = useCheckUserOnAppStart();
 
   return (

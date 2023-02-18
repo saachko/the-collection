@@ -14,9 +14,10 @@ import { sortData } from 'utils/functions';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function UsersPage() {
-  const { isLoggedIn, isAdmin } = useAppSelector((state) => state.user);
-  const { users } = useAppSelector((state) => state.admin);
-  const { usersSorting } = useAppSelector((state) => state.sort);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const isAdmin = useAppSelector((state) => state.user.isAdmin);
+  const users = useAppSelector((state) => state.admin.users);
+  const usersSorting = useAppSelector((state) => state.sort.usersSorting);
   const dispatch = useAppDispatch();
   const {
     data: allUsers,

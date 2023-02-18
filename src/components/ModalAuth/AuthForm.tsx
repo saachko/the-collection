@@ -21,11 +21,11 @@ interface AuthFormProps {
 }
 
 function AuthForm({ submitForm, isInputDisabled, isButtonDisabled }: AuthFormProps) {
-  const { id } = useAppSelector((state) => state.authModal);
+  const id = useAppSelector((state) => state.authModal.id);
   const { t } = useTranslation('translation', { keyPrefix: 'auth' });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLoggedIn } = useAppSelector((state) => state.user);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const {
     register,
     handleSubmit,
