@@ -79,6 +79,12 @@
         "blocked": "blocked",
         "return": "Return to the users' table"
       },
+      "sort": {
+        "aZ": "from A to Z",
+        "zA": "from Z to A",
+        "oldNew": "from old to new",
+        "newOld": "from new to old"
+      },
       "collections": {
         "empty": "There're no collections yet. Create the first one!"
       }
@@ -163,6 +169,12 @@
         "admin": "администратор",
         "blocked": "заблокирован",
         "return": "Вернуться к таблице пользователей"
+      },
+      "sort": {
+        "aZ": "от А до Я",
+        "zA": "от Я до А",
+        "oldNew": "от старых к новым",
+        "newOld": "от новых к старым"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!"

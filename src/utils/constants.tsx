@@ -1,8 +1,15 @@
 import React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiTwotoneMail } from 'react-icons/ai';
+import { BsSortAlphaDown, BsSortAlphaUp, BsSortDown, BsSortUp } from 'react-icons/bs';
 import { FaTelegramPlane } from 'react-icons/fa';
 
-import { Contact, NavLink, TableHeading, UserAuthFormValues } from 'ts/interfaces';
+import {
+  Contact,
+  NavLink,
+  SortButton,
+  TableHeading,
+  UserAuthFormValues,
+} from 'ts/interfaces';
 
 const navLinks: NavLink[] = [
   {
@@ -85,6 +92,29 @@ const usersTableHeadings: TableHeading[] = [
   },
 ];
 
+const sortButtons: SortButton[] = [
+  {
+    id: 'fromAtoZ',
+    icon: <BsSortAlphaDown />,
+    tooltip: 'aZ',
+  },
+  {
+    id: 'fromZtoA',
+    icon: <BsSortAlphaUp />,
+    tooltip: 'zA',
+  },
+  {
+    id: 'fromOldToNew',
+    icon: <BsSortUp />,
+    tooltip: 'oldNew',
+  },
+  {
+    id: 'fromNewToOld',
+    icon: <BsSortDown />,
+    tooltip: 'newOld',
+  },
+];
+
 export {
   navLinks,
   privateLink,
@@ -94,4 +124,5 @@ export {
   imageFileTypes,
   userAvatarBaseUrl,
   usersTableHeadings,
+  sortButtons,
 };

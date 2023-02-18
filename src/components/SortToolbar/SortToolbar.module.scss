@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.sortButton {
+  background-color: var(--transparent);
+  border: none;
+  font-size: $fontSizeButton;
+  padding: 5px;
+  color: var(--text-color);
+  transition: $transition;
+
+  &:hover {
+    color: var(--primary-color-light);
+  }
+
+  &:active {
+    opacity: $activeOpacity;
+  }
+}
+
+.sortButtonActive,
+.sortButtonActive:hover {
+  color: var(--primary-color);
+
+  &:active {
+    opacity: $activeOpacity;
+  }
+}

@@ -3,15 +3,20 @@ import { Navigate } from 'react-router-dom';
 
 import { useGetAllUsersQuery } from 'redux/api/userApiSlice';
 import { setUsers } from 'redux/slices/adminSlice';
+import { setUsersSortingType } from 'redux/slices/sortSlice';
 
 import Loader from 'components/Loader/Loader';
+import SortToolbar from 'components/SortToolbar/SortToolbar';
 import UsersTable from 'components/UsersTable/UsersTable';
+
+import { sortData } from 'utils/functions';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function UsersPage() {
   const { isLoggedIn, isAdmin } = useAppSelector((state) => state.user);
   const { users } = useAppSelector((state) => state.admin);
+  const { usersSorting } = useAppSelector((state) => state.sort);
   const dispatch = useAppDispatch();
   const {
     data: allUsers,
@@ -21,7 +26,8 @@ function UsersPage() {
 
   useEffect(() => {
     if (allUsers && isSuccessGetAllUsers) {
-      dispatch(setUsers(allUsers));
+      const sortedData = sortData(allUsers, usersSorting);
+      dispatch(setUsers(sortedData));
     }
   }, [isSuccessGetAllUsers]);
 
@@ -30,6 +36,12 @@ function UsersPage() {
   }
   return (
     <div className="content">
+      <SortToolbar
+        sortingList={users}
+        sortingType={usersSorting}
+        setSortingType={setUsersSortingType}
+        setList={setUsers}
+      />
       <UsersTable users={users} />
       {isGetAllUsersLoading && <Loader />}
     </div>

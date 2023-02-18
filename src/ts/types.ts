@@ -4,4 +4,6 @@ type Themes = 'light' | 'dark';
 
 type AuthModal = 'signIn' | 'signUp' | '';
 
-export type { SetState, Themes, AuthModal };
+type SortTypes = 'fromAtoZ' | 'fromZtoA' | 'fromNewToOld' | 'fromOldToNew';
+
+export type { SetState, Themes, AuthModal, SortTypes };

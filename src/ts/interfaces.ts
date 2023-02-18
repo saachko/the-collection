@@ -1,3 +1,5 @@
+import { SortTypes } from './types';
+
 interface NavLink {
   id: string;
   name: string;
@@ -64,6 +66,12 @@ interface TableHeading {
   headingName: string;
 }
 
+interface SortButton {
+  id: SortTypes;
+  icon: JSX.Element;
+  tooltip: string;
+}
+
 export type {
   NavLink,
   Contact,
@@ -75,4 +83,5 @@ export type {
   EditDropdownItem,
   UpdateUserFormValues,
   TableHeading,
+  SortButton,
 };

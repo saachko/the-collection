@@ -1,4 +1,5 @@
-import { ParsedToken } from 'ts/interfaces';
+import { ParsedToken, User } from 'ts/interfaces';
+import { SortTypes } from 'ts/types';
 
 const parseJwt = (tokenToParse: string) => {
   const base64Url = tokenToParse.split('.')[1];
@@ -36,4 +37,25 @@ const formatDate = (stringDate: string) => {
   return date.toLocaleString();
 };
 
-export { checkToken, createUserAvatar, formatDate };
+const sortData = (data: User[] | null, sortType: SortTypes) => {
+  if (data) {
+    switch (sortType) {
+      case 'fromAtoZ':
+        return [...data].sort((a, b) => (a.username > b.username ? 1 : -1));
+      case 'fromZtoA':
+        return [...data].sort((a, b) => (a.username < b.username ? 1 : -1));
+      case 'fromOldToNew':
+        return [...data].sort((a, b) =>
+          formatDate(a.createdAt) > formatDate(b.createdAt) ? 1 : -1
+        );
+      case 'fromNewToOld':
+      default:
+        return [...data].sort((a, b) =>
+          formatDate(a.createdAt) < formatDate(b.createdAt) ? 1 : -1
+        );
+    }
+  }
+  return data;
+};
+
+export { checkToken, createUserAvatar, formatDate, sortData };

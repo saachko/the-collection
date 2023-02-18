@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { showModal } from 'redux/slices/modalAuthSlice';
+import { setDefaultSorting } from 'redux/slices/sortSlice';
 import { setLoggedOut } from 'redux/slices/userSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
@@ -17,6 +18,12 @@ function ButtonControls() {
   const [confirmLogOutNotification, setConfirmLogOutNotification] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const logOut = () => {
+    dispatch(setLoggedOut());
+    dispatch(setSelectedUser(null));
+    dispatch(setDefaultSorting());
+  };
 
   if (!isLoggedIn) {
     return (
@@ -47,10 +54,7 @@ function ButtonControls() {
       <ConfirmNotification
         isShown={confirmLogOutNotification}
         setShown={setConfirmLogOutNotification}
-        onConfirm={() => {
-          dispatch(setLoggedOut());
-          dispatch(setSelectedUser(null));
-        }}
+        onConfirm={logOut}
         text={t('confirmLogOut')}
       />
     </div>
