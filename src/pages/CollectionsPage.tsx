@@ -10,7 +10,10 @@ function CollectionsPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
 
   return (
-    <EmptyContainer text={isLoggedIn ? `${t('empty')}` : `${t('emptyAndLogOut')}`} />
+    <EmptyContainer
+      title={t('empty')}
+      text={isLoggedIn ? `${t('emptyAndLoggedIn')}` : `${t('emptyAndLoggedOut')}`}
+    />
   );
 }
 

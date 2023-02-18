@@ -19,7 +19,10 @@ function ProfilePage() {
   return (
     <div className="content">
       <UserInfo avatar={user?.avatar} username={user?.username} roles={user?.roles} />
-      <EmptyContainer text={t('collections.empty')} />
+      <EmptyContainer
+        title={t('collections.empty')}
+        text={t('collections.emptyAndLoggedIn')}
+      />
     </div>
   );
 }

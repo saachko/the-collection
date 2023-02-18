@@ -47,7 +47,10 @@ function UserPage() {
         username={selectedUser?.username}
         roles={selectedUser?.roles}
       />
-      <EmptyContainer text={t('collections.empty')} />
+      <EmptyContainer
+        title={t('collections.empty')}
+        text={t('collections.emptyAndLoggedIn')}
+      />
     </div>
   );
 }

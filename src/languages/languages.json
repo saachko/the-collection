@@ -86,8 +86,9 @@
         "newOld": "from new to old"
       },
       "collections": {
-        "empty": "There're no collections yet. Create the first one!",
-        "emptyAndLogOut": "There're no collections yet. Sign up and the first one!"
+        "empty": "There're no collections yet.",
+        "emptyAndLoggedIn": "Create the first one!",
+        "emptyAndLoggedOut": "Sign up and create the first one!"
       }
     }
   },
@@ -179,7 +180,8 @@
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",
-        "emptyAndLogOut": "Коллекций пока что нет. Зарегистрируйтесь и создайте первую!"
+        "emptyAndLoggedIn": "Создайте первую!",
+        "emptyAndLoggedOut": "Зарегистрируйтесь и создайте первую!"
       }
     }
   }
