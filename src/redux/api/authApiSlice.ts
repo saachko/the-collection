@@ -23,6 +23,7 @@ const authApiSlice = apiSlice.injectEndpoints({
             return 'signUpError';
         }
       },
+      invalidatesTags: ['User'],
     }),
 
     signIn: builder.mutation<UserResponse, UserAuthFormValues>({
@@ -47,6 +48,7 @@ const authApiSlice = apiSlice.injectEndpoints({
             return 'signInError';
         }
       },
+      invalidatesTags: ['User'],
     }),
   }),
 });
