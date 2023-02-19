@@ -1,5 +1,5 @@
 import { Endpoints, Methods } from 'ts/enums';
-import { Collection, CollectionFormValues } from 'ts/interfaces';
+import { Collection, CollectionRequestBody } from 'ts/interfaces';
 
 import apiSlice from './apiSlice';
 
@@ -13,15 +13,18 @@ const collectionApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              ...result.map((user) => ({ type: 'Collection' as const, id: user._id })),
+              ...result.map((collection) => ({
+                type: 'Collection' as const,
+                id: collection._id,
+              })),
               'Collection',
             ]
           : ['Collection'],
     }),
 
     getCollectionById: builder.query<Collection, string>({
-      query: (id: string) => ({
-        url: `${Endpoints.collections}${id}`,
+      query: (collectionId: string) => ({
+        url: `${Endpoints.collections}${collectionId}`,
         method: Methods.get,
       }),
       providesTags: ['Collection'],
@@ -35,14 +38,17 @@ const collectionApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              ...result.map((user) => ({ type: 'Collection' as const, id: user._id })),
+              ...result.map((collection) => ({
+                type: 'Collection' as const,
+                id: collection._id,
+              })),
               'Collection',
             ]
           : ['Collection'],
     }),
 
-    createCollection: builder.mutation<Collection, CollectionFormValues>({
-      query: (body: CollectionFormValues) => ({
+    createCollection: builder.mutation<Collection, CollectionRequestBody>({
+      query: (body: CollectionRequestBody) => ({
         url: `${Endpoints.collections}`,
         method: Methods.post,
         headers: {
@@ -55,8 +61,8 @@ const collectionApiSlice = apiSlice.injectEndpoints({
     }),
 
     deleteCollectionById: builder.mutation<Collection, string>({
-      query: (id: string) => ({
-        url: `${Endpoints.collections}${id}`,
+      query: (collectionId: string) => ({
+        url: `${Endpoints.collections}${collectionId}`,
         method: Methods.delete,
         headers: {
           'Content-type': 'application/json',
@@ -66,9 +72,12 @@ const collectionApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['Collection'],
     }),
 
-    updateCollectionById: builder.mutation<Collection, { id: string; body: Collection }>({
-      query: ({ id, body }) => ({
-        url: `${Endpoints.collections}${id}`,
+    updateCollectionById: builder.mutation<
+      Collection,
+      { collectionId: string; body: Collection }
+    >({
+      query: ({ collectionId, body }) => ({
+        url: `${Endpoints.collections}${collectionId}`,
         method: Methods.put,
         headers: {
           'Content-type': 'application/json',
@@ -83,8 +92,9 @@ const collectionApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useLazyGetCollectionByIdQuery,
+  useLazyGetAllCollectionsQuery,
+  useLazyGetCollectionsByUserIdQuery,
   useGetAllCollectionsQuery,
-  useGetCollectionsByUserIdQuery,
   useCreateCollectionMutation,
   useDeleteCollectionByIdMutation,
   useUpdateCollectionByIdMutation,

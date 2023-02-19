@@ -1,5 +1,11 @@
 import { SortTypes } from './types';
 
+interface DatabaseModel {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface NavLink {
   id: string;
   name: string;
@@ -13,16 +19,13 @@ interface Contact {
   title: string;
 }
 
-interface User {
-  _id: string;
+interface User extends DatabaseModel {
   username: string;
   email: string;
   password: string;
   avatar: string;
   roles: string[];
   isBlocked: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 interface UserAuthFormValues {
@@ -72,26 +75,69 @@ interface SortButton {
   tooltip: string;
 }
 
-interface Collection {
-  _id: string;
-  title: string;
-  description: string;
-  theme: string;
-  image: string;
-  ownerId: string;
-  ownerName: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 interface CollectionFormValues {
   title: string;
   description: string;
   theme: string;
   image: string;
+}
+
+interface CollectionRequestBody extends CollectionFormValues {
   ownerId: string;
   ownerName: string;
 }
+
+interface Collection extends DatabaseModel, CollectionRequestBody {}
+
+interface CustomFieldFormValues {
+  type: string;
+  label: string;
+}
+
+interface CustomFieldRequestBody extends CustomFieldFormValues {
+  collectionId: string;
+}
+
+interface CustomField extends DatabaseModel, CustomFieldRequestBody {}
+
+interface CustomFieldInItem {
+  customFieldId: string;
+  label: string;
+  value: string;
+}
+
+interface ItemFormValues {
+  itemName: string;
+  customFields: CustomFieldInItem[];
+}
+
+interface ItemRequestBody extends ItemFormValues {
+  collectionId: string;
+  collectionName: string;
+  collectionTheme: string;
+  ownerId: string;
+  ownerName: string;
+}
+
+interface Item extends DatabaseModel, ItemRequestBody {
+  likes: string[];
+}
+
+interface TagRequestBody {
+  label: string;
+  items: string[];
+}
+
+interface Tag extends DatabaseModel, TagRequestBody {}
+
+interface CommentRequestBody {
+  itemId: string;
+  authorId: string;
+  authorName: string;
+  text: string;
+}
+
+interface Comment extends DatabaseModel, CommentRequestBody {}
 
 export type {
   NavLink,
@@ -106,5 +152,16 @@ export type {
   TableHeading,
   SortButton,
   Collection,
+  CollectionRequestBody,
   CollectionFormValues,
+  CustomField,
+  CustomFieldRequestBody,
+  CustomFieldFormValues,
+  Item,
+  ItemRequestBody,
+  ItemFormValues,
+  Tag,
+  TagRequestBody,
+  Comment,
+  CommentRequestBody,
 };
