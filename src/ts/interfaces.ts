@@ -87,7 +87,9 @@ interface CollectionRequestBody extends CollectionFormValues {
   ownerName: string;
 }
 
-interface Collection extends DatabaseModel, CollectionRequestBody {}
+interface Collection extends DatabaseModel, CollectionRequestBody {
+  itemsQuantity: number;
+}
 
 interface CustomFieldFormValues {
   type: string;

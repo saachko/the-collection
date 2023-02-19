@@ -43,8 +43,14 @@ function CollectionCard({ collection }: CollectionCardProps) {
       </div>
       <Card.Body>
         <Card.Title className="mb-0">{collection.title}</Card.Title>
-        <div className={styles.theme}>{collection.theme}</div>
-        <Card.Text>{formatDescription()}</Card.Text>
+        <Card.Text className={styles.theme}>{collection.theme}</Card.Text>
+        <Card.Text className="mb-1">{formatDescription()}</Card.Text>
+        <Card.Text className={styles.quantity}>
+          <em>
+            {t('collections.itemsQuantity')}
+            {collection.itemsQuantity}
+          </em>
+        </Card.Text>
       </Card.Body>
       <Card.Footer className={styles.cardFooter}>
         <p>

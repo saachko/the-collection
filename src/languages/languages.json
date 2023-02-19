@@ -90,7 +90,8 @@
         "emptyAndLoggedIn": "Create the first one!",
         "emptyAndLoggedOut": "Sign up and create the first one!",
         "createdBy": "Created by ",
-        "createdAt": "at"
+        "createdAt": "at",
+        "itemsQuantity": "Items quantity: "
       }
     }
   },
@@ -185,7 +186,8 @@
         "emptyAndLoggedIn": "Создайте первую!",
         "emptyAndLoggedOut": "Зарегистрируйтесь и создайте первую!",
         "createdBy": "Создал(а) ",
-        "createdAt": "в"
+        "createdAt": "в",
+        "itemsQuantity": "Количество элементов: "
       }
     }
   }
