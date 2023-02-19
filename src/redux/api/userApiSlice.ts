@@ -15,6 +15,7 @@ const userApiSlice = apiSlice.injectEndpoints({
           ? [...result.map((user) => ({ type: 'User' as const, id: user._id })), 'User']
           : ['User'],
     }),
+
     getUserById: builder.query<User, string>({
       query: (id: string) => ({
         url: `${Endpoints.users}${id}`,

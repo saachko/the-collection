@@ -72,6 +72,27 @@ interface SortButton {
   tooltip: string;
 }
 
+interface Collection {
+  _id: string;
+  title: string;
+  description: string;
+  theme: string;
+  image: string;
+  ownerId: string;
+  ownerName: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface CollectionFormValues {
+  title: string;
+  description: string;
+  theme: string;
+  image: string;
+  ownerId: string;
+  ownerName: string;
+}
+
 export type {
   NavLink,
   Contact,
@@ -84,4 +105,6 @@ export type {
   UpdateUserFormValues,
   TableHeading,
   SortButton,
+  Collection,
+  CollectionFormValues,
 };
