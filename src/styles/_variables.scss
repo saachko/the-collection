@@ -54,47 +54,6 @@ $paddingPage: 10px 15px;
 $transition: all 0.2s ease-out;
 $themeTransition: background-color 0.2s linear;
 $hoverOpacity: 0.8;
+$hoverScale: scale(1.02);
+$hoverShadow: 0px 10px 13px var(--background-secondary-color);
 $activeOpacity: 0.5;
-
-%loading-skeleton {
-  color: transparent;
-  appearance: none;
-  -webkit-appearance: none;
-  background-color: #eee;
-  border-color: #eee;
-
-  &::placeholder {
-    color: transparent;
-  }
-}
-
-@keyframes loading-skeleton {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.loading-skeleton {
-  pointer-events: none;
-  animation: loading-skeleton 1s infinite alternate;
-
-  img {
-    filter: grayscale(100) contrast(0%) brightness(1.8);
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  li,
-  .btn,
-  label,
-  .form-control {
-    @extend %loading-skeleton;
-  }
-}

@@ -13,6 +13,7 @@ import storage from 'redux-persist/lib/storage';
 
 import apiSlice from './api/apiSlice';
 import adminReducer from './slices/adminSlice';
+import collectionReducer from './slices/collectionSlice';
 import authModalReducer from './slices/modalAuthSlice';
 import sortReducer from './slices/sortSlice';
 import userReducer from './slices/userSlice';
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   sort: sortReducer,
   user: persistReducer(userConfig, userReducer),
   admin: adminReducer,
+  collection: collectionReducer,
 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });

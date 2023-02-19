@@ -88,7 +88,9 @@
       "collections": {
         "empty": "There're no collections yet.",
         "emptyAndLoggedIn": "Create the first one!",
-        "emptyAndLoggedOut": "Sign up and create the first one!"
+        "emptyAndLoggedOut": "Sign up and create the first one!",
+        "createdBy": "Created by ",
+        "createdAt": "at"
       }
     }
   },
@@ -181,7 +183,9 @@
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",
         "emptyAndLoggedIn": "Создайте первую!",
-        "emptyAndLoggedOut": "Зарегистрируйтесь и создайте первую!"
+        "emptyAndLoggedOut": "Зарегистрируйтесь и создайте первую!",
+        "createdBy": "Создал(а) ",
+        "createdAt": "в"
       }
     }
   }
