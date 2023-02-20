@@ -78,7 +78,8 @@
         "createdAt": "Registration date & time",
         "admin": "administrator",
         "blocked": "blocked",
-        "return": "Return to the users' table"
+        "return": "Return to the users' table",
+        "collections": "User's collections"
       },
       "sort": {
         "aZ": "from A to Z",
@@ -175,7 +176,8 @@
         "createdAt": "Дата и время регистрации",
         "admin": "администратор",
         "blocked": "заблокирован",
-        "return": "Вернуться к таблице пользователей"
+        "return": "Вернуться к таблице пользователей",
+        "collections": "Коллекции пользователя"
       },
       "sort": {
         "aZ": "от А до Я",

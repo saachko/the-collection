@@ -17,6 +17,26 @@ function CollectionCardsContainer({ collections }: CollectionCardsContainerProps
         collections.map((collection) => (
           <CollectionCard key={collection._id} collection={collection} />
         ))}
+      {collections &&
+        collections.map((collection) => (
+          <CollectionCard key={collection._id} collection={collection} />
+        ))}
+      {collections &&
+        collections.map((collection) => (
+          <CollectionCard key={collection._id} collection={collection} />
+        ))}
+      {collections &&
+        collections.map((collection) => (
+          <CollectionCard key={collection._id} collection={collection} />
+        ))}
+      {collections &&
+        collections.map((collection) => (
+          <CollectionCard key={collection._id} collection={collection} />
+        ))}
+      {collections &&
+        collections.map((collection) => (
+          <CollectionCard key={collection._id} collection={collection} />
+        ))}
     </div>
   );
 }
