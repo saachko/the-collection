@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { memo, useState } from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Placeholder, Tooltip } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock } from 'react-icons/ai';
@@ -24,9 +24,10 @@ interface UserInfoProps {
   avatar: string | undefined;
   username: string | undefined;
   roles: string[] | undefined;
+  isUserLoading: boolean;
 }
 
-function UserInfo({ avatar, username, roles }: UserInfoProps) {
+function UserInfo({ avatar, username, roles, isUserLoading }: UserInfoProps) {
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
   const [isUpdateUserModalShown, setUpdateUserModalShown] = useState(false);
@@ -56,10 +57,18 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
         <div className="d-flex gap-4">
           <div className="avatar position-relative">
             <div className="avatar loading-skeleton position-absolute" />
-            <Image src={avatar} alt="avatar" className="avatar position-absolute" />
+            <Image src={avatar} className="avatar position-absolute" />
           </div>
           <div>
-            <h1 className="mb-0">{username}</h1>
+            <h1 className="mb-0">
+              {isUserLoading ? (
+                <Placeholder className="loading-skeleton d-flex" animation="glow">
+                  <Placeholder xs={12} size="lg" />
+                </Placeholder>
+              ) : (
+                `${username}`
+              )}
+            </h1>
             <p className="mt-0 mb-0">
               <em className="me-2">
                 {t(`${roles?.includes('admin') ? `admin` : `user`}`)}

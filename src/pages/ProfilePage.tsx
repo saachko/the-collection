@@ -13,7 +13,11 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import UserInfo from '../components/UserInfo/UserInfo';
 
-function ProfilePage() {
+interface ProfilePageProps {
+  isUserLoading: boolean;
+}
+
+function ProfilePage({ isUserLoading }: ProfilePageProps) {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const user = useAppSelector((state) => state.user.user);
   const collectionsByUser = useAppSelector((state) => state.collection.collectionsByUser);
@@ -47,9 +51,14 @@ function ProfilePage() {
   return (
     <div className="content">
       {isGetCollectionsLoading && <Loader />}
-      <UserInfo avatar={user?.avatar} username={user?.username} roles={user?.roles} />
+      <UserInfo
+        avatar={user?.avatar}
+        username={user?.username}
+        roles={user?.roles}
+        isUserLoading={isUserLoading}
+      />
 
-      {collections ? (
+      {collections && collections.length > 0 ? (
         <>
           <h3 className="mt-3 mb-3 text-center">{t('profilePage.myCollections')}</h3>
           <CollectionCardsContainer collections={collectionsByUser} />

@@ -23,8 +23,10 @@ function UserPage() {
   );
   const { t } = useTranslation('translation');
   const location = useLocation();
-  const [getUserById, { data: currentUser, isSuccess: isSuccessGetUser }] =
-    useLazyGetUserByIdQuery();
+  const [
+    getUserById,
+    { data: currentUser, isSuccess: isSuccessGetUser, isLoading: isUserLoading },
+  ] = useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -76,8 +78,9 @@ function UserPage() {
         avatar={selectedUser?.avatar}
         username={selectedUser?.username}
         roles={selectedUser?.roles}
+        isUserLoading={isUserLoading}
       />
-      {collections ? (
+      {collections && collections.length > 0 ? (
         <>
           <h3 className="mt-3 mb-3 text-center">
             {userId === selectedUser?._id
