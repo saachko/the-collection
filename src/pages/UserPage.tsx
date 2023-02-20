@@ -23,10 +23,8 @@ function UserPage() {
   );
   const { t } = useTranslation('translation');
   const location = useLocation();
-  const [
-    getUserById,
-    { data: currentUser, isSuccess: isSuccessGetUser, isLoading: isUserLoading },
-  ] = useLazyGetUserByIdQuery();
+  const [getUserById, { data: currentUser, isSuccess: isSuccessGetUser }] =
+    useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -78,7 +76,6 @@ function UserPage() {
         avatar={selectedUser?.avatar}
         username={selectedUser?.username}
         roles={selectedUser?.roles}
-        isUserLoading={isUserLoading}
       />
       {collections && collections.length > 0 ? (
         <>
@@ -87,7 +84,7 @@ function UserPage() {
               ? t('profilePage.myCollections')
               : t('usersPage.collections')}
           </h3>
-          <CollectionCardsContainer collections={collectionsBySelectedUser} />
+          <CollectionCardsContainer collections={collections} />
         </>
       ) : (
         <EmptyContainer

@@ -1,10 +1,12 @@
 import clsx from 'clsx';
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { OverlayTrigger, Placeholder, Tooltip } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock } from 'react-icons/ai';
 import { useLocation } from 'react-router-dom';
+
+import { setSelectedUser } from 'redux/slices/adminSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
@@ -13,7 +15,7 @@ import Loader from 'components/Loader/Loader';
 import ModalUserUpdate from 'components/ModalUserUpdate/ModalUserUpdate';
 
 import useDeleteUser from 'hooks/useDeleteUser';
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useUpdateUserByAdmin from 'hooks/useUpdateUserByAdmin';
 
 import { EditDropdownItem } from 'ts/interfaces';
@@ -24,10 +26,10 @@ interface UserInfoProps {
   avatar: string | undefined;
   username: string | undefined;
   roles: string[] | undefined;
-  isUserLoading: boolean;
 }
 
-function UserInfo({ avatar, username, roles, isUserLoading }: UserInfoProps) {
+function UserInfo({ avatar, username, roles }: UserInfoProps) {
+  const user = useAppSelector((state) => state.user.user);
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
   const [isUpdateUserModalShown, setUpdateUserModalShown] = useState(false);
@@ -35,7 +37,18 @@ function UserInfo({ avatar, username, roles, isUserLoading }: UserInfoProps) {
   const [isDeleteErrorShown, setDeleteErrorShown] = useState(false);
   const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
   const location = useLocation();
-  const { deleteUser, isDeleteUserLoading } = useDeleteUser(setDeleteErrorShown);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (location.pathname === '/profile') {
+      dispatch(setSelectedUser(null));
+    }
+  }, [selectedUser]);
+
+  const { deleteUser, isDeleteUserLoading } = useDeleteUser(
+    setDeleteErrorShown,
+    selectedUser || user
+  );
 
   const editActions: EditDropdownItem[] = [
     { id: '1', title: `${t('userEdit')}`, action: () => setUpdateUserModalShown(true) },
@@ -61,7 +74,7 @@ function UserInfo({ avatar, username, roles, isUserLoading }: UserInfoProps) {
           </div>
           <div>
             <h1 className="mb-0">
-              {isUserLoading ? (
+              {!username ? (
                 <Placeholder className="loading-skeleton d-flex" animation="glow">
                   <Placeholder xs={12} size="lg" />
                 </Placeholder>
@@ -77,7 +90,7 @@ function UserInfo({ avatar, username, roles, isUserLoading }: UserInfoProps) {
                 placement="right"
                 overlay={<Tooltip>{t('blocked')}</Tooltip>}
               >
-                <span style={{ color: 'var(--primary-color)' }}>
+                <span className={styles.blockedIcon}>
                   {location.pathname !== '/profile' && selectedUser?.isBlocked && (
                     <AiFillLock />
                   )}
@@ -100,8 +113,9 @@ function UserInfo({ avatar, username, roles, isUserLoading }: UserInfoProps) {
           isShown={isUpdateUserModalShown}
           setShown={setUpdateUserModalShown}
           setUpdateErrorShown={setUpdateErrorShown}
+          user={selectedUser || user}
         />
-        {isDeleteUserLoading || (isUpdateUserLoading && <Loader />)}
+        {(isDeleteUserLoading || isUpdateUserLoading) && <Loader />}
       </div>
       <ErrorNotification
         errorMessage="profilePage.userUpdateError"

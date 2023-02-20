@@ -29,10 +29,7 @@ function App() {
           <Routes>
             <Route index path="/" element={<HomePage />} />
             <Route path="collections" element={<CollectionsPage />} />
-            <Route
-              path="profile"
-              element={<ProfilePage isUserLoading={isGetUserLoading} />}
-            />
+            <Route path="profile" element={<ProfilePage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="users/:userId" element={<UserPage />} />
             <Route path="*" element={<NotFoundPage />} />

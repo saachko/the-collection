@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
+import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
 import { setCollections } from 'redux/slices/collectionSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
@@ -16,23 +16,32 @@ function CollectionsPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
   const dispatch = useAppDispatch();
 
-  const {
-    data: allCollections,
-    isSuccess: isSuccessGetCollections,
-    isLoading: isGetCollectionsLoading,
-  } = useGetAllCollectionsQuery(undefined);
+  const [
+    getAllCollections,
+    {
+      data: allCollections,
+      isSuccess: isSuccessGetCollections,
+      isLoading: isGetCollectionsLoading,
+    },
+  ] = useLazyGetAllCollectionsQuery();
+
+  useEffect(() => {
+    (async () => {
+      await getAllCollections();
+    })();
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (allCollections && isSuccessGetCollections) {
       dispatch(setCollections(allCollections));
     }
-  }, [isGetCollectionsLoading]);
+  }, [isSuccessGetCollections]);
 
   return (
     <div className="content">
       {isGetCollectionsLoading && <Loader />}
       {allCollections ? (
-        <CollectionCardsContainer collections={collections} />
+        <CollectionCardsContainer collections={allCollections} />
       ) : (
         <EmptyContainer
           title={t('empty')}

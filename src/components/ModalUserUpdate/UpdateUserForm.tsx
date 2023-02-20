@@ -9,31 +9,34 @@ import ValidationError from 'components/ModalAuth/ValidationError';
 
 import { emailValidation, userAvatarBaseUrl } from 'utils/constants';
 
-import { useAppSelector } from 'hooks/useRedux';
 import useUpdateUser from 'hooks/useUpdateUser';
 import useUpdateUserAvatar from 'hooks/useUpdateUserAvatar';
 
-import { UpdateUserFormValues } from 'ts/interfaces';
+import { UpdateUserFormValues, User } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
 interface UpdateUserFormProps {
+  user: User | null;
   setModalShown: SetState<boolean>;
   setUpdateErrorShown: SetState<boolean>;
 }
 
-function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormProps) {
-  const user = useAppSelector((state) => state.user.user);
-  const selectedUser = useAppSelector((state) => state.admin.selectedUser);
+function UpdateUserForm({
+  user,
+  setModalShown,
+  setUpdateErrorShown,
+}: UpdateUserFormProps) {
   const { t } = useTranslation('translation');
+
   const { submitUpdate, isUpdateUserLoading } = useUpdateUser(
-    selectedUser || user,
+    user,
     setModalShown,
     setUpdateErrorShown
   );
 
   const defaultFormValues: UpdateUserFormValues = {
-    username: selectedUser?.username || user?.username || '',
-    email: selectedUser?.email || user?.email || '',
+    username: user?.username || '',
+    email: user?.email || '',
     avatar: '',
   };
 
@@ -55,7 +58,7 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
   }, []);
 
   const { avatar, changeAvatar, isDefaultAvatar, setDefaultAvatar, isAvatarLoading } =
-    useUpdateUserAvatar(selectedUser || user, setValue);
+    useUpdateUserAvatar(user, setValue);
 
   return (
     <>
@@ -107,7 +110,7 @@ function UpdateUserForm({ setModalShown, setUpdateErrorShown }: UpdateUserFormPr
             isDisabled={isDefaultAvatar}
           />
         </Form.Group>
-        {!(selectedUser || user)?.avatar.includes(userAvatarBaseUrl) && (
+        {!user?.avatar.includes(userAvatarBaseUrl) && (
           <Form.Check
             type="switch"
             id="defaultAvatar"

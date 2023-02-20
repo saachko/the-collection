@@ -91,9 +91,9 @@ const collectionApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
+  useLazyGetAllCollectionsQuery,
   useLazyGetCollectionByIdQuery,
   useLazyGetCollectionsByUserIdQuery,
-  useGetAllCollectionsQuery,
   useCreateCollectionMutation,
   useDeleteCollectionByIdMutation,
   useUpdateCollectionByIdMutation,

@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
+import { User } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
 import styles from './ModalUserUpdate.module.scss';
@@ -12,12 +13,14 @@ interface ModalUserUpdateProps {
   isShown: boolean;
   setShown: SetState<boolean>;
   setUpdateErrorShown: SetState<boolean>;
+  user: User | null;
 }
 
 function ModalUserUpdate({
   isShown,
   setShown,
   setUpdateErrorShown,
+  user,
 }: ModalUserUpdateProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
 
@@ -33,6 +36,7 @@ function ModalUserUpdate({
         <UpdateUserForm
           setModalShown={setShown}
           setUpdateErrorShown={setUpdateErrorShown}
+          user={user}
         />
       </Modal.Body>
     </Modal>
