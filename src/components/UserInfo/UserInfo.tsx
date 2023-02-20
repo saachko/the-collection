@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { memo, useState } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
@@ -16,6 +17,8 @@ import { useAppSelector } from 'hooks/useRedux';
 import useUpdateUserByAdmin from 'hooks/useUpdateUserByAdmin';
 
 import { EditDropdownItem } from 'ts/interfaces';
+
+import styles from './UserInfo.module.scss';
 
 interface UserInfoProps {
   avatar: string | undefined;
@@ -49,7 +52,7 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
 
   return (
     <>
-      <div className="d-flex gap-4 justify-content-between">
+      <div className={clsx('d-flex gap-4 justify-content-between', styles.infoContainer)}>
         <div className="d-flex gap-4">
           <div className="avatar position-relative">
             <div className="avatar loading-skeleton position-absolute" />

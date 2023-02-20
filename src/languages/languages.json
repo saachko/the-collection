@@ -67,7 +67,8 @@
         "file": "File name: ",
         "defaultAvatar": "set default avatar",
         "blocked": "blocked",
-        "adminDeleteError": "User is the only administrator and can't be deleted"
+        "adminDeleteError": "User is the only administrator and can't be deleted",
+        "myCollections": "My collections"
       },
       "usersPage": {
         "#": "#",
@@ -163,7 +164,8 @@
         "file": "Имя файла: ",
         "defaultAvatar": "стандартный аватар",
         "blocked": "заблокирован",
-        "adminDeleteError": "Удаление невозможно, т.к. пользователь - единственный администратор"
+        "adminDeleteError": "Удаление невозможно, т.к. пользователь - единственный администратор",
+        "myCollections": "Мои коллекции"
       },
       "usersPage": {
         "#": "#",
