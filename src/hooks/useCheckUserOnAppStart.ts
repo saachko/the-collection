@@ -11,12 +11,7 @@ const useCheckUserOnAppStart = () => {
   const { token } = useAppSelector((state) => state.user);
   const [
     getUserById,
-    {
-      data: currentUser,
-      isSuccess: isSuccessGetUser,
-      isLoading: isGetUserLoading,
-      status: getUserStatus,
-    },
+    { data: currentUser, isSuccess: isSuccessGetUser, isLoading: isGetUserLoading },
   ] = useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
 
@@ -33,17 +28,14 @@ const useCheckUserOnAppStart = () => {
   }, []);
 
   useEffect(() => {
-    if (getUserStatus === 'fulfilled' && currentUser && isSuccessGetUser) {
+    if (currentUser && isSuccessGetUser) {
       if (currentUser.isBlocked) {
         dispatch(setLoggedOut());
       } else {
         dispatch(setUser(currentUser));
       }
     }
-    if (getUserStatus === 'rejected') {
-      dispatch(setLoggedOut());
-    }
-  }, [getUserStatus]);
+  }, [isSuccessGetUser]);
 
   return { isGetUserLoading };
 };
