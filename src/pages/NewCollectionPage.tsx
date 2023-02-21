@@ -1,26 +1,14 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
-import { SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
-
-import { useCreateCollectionMutation } from 'redux/api/collectionApiSlice';
-import { useCreateCustomFieldMutation } from 'redux/api/customFieldApiSlice';
 
 import CollectionForm from 'components/CollectionForm/CollectionForm';
 import CustomFieldsForm from 'components/CustomFieldsForm/CustomFieldsForm';
 import Loader from 'components/Loader/Loader';
 
-import { createCollectionImage } from 'utils/functions';
-
+import useCreateCollection from 'hooks/useCreateCollection';
 import { useAppSelector } from 'hooks/useRedux';
-
-import {
-  CollectionFormValues,
-  CollectionRequestBody,
-  CustomFieldFormValuesWithId,
-  CustomFieldRequestBody,
-} from 'ts/interfaces';
 
 function NewCollectionPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -30,57 +18,13 @@ function NewCollectionPage() {
   const currentUser = selectedUser || user;
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
 
-  const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
-
-  const [
-    createCollection,
-    {
-      data: newCollection,
-      isLoading: isLoadingCollectionCreation,
-      isSuccess: isSuccessCollectionCreation,
-    },
-  ] = useCreateCollectionMutation();
-
-  const [
-    createCustomField,
-    { isLoading: isLoadingFieldCreation, isSuccess: isSuccessFieldCreation },
-  ] = useCreateCustomFieldMutation();
-
-  const isLoadingCreation = isLoadingCollectionCreation || isLoadingFieldCreation;
-
-  const validateCustomFields = () =>
-    customFields.filter((field) => field.label && field.type);
-
-  const submitCreation: SubmitHandler<CollectionFormValues> = async ({
-    ...formValues
-  }) => {
-    const newCollectionParams: CollectionRequestBody = {
-      title: formValues.title,
-      description: formValues.description || '**No description provided**',
-      theme: formValues.theme || 'other',
-      image:
-        formValues.image || createCollectionImage(formValues.title, currentUser?._id),
-      ownerId: currentUser?._id,
-      ownerName: currentUser?.username,
-    };
-    await createCollection(newCollectionParams);
-  };
-
-  useEffect(() => {
-    if (newCollection && isSuccessCollectionCreation) {
-      const validatedCustomFields = validateCustomFields();
-      const newFields: CustomFieldRequestBody[] = validatedCustomFields.map(
-        (newField) => ({
-          type: newField.type,
-          label: newField.label,
-          collectionId: newCollection._id,
-        })
-      );
-      newFields.map(async (newField) => {
-        await createCustomField(newField);
-      });
-    }
-  }, [isSuccessCollectionCreation]);
+  const {
+    customFields,
+    setCustomFields,
+    submitCreation,
+    isLoadingCreation,
+    isSuccessFieldCreation,
+  } = useCreateCollection(currentUser);
 
   useEffect(() => {
     if (isSuccessFieldCreation) navigate(-1);
