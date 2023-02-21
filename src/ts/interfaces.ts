@@ -141,6 +141,11 @@ interface CommentRequestBody {
 
 interface Comment extends DatabaseModel, CommentRequestBody {}
 
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
 export type {
   NavLink,
   Contact,
@@ -166,4 +171,5 @@ export type {
   TagRequestBody,
   Comment,
   CommentRequestBody,
+  SelectOption,
 };

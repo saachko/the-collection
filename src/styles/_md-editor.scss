@@ -1,0 +1,54 @@
+@import './variables.scss';
+
+[data-color-mode*='light'] .wmde-markdown,
+[data-color-mode*='light'] .wmde-markdown-var,
+.wmde-markdown-var[data-color-mode*='light'],
+.wmde-markdown[data-color-mode*='light'],
+body[data-color-mode*='light'] {
+  background-color: var(--background-primary-color);
+  border: 1px solid var(--lines-color);
+  box-shadow: none;
+  color: var(--text-color);
+
+  li.active {
+    svg path,
+    svg polygon {
+      fill: var(--secondary-color-light);
+    }
+  }
+
+  svg path,
+  svg polygon {
+    fill: var(--text-color);
+  }
+
+  button[data-name='comment'] {
+    svg path,
+    svg polygon {
+      fill: none;
+    }
+  }
+
+  .w-md-editor-toolbar {
+    background-color: var(--background-primary-color);
+    border-bottom: 1px solid var(--lines-color);
+  }
+
+  .w-md-editor-preview {
+    box-shadow: inset 1px 0 0 0 var(--lines-color);
+  }
+
+  .wmde-markdown-color {
+    border: none;
+  }
+}
+
+.wmde-markdown .wmde-markdown-color {
+  border: none;
+}
+
+.token {
+  .content {
+    padding: 0;
+  }
+}

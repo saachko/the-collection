@@ -1,0 +1,27 @@
+@import './variables.scss';
+
+.react-select-container {
+  .react-select__control {
+    outline: none;
+    border-radius: 7px;
+    color: var(--text-color);
+    transition: $transition;
+
+    .react-select__value-container {
+      border-radius: 7px 0 0 7px;
+    }
+
+    .react-select__indicators {
+      border-radius: 0 7px 7px 0;
+    }
+  }
+}
+
+html[data-theme='dark'] {
+  .react-select__value-container,
+  .react-select__indicators,
+  .react-select__menu {
+    color: #555671;
+    background-color: var(--light-color);
+  }
+}

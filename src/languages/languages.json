@@ -68,7 +68,8 @@
         "defaultAvatar": "set default avatar",
         "blocked": "blocked",
         "adminDeleteError": "User is the only administrator and can't be deleted",
-        "myCollections": "My collections"
+        "myCollections": "My collections",
+        "newCollection": "New collection"
       },
       "usersPage": {
         "#": "#",
@@ -93,7 +94,32 @@
         "emptyAndLoggedOut": "Sign up and create the first one!",
         "createdBy": "Created by ",
         "createdAt": "at",
-        "itemsQuantity": "Items quantity: "
+        "itemsQuantity": "Items quantity: ",
+        "return": "Return to profile page",
+        "create": "Create a new collection",
+        "title": "Title",
+        "titlePlaceholder": "Enter collection title",
+        "theme": "Theme",
+        "themePlaceholder": "Select collection theme",
+        "books": "Books",
+        "vinyl": "Vinyl",
+        "movies": "Movies",
+        "comics": "Comics",
+        "toys": "Toys",
+        "cosmetics": "Сosmetics",
+        "antiques": "Antiques",
+        "autographs": "Autographs",
+        "souvinirs": "Souvinirs",
+        "coins": "Coins",
+        "stamps": "Stamps",
+        "calendars": "Calendars",
+        "pictures": "Pictures",
+        "other": "Other",
+        "image": "Image",
+        "defaultImage": "set default image",
+        "noFile": "No file uploaded yet",
+        "file": "File name: ",
+        "description": "Description"
       }
     }
   },
@@ -166,7 +192,8 @@
         "defaultAvatar": "стандартный аватар",
         "blocked": "заблокирован",
         "adminDeleteError": "Удаление невозможно, т.к. пользователь - единственный администратор",
-        "myCollections": "Мои коллекции"
+        "myCollections": "Мои коллекции",
+        "newCollection": "Новая коллекция"
       },
       "usersPage": {
         "#": "#",
@@ -191,7 +218,32 @@
         "emptyAndLoggedOut": "Зарегистрируйтесь и создайте первую!",
         "createdBy": "Создал(а) ",
         "createdAt": "в",
-        "itemsQuantity": "Количество элементов: "
+        "itemsQuantity": "Количество элементов: ",
+        "return": "Вернуться на страницу пользователя",
+        "create": "Создать новую коллекцию",
+        "title": "Название",
+        "titlePlaceholder": "Введите название коллекции",
+        "theme": "Тема",
+        "themePlaceholder": "Выберите тему коллекции",
+        "books": "Книги",
+        "vinyl": "Винил",
+        "movies": "Фильмы",
+        "comics": "Комиксы",
+        "toys": "Игрушки",
+        "cosmetics": "Косметика",
+        "antiques": "Антиквариант",
+        "autographs": "Автографы",
+        "souvinirs": "Сувениры",
+        "coins": "Монеты",
+        "stamps": "Марки",
+        "calendars": "Календари",
+        "pictures": "Картины",
+        "other": "Другое",
+        "image": "Изображение",
+        "defaultImage": "стандартное изображение",
+        "noFile": "Файл отсутствует",
+        "file": "Имя файла: ",
+        "description": "Описание"
       }
     }
   }

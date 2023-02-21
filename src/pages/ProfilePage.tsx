@@ -1,8 +1,10 @@
 import React, { memo, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
+import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setCollectionsByUser } from 'redux/slices/collectionSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
@@ -19,6 +21,7 @@ function ProfilePage() {
   const collectionsByUser = useAppSelector((state) => state.collection.collectionsByUser);
   const { t } = useTranslation('translation');
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [
     getCollectionsByUser,
@@ -41,6 +44,11 @@ function ProfilePage() {
     }
   }, [isSuccessGetCollections]);
 
+  const navigateToNewCollectionPage = () => {
+    dispatch(setSelectedUser(null));
+    navigate('/new-collection');
+  };
+
   if (!isLoggedIn) {
     return <Navigate to="/" />;
   }
@@ -48,7 +56,9 @@ function ProfilePage() {
     <div className="content">
       {isGetCollectionsLoading && <Loader />}
       <UserInfo avatar={user?.avatar} username={user?.username} roles={user?.roles} />
-
+      <Button className="secondary-button mt-2" onClick={navigateToNewCollectionPage}>
+        {t('profilePage.newCollection')}
+      </Button>
       {collections && collections.length > 0 ? (
         <>
           <h3 className="mt-3 mb-3 text-center">{t('profilePage.myCollections')}</h3>
