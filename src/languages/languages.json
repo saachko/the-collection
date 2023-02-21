@@ -105,11 +105,12 @@
         "vinyl": "Vinyl",
         "movies": "Movies",
         "comics": "Comics",
+        "flowers": "Flowers",
         "toys": "Toys",
-        "cosmetics": "Сosmetics",
+        "cosmetics": "Cosmetics",
         "antiques": "Antiques",
         "autographs": "Autographs",
-        "souvinirs": "Souvinirs",
+        "souvenirs": "Souvenirs",
         "coins": "Coins",
         "stamps": "Stamps",
         "calendars": "Calendars",
@@ -134,7 +135,12 @@
         "typePlaceholder": "Type",
         "removeField": "remove field",
         "cancelCreation": "Cancel",
-        "confirmCreation": "Confirm"
+        "confirmCreation": "Confirm",
+        "required": "{{value}} can't be empty",
+        "maxLength": "{{value}} can't be more than {{count}} symbols",
+        "themeNote": "If you doesn't select a theme, it will be defined as Other",
+        "imageNote": "If you doesn't select an image, the default one will be set automatically",
+        "fieldsNote": "Fields with empty labels or types won't be saved"
       }
     }
   },
@@ -244,11 +250,12 @@
         "vinyl": "Винил",
         "movies": "Фильмы",
         "comics": "Комиксы",
+        "flowers": "Цветы",
         "toys": "Игрушки",
         "cosmetics": "Косметика",
-        "antiques": "Антиквариант",
+        "antiques": "Антиквариат",
         "autographs": "Автографы",
-        "souvinirs": "Сувениры",
+        "souvenirs": "Сувениры",
         "coins": "Монеты",
         "stamps": "Марки",
         "calendars": "Календари",
@@ -273,7 +280,12 @@
         "typePlaceholder": "Тип",
         "removeField": "удалить поле",
         "cancelCreation": "Отмена",
-        "confirmCreation": "Подтвердить"
+        "confirmCreation": "Подтвердить",
+        "required": "{{value}} не может быть пустым",
+        "maxLength": "{{value}} не может быть длиннее {{count}} символов",
+        "themeNote": "Если вы не выберете тему, она будет определена как Другое",
+        "imageNote": "Если вы не выберете изображение, автоматически будет установлено стандартное",
+        "fieldsNote": "Поля с пустыми названиями или типами не будут сохранены"
       }
     }
   }

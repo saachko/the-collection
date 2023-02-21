@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLazyGetUserByIdQuery } from 'redux/api/userApiSlice';
-import { setLoggedIn, setToken, setUser } from 'redux/slices/userSlice';
+import { setLoggedIn, setLoggedOut, setUser } from 'redux/slices/userSlice';
 
 import { checkToken } from 'utils/functions';
 
@@ -35,15 +35,13 @@ const useCheckUserOnAppStart = () => {
   useEffect(() => {
     if (getUserStatus === 'fulfilled' && currentUser && isSuccessGetUser) {
       if (currentUser.isBlocked) {
-        dispatch(setLoggedIn(false));
-        dispatch(setToken(null));
+        dispatch(setLoggedOut());
       } else {
         dispatch(setUser(currentUser));
       }
     }
     if (getUserStatus === 'rejected') {
-      dispatch(setLoggedIn(false));
-      dispatch(setToken(null));
+      dispatch(setLoggedOut());
     }
   }, [getUserStatus]);
 

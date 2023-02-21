@@ -6,7 +6,6 @@ import { GroupBase, StylesConfig } from 'react-select';
 
 import {
   Contact,
-  CustomFieldFormValues,
   NavLink,
   SelectOption,
   SortButton,
@@ -125,10 +124,11 @@ const collectionThemes = [
   'movies',
   'comics',
   'toys',
+  'flowers',
   'cosmetics',
   'antiques',
   'autographs',
-  'souvinirs',
+  'souvenirs',
   'coins',
   'stamps',
   'calendars',

@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
@@ -9,17 +9,18 @@ import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 
 import { customFieldsTypes, selectStyles } from 'utils/constants';
 
-import { CustomFieldFormValues, SelectOption } from 'ts/interfaces';
+import { CustomFieldFormValuesWithId, SelectOption } from 'ts/interfaces';
+import { SetState } from 'ts/types';
 
 import styles from './CustomFieldsForm.module.scss';
 
-interface CustomFieldFormValuesWithId extends CustomFieldFormValues {
-  id: string;
+interface CustomFieldsFormProps {
+  fields: CustomFieldFormValuesWithId[];
+  setFields: SetState<CustomFieldFormValuesWithId[]>;
 }
 
-function CustomFieldsForm() {
+function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
-  const [fields, setFields] = useState<CustomFieldFormValuesWithId[]>([]);
 
   const defaultCustomField: CustomFieldFormValuesWithId = {
     id: v4(),
@@ -40,17 +41,23 @@ function CustomFieldsForm() {
     setFields((prev) => prev.filter((field) => field.id !== fieldId));
   };
 
+  const updateField = (key: string, value: string, id: string) => {
+    setFields((prev) =>
+      prev.map((field) => (field.id === id ? { ...field, [key]: value } : field))
+    );
+  };
   return (
     <div className={styles.container}>
       <p className={styles.prescription}>{t('prescription')}</p>
       <div className="d-flex gap-3 align-items-center">
-        <h4>{t('customFields')}</h4>
+        <h4 className="mb-0">{t('customFields')}</h4>
         <OverlayTrigger placement="right" overlay={<Tooltip>{t('addField')}</Tooltip>}>
           <button type="button" className={styles.addFieldButton} onClick={addField}>
             <AiFillPlusCircle />
           </button>
         </OverlayTrigger>
       </div>
+      <p className={styles.note}>{t('fieldsNote')}</p>
       {fields.length > 0 ? (
         fields.map((field) => (
           <div className="d-flex gap-2 align-items-center" key={field.id}>
@@ -58,25 +65,17 @@ function CustomFieldsForm() {
               <Form.Control
                 type="text"
                 placeholder={t('labelPlaceholder')}
-                // {...register('username', {
-                //   required: true,
-                //   minLength: 2,
-                //   maxLength: 50,
-                //   onChange: () => errors && clearErrors('username'),
-                // })}
-                // disabled={isUpdateUserLoading}
+                value={field.label}
+                onChange={({ target }) => updateField('label', target.value, field.id)}
               />
-              {/* {errors.username && <ValidationError errors={errors} field="username" />} */}
             </Form.Group>
             <Form.Group className="mb-3 form-group w-25" controlId="collectionFormTheme">
-              {/* <Controller
-      control={control}
-      name="responsibleUser"
-      render={({ field: { onChange, value } }) => ( */}
               <ReactSelect
                 options={customFieldTypesOptions}
                 placeholder={t('typePlaceholder')}
-                // onChange={(newValue) => onChange((newValue as SelectOptions).value)}
+                onChange={(newValue) =>
+                  updateField('type', (newValue as SelectOption).value, field.id)
+                }
                 styles={selectStyles}
                 className="react-select-container"
                 classNamePrefix="react-select"

@@ -16,13 +16,6 @@ interface CollectionCardProps {
 function CollectionCard({ collection }: CollectionCardProps) {
   const { t } = useTranslation('translation');
 
-  const formatDescription = () => {
-    if (collection.description.length > 40) {
-      return `${collection.description.slice(0, 40)}...`;
-    }
-    return collection.description;
-  };
-
   const formatDateAndTime = () => {
     const formattedDate = formatDate(collection.createdAt);
     return `${formattedDate.slice(0, 10)} ${t(
@@ -41,10 +34,13 @@ function CollectionCard({ collection }: CollectionCardProps) {
           src={collection.image}
         />
       </div>
-      <Card.Body>
-        <Card.Title className="mb-0">{collection.title}</Card.Title>
-        <Card.Text className={styles.theme}>{collection.theme}</Card.Text>
-        <Card.Text className="mb-1">{formatDescription()}</Card.Text>
+      <Card.Body className="d-flex flex-column justify-content-between align-items-start gap-3">
+        <div>
+          <Card.Title className="mb-0">{collection.title}</Card.Title>
+          <Card.Text className={styles.theme}>
+            {t(`collections.${collection.theme}`)}
+          </Card.Text>
+        </div>
         <Card.Text className={styles.quantity}>
           <em>
             {t('collections.itemsQuantity')}

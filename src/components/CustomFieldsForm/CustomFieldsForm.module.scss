@@ -36,3 +36,9 @@
 .removeFieldButton {
   margin-top: -22px;
 }
+
+.note {
+  color: var(--text-color-light);
+  font-size: $fontSizeExtraSmall;
+  font-style: italic;
+}

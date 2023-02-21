@@ -83,8 +83,8 @@ interface CollectionFormValues {
 }
 
 interface CollectionRequestBody extends CollectionFormValues {
-  ownerId: string;
-  ownerName: string;
+  ownerId: string | undefined;
+  ownerName: string | undefined;
 }
 
 interface Collection extends DatabaseModel, CollectionRequestBody {
@@ -94,6 +94,10 @@ interface Collection extends DatabaseModel, CollectionRequestBody {
 interface CustomFieldFormValues {
   type: CustomFieldTypes;
   label: string;
+}
+
+interface CustomFieldFormValuesWithId extends CustomFieldFormValues {
+  id: string;
 }
 
 interface CustomFieldRequestBody extends CustomFieldFormValues {
@@ -164,6 +168,7 @@ export type {
   CustomField,
   CustomFieldRequestBody,
   CustomFieldFormValues,
+  CustomFieldFormValuesWithId,
   Item,
   ItemRequestBody,
   ItemFormValues,

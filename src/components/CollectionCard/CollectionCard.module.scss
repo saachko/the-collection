@@ -11,6 +11,12 @@
     transform: $hoverScale;
     box-shadow: $hoverShadow;
   }
+
+  img {
+    width: 283.18px;
+    height: 283.18px;
+    object-fit: cover;
+  }
 }
 
 .cardFooter {
@@ -25,7 +31,7 @@
 .skeleton {
   width: 100%;
   height: 283.18px;
-  border-radius: var(--bs-card-inner-border-radius);
+  border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
 }
 
 .theme {

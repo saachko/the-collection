@@ -1,21 +1,62 @@
-import React, { memo, useState } from 'react';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import React, { memo, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import ReactSelect from 'react-select';
+import { v4 } from 'uuid';
 
 import DragAndDropFileUploader from 'components/DragAndDropFileUploader/DragAndDropFileUploader';
+import Loader from 'components/Loader/Loader';
 import MarkdownTextarea from 'components/MarkdownTextarea/MarkdownTextarea';
 
 import { collectionThemes, selectStyles } from 'utils/constants';
+import storage from 'utils/firebase';
+import { createCollectionImage } from 'utils/functions';
 
-import { SelectOption } from 'ts/interfaces';
+import { CollectionFormValues, SelectOption } from 'ts/interfaces';
 
 import styles from './CollectionForm.module.scss';
+import ValidationError from './ValidationError';
 
-function CollectionForm() {
+interface CollectionFormProps {
+  ownerId: string | undefined;
+  submitForm: SubmitHandler<CollectionFormValues>;
+}
+
+function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
+
   const [image, setImage] = useState<File | null>(null);
+  const [isImageLoading, setImageLoading] = useState(false);
   const [isDefaultImage, setDefaultImage] = useState(false);
+  const [description, setDescription] = useState('');
+
+  const defaultFormValues: CollectionFormValues = {
+    title: '',
+    description: '',
+    theme: '',
+    image: '',
+  };
+
+  const {
+    register,
+    control,
+    clearErrors,
+    setFocus,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    getValues,
+  } = useForm<CollectionFormValues>({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    defaultValues: defaultFormValues,
+  });
+
+  useEffect(() => {
+    setFocus('title');
+  }, []);
 
   const collectionThemeOptions: SelectOption[] = collectionThemes.map((value) => ({
     value,
@@ -26,59 +67,101 @@ function CollectionForm() {
     setImage(file);
   };
 
+  const uploadAvatar = () => {
+    if (image) {
+      const avatarRef = ref(storage, `collectionImages/${image.name + v4()}`);
+      uploadBytes(avatarRef, image).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          setValue('image', url);
+          setImageLoading(false);
+        });
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (image) {
+      setImageLoading(true);
+      uploadAvatar();
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (isDefaultImage) {
+      setValue('image', createCollectionImage(getValues('title') || v4(), ownerId));
+    } else {
+      setValue('image', '');
+    }
+  }, [isDefaultImage]);
+
+  useEffect(() => {
+    setValue('description', description);
+  }, [description]);
+
   return (
     <div className={styles.container}>
-      <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
-        <Form.Label>{t('title')}</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder={t('titlePlaceholder')}
-          // {...register('username', {
-          //   required: true,
-          //   minLength: 2,
-          //   maxLength: 50,
-          //   onChange: () => errors && clearErrors('username'),
-          // })}
-          // disabled={isUpdateUserLoading}
-        />
-        {/* {errors.username && <ValidationError errors={errors} field="username" />} */}
-      </Form.Group>
-      <Form.Group className="mb-3 form-group" controlId="collectionFormTheme">
-        <Form.Label>{t('theme')}</Form.Label>
-        {/* <Controller
+      {isImageLoading && <Loader />}
+      <Form
+        id="collectionForm"
+        aria-label="form"
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit(submitForm)}
+      >
+        <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
+          <Form.Label>{t('title')}</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder={t('titlePlaceholder')}
+            {...register('title', {
+              required: true,
+              maxLength: 50,
+              onChange: () => errors && clearErrors('title'),
+            })}
+          />
+          {errors.title && <ValidationError errors={errors} field="title" />}
+        </Form.Group>
+        <Form.Group className="mb-3 form-group" controlId="collectionFormTheme">
+          <Form.Label>{t('theme')}</Form.Label>
+          <Controller
             control={control}
-            name="responsibleUser"
-            render={({ field: { onChange, value } }) => ( */}
-        <ReactSelect
-          options={collectionThemeOptions}
-          placeholder={t('themePlaceholder')}
-          // onChange={(newValue) => onChange((newValue as SelectOptions).value)}
-          styles={selectStyles}
-          className="react-select-container"
-          classNamePrefix="react-select"
+            name="theme"
+            render={({ field: { onChange } }) => (
+              <ReactSelect
+                options={collectionThemeOptions}
+                placeholder={t('themePlaceholder')}
+                onChange={(newValue) => onChange((newValue as SelectOption).value)}
+                styles={selectStyles}
+                className="react-select-container"
+                classNamePrefix="react-select"
+              />
+            )}
+          />
+          <p className={styles.note}>{t('themeNote')}</p>
+        </Form.Group>
+        <Form.Group className="mb-1 form-group" controlId="collectionFormImage">
+          <Form.Label>{t('image')}</Form.Label>
+          <DragAndDropFileUploader
+            changeFile={changeImage}
+            name="image"
+            fileName={image?.name}
+            caption={image ? 'collections.file' : 'collections.noFile'}
+            isDisabled={isDefaultImage}
+          />
+        </Form.Group>
+        <Form.Check
+          type="switch"
+          id="defaultImage"
+          label={t('defaultImage')}
+          checked={isDefaultImage}
+          onChange={() => setDefaultImage(!isDefaultImage)}
         />
-      </Form.Group>
-      <Form.Group className="mb-1 form-group" controlId="collectionFormImage">
-        <Form.Label>{t('image')}</Form.Label>
-        <DragAndDropFileUploader
-          changeFile={changeImage}
-          name="image"
-          fileName={image?.name}
-          caption={image ? 'collections.file' : 'collections.noFile'}
-          isDisabled={isDefaultImage}
-        />
-      </Form.Group>
-      <Form.Check
-        type="switch"
-        id="defaultImage"
-        label={t('defaultImage')}
-        checked={isDefaultImage}
-        onChange={() => setDefaultImage(!isDefaultImage)}
-      />
-      <Form.Group className="mb-3 mt-3 form-group" controlId="collectionFormImage">
-        <Form.Label>{t('description')}</Form.Label>
-        <MarkdownTextarea />
-      </Form.Group>
+        <p className={styles.note}>{t('imageNote')}</p>
+        <Form.Group className="mb-3 mt-3 form-group" controlId="collectionFormImage">
+          <Form.Label>{t('description')}</Form.Label>
+          <MarkdownTextarea value={description} setValue={setDescription} />
+        </Form.Group>
+      </Form>
     </div>
   );
 }
