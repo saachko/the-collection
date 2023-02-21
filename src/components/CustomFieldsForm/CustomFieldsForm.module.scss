@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+
+.container {
+  width: 55%;
+
+  h2 {
+    font-size: $fontSizeH4;
+  }
+}
+
+.prescription {
+  font-size: $fontSizeSmall;
+
+  .type {
+    color: var(--secondary-color-light);
+  }
+}
+
+.addFieldButton,
+.removeFieldButton {
+  background-color: var(--transparent);
+  border: none;
+  margin-top: -8px;
+
+  svg {
+    transform: scale(1.2);
+    color: var(--secondary-color-light);
+    transition: $transition;
+
+    &:hover {
+      opacity: $hoverOpacity;
+    }
+  }
+}
+
+.removeFieldButton {
+  margin-top: -22px;
+}

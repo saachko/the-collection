@@ -6,12 +6,14 @@ import { GroupBase, StylesConfig } from 'react-select';
 
 import {
   Contact,
+  CustomFieldFormValues,
   NavLink,
   SelectOption,
   SortButton,
   TableHeading,
   UserAuthFormValues,
 } from 'ts/interfaces';
+import { CustomFieldTypes } from 'ts/types';
 
 const navLinks: NavLink[] = [
   {
@@ -164,6 +166,14 @@ const selectStyles: StylesConfig<
   }),
 };
 
+const customFieldsTypes: CustomFieldTypes[] = [
+  'number',
+  'string',
+  'text',
+  'date',
+  'checkbox',
+];
+
 export {
   navLinks,
   privateLink,
@@ -176,4 +186,5 @@ export {
   sortButtons,
   collectionThemes,
   selectStyles,
+  customFieldsTypes,
 };

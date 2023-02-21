@@ -1,4 +1,4 @@
-import { SortTypes } from './types';
+import { CustomFieldTypes, SortTypes } from './types';
 
 interface DatabaseModel {
   _id: string;
@@ -92,7 +92,7 @@ interface Collection extends DatabaseModel, CollectionRequestBody {
 }
 
 interface CustomFieldFormValues {
-  type: string;
+  type: CustomFieldTypes;
   label: string;
 }
 

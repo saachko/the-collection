@@ -119,7 +119,22 @@
         "defaultImage": "set default image",
         "noFile": "No file uploaded yet",
         "file": "File name: ",
-        "description": "Description"
+        "description": "Description",
+        "prescription": "Custom fields can be added to any collection. They define which characteristics will be assigned to each item in the particular collection. The fields can have one of the following types: number, string, text (represented as string value with formatting), date, boolean (yes or no).",
+        "customFields": "Custom fields",
+        "emptyTitle": "There're no custom fields yet.",
+        "emptyText": "Create the first one!",
+        "addField": "add field",
+        "number": "Number",
+        "string": "String",
+        "text": "Text",
+        "date": "Date",
+        "checkbox": "Boolean",
+        "labelPlaceholder": "Custom field's label",
+        "typePlaceholder": "Type",
+        "removeField": "remove field",
+        "cancelCreation": "Cancel",
+        "confirmCreation": "Confirm"
       }
     }
   },
@@ -243,7 +258,22 @@
         "defaultImage": "стандартное изображение",
         "noFile": "Файл отсутствует",
         "file": "Имя файла: ",
-        "description": "Описание"
+        "description": "Описание",
+        "prescription": "Пользовательские поля могут быть добавлены в любую коллекцию. Они определяют, какие характеристики будут присвоены каждому элементу в конкретной коллекции. Поля могут иметь один из следующих типов: число, строка, текст (представленный в виде строкового значения с форматированием), дата, логическое значение (да или нет).",
+        "customFields": "Пользовательские поля",
+        "emptyTitle": "Пользовательских полей нет.",
+        "emptyText": "Создайте первое!",
+        "addField": "создать поле",
+        "number": "Число",
+        "string": "Строка",
+        "text": "Текст",
+        "date": "Дата",
+        "checkbox": "Да/нет",
+        "labelPlaceholder": "Название поля",
+        "typePlaceholder": "Тип",
+        "removeField": "удалить поле",
+        "cancelCreation": "Отмена",
+        "confirmCreation": "Подтвердить"
       }
     }
   }

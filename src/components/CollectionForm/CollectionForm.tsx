@@ -27,7 +27,7 @@ function CollectionForm() {
   };
 
   return (
-    <Form aria-label="form" noValidate autoComplete="off" className={styles.container}>
+    <div className={styles.container}>
       <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
         <Form.Label>{t('title')}</Form.Label>
         <Form.Control
@@ -79,7 +79,7 @@ function CollectionForm() {
         <Form.Label>{t('description')}</Form.Label>
         <MarkdownTextarea />
       </Form.Group>
-    </Form>
+    </div>
   );
 }
 
