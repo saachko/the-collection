@@ -1,4 +1,3 @@
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { memo, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -11,8 +10,9 @@ import Loader from 'components/Loader/Loader';
 import MarkdownTextarea from 'components/MarkdownTextarea/MarkdownTextarea';
 
 import { collectionThemes, selectStyles } from 'utils/constants';
-import storage from 'utils/firebase';
 import { createCollectionImage } from 'utils/functions';
+
+import useUpdateImage from 'hooks/useUpdateImage';
 
 import { CollectionFormValues, SelectOption } from 'ts/interfaces';
 
@@ -26,10 +26,6 @@ interface CollectionFormProps {
 
 function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
-
-  const [image, setImage] = useState<File | null>(null);
-  const [isImageLoading, setImageLoading] = useState(false);
-  const [isDefaultImage, setDefaultImage] = useState(false);
   const [description, setDescription] = useState('');
 
   const defaultFormValues: CollectionFormValues = {
@@ -63,28 +59,20 @@ function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
     label: `${t(value)}`,
   }));
 
-  const changeImage = (file: File) => {
-    setImage(file);
-  };
-
-  const uploadAvatar = () => {
-    if (image) {
-      const avatarRef = ref(storage, `collectionImages/${image.name + v4()}`);
-      uploadBytes(avatarRef, image).then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          setValue('image', url);
-          setImageLoading(false);
-        });
-      });
-    }
-  };
+  const {
+    image,
+    imageUrl,
+    changeImage,
+    isDefaultImage,
+    setDefaultImage,
+    isImageLoading,
+  } = useUpdateImage('collectionImages');
 
   useEffect(() => {
-    if (image) {
-      setImageLoading(true);
-      uploadAvatar();
+    if (image && imageUrl) {
+      setValue('image', imageUrl);
     }
-  }, [image]);
+  }, [image, imageUrl]);
 
   useEffect(() => {
     if (isDefaultImage) {

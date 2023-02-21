@@ -8,9 +8,10 @@ import Loader from 'components/Loader/Loader';
 import ValidationError from 'components/ModalAuth/ValidationError';
 
 import { emailValidation, userAvatarBaseUrl } from 'utils/constants';
+import { createUserAvatar } from 'utils/functions';
 
+import useUpdateImage from 'hooks/useUpdateImage';
 import useUpdateUser from 'hooks/useUpdateUser';
-import useUpdateUserAvatar from 'hooks/useUpdateUserAvatar';
 
 import { UpdateUserFormValues, User } from 'ts/interfaces';
 import { SetState } from 'ts/types';
@@ -57,8 +58,28 @@ function UpdateUserForm({
     setFocus('username');
   }, []);
 
-  const { avatar, changeAvatar, isDefaultAvatar, setDefaultAvatar, isAvatarLoading } =
-    useUpdateUserAvatar(user, setValue);
+  const {
+    image: avatar,
+    imageUrl: avatarUrl,
+    changeImage: changeAvatar,
+    isDefaultImage: isDefaultAvatar,
+    setDefaultImage: setDefaultAvatar,
+    isImageLoading: isAvatarLoading,
+  } = useUpdateImage('usersAvatars');
+
+  useEffect(() => {
+    if (avatar && avatarUrl) {
+      setValue('avatar', avatarUrl);
+    }
+  }, [avatar, avatarUrl]);
+
+  useEffect(() => {
+    if (isDefaultAvatar) {
+      setValue('avatar', createUserAvatar(user?.username, user?.email));
+    } else {
+      setValue('avatar', '');
+    }
+  }, [isDefaultAvatar]);
 
   return (
     <>
