@@ -47,6 +47,20 @@
   font-size: $fontSizeSmall;
 }
 
-.author {
+.author,
+.author:hover {
   color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+}
+
+.authorLink {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
 }

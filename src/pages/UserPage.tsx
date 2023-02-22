@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Navigate, useLocation } from 'react-router-dom';
+import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
 import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
 import { useLazyGetUserByIdQuery } from 'redux/api/userApiSlice';
@@ -26,6 +27,7 @@ function UserPage() {
   const [getUserById, { data: currentUser, isSuccess: isSuccessGetUser }] =
     useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!selectedUser) {
@@ -63,6 +65,10 @@ function UserPage() {
     }
   }, [isSuccessGetCollections]);
 
+  const navigateToNewCollectionPage = () => {
+    navigate('/new-collection');
+  };
+
   if (!isAdmin) {
     return <Navigate to="/" />;
   }
@@ -77,6 +83,9 @@ function UserPage() {
         username={selectedUser?.username}
         roles={selectedUser?.roles}
       />
+      <Button className="secondary-button mt-2" onClick={navigateToNewCollectionPage}>
+        {t('profilePage.newCollection')}
+      </Button>
       {collections && collections.length > 0 ? (
         <>
           <h3 className="mt-3 mb-3 text-center">

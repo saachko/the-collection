@@ -35,9 +35,11 @@ function NewCollectionPage() {
   }
   return (
     <div className="content">
-      {/* CHANGE PATH FOR USER'S PAGE (NOT TO PROFILE PAGE) */}
       {isLoadingCreation && <Loader />}
-      <NavLink to="/profile" className="link mb-2">
+      <NavLink
+        to={selectedUser ? `/user/${selectedUser._id}` : '/profile'}
+        className="link mb-2"
+      >
         {t('return')}
       </NavLink>
       <h2>{t('create')}</h2>

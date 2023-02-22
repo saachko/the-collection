@@ -1,9 +1,12 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { memo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 import { formatDate } from 'utils/functions';
+
+import { useAppSelector } from 'hooks/useRedux';
 
 import { Collection } from 'ts/interfaces';
 
@@ -14,6 +17,7 @@ interface CollectionCardProps {
 }
 
 function CollectionCard({ collection }: CollectionCardProps) {
+  const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const { t } = useTranslation('translation');
 
   const formatDateAndTime = () => {
@@ -51,7 +55,14 @@ function CollectionCard({ collection }: CollectionCardProps) {
       <Card.Footer className={styles.cardFooter}>
         <p>
           {t('collections.createdBy')}
-          <span className={styles.author}>{collection.ownerName}</span>
+          <NavLink
+            to={isAdmin ? `/users/${collection.ownerId}` : ''}
+            className={clsx(styles.author, {
+              [styles.authorLink]: isAdmin,
+            })}
+          >
+            <span>{collection.ownerName}</span>
+          </NavLink>
         </p>
         <p>{formatDateAndTime()}</p>
       </Card.Footer>
@@ -59,4 +70,4 @@ function CollectionCard({ collection }: CollectionCardProps) {
   );
 }
 
-export default CollectionCard;
+export default memo(CollectionCard);
