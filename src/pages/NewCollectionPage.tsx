@@ -37,7 +37,7 @@ function NewCollectionPage() {
     <div className="content">
       {isLoadingCreation && <Loader />}
       <NavLink
-        to={selectedUser ? `/user/${selectedUser._id}` : '/profile'}
+        to={selectedUser ? `/users/${selectedUser._id}` : '/profile'}
         className="link mb-2"
       >
         {t('return')}
