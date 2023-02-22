@@ -43,7 +43,7 @@ function NewCollectionPage() {
         {t('return')}
       </NavLink>
       <h2>{t('create')}</h2>
-      <div className="d-flex flex-wrap justify-content-between gap-2">
+      <div className="d-flex flex-wrap justify-content-between gap-2 flex-md-row flex-column">
         <CollectionForm ownerId={currentUser?._id} submitForm={submitCreation} />
         <CustomFieldsForm fields={customFields} setFields={setCustomFields} />
       </div>

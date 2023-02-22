@@ -19,6 +19,10 @@
       color: var(--secondary-color-light);
     }
   }
+
+  @media (max-width: 420px) {
+    flex-direction: column;
+  }
 }
 
 .copyright {

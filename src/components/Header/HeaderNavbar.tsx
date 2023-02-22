@@ -20,7 +20,7 @@ function HeaderNavbar() {
   const { t } = useTranslation('translation');
 
   return (
-    <Navbar>
+    <Navbar className={styles.headerNav}>
       <Container className="p-0">
         <Logo />
         <Nav className="d-flex gap-2">

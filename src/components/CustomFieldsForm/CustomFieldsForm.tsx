@@ -58,46 +58,54 @@ function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
         </OverlayTrigger>
       </div>
       <p className={styles.note}>{t('fieldsNote')}</p>
-      {fields.length > 0 ? (
-        fields.map((field) => (
-          <div className="d-flex gap-2 align-items-center" key={field.id}>
-            <Form.Group className="mb-3 form-group w-75" controlId="collectionFormTitle">
-              <Form.Control
-                type="text"
-                placeholder={t('labelPlaceholder')}
-                value={field.label}
-                onChange={({ target }) => updateField('label', target.value, field.id)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3 form-group w-25" controlId="collectionFormTheme">
-              <ReactSelect
-                options={customFieldTypesOptions}
-                placeholder={t('typePlaceholder')}
-                onChange={(newValue) =>
-                  updateField('type', (newValue as SelectOption).value, field.id)
-                }
-                styles={selectStyles}
-                className="react-select-container"
-                classNamePrefix="react-select"
-              />
-            </Form.Group>
-            <OverlayTrigger
-              placement="bottom"
-              overlay={<Tooltip>{t('removeField')}</Tooltip>}
-            >
-              <button
-                type="button"
-                className={styles.removeFieldButton}
-                onClick={() => removeField(field.id)}
+      <div className="mb-3">
+        {fields.length > 0 ? (
+          fields.map((field) => (
+            <div className="d-flex gap-2 align-items-center" key={field.id}>
+              <Form.Group
+                className="mb-3 form-group w-75"
+                controlId="collectionFormTitle"
               >
-                <AiFillMinusCircle />
-              </button>
-            </OverlayTrigger>
-          </div>
-        ))
-      ) : (
-        <EmptyContainer title={t('emptyTitle')} text={t('emptyText')} />
-      )}
+                <Form.Control
+                  type="text"
+                  placeholder={t('labelPlaceholder')}
+                  value={field.label}
+                  onChange={({ target }) => updateField('label', target.value, field.id)}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3 form-group w-25"
+                controlId="collectionFormTheme"
+              >
+                <ReactSelect
+                  options={customFieldTypesOptions}
+                  placeholder={t('typePlaceholder')}
+                  onChange={(newValue) =>
+                    updateField('type', (newValue as SelectOption).value, field.id)
+                  }
+                  styles={selectStyles}
+                  className="react-select-container"
+                  classNamePrefix="react-select"
+                />
+              </Form.Group>
+              <OverlayTrigger
+                placement="bottom"
+                overlay={<Tooltip>{t('removeField')}</Tooltip>}
+              >
+                <button
+                  type="button"
+                  className={styles.removeFieldButton}
+                  onClick={() => removeField(field.id)}
+                >
+                  <AiFillMinusCircle />
+                </button>
+              </OverlayTrigger>
+            </div>
+          ))
+        ) : (
+          <EmptyContainer title={t('emptyTitle')} text={t('emptyText')} />
+        )}
+      </div>
     </div>
   );
 }

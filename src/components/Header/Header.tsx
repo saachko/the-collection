@@ -11,7 +11,7 @@ function Header() {
     <header>
       <div className={styles.headerContent}>
         <HeaderNavbar />
-        <div className="d-flex align-items-center gap-3">
+        <div className={styles.controls}>
           <ThemeSwitcher />
           <LanguageSwitcher />
           <ButtonControls />

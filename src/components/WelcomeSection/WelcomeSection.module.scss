@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+
+.section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.title {
+  @media (max-width: 878px) {
+    font-size: $fontSizeH2;
+  }
+}
+
+.welcomeImage {
+  svg {
+    height: calc(100vh - 80px);
+
+    @media (max-width: 1080px) {
+      height: calc(100vh - 130px);
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+.welcomeText {
+  width: 50%;
+  margin-left: 3rem;
+  align-self: center;
+  margin-top: -10%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 15px 0;
+  }
+}

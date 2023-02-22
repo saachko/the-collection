@@ -2,13 +2,7 @@ import React, { memo } from 'react';
 
 function WelcomeSvg() {
   return (
-    <svg
-      // width="574"
-      height="calc(100vh - 80px)"
-      viewBox="0 0 574 895"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg viewBox="0 0 574 895" fill="none" xmlns="http://www.w3.org/2000/svg">
       <mask
         id="mask0_5539_4"
         style={{ maskType: 'alpha' }}

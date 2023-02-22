@@ -3,21 +3,24 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 
+import styles from './WelcomeSection.module.scss';
 import WelcomeSvg from './WelcomeSvg';
 
 function WelcomeSection() {
   const { t } = useTranslation('translation', { keyPrefix: 'home' });
 
   return (
-    <section className="d-flex justify-content-between gap-2">
-      <div className="w-50 ms-5 align-self-center mt--10">
-        <h1>{t('mainTitle')}</h1>
-        <p>{t('mainText')}</p>
+    <section className={styles.section}>
+      <div className={styles.welcomeText}>
+        <h1 className={styles.title}>{t('mainTitle')}</h1>
+        <p className={styles.text}>{t('mainText')}</p>
         <NavLink to="/collections">
           <Button className="secondary-button">{t('browseButton')}</Button>
         </NavLink>
       </div>
-      <WelcomeSvg />
+      <div className={styles.welcomeImage}>
+        <WelcomeSvg />
+      </div>
     </section>
   );
 }

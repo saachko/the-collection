@@ -8,6 +8,24 @@
   align-items: center;
   height: 80px;
   gap: 10px;
+
+  @media (max-width: 1080px) {
+    flex-direction: column;
+    height: 130px;
+    gap: 0;
+  }
+
+  .headerNav {
+    @media (max-width: 1080px) {
+      width: 100%;
+      padding-bottom: 0;
+      padding-top: 0;
+
+      .headerNavLink {
+        padding: 5px 0;
+      }
+    }
+  }
 }
 
 .headerNavLink {
@@ -30,5 +48,17 @@
 
   &:hover {
     opacity: $hoverOpacity;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  @media (max-width: 1080px) {
+    width: calc(100vw - 15px);
+    justify-content: end;
+    padding-right: 15px;
   }
 }
