@@ -16,6 +16,7 @@ import adminReducer from './slices/adminSlice';
 import collectionReducer from './slices/collectionSlice';
 import authModalReducer from './slices/modalAuthSlice';
 import sortReducer from './slices/sortSlice';
+import successNotificationReducer from './slices/successNotificationSlice';
 import userReducer from './slices/userSlice';
 
 const persistConfig = {
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   user: persistReducer(userConfig, userReducer),
   admin: adminReducer,
   collection: collectionReducer,
+  successNotification: successNotificationReducer,
 
   [apiSlice.reducerPath]: apiSlice.reducer,
 });

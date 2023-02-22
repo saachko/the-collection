@@ -10,9 +10,9 @@ import { setSelectedUser } from 'redux/slices/adminSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
-import ErrorNotification from 'components/ErrorNotification/ErrorNotification';
 import Loader from 'components/Loader/Loader';
 import ModalUserUpdate from 'components/ModalUserUpdate/ModalUserUpdate';
+import ErrorNotification from 'components/Notification/Notification';
 
 import useDeleteUser from 'hooks/useDeleteUser';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -118,14 +118,16 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
         {(isDeleteUserLoading || isUpdateUserLoading) && <Loader />}
       </div>
       <ErrorNotification
-        errorMessage="profilePage.userUpdateError"
-        closeErrorNotification={() => setUpdateErrorShown(false)}
+        message="profilePage.userUpdateError"
+        closeNotification={() => setUpdateErrorShown(false)}
         isShown={isUpdateErrorShown}
+        variant="danger"
       />
       <ErrorNotification
-        errorMessage="profilePage.adminDeleteError"
-        closeErrorNotification={() => setDeleteErrorShown(false)}
+        message="profilePage.adminDeleteError"
+        closeNotification={() => setDeleteErrorShown(false)}
         isShown={isDeleteErrorShown}
+        variant="danger"
       />
     </>
   );

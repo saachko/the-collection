@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { closeModal } from 'redux/slices/modalAuthSlice';
 
-import ErrorNotification from 'components/ErrorNotification/ErrorNotification';
 import Loader from 'components/Loader/Loader';
+import ErrorNotification from 'components/Notification/Notification';
 
 import useAuth from 'hooks/useAuth';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -63,14 +63,16 @@ function ModalAuth() {
         </Modal.Body>
       </Modal>
       <ErrorNotification
-        errorMessage={`auth.${signUpErrorMessage}`}
-        closeErrorNotification={closeSignUpErrorNotification}
+        message={`auth.${signUpErrorMessage}`}
+        closeNotification={closeSignUpErrorNotification}
         isShown={isSignUpErrorShown}
+        variant="danger"
       />
       <ErrorNotification
-        errorMessage={`auth.${signInErrorMessage}`}
-        closeErrorNotification={closeSignInErrorNotification}
+        message={`auth.${signInErrorMessage}`}
+        closeNotification={closeSignInErrorNotification}
         isShown={isSignInErrorShown}
+        variant="danger"
       />
       {isLoadingAuth && <Loader />}
     </>

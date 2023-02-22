@@ -1,3 +1,4 @@
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
@@ -13,9 +14,20 @@ import {
   CustomFieldRequestBody,
   User,
 } from 'ts/interfaces';
+import { SetState } from 'ts/types';
 
-const useCreateCollection = (currentUser: User | null) => {
+import { useAppDispatch } from './useRedux';
+
+const useCreateCollection = (
+  currentUser: User | null,
+  setCreationErrorShown: SetState<boolean>,
+  setCreationSuccessShown: ActionCreatorWithPayload<
+    boolean,
+    'successNotification/setCollectionCreated'
+  >
+) => {
   const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
+  const dispatch = useAppDispatch();
 
   const [
     createCollection,
@@ -23,12 +35,17 @@ const useCreateCollection = (currentUser: User | null) => {
       data: newCollection,
       isLoading: isLoadingCollectionCreation,
       isSuccess: isSuccessCollectionCreation,
+      isError: isErrorCollectionCreation,
     },
   ] = useCreateCollectionMutation();
 
   const [
     createCustomField,
-    { isLoading: isLoadingFieldCreation, isSuccess: isSuccessFieldCreation },
+    {
+      isLoading: isLoadingFieldCreation,
+      isSuccess: isSuccessFieldCreation,
+      isError: isErrorFieldCreation,
+    },
   ] = useCreateCustomFieldMutation();
 
   const isLoadingCreation = isLoadingCollectionCreation || isLoadingFieldCreation;
@@ -41,7 +58,7 @@ const useCreateCollection = (currentUser: User | null) => {
   }) => {
     const newCollectionParams: CollectionRequestBody = {
       title: formValues.title,
-      description: formValues.description || '**No description provided**',
+      description: formValues.description || '*(No description provided)*',
       theme: formValues.theme || 'other',
       image:
         formValues.image || createCollectionImage(formValues.title, currentUser?._id),
@@ -67,12 +84,23 @@ const useCreateCollection = (currentUser: User | null) => {
     }
   }, [isSuccessCollectionCreation]);
 
+  useEffect(() => {
+    if (isSuccessFieldCreation) {
+      dispatch(setCreationSuccessShown(true));
+    }
+  }, [isSuccessFieldCreation]);
+
+  useEffect(() => {
+    if (isErrorCollectionCreation || isErrorFieldCreation) {
+      setCreationErrorShown(true);
+    }
+  }, [isErrorCollectionCreation, isErrorFieldCreation]);
+
   return {
     customFields,
     setCustomFields,
     submitCreation,
     isLoadingCreation,
-    isSuccessFieldCreation,
   };
 };
 

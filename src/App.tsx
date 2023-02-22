@@ -1,13 +1,16 @@
-import React, { Suspense, lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
+import { setCollectionCreated } from 'redux/slices/successNotificationSlice';
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import Loader from 'components/Loader/Loader';
 import ModalAuth from 'components/ModalAuth/ModalAuth';
+import Notification from 'components/Notification/Notification';
 
 import useCheckUserOnAppStart from 'hooks/useCheckUserOnAppStart';
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
@@ -19,7 +22,16 @@ const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
   const isModalAuthShown = useAppSelector((state) => state.authModal.isShown);
+  const isCollectionCreated = useAppSelector(
+    (state) => state.successNotification.isCollectionCreated
+  );
   const { isGetUserLoading } = useCheckUserOnAppStart();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isCollectionCreated) navigate(-1);
+  }, [isCollectionCreated]);
 
   return (
     <>
@@ -37,6 +49,12 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
+        <Notification
+          message="collections.creationSuccess"
+          closeNotification={() => dispatch(setCollectionCreated(false))}
+          isShown={isCollectionCreated}
+          variant="primary"
+        />
       </Suspense>
       <Footer />
       {isModalAuthShown && <ModalAuth />}

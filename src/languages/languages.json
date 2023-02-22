@@ -140,7 +140,9 @@
         "maxLength": "{{value}} can't be more than {{count}} symbols",
         "themeNote": "If you doesn't select a theme, it will be defined as Other",
         "imageNote": "If you doesn't select an image, the default one will be set automatically",
-        "fieldsNote": "Fields with empty labels or types won't be saved"
+        "fieldsNote": "Fields with empty labels or types won't be saved",
+        "creationSuccess": "New collection is created successfully",
+        "creationError": "Unexpected error! Please try again later"
       }
     }
   },
@@ -285,7 +287,9 @@
         "maxLength": "{{value}} не может быть длиннее {{count}} символов",
         "themeNote": "Если вы не выберете тему, она будет определена как Другое",
         "imageNote": "Если вы не выберете изображение, автоматически будет установлено стандартное",
-        "fieldsNote": "Поля с пустыми названиями или типами не будут сохранены"
+        "fieldsNote": "Поля с пустыми названиями или типами не будут сохранены",
+        "creationSuccess": "Новая коллекция успешно создана",
+        "creationError": "Ошибка! Пожалуйста, повторите попытку позже"
       }
     }
   }

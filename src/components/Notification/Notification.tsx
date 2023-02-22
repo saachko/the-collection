@@ -3,17 +3,21 @@ import { Alert } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { CSSTransition } from 'react-transition-group';
 
-interface ErrorNotificationProps {
-  errorMessage: string;
-  closeErrorNotification: () => void;
+type NotificationVariant = 'danger' | 'primary';
+
+interface NotificationProps {
+  message: string;
+  closeNotification: () => void;
   isShown: boolean;
+  variant: NotificationVariant;
 }
 
-function ErrorNotification({
-  errorMessage,
-  closeErrorNotification,
+function Notification({
+  message,
+  closeNotification,
   isShown,
-}: ErrorNotificationProps) {
+  variant,
+}: NotificationProps) {
   const { t } = useTranslation('translation');
   const [mountNotification, setMountNotification] = useState(false);
   const alertRef = useRef(null);
@@ -26,7 +30,7 @@ function ErrorNotification({
 
   useEffect(() => {
     if (!mountNotification) {
-      setTimeout(() => closeErrorNotification(), 200);
+      setTimeout(() => closeNotification(), 200);
     }
   }, [mountNotification]);
 
@@ -41,12 +45,16 @@ function ErrorNotification({
         {isShown && (
           <Alert
             ref={alertRef}
-            variant="danger"
+            variant={variant}
             onClose={() => setMountNotification(false)}
             dismissible
           >
-            <Alert.Heading style={{ fontSize: '20px' }}>{t('auth.error')}</Alert.Heading>
-            <p>{t(errorMessage)}</p>
+            {variant === 'danger' && (
+              <Alert.Heading style={{ fontSize: '20px' }}>
+                {t('auth.error')}
+              </Alert.Heading>
+            )}
+            <p>{t(message)}</p>
           </Alert>
         )}
       </div>
@@ -54,4 +62,4 @@ function ErrorNotification({
   );
 }
 
-export default memo(ErrorNotification);
+export default memo(Notification);

@@ -1,11 +1,14 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useState } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
+import { setCollectionCreated } from 'redux/slices/successNotificationSlice';
+
 import CollectionForm from 'components/CollectionForm/CollectionForm';
 import CustomFieldsForm from 'components/CustomFieldsForm/CustomFieldsForm';
 import Loader from 'components/Loader/Loader';
+import Notification from 'components/Notification/Notification';
 
 import useCreateCollection from 'hooks/useCreateCollection';
 import { useAppSelector } from 'hooks/useRedux';
@@ -17,18 +20,10 @@ function NewCollectionPage() {
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const currentUser = selectedUser || user;
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  const [isCreationErrorShown, setCreationErrorShown] = useState(false);
 
-  const {
-    customFields,
-    setCustomFields,
-    submitCreation,
-    isLoadingCreation,
-    isSuccessFieldCreation,
-  } = useCreateCollection(currentUser);
-
-  useEffect(() => {
-    if (isSuccessFieldCreation) navigate(-1);
-  }, [isSuccessFieldCreation]);
+  const { customFields, setCustomFields, submitCreation, isLoadingCreation } =
+    useCreateCollection(currentUser, setCreationErrorShown, setCollectionCreated);
 
   if (!isLoggedIn) {
     return <Navigate to="/" />;
@@ -65,6 +60,12 @@ function NewCollectionPage() {
           {t('confirmCreation')}
         </Button>
       </ButtonToolbar>
+      <Notification
+        message="collections.creationError"
+        closeNotification={() => setCreationErrorShown(false)}
+        isShown={isCreationErrorShown}
+        variant="danger"
+      />
     </div>
   );
 }
