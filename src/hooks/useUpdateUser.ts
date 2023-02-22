@@ -15,7 +15,7 @@ const useUpdateUser = (
   setModalShown: SetState<boolean>,
   setUpdateErrorShown: SetState<boolean>
 ) => {
-  const { selectedUser } = useAppSelector((state) => state.admin);
+  const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const dispatch = useAppDispatch();
   const [
     updateUserById,

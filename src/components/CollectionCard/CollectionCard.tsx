@@ -2,11 +2,13 @@ import clsx from 'clsx';
 import React, { memo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { setSelectedCollection } from 'redux/slices/collectionSlice';
 
 import { formatDate } from 'utils/functions';
 
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { Collection } from 'ts/interfaces';
 
@@ -19,6 +21,8 @@ interface CollectionCardProps {
 function CollectionCard({ collection }: CollectionCardProps) {
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const { t } = useTranslation('translation');
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const formatDateAndTime = () => {
     const formattedDate = formatDate(collection.createdAt);
@@ -28,7 +32,13 @@ function CollectionCard({ collection }: CollectionCardProps) {
   };
 
   return (
-    <Card className={styles.card}>
+    <Card
+      className={styles.card}
+      onClick={() => {
+        dispatch(setSelectedCollection(collection));
+        navigate(`/collections/${collection._id}`);
+      }}
+    >
       <div className={styles.skeleton}>
         <div className={clsx('loading-skeleton position-absolute', styles.skeleton)} />
         <Card.Img

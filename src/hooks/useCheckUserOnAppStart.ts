@@ -8,7 +8,7 @@ import { checkToken } from 'utils/functions';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const useCheckUserOnAppStart = () => {
-  const { token } = useAppSelector((state) => state.user);
+  const token = useAppSelector((state) => state.user.token);
   const [
     getUserById,
     { data: currentUser, isSuccess: isSuccessGetUser, isLoading: isGetUserLoading },

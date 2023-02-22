@@ -59,7 +59,7 @@
         "userCollector": "Make user collector",
         "userBlock": "Block user",
         "userUnblock": "Unblock user",
-        "userDeleteConfirm": "Are you sure you want to delete profile?",
+        "userDeleteConfirm": "Are you sure you want to delete the profile?",
         "userUpdateTitle": "Edit user data",
         "userUpdateError": "Unexpected error! Please try again later",
         "avatar": "Avatar",
@@ -143,6 +143,15 @@
         "fieldsNote": "Fields with empty labels or types won't be saved",
         "creationSuccess": "New collection is created successfully",
         "creationError": "Unexpected error! Please try again later"
+      },
+      "collectionPage": {
+        "return": "Return to the previous page",
+        "collectionEdit": "Edit collection",
+        "collectionDelete": "Delete collection",
+        "createdBy": "Created by ",
+        "createdAt": "at",
+        "collectionDeleteConfirm": "Are you sure you want to delete the collection?",
+        "error": "Unexpected error! Please try again later"
       }
     }
   },
@@ -290,6 +299,15 @@
         "fieldsNote": "Поля с пустыми названиями или типами не будут сохранены",
         "creationSuccess": "Новая коллекция успешно создана",
         "creationError": "Ошибка! Пожалуйста, повторите попытку позже"
+      },
+      "collectionPage": {
+        "return": "Вернуться на предыдущую страницу",
+        "collectionEdit": "Редактировать",
+        "collectionDelete": "Удалить",
+        "createdBy": "Создал(а) ",
+        "createdAt": "в",
+        "collectionDeleteConfirm": "Вы уверены, что хотите удалить коллекцию?",
+        "error": "Ошибка! Пожалуйста, повторите попытку позже"
       }
     }
   }

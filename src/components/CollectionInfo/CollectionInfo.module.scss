@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.container {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--lines-color);
+}
+
+.image {
+  @media (max-width: 768px) {
+    order: 1;
+    align-self: center;
+  }
+}
+
+.description {
+  width: calc(100% - 300px);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  p {
+    transition: $themeTransition;
+    background-color: var(--background-primary-color);
+  }
+}
+
+.createdInfo {
+  margin: 0 0 15px;
+  font-size: $fontSizeExtraSmall;
+}
+
+.author,
+.author:hover {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+  cursor: default;
+}
+
+.authorLink.authorLink {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
+}

@@ -4,12 +4,14 @@ import { Collection } from 'ts/interfaces';
 
 interface CollectionState {
   collections: Collection[] | null;
+  selectedCollection: Collection | null;
   collectionsByUser: Collection[] | null;
   collectionsBySelectedUser: Collection[] | null;
 }
 
 const initialState: CollectionState = {
   collections: null,
+  selectedCollection: null,
   collectionsByUser: null,
   collectionsBySelectedUser: null,
 };
@@ -20,6 +22,10 @@ const collectionSlice = createSlice({
   reducers: {
     setCollections(state, { payload }: PayloadAction<Collection[] | null>) {
       state.collections = payload;
+    },
+
+    setSelectedCollection(state, { payload }: PayloadAction<Collection | null>) {
+      state.selectedCollection = payload;
     },
 
     setCollectionsByUser(state, { payload }: PayloadAction<Collection[] | null>) {
@@ -39,6 +45,7 @@ const collectionSlice = createSlice({
 
 export const {
   setCollections,
+  setSelectedCollection,
   setCollectionsByUser,
   setCollectionsBySelectedUser,
   resetCollectionsByUsers,

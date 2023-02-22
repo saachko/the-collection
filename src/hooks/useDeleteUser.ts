@@ -11,9 +11,7 @@ import { User } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
 const useDeleteUser = (setDeleteErrorShown: SetState<boolean>, user: User | null) => {
-  const { users } = useAppSelector((state) => state.admin);
-  // const { user } = useAppSelector((state) => state.user);
-  // const { selectedUser } = useAppSelector((state) => state.admin);
+  const users = useAppSelector((state) => state.admin.users);
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const dispatch = useAppDispatch();
   const [

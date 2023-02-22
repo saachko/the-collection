@@ -78,9 +78,13 @@ const useCreateCollection = (
           collectionId: newCollection._id,
         })
       );
-      newFields.map(async (newField) => {
-        await createCustomField(newField);
-      });
+      if (newFields.length > 0) {
+        newFields.map(async (newField) => {
+          await createCustomField(newField);
+        });
+      } else {
+        dispatch(setCreationSuccessShown(true));
+      }
     }
   }, [isSuccessCollectionCreation]);
 

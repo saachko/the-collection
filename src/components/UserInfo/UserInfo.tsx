@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import React, { memo, useEffect, useState } from 'react';
-import { OverlayTrigger, Placeholder, Tooltip } from 'react-bootstrap';
-import Image from 'react-bootstrap/Image';
+import { Image, OverlayTrigger, Placeholder, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock } from 'react-icons/ai';
 import { useLocation } from 'react-router-dom';
@@ -76,7 +75,8 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
             <h1 className="mb-0">
               {!username ? (
                 <Placeholder className="loading-skeleton d-flex" animation="glow">
-                  <Placeholder xs={12} size="lg" />
+                  <Placeholder size="lg" />
+                  Username
                 </Placeholder>
               ) : (
                 `${username}`
