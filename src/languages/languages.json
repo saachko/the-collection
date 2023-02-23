@@ -142,6 +142,7 @@
         "themeNote": "If you doesn't select a theme, it will be defined as Other",
         "imageNote": "If you doesn't select an image, the default one will be set automatically",
         "fieldsNote": "Fields with empty labels or types won't be saved",
+        "fieldsUpdateNote": "Fields with empty labels won't be saved. Types of already existing fields are immutable to prevent data loss",
         "creationSuccess": "New collection is created successfully",
         "error": "Unexpected error! Please try again later"
       },
@@ -299,6 +300,7 @@
         "themeNote": "Если вы не выберете тему, она будет определена как Другое",
         "imageNote": "Если вы не выберете изображение, автоматически будет установлено стандартное",
         "fieldsNote": "Поля с пустыми названиями или типами не будут сохранены",
+        "fieldsUpdateNote": "Поля с пустыми названиями не будут сохранены. Типы уже существующих полей неизменяемы, чтобы предотвратить потерю данных",
         "creationSuccess": "Новая коллекция успешно создана",
         "error": "Ошибка! Пожалуйста, повторите попытку позже"
       },

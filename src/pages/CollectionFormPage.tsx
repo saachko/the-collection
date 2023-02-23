@@ -26,7 +26,7 @@ function CollectionFormPage() {
   );
   const [isErrorShown, setErrorShown] = useState(false);
 
-  const { customFields, setCustomFields, submitUpdate, isLoadingUpdate } =
+  const { customFields, setCustomFields, submitUpdate, isLoadingUpdate, startFieldsIds } =
     useUpdateCollection(setErrorShown, selectedCollection);
 
   const { submitCreation, isLoadingCreation } = useCreateCollection(
@@ -57,7 +57,12 @@ function CollectionFormPage() {
       <h2>{selectedCollection ? `${t('update')}` : `${t('create')}`}</h2>
       <div className="d-flex flex-wrap justify-content-between gap-2 flex-md-row flex-column">
         <CollectionForm ownerId={currentUser?._id} submitForm={submitChanges()} />
-        <CustomFieldsForm fields={customFields} setFields={setCustomFields} />
+        <CustomFieldsForm
+          fields={customFields}
+          setFields={setCustomFields}
+          selectedCollection={selectedCollection}
+          startFieldsIds={startFieldsIds}
+        />
       </div>
       <ButtonToolbar className="justify-content-center gap-5 mt-4 mb-3">
         <Button

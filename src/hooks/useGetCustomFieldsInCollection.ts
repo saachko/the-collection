@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useLazyGetCustomFieldsByCollectionIdQuery } from 'redux/api/customFieldApiSlice';
 
@@ -9,6 +9,8 @@ const useCustomFieldsInCollection = (
   collectionId: string | undefined,
   setCustomFields: SetState<CustomFieldFormValuesWithId[]>
 ) => {
+  const [startFieldsIds, setStartFieldsIds] = useState<string[]>([]);
+
   const [
     getFields,
     {
@@ -34,10 +36,12 @@ const useCustomFieldsInCollection = (
         label: field.label,
       }));
       setCustomFields(fields);
+      const ids = fieldsInCollection.map((field) => field._id);
+      setStartFieldsIds(ids);
     }
   }, [fieldsInCollection]);
 
-  return { fieldsInCollection, isLoadingFields };
+  return { fieldsInCollection, isLoadingFields, startFieldsIds };
 };
 
 export default useCustomFieldsInCollection;

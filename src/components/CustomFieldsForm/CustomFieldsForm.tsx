@@ -9,7 +9,7 @@ import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 
 import { customFieldsTypes, selectStyles } from 'utils/constants';
 
-import { CustomFieldFormValuesWithId, SelectOption } from 'ts/interfaces';
+import { Collection, CustomFieldFormValuesWithId, SelectOption } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
 import styles from './CustomFieldsForm.module.scss';
@@ -17,9 +17,16 @@ import styles from './CustomFieldsForm.module.scss';
 interface CustomFieldsFormProps {
   fields: CustomFieldFormValuesWithId[];
   setFields: SetState<CustomFieldFormValuesWithId[]>;
+  selectedCollection: Collection | null;
+  startFieldsIds: string[];
 }
 
-function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
+function CustomFieldsForm({
+  fields,
+  setFields,
+  selectedCollection,
+  startFieldsIds,
+}: CustomFieldsFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
 
   const defaultCustomField: CustomFieldFormValuesWithId = {
@@ -60,7 +67,9 @@ function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
           </button>
         </OverlayTrigger>
       </div>
-      <p className={styles.note}>{t('fieldsNote')}</p>
+      <p className={styles.note}>
+        {selectedCollection ? `${t('fieldsUpdateNote')}` : `${t('fieldsNote')}`}
+      </p>
       <div className="mb-3">
         {fields.length > 0 ? (
           fields.map((field) => (
@@ -90,6 +99,7 @@ function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
                   styles={selectStyles}
                   className="react-select-container"
                   classNamePrefix="react-select"
+                  isDisabled={!!selectedCollection && startFieldsIds.includes(field.id)}
                 />
               </Form.Group>
               <OverlayTrigger

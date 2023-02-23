@@ -3,23 +3,18 @@ import { SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useUpdateCollectionByIdMutation } from 'redux/api/collectionApiSlice';
-import {
-  useCreateCustomFieldMutation,
-  useDeleteCustomFieldByIdMutation,
-  useUpdateCustomFieldByIdMutation,
-} from 'redux/api/customFieldApiSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
 
 import {
   Collection,
   CollectionFormValues,
   CustomFieldFormValuesWithId,
-  CustomFieldRequestBody,
 } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
 import useCustomFieldsInCollection from './useGetCustomFieldsInCollection';
 import { useAppDispatch } from './useRedux';
+import useUpdateCustomFields from './useUpdateCustomFields';
 
 const useUpdateCollection = (
   setUpdateErrorShown: SetState<boolean>,
@@ -28,10 +23,16 @@ const useUpdateCollection = (
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
-  const { fieldsInCollection, isLoadingFields } = useCustomFieldsInCollection(
-    collection?._id,
-    setCustomFields
-  );
+  const { fieldsInCollection, isLoadingFields, startFieldsIds } =
+    useCustomFieldsInCollection(collection?._id, setCustomFields);
+
+  const {
+    deleteUnnecessaryFields,
+    createNewCustomFields,
+    updateFields,
+    isLoadingCustomFieldUpdate,
+    isErrorCustomField,
+  } = useUpdateCustomFields(fieldsInCollection, customFields, collection);
 
   const [
     updateCollectionById,
@@ -42,25 +43,6 @@ const useUpdateCollection = (
       isError: isErrorCollectionUpdate,
     },
   ] = useUpdateCollectionByIdMutation();
-
-  const [
-    updateCustomFieldById,
-    {
-      isLoading: isLoadingFieldUpdate,
-      isSuccess: isSuccessFieldUpdate,
-      isError: isErrorFieldUpdate,
-    },
-  ] = useUpdateCustomFieldByIdMutation();
-
-  const [
-    deleteCustomFieldById,
-    { isLoading: isLoadingFieldDelete, isError: isErrorFieldDelete },
-  ] = useDeleteCustomFieldByIdMutation();
-
-  const [
-    createCustomField,
-    { isLoading: isLoadingFieldCreation, isError: isErrorFieldCreation },
-  ] = useCreateCustomFieldMutation();
 
   const submitUpdate: SubmitHandler<CollectionFormValues> = async ({ ...formValues }) => {
     if (collection) {
@@ -78,85 +60,26 @@ const useUpdateCollection = (
     }
   };
 
-  const validatedCustomFields = customFields.filter((field) => field.label && field.type);
-
-  const deleteUnnecessaryFields = () => {
-    const fieldsToDelete = fieldsInCollection?.filter((fieldInCollection) =>
-      validatedCustomFields.every((field) => field.id !== fieldInCollection._id)
-    );
-    if (fieldsToDelete && fieldsToDelete?.length > 0) {
-      fieldsToDelete?.map(async (deletedField) => {
-        await deleteCustomFieldById(deletedField._id);
-      });
-    }
-  };
-
-  const createNewCustomFields = () => {
-    const newFields = validatedCustomFields.filter((field) =>
-      fieldsInCollection?.every((fieldInCollection) => fieldInCollection._id !== field.id)
-    );
-    if (newFields.length > 0 && collection) {
-      newFields.map(async (newField) => {
-        const field: CustomFieldRequestBody = {
-          type: newField.type,
-          label: newField.label,
-          collectionId: collection?._id,
-        };
-        await createCustomField(field);
-      });
-    }
-  };
-
-  const updateFields = () => {
-    const fieldsToUpdate = fieldsInCollection?.filter((fieldInCollection) =>
-      validatedCustomFields?.some((field) => field.id === fieldInCollection._id)
-    );
-    const updatedFields = fieldsToUpdate?.map((field) => ({
-      ...field,
-      type: validatedCustomFields.find((f) => f.id === field._id)?.type || field.type,
-      label: validatedCustomFields.find((f) => f.id === field._id)?.label || field.label,
-    }));
-    if (updatedFields && updatedFields.length > 0 && collection) {
-      updatedFields.map(async (updatedField) => {
-        await updateCustomFieldById({ fieldId: updatedField._id, body: updatedField });
-      });
-    }
-  };
-
   useEffect(() => {
     if (updatedCollection && isSuccessCollectionUpdate) {
       deleteUnnecessaryFields();
       createNewCustomFields();
       updateFields();
+      dispatch(setSelectedCollection(updatedCollection));
+      navigate(-1);
     }
   }, [isSuccessCollectionUpdate]);
 
   useEffect(() => {
-    if (isSuccessFieldUpdate && updatedCollection) {
-      dispatch(setSelectedCollection(updatedCollection));
-      navigate(-1);
-    }
-  }, [isSuccessFieldUpdate]);
-
-  useEffect(() => {
-    if (
-      isErrorCollectionUpdate ||
-      isErrorFieldUpdate ||
-      isErrorFieldDelete ||
-      isErrorFieldCreation
-    ) {
+    if (isErrorCollectionUpdate || isErrorCustomField) {
       setUpdateErrorShown(true);
     }
-  }, [isErrorCollectionUpdate, isErrorFieldUpdate]);
+  }, [isErrorCollectionUpdate, isErrorCustomField]);
 
   const isLoadingUpdate =
-    isLoadingFields ||
-    isLoadingCollectionUpdate ||
-    isLoadingFieldUpdate ||
-    isLoadingFieldDelete ||
-    isLoadingFieldCreation;
+    isLoadingFields || isLoadingCollectionUpdate || isLoadingCustomFieldUpdate;
 
-  return { customFields, setCustomFields, submitUpdate, isLoadingUpdate };
+  return { customFields, setCustomFields, submitUpdate, isLoadingUpdate, startFieldsIds };
 };
 
 export default useUpdateCollection;
