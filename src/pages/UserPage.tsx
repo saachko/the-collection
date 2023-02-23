@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
 import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
-import { useLazyGetUserByIdQuery } from 'redux/api/userApiSlice';
-import { setSelectedUser } from 'redux/slices/adminSlice';
 import {
   setCollectionsBySelectedUser,
   setSelectedCollection,
@@ -16,6 +14,7 @@ import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import Loader from 'components/Loader/Loader';
 import UserInfo from 'components/UserInfo/UserInfo';
 
+import useGetUserFromLocation from 'hooks/useGetUserFromLocation';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function UserPage() {
@@ -26,26 +25,10 @@ function UserPage() {
     (state) => state.collection.collectionsBySelectedUser
   );
   const { t } = useTranslation('translation');
-  const location = useLocation();
-  const [getUserById, { data: currentUser, isSuccess: isSuccessGetUser }] =
-    useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!selectedUser) {
-      const currentUserId = location.pathname.split('/')[2];
-      (async () => {
-        await getUserById(currentUserId);
-      })();
-    }
-  }, [selectedUser]);
-
-  useEffect(() => {
-    if (currentUser && isSuccessGetUser) {
-      dispatch(setSelectedUser(currentUser));
-    }
-  }, [isSuccessGetUser]);
+  useGetUserFromLocation(selectedUser);
 
   const [
     getCollectionsByUser,
@@ -97,7 +80,7 @@ function UserPage() {
               ? t('profilePage.myCollections')
               : t('usersPage.collections')}
           </h3>
-          <CollectionCardsContainer collections={collections} />
+          <CollectionCardsContainer collections={collectionsBySelectedUser} />
         </>
       ) : (
         <EmptyContainer

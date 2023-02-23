@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useLazyGetCollectionByIdQuery } from 'redux/api/collectionApiSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 const useGetCollectionFromLocation = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
@@ -36,6 +37,12 @@ const useGetCollectionFromLocation = () => {
       dispatch(setSelectedCollection(currentCollection));
     }
   }, [isSuccessGetCollection]);
+
+  useEffect(() => {
+    if (isErrorGetCollection) {
+      navigate('/404');
+    }
+  }, [isErrorGetCollection]);
 
   return { isCollectionLoading, isErrorGetCollection };
 };

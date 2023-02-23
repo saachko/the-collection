@@ -66,7 +66,7 @@ function ProfilePage() {
       {collections && collections.length > 0 ? (
         <>
           <h3 className="mt-3 mb-3 text-center">{t('profilePage.myCollections')}</h3>
-          <CollectionCardsContainer collections={collections} />
+          <CollectionCardsContainer collections={collectionsByUser} />
         </>
       ) : (
         <EmptyContainer

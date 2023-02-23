@@ -41,7 +41,7 @@ function CollectionsPage() {
     <div className="content">
       {isGetCollectionsLoading && <Loader />}
       {allCollections ? (
-        <CollectionCardsContainer collections={allCollections} />
+        <CollectionCardsContainer collections={collections} />
       ) : (
         <EmptyContainer
           title={t('empty')}
