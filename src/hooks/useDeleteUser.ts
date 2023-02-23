@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
 import { useDeleteUserByIdMutation } from 'redux/api/userApiSlice';
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setLoggedOut } from 'redux/slices/userSlice';
@@ -20,6 +21,8 @@ const useDeleteUser = (setDeleteErrorShown: SetState<boolean>, user: User | null
   ] = useDeleteUserByIdMutation();
   const navigate = useNavigate();
 
+  const [getAllCollections] = useLazyGetAllCollectionsQuery();
+
   const deleteUser = async () => {
     if (users) {
       const admins = users.filter((currentUser) => currentUser.roles.includes('admin'));
@@ -30,6 +33,7 @@ const useDeleteUser = (setDeleteErrorShown: SetState<boolean>, user: User | null
     }
     if (user?._id) {
       await deleteUserById(user?._id);
+      await getAllCollections();
     }
   };
 

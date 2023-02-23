@@ -1,0 +1,32 @@
+@import '../../styles/variables.scss';
+
+.filterButton {
+  background-color: var(--transparent);
+  border: none;
+  font-size: $fontSizeButton;
+  padding: 5px;
+  color: var(--text-color);
+  transition: $transition;
+
+  &:hover {
+    color: var(--primary-color-light);
+  }
+
+  &:active {
+    opacity: $activeOpacity;
+  }
+}
+
+.adminsButton {
+  &:hover {
+    color: var(--light-color);
+  }
+}
+
+.filterAdminsActive {
+  color: var(--secondary-color);
+}
+
+.filterBlockedActive {
+  color: var(--primary-color);
+}

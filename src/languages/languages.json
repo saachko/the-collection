@@ -88,6 +88,12 @@
         "oldNew": "from old to new",
         "newOld": "from new to old"
       },
+      "filter": {
+        "admins": "show admins",
+        "blocked": "show blocked users",
+        "noFilter": "show all users",
+        "noUsersResult": "No users found"
+      },
       "collections": {
         "empty": "There're no collections yet.",
         "emptyAndLoggedIn": "Create the first one!",
@@ -245,6 +251,12 @@
         "zA": "от Я до А",
         "oldNew": "от старых к новым",
         "newOld": "от новых к старым"
+      },
+      "filter": {
+        "admins": "показать администраторов",
+        "blocked": "показать заблокированных",
+        "noFilter": "показать всех пользователей",
+        "noUsersResult": "Пользователи отсутствуют"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",

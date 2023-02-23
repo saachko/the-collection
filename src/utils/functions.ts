@@ -61,4 +61,18 @@ const sortData = (data: User[] | null, sortType: SortTypes) => {
   return data;
 };
 
-export { checkToken, createUserAvatar, createCollectionImage, formatDate, sortData };
+const filterUsersByRole = (filteringList: User[] | null) =>
+  filteringList?.filter((user) => user.roles.includes('admin'));
+
+const filterUsersByStatus = (filteringList: User[] | null) =>
+  filteringList?.filter((user) => user.isBlocked);
+
+export {
+  checkToken,
+  createUserAvatar,
+  createCollectionImage,
+  formatDate,
+  sortData,
+  filterUsersByRole,
+  filterUsersByStatus,
+};

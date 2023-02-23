@@ -12,7 +12,7 @@ import { useAppDispatch } from 'hooks/useRedux';
 import { User } from 'ts/interfaces';
 import { SortTypes } from 'ts/types';
 
-import styles from './SortToolbar.module.scss';
+import styles from './SortTools.module.scss';
 
 interface SortToolbarProps {
   sortingList: User[] | null;
