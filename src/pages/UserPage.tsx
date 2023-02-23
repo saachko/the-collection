@@ -6,7 +6,10 @@ import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
 import { useLazyGetUserByIdQuery } from 'redux/api/userApiSlice';
 import { setSelectedUser } from 'redux/slices/adminSlice';
-import { setCollectionsBySelectedUser } from 'redux/slices/collectionSlice';
+import {
+  setCollectionsBySelectedUser,
+  setSelectedCollection,
+} from 'redux/slices/collectionSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
@@ -66,6 +69,7 @@ function UserPage() {
   }, [isSuccessGetCollections]);
 
   const navigateToNewCollectionPage = () => {
+    dispatch(setSelectedCollection(null));
     navigate('/new-collection');
   };
 

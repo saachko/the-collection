@@ -12,34 +12,51 @@ import Notification from 'components/Notification/Notification';
 
 import useCreateCollection from 'hooks/useCreateCollection';
 import { useAppSelector } from 'hooks/useRedux';
+import useUpdateCollection from 'hooks/useUpdateCollection';
 
-function NewCollectionPage() {
+function CollectionFormPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const currentUser = selectedUser || user;
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
-  const [isCreationErrorShown, setCreationErrorShown] = useState(false);
+  const selectedCollection = useAppSelector(
+    (state) => state.collection.selectedCollection
+  );
+  const [isErrorShown, setErrorShown] = useState(false);
 
-  const { customFields, setCustomFields, submitCreation, isLoadingCreation } =
-    useCreateCollection(currentUser, setCreationErrorShown, setCollectionCreated);
+  const { customFields, setCustomFields, submitUpdate, isLoadingUpdate } =
+    useUpdateCollection(setErrorShown, selectedCollection);
+
+  const { submitCreation, isLoadingCreation } = useCreateCollection(
+    currentUser,
+    setErrorShown,
+    setCollectionCreated,
+    customFields
+  );
+
+  const isLoading = isLoadingCreation || isLoadingUpdate;
+
+  const submitChanges = () => {
+    if (selectedCollection) {
+      return submitUpdate;
+    }
+    return submitCreation;
+  };
 
   if (!isLoggedIn) {
     return <Navigate to="/" />;
   }
   return (
     <div className="content">
-      {isLoadingCreation && <Loader />}
-      <NavLink
-        to={selectedUser ? `/users/${selectedUser._id}` : '/profile'}
-        className="link mb-2"
-      >
+      {isLoading && <Loader />}
+      <NavLink to="" className="link mb-2" onClick={() => navigate(-1)}>
         {t('return')}
       </NavLink>
-      <h2>{t('create')}</h2>
+      <h2>{selectedCollection ? `${t('update')}` : `${t('create')}`}</h2>
       <div className="d-flex flex-wrap justify-content-between gap-2 flex-md-row flex-column">
-        <CollectionForm ownerId={currentUser?._id} submitForm={submitCreation} />
+        <CollectionForm ownerId={currentUser?._id} submitForm={submitChanges()} />
         <CustomFieldsForm fields={customFields} setFields={setCustomFields} />
       </div>
       <ButtonToolbar className="justify-content-center gap-5 mt-4 mb-3">
@@ -61,13 +78,13 @@ function NewCollectionPage() {
         </Button>
       </ButtonToolbar>
       <Notification
-        message="collections.creationError"
-        closeNotification={() => setCreationErrorShown(false)}
-        isShown={isCreationErrorShown}
+        message="collections.error"
+        closeNotification={() => setErrorShown(false)}
+        isShown={isErrorShown}
         variant="danger"
       />
     </div>
   );
 }
 
-export default memo(NewCollectionPage);
+export default memo(CollectionFormPage);

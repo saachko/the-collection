@@ -5,7 +5,10 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
 import { setSelectedUser } from 'redux/slices/adminSlice';
-import { setCollectionsByUser } from 'redux/slices/collectionSlice';
+import {
+  setCollectionsByUser,
+  setSelectedCollection,
+} from 'redux/slices/collectionSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
@@ -46,6 +49,7 @@ function ProfilePage() {
 
   const navigateToNewCollectionPage = () => {
     dispatch(setSelectedUser(null));
+    dispatch(setSelectedCollection(null));
     navigate('/new-collection');
   };
 

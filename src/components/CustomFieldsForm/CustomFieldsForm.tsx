@@ -33,6 +33,9 @@ function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
     label: `${t(type)}`,
   }));
 
+  const getValueFromOption = (value: string) =>
+    value ? customFieldTypesOptions.find((option) => option.value === value) : '';
+
   const addField = () => {
     setFields((prev) => [...prev, defaultCustomField]);
   };
@@ -83,6 +86,7 @@ function CustomFieldsForm({ fields, setFields }: CustomFieldsFormProps) {
                   onChange={(newValue) =>
                     updateField('type', (newValue as SelectOption).value, field.id)
                   }
+                  value={getValueFromOption(field.type)}
                   styles={selectStyles}
                   className="react-select-container"
                   classNamePrefix="react-select"

@@ -14,7 +14,8 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
-const NewCollectionPage = lazy(() => import('pages/NewCollectionPage'));
+const NewCollectionPage = lazy(() => import('pages/CollectionFormPage'));
+const EditCollectionPage = lazy(() => import('pages/EditCollectionPage'));
 const CollectionPage = lazy(() => import('pages/CollectionPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage'));
 const UsersPage = lazy(() => import('pages/UsersPage'));
@@ -45,6 +46,10 @@ function App() {
             <Route path="collections" element={<CollectionsPage />} />
             <Route path="new-collection" element={<NewCollectionPage />} />
             <Route path="collections/:collectionId" element={<CollectionPage />} />
+            <Route
+              path="collections/:collectionId/edit"
+              element={<EditCollectionPage />}
+            />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="users/:userId" element={<UserPage />} />

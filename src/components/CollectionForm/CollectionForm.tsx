@@ -12,6 +12,7 @@ import MarkdownTextarea from 'components/MarkdownTextarea/MarkdownTextarea';
 import { collectionThemes, selectStyles } from 'utils/constants';
 import { createCollectionImage } from 'utils/functions';
 
+import { useAppSelector } from 'hooks/useRedux';
 import useUpdateImage from 'hooks/useUpdateImage';
 
 import { CollectionFormValues, SelectOption } from 'ts/interfaces';
@@ -26,14 +27,18 @@ interface CollectionFormProps {
 
 function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
-  const [description, setDescription] = useState('');
+  const selectedCollection = useAppSelector(
+    (state) => state.collection.selectedCollection
+  );
 
   const defaultFormValues: CollectionFormValues = {
-    title: '',
-    description: '',
-    theme: '',
+    title: selectedCollection?.title || '',
+    description: selectedCollection?.description || '',
+    theme: selectedCollection?.theme || '',
     image: '',
   };
+
+  const [description, setDescription] = useState(defaultFormValues.description);
 
   const {
     register,
@@ -58,6 +63,9 @@ function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
     value,
     label: `${t(value)}`,
   }));
+
+  const getValueFromOption = (value: string) =>
+    value ? collectionThemeOptions.find((option) => option.value === value) : '';
 
   const {
     image,
@@ -114,10 +122,11 @@ function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
           <Controller
             control={control}
             name="theme"
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <ReactSelect
                 options={collectionThemeOptions}
                 placeholder={t('themePlaceholder')}
+                value={getValueFromOption(value)}
                 onChange={(newValue) => onChange((newValue as SelectOption).value)}
                 styles={selectStyles}
                 className="react-select-container"

@@ -1,5 +1,5 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import { useCreateCollectionMutation } from 'redux/api/collectionApiSlice';
@@ -24,9 +24,9 @@ const useCreateCollection = (
   setCreationSuccessShown: ActionCreatorWithPayload<
     boolean,
     'successNotification/setCollectionCreated'
-  >
+  >,
+  customFields: CustomFieldFormValuesWithId[]
 ) => {
-  const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
   const dispatch = useAppDispatch();
 
   const [
@@ -102,7 +102,6 @@ const useCreateCollection = (
 
   return {
     customFields,
-    setCustomFields,
     submitCreation,
     isLoadingCreation,
   };

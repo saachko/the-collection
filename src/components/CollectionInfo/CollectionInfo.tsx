@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { Image, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
@@ -27,6 +27,7 @@ function CollectionInfo() {
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
+  const navigate = useNavigate();
 
   const formatDateAndTime = () => {
     if (selectedCollection) {
@@ -45,7 +46,7 @@ function CollectionInfo() {
     {
       id: '1',
       title: `${t('collectionEdit')}`,
-      action: () => console.log('aaa'),
+      action: () => navigate(`/collections/${selectedCollection?._id}/edit`),
     },
     {
       id: '2',
@@ -66,6 +67,7 @@ function CollectionInfo() {
             {!selectedCollection?.title ? (
               <Placeholder className="loading-skeleton d-flex" animation="glow">
                 <Placeholder size="lg" />
+                Placeholder
               </Placeholder>
             ) : (
               `${selectedCollection?.title}`

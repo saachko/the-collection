@@ -36,8 +36,8 @@ const userSlice = createSlice({
     setLoggedOut(state) {
       state.user = null;
       state.token = null;
-      state.isLoggedIn = false;
       state.isAdmin = false;
+      state.isLoggedIn = false;
     },
   },
 });

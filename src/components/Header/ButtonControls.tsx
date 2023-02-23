@@ -20,9 +20,9 @@ function ButtonControls() {
   const navigate = useNavigate();
 
   const logOut = () => {
-    dispatch(setLoggedOut());
     dispatch(setSelectedUser(null));
     dispatch(setDefaultSorting());
+    dispatch(setLoggedOut());
   };
 
   if (!isLoggedIn) {
