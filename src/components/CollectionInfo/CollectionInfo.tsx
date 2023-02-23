@@ -1,9 +1,11 @@
 import MDEditor from '@uiw/react-md-editor';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { Image, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
+
+import { setSelectedUser } from 'redux/slices/adminSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
@@ -13,7 +15,7 @@ import ErrorNotification from 'components/Notification/Notification';
 import { formatDate } from 'utils/functions';
 
 import useDeleteCollection from 'hooks/useDeleteCollection';
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { EditDropdownItem } from 'ts/interfaces';
 
@@ -28,6 +30,7 @@ function CollectionInfo() {
     (state) => state.collection.selectedCollection
   );
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const formatDateAndTime = () => {
     if (selectedCollection) {
@@ -84,6 +87,7 @@ function CollectionInfo() {
             className={clsx(styles.author, {
               [styles.authorLink]: isAdmin,
             })}
+            onClick={() => dispatch(setSelectedUser(null))}
           >
             <span>{selectedCollection?.ownerName} </span>
           </NavLink>
@@ -112,4 +116,4 @@ function CollectionInfo() {
   );
 }
 
-export default CollectionInfo;
+export default memo(CollectionInfo);

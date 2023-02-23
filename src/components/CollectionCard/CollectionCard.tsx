@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
 
 import { formatDate } from 'utils/functions';
@@ -70,6 +71,10 @@ function CollectionCard({ collection }: CollectionCardProps) {
             className={clsx(styles.author, {
               [styles.authorLink]: isAdmin,
             })}
+            onClick={(event) => {
+              event.stopPropagation();
+              dispatch(setSelectedUser(null));
+            }}
           >
             <span>{collection.ownerName}</span>
           </NavLink>
