@@ -1,3 +1,4 @@
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import clsx from 'clsx';
 import React, { memo } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -21,6 +22,8 @@ interface SortToolbarProps {
   sortingCollectionsList?: Collection[] | null;
   sortingType: SortTypes;
   sortButtons: SortButton[];
+  setCollectionsList?: ActionCreatorWithPayload<Collection[] | null>;
+  setCollectionsSorting?: ActionCreatorWithPayload<SortTypes>;
 }
 
 function SortToolbar({
@@ -28,6 +31,8 @@ function SortToolbar({
   sortingCollectionsList,
   sortingType,
   sortButtons,
+  setCollectionsList,
+  setCollectionsSorting,
 }: SortToolbarProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'sort' });
   const dispatch = useAppDispatch();
@@ -39,8 +44,8 @@ function SortToolbar({
       dispatch(setUsers(sortedData as User[] | null));
     }
     if (sortingCollectionsList) {
-      dispatch(setCollectionsSortingType(type));
-      dispatch(setCollections(sortedData as Collection[] | null));
+      dispatch((setCollectionsSorting || setCollectionsSortingType)(type));
+      dispatch((setCollectionsList || setCollections)(sortedData as Collection[] | null));
     }
   };
 
@@ -70,6 +75,8 @@ function SortToolbar({
 SortToolbar.defaultProps = {
   sortingUserList: null,
   sortingCollectionsList: null,
+  setCollectionsList: setCollections,
+  setCollectionsSorting: setCollectionsSortingType,
 };
 
 export default memo(SortToolbar);

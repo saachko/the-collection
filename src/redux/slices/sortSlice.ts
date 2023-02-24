@@ -5,11 +5,13 @@ import { SortTypes } from 'ts/types';
 interface SortState {
   usersSorting: SortTypes;
   collectionsSorting: SortTypes;
+  collectionsBySelectedUserSorting: SortTypes;
 }
 
 const initialState: SortState = {
   usersSorting: 'fromNewToOld',
   collectionsSorting: 'fromNewToOld',
+  collectionsBySelectedUserSorting: 'fromNewToOld',
 };
 
 const sortSlice = createSlice({
@@ -24,6 +26,13 @@ const sortSlice = createSlice({
       state.collectionsSorting = payload;
     },
 
+    setCollectionsBySelectedUserSortingType(
+      state,
+      { payload }: PayloadAction<SortTypes>
+    ) {
+      state.collectionsBySelectedUserSorting = payload;
+    },
+
     setDefaultUsersSorting(state) {
       state.usersSorting = 'fromNewToOld';
     },
@@ -31,14 +40,20 @@ const sortSlice = createSlice({
     setDefaultCollectionsSorting(state) {
       state.collectionsSorting = 'fromNewToOld';
     },
+
+    setDefaultCollectionsBySelectedUserSorting(state) {
+      state.collectionsBySelectedUserSorting = 'fromNewToOld';
+    },
   },
 });
 
 export const {
   setUsersSortingType,
   setCollectionsSortingType,
+  setCollectionsBySelectedUserSortingType,
   setDefaultUsersSorting,
   setDefaultCollectionsSorting,
+  setDefaultCollectionsBySelectedUserSorting,
 } = sortSlice.actions;
 
 export default sortSlice.reducer;

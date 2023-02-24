@@ -8,11 +8,16 @@ import {
   setCollectionsBySelectedUser,
   setSelectedCollection,
 } from 'redux/slices/collectionSlice';
+import { setCollectionsBySelectedUserSortingType } from 'redux/slices/sortSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
+import ThemeFilter from 'components/FilterTools/ThemeFilter';
 import Loader from 'components/Loader/Loader';
+import SortToolbar from 'components/SortToolbar/SortToolbar';
 import UserInfo from 'components/UserInfo/UserInfo';
+
+import { defaultSortButtons, sortByItemsQuantityButtons } from 'utils/constants';
 
 import useGetUserFromLocation from 'hooks/useGetUserFromLocation';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -21,6 +26,9 @@ function UserPage() {
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const userId = useAppSelector((state) => state.user.token?.id);
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
+  const collectionsSorting = useAppSelector(
+    (state) => state.sort.collectionsBySelectedUserSorting
+  );
   const collectionsBySelectedUser = useAppSelector(
     (state) => state.collection.collectionsBySelectedUser
   );
@@ -70,9 +78,25 @@ function UserPage() {
         username={selectedUser?.username}
         roles={selectedUser?.roles}
       />
-      <Button className="secondary-button mt-2" onClick={navigateToNewCollectionPage}>
-        {t('profilePage.newCollection')}
-      </Button>
+      <div className="d-flex justify-content-between align-items-center gap-3 mb-4 mt-2 flex-lg-row flex-column">
+        <Button className="secondary-button mt-2" onClick={navigateToNewCollectionPage}>
+          {t('profilePage.newCollection')}
+        </Button>
+        <div className="d-flex justify-content-end align-items-center gap-3 mb-1 mt-1 flex-md-row flex-column">
+          <ThemeFilter
+            allCollections={collections || null}
+            filteringList={collectionsBySelectedUser}
+            setList={setCollectionsBySelectedUser}
+          />
+          <SortToolbar
+            sortingCollectionsList={collectionsBySelectedUser}
+            sortingType={collectionsSorting}
+            sortButtons={[...sortByItemsQuantityButtons, ...defaultSortButtons]}
+            setCollectionsList={setCollectionsBySelectedUser}
+            setCollectionsSorting={setCollectionsBySelectedUserSortingType}
+          />
+        </div>
+      </div>
       {collections && collections.length > 0 ? (
         <>
           <h3 className="mt-3 mb-3 text-center">
