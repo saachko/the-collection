@@ -48,6 +48,10 @@ function CollectionsPage() {
         allCollections
       ) as Collection[];
       dispatch(setCollections(sortedData));
+      if (theme) {
+        const filteredData = sortedData.filter((element) => element.theme === theme);
+        dispatch(setCollections(filteredData || null));
+      }
     }
   }, [isSuccessGetCollections]);
 

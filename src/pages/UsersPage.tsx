@@ -53,7 +53,7 @@ function UsersPage() {
   }
   return (
     <div className="content">
-      <div className="d-flex justify-content-end gap-3">
+      <div className="d-flex justify-content-center justify-content-md-end gap-3">
         <UsersFilters
           allUsers={sortData(usersSorting, allUsers || null) as User[]}
           filteringList={users}
