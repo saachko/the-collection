@@ -30,3 +30,32 @@
 .filterBlockedActive {
   color: var(--primary-color);
 }
+
+.themeFilter {
+  margin-top: 5px;
+  width: 285px;
+}
+
+.resetCollectionsFilter {
+  background-color: var(--transparent);
+  border: none;
+  font-size: $fontSizeButton;
+  padding: 5px;
+
+  svg path {
+    stroke: var(--primary-color);
+    transition: $transition;
+  }
+
+  &:hover {
+    svg path {
+      stroke: var(--primary-color-light);
+    }
+  }
+
+  &:active {
+    svg path {
+      opacity: $activeOpacity;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { setCollections } from 'redux/slices/collectionSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
+import ThemeFilter from 'components/FilterTools/ThemeFilter';
 import Loader from 'components/Loader/Loader';
 import SortToolbar from 'components/SortToolbar/SortToolbar';
 
@@ -54,7 +55,12 @@ function CollectionsPage() {
       {isGetCollectionsLoading && <Loader />}
       {allCollections ? (
         <>
-          <div className="d-flex justify-content-end gap-3 mb-2">
+          <div className="d-flex justify-content-end align-items-center gap-3 mb-4 mt-2 flex-md-row flex-column">
+            <ThemeFilter
+              allCollections={allCollections}
+              filteringList={collections}
+              setList={setCollections}
+            />
             <SortToolbar
               sortingCollectionsList={collections}
               sortingType={collectionsSorting}

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
+import { setDefaultUsersFilters } from 'redux/slices/filterSlice';
 import { showModal } from 'redux/slices/modalAuthSlice';
 import { setDefaultUsersSorting } from 'redux/slices/sortSlice';
 import { setLoggedOut } from 'redux/slices/userSlice';
@@ -22,6 +23,7 @@ function ButtonControls() {
   const logOut = () => {
     dispatch(setSelectedUser(null));
     dispatch(setDefaultUsersSorting());
+    dispatch(setDefaultUsersFilters());
     dispatch(setLoggedOut());
   };
 

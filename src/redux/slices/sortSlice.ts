@@ -27,10 +27,18 @@ const sortSlice = createSlice({
     setDefaultUsersSorting(state) {
       state.usersSorting = 'fromNewToOld';
     },
+
+    setDefaultCollectionsSorting(state) {
+      state.collectionsSorting = 'fromNewToOld';
+    },
   },
 });
 
-export const { setUsersSortingType, setCollectionsSortingType, setDefaultUsersSorting } =
-  sortSlice.actions;
+export const {
+  setUsersSortingType,
+  setCollectionsSortingType,
+  setDefaultUsersSorting,
+  setDefaultCollectionsSorting,
+} = sortSlice.actions;
 
 export default sortSlice.reducer;
