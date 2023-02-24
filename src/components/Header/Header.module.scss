@@ -15,6 +15,18 @@
     gap: 0;
   }
 
+  @media (max-width: 768px) {
+    flex-direction: row;
+    height: 80px;
+    gap: 10px;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    height: 130px;
+    gap: 0;
+  }
+
   .headerNav {
     @media (max-width: 1080px) {
       width: 100%;
@@ -39,6 +51,10 @@
   &.active {
     color: var(--primary-color);
   }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .themeButton {
@@ -60,5 +76,15 @@
     width: calc(100vw - 15px);
     justify-content: end;
     padding-right: 15px;
+  }
+
+  @media (max-width: 576px) {
+    justify-content: space-between;
+  }
+}
+
+.buttonControls {
+  @media (max-width: 768px) {
+    display: none;
   }
 }

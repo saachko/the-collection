@@ -21,7 +21,7 @@ function HeaderNavbar() {
 
   return (
     <Navbar className={styles.headerNav}>
-      <Container className="p-0">
+      <Container className="p-0 justify-content-center justify-content-sm-between">
         <Logo />
         <Nav className="d-flex gap-2">
           {navLinks.map((link) => (

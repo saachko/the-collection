@@ -23,22 +23,48 @@ import { CustomFieldTypes } from 'ts/types';
 
 const navLinks: NavLink[] = [
   {
-    id: '1',
+    id: 'home',
     name: 'header.home',
     path: '/',
   },
   {
-    id: '2',
+    id: 'collections',
     name: 'header.collections',
     path: '/collections',
   },
 ];
 
 const privateLink: NavLink = {
-  id: '3',
+  id: 'users',
   name: 'header.users',
   path: '/users',
 };
+
+const burgerMenuLinks: NavLink[] = [
+  {
+    id: 'signin',
+    name: 'header.signin',
+    path: '',
+  },
+  {
+    id: 'signup',
+    name: 'header.signup',
+    path: '',
+  },
+];
+
+const burgerMenuLinksLoggedIn: NavLink[] = [
+  {
+    id: 'profile',
+    name: 'header.profile',
+    path: '/profile',
+  },
+  {
+    id: 'logout',
+    name: 'header.logout',
+    path: '',
+  },
+];
 
 const authorsContacts: Contact[] = [
   {
@@ -208,4 +234,6 @@ export {
   collectionThemes,
   selectStyles,
   customFieldsTypes,
+  burgerMenuLinks,
+  burgerMenuLinksLoggedIn,
 };

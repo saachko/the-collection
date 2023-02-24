@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.menuButton {
+  display: none;
+  padding: 0 5px;
+  margin-top: -10px;
+  background-color: var(--transparent);
+  border: none;
+  font-size: $fontSizeH2;
+
+  svg {
+    transition: $transition;
+  }
+
+  &:hover svg {
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.burgerNavLink {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: $transition;
+  padding: 5px;
+
+  &:hover,
+  &:active,
+  &.active {
+    color: var(--primary-color);
+  }
+
+  &:hover,
+  &:active {
+    background-color: var(--background-secondary-color);
+  }
+}

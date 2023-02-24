@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
+
 import ButtonControls from './ButtonControls';
 import styles from './Header.module.scss';
 import HeaderNavbar from './HeaderNavbar';
@@ -15,6 +17,7 @@ function Header() {
           <ThemeSwitcher />
           <LanguageSwitcher />
           <ButtonControls />
+          <BurgerMenu />
         </div>
       </div>
     </header>

@@ -13,6 +13,8 @@ import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotificat
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
+import styles from './Header.module.scss';
+
 function ButtonControls() {
   const { t } = useTranslation('translation', { keyPrefix: 'header' });
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
@@ -29,7 +31,7 @@ function ButtonControls() {
 
   if (!isLoggedIn) {
     return (
-      <div>
+      <div className={styles.buttonControls}>
         <Button
           className="secondary-button me-2"
           onClick={() => dispatch(showModal('signIn'))}
@@ -43,7 +45,7 @@ function ButtonControls() {
     );
   }
   return (
-    <div>
+    <div className={styles.buttonControls}>
       <Button
         className="secondary-button me-2"
         onClick={() => setConfirmLogOutNotification(true)}
