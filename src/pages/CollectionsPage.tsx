@@ -21,6 +21,7 @@ function CollectionsPage() {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const collections = useAppSelector((state) => state.collection.collections);
   const collectionsSorting = useAppSelector((state) => state.sort.collectionsSorting);
+  const theme = useAppSelector((state) => state.filter.collectionsThemeFilter);
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
   const dispatch = useAppDispatch();
 
@@ -60,6 +61,7 @@ function CollectionsPage() {
               allCollections={allCollections}
               filteringList={collections}
               setList={setCollections}
+              theme={theme}
             />
             <SortToolbar
               sortingCollectionsList={collections}

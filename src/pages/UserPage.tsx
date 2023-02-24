@@ -8,7 +8,14 @@ import {
   setCollectionsBySelectedUser,
   setSelectedCollection,
 } from 'redux/slices/collectionSlice';
-import { setCollectionsBySelectedUserSortingType } from 'redux/slices/sortSlice';
+import {
+  setCollectionsBySelectedUserThemeFilter,
+  setDefaultCollectionsBySelectedUserFilters,
+} from 'redux/slices/filterSlice';
+import {
+  setCollectionsBySelectedUserSortingType,
+  setDefaultCollectionsBySelectedUserSorting,
+} from 'redux/slices/sortSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
@@ -26,6 +33,9 @@ function UserPage() {
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const userId = useAppSelector((state) => state.user.token?.id);
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
+  const theme = useAppSelector(
+    (state) => state.filter.collectionsBySelectedUserThemeFilter
+  );
   const collectionsSorting = useAppSelector(
     (state) => state.sort.collectionsBySelectedUserSorting
   );
@@ -51,6 +61,8 @@ function UserPage() {
     (async () => {
       if (selectedUser) await getCollectionsByUser(selectedUser._id);
     })();
+    dispatch(setDefaultCollectionsBySelectedUserFilters());
+    dispatch(setDefaultCollectionsBySelectedUserSorting());
   }, [selectedUser]);
 
   useEffect(() => {
@@ -87,6 +99,10 @@ function UserPage() {
             allCollections={collections || null}
             filteringList={collectionsBySelectedUser}
             setList={setCollectionsBySelectedUser}
+            setThemeFilter={setCollectionsBySelectedUserThemeFilter}
+            setDefaultFilters={setDefaultCollectionsBySelectedUserFilters}
+            setDefaultSorting={setDefaultCollectionsBySelectedUserSorting}
+            theme={theme}
           />
           <SortToolbar
             sortingCollectionsList={collectionsBySelectedUser}

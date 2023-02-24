@@ -1,6 +1,6 @@
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { ActionCreatorWithPayload, ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrFormClose } from 'react-icons/gr';
 import ReactSelect from 'react-select';
@@ -13,7 +13,7 @@ import { setDefaultCollectionsSorting } from 'redux/slices/sortSlice';
 
 import { collectionThemes, selectStyles } from 'utils/constants';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch } from 'hooks/useRedux';
 
 import { Collection, SelectOption } from 'ts/interfaces';
 
@@ -23,11 +23,22 @@ interface ThemeFilterProps {
   allCollections: Collection[] | null;
   filteringList: Collection[] | null;
   setList: ActionCreatorWithPayload<Collection[] | null>;
+  theme: string;
+  setThemeFilter?: ActionCreatorWithPayload<string>;
+  setDefaultFilters?: ActionCreatorWithoutPayload;
+  setDefaultSorting?: ActionCreatorWithoutPayload;
 }
 
-function ThemeFilter({ allCollections, filteringList, setList }: ThemeFilterProps) {
+function ThemeFilter({
+  allCollections,
+  filteringList,
+  setList,
+  theme,
+  setThemeFilter,
+  setDefaultFilters,
+  setDefaultSorting,
+}: ThemeFilterProps) {
   const { t } = useTranslation('translation');
-  const theme = useAppSelector((state) => state.filter.collectionsThemeFilter);
   const dispatch = useAppDispatch();
   const collectionThemeOptions: SelectOption[] = collectionThemes.map((value) => ({
     value,
@@ -51,8 +62,8 @@ function ThemeFilter({ allCollections, filteringList, setList }: ThemeFilterProp
   }, [theme]);
 
   const resetFilters = () => {
-    dispatch(setDefaultCollectionsFilters());
-    dispatch(setDefaultCollectionsSorting());
+    dispatch((setDefaultFilters || setDefaultCollectionsFilters)());
+    dispatch((setDefaultSorting || setDefaultCollectionsSorting)());
     dispatch(setList(allCollections));
   };
 
@@ -73,7 +84,9 @@ function ThemeFilter({ allCollections, filteringList, setList }: ThemeFilterProp
         placeholder={t('collections.themePlaceholder')}
         value={getValueFromOption(theme)}
         onChange={(value) =>
-          dispatch(setCollectionsThemeFilter((value as SelectOption).value))
+          dispatch(
+            (setThemeFilter || setCollectionsThemeFilter)((value as SelectOption).value)
+          )
         }
         styles={selectStyles}
         className={clsx('react-select-container', styles.themeFilter)}
@@ -83,4 +96,10 @@ function ThemeFilter({ allCollections, filteringList, setList }: ThemeFilterProp
   );
 }
 
-export default ThemeFilter;
+ThemeFilter.defaultProps = {
+  setThemeFilter: setCollectionsThemeFilter,
+  setDefaultFilters: setDefaultCollectionsFilters,
+  setDefaultSorting: setDefaultCollectionsSorting,
+};
+
+export default memo(ThemeFilter);

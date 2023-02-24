@@ -4,12 +4,16 @@ interface FilterState {
   usersFilterAdmins: boolean;
   usersFilterBlocked: boolean;
   collectionsThemeFilter: string;
+  collectionsByUserThemeFilter: string;
+  collectionsBySelectedUserThemeFilter: string;
 }
 
 const initialState: FilterState = {
   usersFilterAdmins: false,
   usersFilterBlocked: false,
   collectionsThemeFilter: '',
+  collectionsByUserThemeFilter: '',
+  collectionsBySelectedUserThemeFilter: '',
 };
 
 const filterSlice = createSlice({
@@ -28,6 +32,14 @@ const filterSlice = createSlice({
       state.collectionsThemeFilter = payload;
     },
 
+    setCollectionsByUserThemeFilter(state, { payload }: PayloadAction<string>) {
+      state.collectionsByUserThemeFilter = payload;
+    },
+
+    setCollectionsBySelectedUserThemeFilter(state, { payload }: PayloadAction<string>) {
+      state.collectionsBySelectedUserThemeFilter = payload;
+    },
+
     setDefaultUsersFilters(state) {
       state.usersFilterAdmins = false;
       state.usersFilterBlocked = false;
@@ -36,6 +48,14 @@ const filterSlice = createSlice({
     setDefaultCollectionsFilters(state) {
       state.collectionsThemeFilter = '';
     },
+
+    setDefaultCollectionsByUserFilters(state) {
+      state.collectionsByUserThemeFilter = '';
+    },
+
+    setDefaultCollectionsBySelectedUserFilters(state) {
+      state.collectionsBySelectedUserThemeFilter = '';
+    },
   },
 });
 
@@ -43,8 +63,12 @@ export const {
   setUsersFilterAdmins,
   setUsersFilterBlocked,
   setCollectionsThemeFilter,
+  setCollectionsByUserThemeFilter,
+  setCollectionsBySelectedUserThemeFilter,
   setDefaultUsersFilters,
   setDefaultCollectionsFilters,
+  setDefaultCollectionsByUserFilters,
+  setDefaultCollectionsBySelectedUserFilters,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
