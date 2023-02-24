@@ -1,39 +1,47 @@
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import clsx from 'clsx';
-import React from 'react';
+import React, { memo } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-import { sortButtons } from 'utils/constants';
+import { setUsers } from 'redux/slices/adminSlice';
+import { setCollections } from 'redux/slices/collectionSlice';
+import { setCollectionsSortingType, setUsersSortingType } from 'redux/slices/sortSlice';
+
 import { sortData } from 'utils/functions';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
-import { User } from 'ts/interfaces';
+import { Collection, SortButton, User } from 'ts/interfaces';
 import { SortTypes } from 'ts/types';
 
-import styles from './SortTools.module.scss';
+import styles from './SortToolbar.module.scss';
 
 interface SortToolbarProps {
-  sortingList: User[] | null;
+  sortingUserList?: User[] | null;
+  sortingCollectionsList?: Collection[] | null;
   sortingType: SortTypes;
-  setSortingType: ActionCreatorWithPayload<SortTypes>;
-  setList: ActionCreatorWithPayload<User[] | null>;
+  sortButtons: SortButton[];
 }
 
 function SortToolbar({
-  sortingList,
+  sortingUserList,
+  sortingCollectionsList,
   sortingType,
-  setSortingType,
-  setList,
+  sortButtons,
 }: SortToolbarProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'sort' });
   const dispatch = useAppDispatch();
 
   const changeSortingType = (type: SortTypes) => {
-    dispatch(setSortingType(type));
-    const sortedData = sortData(sortingList, type);
-    dispatch(setList(sortedData));
+    const sortedData = sortData(type, sortingUserList, sortingCollectionsList);
+    if (sortingUserList) {
+      dispatch(setUsersSortingType(type));
+      dispatch(setUsers(sortedData as User[] | null));
+    }
+    if (sortingCollectionsList) {
+      dispatch(setCollectionsSortingType(type));
+      dispatch(setCollections(sortedData as Collection[] | null));
+    }
   };
 
   return (
@@ -59,4 +67,9 @@ function SortToolbar({
   );
 }
 
-export default SortToolbar;
+SortToolbar.defaultProps = {
+  sortingUserList: null,
+  sortingCollectionsList: null,
+};
+
+export default memo(SortToolbar);

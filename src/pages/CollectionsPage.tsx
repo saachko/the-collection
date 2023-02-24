@@ -7,12 +7,19 @@ import { setCollections } from 'redux/slices/collectionSlice';
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import Loader from 'components/Loader/Loader';
+import SortToolbar from 'components/SortToolbar/SortToolbar';
+
+import { defaultSortButtons, sortByItemsQuantityButtons } from 'utils/constants';
+import { sortData } from 'utils/functions';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+
+import { Collection } from 'ts/interfaces';
 
 function CollectionsPage() {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const collections = useAppSelector((state) => state.collection.collections);
+  const collectionsSorting = useAppSelector((state) => state.sort.collectionsSorting);
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
   const dispatch = useAppDispatch();
 
@@ -33,7 +40,12 @@ function CollectionsPage() {
 
   useEffect(() => {
     if (allCollections && isSuccessGetCollections) {
-      dispatch(setCollections(allCollections));
+      const sortedData = sortData(
+        collectionsSorting,
+        null,
+        allCollections
+      ) as Collection[];
+      dispatch(setCollections(sortedData));
     }
   }, [isSuccessGetCollections]);
 
@@ -41,7 +53,16 @@ function CollectionsPage() {
     <div className="content">
       {isGetCollectionsLoading && <Loader />}
       {allCollections ? (
-        <CollectionCardsContainer collections={collections} />
+        <>
+          <div className="d-flex justify-content-end gap-3 mb-2">
+            <SortToolbar
+              sortingCollectionsList={collections}
+              sortingType={collectionsSorting}
+              sortButtons={[...sortByItemsQuantityButtons, ...defaultSortButtons]}
+            />
+          </div>
+          <CollectionCardsContainer collections={collections} />
+        </>
       ) : (
         <EmptyContainer
           title={t('empty')}

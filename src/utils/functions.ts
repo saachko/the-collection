@@ -1,4 +1,4 @@
-import { ParsedToken, User } from 'ts/interfaces';
+import { Collection, ParsedToken, User } from 'ts/interfaces';
 import { SortTypes } from 'ts/types';
 
 const parseJwt = (tokenToParse: string) => {
@@ -40,13 +40,44 @@ const formatDate = (stringDate: string) => {
   return date.toLocaleString();
 };
 
-const sortData = (data: User[] | null, sortType: SortTypes) => {
+const sortData = (
+  sortType: SortTypes,
+  userData?: User[] | null,
+  collectionData?: Collection[] | null
+) => {
+  const data = userData || collectionData;
   if (data) {
     switch (sortType) {
+      case 'fromLessToMore':
+        if (collectionData) {
+          return [...(data as Collection[])].sort(
+            (a, b) => a.itemsQuantity - b.itemsQuantity
+          );
+        }
+        break;
+      case 'fromMoreToLess':
+        if (collectionData) {
+          return [...(data as Collection[])].sort(
+            (a, b) => b.itemsQuantity - a.itemsQuantity
+          );
+        }
+        break;
       case 'fromAtoZ':
-        return [...data].sort((a, b) => (a.username > b.username ? 1 : -1));
+        if (userData) {
+          return [...(data as User[])].sort((a, b) => (a.username > b.username ? 1 : -1));
+        }
+        if (collectionData) {
+          return [...(data as Collection[])].sort((a, b) => (a.title > b.title ? 1 : -1));
+        }
+        break;
       case 'fromZtoA':
-        return [...data].sort((a, b) => (a.username < b.username ? 1 : -1));
+        if (userData) {
+          return [...(data as User[])].sort((a, b) => (a.username < b.username ? 1 : -1));
+        }
+        if (collectionData) {
+          return [...(data as Collection[])].sort((a, b) => (a.title < b.title ? 1 : -1));
+        }
+        break;
       case 'fromOldToNew':
         return [...data].sort((a, b) =>
           formatDate(a.createdAt) > formatDate(b.createdAt) ? 1 : -1

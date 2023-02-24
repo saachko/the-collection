@@ -4,17 +4,19 @@ import { Navigate } from 'react-router-dom';
 
 import { useGetAllUsersQuery } from 'redux/api/userApiSlice';
 import { setUsers } from 'redux/slices/adminSlice';
-import { setUsersSortingType } from 'redux/slices/sortSlice';
 
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import UsersFilters from 'components/FilterTools/UsersFilters';
 import Loader from 'components/Loader/Loader';
-import SortToolbar from 'components/SortTools/SortToolbar';
+import SortToolbar from 'components/SortToolbar/SortToolbar';
 import UsersTable from 'components/UsersTable/UsersTable';
 
+import { defaultSortButtons } from 'utils/constants';
 import { filterUsersByRole, filterUsersByStatus, sortData } from 'utils/functions';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+
+import { User } from 'ts/interfaces';
 
 function UsersPage() {
   const { t } = useTranslation('translation');
@@ -33,7 +35,7 @@ function UsersPage() {
 
   useEffect(() => {
     if (allUsers && isSuccessGetAllUsers) {
-      const sortedData = sortData(allUsers, usersSorting);
+      const sortedData = sortData(usersSorting, allUsers) as User[];
       dispatch(setUsers(sortedData));
       if (filterAdmins) {
         const filteredData = filterUsersByRole(sortedData);
@@ -53,15 +55,14 @@ function UsersPage() {
     <div className="content">
       <div className="d-flex justify-content-end gap-3">
         <UsersFilters
-          allUsers={sortData(allUsers || null, usersSorting)}
+          allUsers={sortData(usersSorting, allUsers || null) as User[]}
           filteringList={users}
           setList={setUsers}
         />
         <SortToolbar
-          sortingList={users}
+          sortingUserList={users}
           sortingType={usersSorting}
-          setSortingType={setUsersSortingType}
-          setList={setUsers}
+          sortButtons={defaultSortButtons}
         />
       </div>
       <UsersTable users={users} />

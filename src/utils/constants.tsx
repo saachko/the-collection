@@ -1,6 +1,13 @@
 import React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiTwotoneMail } from 'react-icons/ai';
-import { BsSortAlphaDown, BsSortAlphaUp, BsSortDown, BsSortUp } from 'react-icons/bs';
+import {
+  BsSortAlphaDown,
+  BsSortAlphaUp,
+  BsSortDown,
+  BsSortNumericDown,
+  BsSortNumericUp,
+  BsSortUp,
+} from 'react-icons/bs';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { GroupBase, StylesConfig } from 'react-select';
 
@@ -95,7 +102,7 @@ const usersTableHeadings: TableHeading[] = [
   },
 ];
 
-const sortButtons: SortButton[] = [
+const defaultSortButtons: SortButton[] = [
   {
     id: 'fromAtoZ',
     icon: <BsSortAlphaDown />,
@@ -108,13 +115,26 @@ const sortButtons: SortButton[] = [
   },
   {
     id: 'fromOldToNew',
-    icon: <BsSortUp />,
+    icon: <BsSortDown />,
     tooltip: 'oldNew',
   },
   {
     id: 'fromNewToOld',
-    icon: <BsSortDown />,
+    icon: <BsSortUp />,
     tooltip: 'newOld',
+  },
+];
+
+const sortByItemsQuantityButtons: SortButton[] = [
+  {
+    id: 'fromLessToMore',
+    icon: <BsSortNumericDown />,
+    tooltip: 'lessMore',
+  },
+  {
+    id: 'fromMoreToLess',
+    icon: <BsSortNumericUp />,
+    tooltip: 'moreLess',
   },
 ];
 
@@ -183,7 +203,8 @@ export {
   imageFileTypes,
   userAvatarBaseUrl,
   usersTableHeadings,
-  sortButtons,
+  defaultSortButtons,
+  sortByItemsQuantityButtons,
   collectionThemes,
   selectStyles,
   customFieldsTypes,

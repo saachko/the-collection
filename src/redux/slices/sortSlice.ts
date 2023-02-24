@@ -4,10 +4,12 @@ import { SortTypes } from 'ts/types';
 
 interface SortState {
   usersSorting: SortTypes;
+  collectionsSorting: SortTypes;
 }
 
 const initialState: SortState = {
   usersSorting: 'fromNewToOld',
+  collectionsSorting: 'fromNewToOld',
 };
 
 const sortSlice = createSlice({
@@ -18,12 +20,17 @@ const sortSlice = createSlice({
       state.usersSorting = payload;
     },
 
-    setDefaultSorting(state) {
+    setCollectionsSortingType(state, { payload }: PayloadAction<SortTypes>) {
+      state.collectionsSorting = payload;
+    },
+
+    setDefaultUsersSorting(state) {
       state.usersSorting = 'fromNewToOld';
     },
   },
 });
 
-export const { setUsersSortingType, setDefaultSorting } = sortSlice.actions;
+export const { setUsersSortingType, setCollectionsSortingType, setDefaultUsersSorting } =
+  sortSlice.actions;
 
 export default sortSlice.reducer;

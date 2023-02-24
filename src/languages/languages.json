@@ -86,13 +86,16 @@
         "aZ": "from A to Z",
         "zA": "from Z to A",
         "oldNew": "from old to new",
-        "newOld": "from new to old"
+        "newOld": "from new to old",
+        "moreLess": "from more items to less",
+        "lessMore": "from less items to more"
       },
       "filter": {
         "admins": "show admins",
         "blocked": "show blocked users",
         "noFilter": "show all users",
-        "noUsersResult": "No users found"
+        "noUsersResult": "No users found",
+        "noCollectionsResult": "No collections found"
       },
       "collections": {
         "empty": "There're no collections yet.",
@@ -250,13 +253,16 @@
         "aZ": "от А до Я",
         "zA": "от Я до А",
         "oldNew": "от старых к новым",
-        "newOld": "от новых к старым"
+        "newOld": "от новых к старым",
+        "moreLess": "по убыванию количества элементов",
+        "lessMore": "по возрастанию количества элементов"
       },
       "filter": {
         "admins": "показать администраторов",
         "blocked": "показать заблокированных",
         "noFilter": "показать всех пользователей",
-        "noUsersResult": "Пользователи отсутствуют"
+        "noUsersResult": "Пользователи отсутствуют",
+        "noCollectionsResult": "Коллекции отсутствуют"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",

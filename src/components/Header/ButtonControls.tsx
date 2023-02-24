@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { showModal } from 'redux/slices/modalAuthSlice';
-import { setDefaultSorting } from 'redux/slices/sortSlice';
+import { setDefaultUsersSorting } from 'redux/slices/sortSlice';
 import { setLoggedOut } from 'redux/slices/userSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
@@ -21,7 +21,7 @@ function ButtonControls() {
 
   const logOut = () => {
     dispatch(setSelectedUser(null));
-    dispatch(setDefaultSorting());
+    dispatch(setDefaultUsersSorting());
     dispatch(setLoggedOut());
   };
 
