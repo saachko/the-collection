@@ -66,13 +66,13 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
   return (
     <>
       <div className={clsx('d-flex gap-4 justify-content-between', styles.infoContainer)}>
-        <div className="d-flex gap-4">
+        <div className="d-flex gap-4 flex-column flex-sm-row">
           <div className="avatar position-relative">
             <div className="avatar loading-skeleton position-absolute" />
             <Image src={avatar} className="avatar position-absolute" />
           </div>
           <div>
-            <h1 className="mb-0">
+            <h1 className={styles.title}>
               {!username ? (
                 <Placeholder className="loading-skeleton d-flex" animation="glow">
                   <Placeholder size="lg" />

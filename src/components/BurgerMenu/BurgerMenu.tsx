@@ -77,8 +77,13 @@ function BurgerMenu() {
       >
         <RxHamburgerMenu />
       </button>
-      <Offcanvas show={showMenu} onHide={() => setShowMenu(false)} placement="end">
-        <Offcanvas.Header closeButton className="d-flex justify-content-end pt-4 me-4" />
+      <Offcanvas
+        show={showMenu}
+        onHide={() => setShowMenu(false)}
+        placement="end"
+        className={styles.menu}
+      >
+        <Offcanvas.Header closeButton className="d-flex justify-content-end pt-4 pe-5" />
         <Offcanvas.Body>
           <Nav className="d-flex flex-column gap-2" onClick={() => setShowMenu(false)}>
             {navLinks.map((link) => (

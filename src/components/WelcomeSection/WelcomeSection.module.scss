@@ -3,9 +3,10 @@
 .section {
   display: flex;
   justify-content: space-between;
+  border-bottom: 1px solid var(--lines-color);
   gap: 1rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-direction: column;
   }
 }
@@ -24,8 +25,16 @@
       height: calc(100vh - 130px);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       display: none;
+    }
+  }
+}
+
+.verticalScreenImage {
+  svg {
+    @media (max-width: 1080px) {
+      height: 60vw;
     }
   }
 }

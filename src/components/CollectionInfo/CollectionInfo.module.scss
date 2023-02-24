@@ -6,9 +6,20 @@
 }
 
 .image {
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     order: 1;
     align-self: center;
+  }
+}
+
+.title {
+  word-break: break-word;
+}
+
+.dropdown {
+  @media (max-width: 767px) {
+    align-self: start;
+    margin-top: 7px;
   }
 }
 

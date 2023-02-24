@@ -66,7 +66,7 @@ function CollectionInfo() {
       </div>
       <div className={styles.description}>
         <div className="d-flex align-items-center justify-content-between">
-          <h2>
+          <h2 className={styles.title}>
             {!selectedCollection?.title ? (
               <Placeholder className="loading-skeleton d-flex" animation="glow">
                 <Placeholder size="lg" />
@@ -77,7 +77,9 @@ function CollectionInfo() {
             )}
           </h2>
           {(isAdmin || user?._id === selectedCollection?.ownerId) && (
-            <EditDropdown dropdownItems={editActions} />
+            <div className={styles.dropdown}>
+              <EditDropdown dropdownItems={editActions} />
+            </div>
           )}
         </div>
         <p className={styles.createdInfo}>

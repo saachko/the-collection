@@ -1,5 +1,11 @@
 @import '../../styles/variables.scss';
 
+.menu {
+  div {
+    background-color: var(--background-primary-color);
+  }
+}
+
 .menuButton {
   display: none;
   padding: 0 5px;
@@ -10,6 +16,7 @@
 
   svg {
     transition: $transition;
+    color: var(--text-color);
   }
 
   &:hover svg {
