@@ -13,18 +13,18 @@ import {
 import { SetState } from 'ts/types';
 
 import useCustomFieldsInCollection from './useGetCustomFieldsInCollection';
-import { useAppDispatch } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useRedux';
 import useUpdateCustomFields from './useUpdateCustomFields';
 
-const useUpdateCollection = (
-  setUpdateErrorShown: SetState<boolean>,
-  collection: Collection | null
-) => {
+const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const selectedCollection = useAppSelector(
+    (state) => state.collection.selectedCollection
+  );
   const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
   const { fieldsInCollection, isLoadingFields, startFieldsIds } =
-    useCustomFieldsInCollection(collection?._id, setCustomFields);
+    useCustomFieldsInCollection(selectedCollection?._id, setCustomFields);
 
   const {
     deleteUnnecessaryFields,
@@ -32,7 +32,7 @@ const useUpdateCollection = (
     updateFields,
     isLoadingCustomFieldUpdate,
     isErrorCustomField,
-  } = useUpdateCustomFields(fieldsInCollection, customFields, collection);
+  } = useUpdateCustomFields(fieldsInCollection, customFields, selectedCollection);
 
   const [
     updateCollectionById,
@@ -45,16 +45,16 @@ const useUpdateCollection = (
   ] = useUpdateCollectionByIdMutation();
 
   const submitUpdate: SubmitHandler<CollectionFormValues> = async ({ ...formValues }) => {
-    if (collection) {
+    if (selectedCollection) {
       const updatedCollectionBody: Collection = {
-        ...collection,
+        ...selectedCollection,
         title: formValues.title || '*(No description provided)*',
         theme: formValues.theme || 'other',
-        image: formValues.image || collection.image,
+        image: formValues.image || selectedCollection.image,
         description: formValues.description,
       };
       await updateCollectionById({
-        collectionId: collection._id,
+        collectionId: selectedCollection._id,
         body: updatedCollectionBody,
       });
     }
@@ -79,7 +79,14 @@ const useUpdateCollection = (
   const isLoadingUpdate =
     isLoadingFields || isLoadingCollectionUpdate || isLoadingCustomFieldUpdate;
 
-  return { customFields, setCustomFields, submitUpdate, isLoadingUpdate, startFieldsIds };
+  return {
+    customFields,
+    setCustomFields,
+    submitUpdate,
+    isLoadingUpdate,
+    startFieldsIds,
+    selectedCollection,
+  };
 };
 
 export default useUpdateCollection;

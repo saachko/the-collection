@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
-import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
 import {
   setCollectionsBySelectedUser,
   setSelectedCollection,
@@ -26,6 +25,7 @@ import UserInfo from 'components/UserInfo/UserInfo';
 
 import { defaultSortButtons, sortByItemsQuantityButtons } from 'utils/constants';
 
+import useGetCollectionsBySelectedUser from 'hooks/useGetCollectionsBySelectedUser';
 import useGetUserFromLocation from 'hooks/useGetUserFromLocation';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -47,29 +47,8 @@ function UserPage() {
   const navigate = useNavigate();
 
   useGetUserFromLocation(selectedUser);
-
-  const [
-    getCollectionsByUser,
-    {
-      data: collections,
-      isSuccess: isSuccessGetCollections,
-      isLoading: isGetCollectionsLoading,
-    },
-  ] = useLazyGetCollectionsByUserIdQuery();
-
-  useEffect(() => {
-    (async () => {
-      if (selectedUser) await getCollectionsByUser(selectedUser._id);
-    })();
-    dispatch(setDefaultCollectionsBySelectedUserFilters());
-    dispatch(setDefaultCollectionsBySelectedUserSorting());
-  }, [selectedUser]);
-
-  useEffect(() => {
-    if (collections && isSuccessGetCollections) {
-      dispatch(setCollectionsBySelectedUser(collections));
-    }
-  }, [isSuccessGetCollections]);
+  const { collections, isGetCollectionsLoading } =
+    useGetCollectionsBySelectedUser(selectedUser);
 
   const navigateToNewCollectionPage = () => {
     dispatch(setSelectedCollection(null));

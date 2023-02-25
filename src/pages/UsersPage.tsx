@@ -1,8 +1,7 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
-import { useGetAllUsersQuery } from 'redux/api/userApiSlice';
 import { setUsers } from 'redux/slices/adminSlice';
 
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
@@ -12,41 +11,16 @@ import SortToolbar from 'components/SortToolbar/SortToolbar';
 import UsersTable from 'components/UsersTable/UsersTable';
 
 import { defaultSortButtons } from 'utils/constants';
-import { filterUsersByRole, filterUsersByStatus, sortData } from 'utils/functions';
+import { sortData } from 'utils/functions';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import useGetAllUsers from 'hooks/useGetAllUsers';
 
 import { User } from 'ts/interfaces';
 
 function UsersPage() {
   const { t } = useTranslation('translation');
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
-  const isAdmin = useAppSelector((state) => state.user.isAdmin);
-  const users = useAppSelector((state) => state.admin.users);
-  const usersSorting = useAppSelector((state) => state.sort.usersSorting);
-  const filterAdmins = useAppSelector((state) => state.filter.usersFilterAdmins);
-  const filterBlocked = useAppSelector((state) => state.filter.usersFilterBlocked);
-  const dispatch = useAppDispatch();
-  const {
-    data: allUsers,
-    isSuccess: isSuccessGetAllUsers,
-    isLoading: isGetAllUsersLoading,
-  } = useGetAllUsersQuery(undefined, { skip: !isLoggedIn && !isAdmin });
-
-  useEffect(() => {
-    if (allUsers && isSuccessGetAllUsers) {
-      const sortedData = sortData(usersSorting, allUsers) as User[];
-      dispatch(setUsers(sortedData));
-      if (filterAdmins) {
-        const filteredData = filterUsersByRole(sortedData);
-        dispatch(setUsers(filteredData || null));
-      }
-      if (filterBlocked) {
-        const filteredData = filterUsersByStatus(users);
-        dispatch(setUsers(filteredData || null));
-      }
-    }
-  }, [isSuccessGetAllUsers]);
+  const { isAdmin, usersSorting, allUsers, users, isGetAllUsersLoading } =
+    useGetAllUsers();
 
   if (!isAdmin) {
     return <Navigate to="/" />;

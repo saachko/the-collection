@@ -3,8 +3,6 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
-import { setCollectionCreated } from 'redux/slices/successNotificationSlice';
-
 import CollectionForm from 'components/CollectionForm/CollectionForm';
 import CustomFieldsForm from 'components/CustomFieldsForm/CustomFieldsForm';
 import Loader from 'components/Loader/Loader';
@@ -21,18 +19,20 @@ function CollectionFormPage() {
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const currentUser = selectedUser || user;
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
-  const selectedCollection = useAppSelector(
-    (state) => state.collection.selectedCollection
-  );
   const [isErrorShown, setErrorShown] = useState(false);
 
-  const { customFields, setCustomFields, submitUpdate, isLoadingUpdate, startFieldsIds } =
-    useUpdateCollection(setErrorShown, selectedCollection);
+  const {
+    customFields,
+    setCustomFields,
+    submitUpdate,
+    isLoadingUpdate,
+    startFieldsIds,
+    selectedCollection,
+  } = useUpdateCollection(setErrorShown);
 
   const { submitCreation, isLoadingCreation } = useCreateCollection(
     currentUser,
     setErrorShown,
-    setCollectionCreated,
     customFields
   );
 

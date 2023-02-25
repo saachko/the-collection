@@ -1,7 +1,6 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
 import { setCollections } from 'redux/slices/collectionSlice';
 
 import CollectionCardsContainer from 'components/CollectionCardsContainer/CollectionCardsContainer';
@@ -11,49 +10,16 @@ import Loader from 'components/Loader/Loader';
 import SortToolbar from 'components/SortToolbar/SortToolbar';
 
 import { defaultSortButtons, sortByItemsQuantityButtons } from 'utils/constants';
-import { sortData } from 'utils/functions';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
-
-import { Collection } from 'ts/interfaces';
+import useGetAllCollections from 'hooks/useGetAllCollections';
+import { useAppSelector } from 'hooks/useRedux';
 
 function CollectionsPage() {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const collections = useAppSelector((state) => state.collection.collections);
-  const collectionsSorting = useAppSelector((state) => state.sort.collectionsSorting);
-  const theme = useAppSelector((state) => state.filter.collectionsThemeFilter);
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
-  const dispatch = useAppDispatch();
-
-  const [
-    getAllCollections,
-    {
-      data: allCollections,
-      isSuccess: isSuccessGetCollections,
-      isLoading: isGetCollectionsLoading,
-    },
-  ] = useLazyGetAllCollectionsQuery();
-
-  useEffect(() => {
-    (async () => {
-      await getAllCollections();
-    })();
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    if (allCollections && isSuccessGetCollections) {
-      const sortedData = sortData(
-        collectionsSorting,
-        null,
-        allCollections
-      ) as Collection[];
-      dispatch(setCollections(sortedData));
-      if (theme) {
-        const filteredData = sortedData.filter((element) => element.theme === theme);
-        dispatch(setCollections(filteredData || null));
-      }
-    }
-  }, [isSuccessGetCollections]);
+  const { allCollections, theme, isGetCollectionsLoading, collectionsSorting } =
+    useGetAllCollections();
 
   return (
     <div className="content">

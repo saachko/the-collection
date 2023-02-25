@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import CollectionInfo from 'components/CollectionInfo/CollectionInfo';
+import ItemsTable from 'components/ItemsTable/ItemsTable';
+import Loader from 'components/Loader/Loader';
 
 import useGetCollectionFromLocation from 'hooks/useGetCollectionFromLocation';
+import useGetItemsInCollection from 'hooks/useGetItemsInCollection';
+import { useAppSelector } from 'hooks/useRedux';
 
 function CollectionPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const navigate = useNavigate();
   useGetCollectionFromLocation();
+  const selectedCollectionId = useAppSelector(
+    (state) => state.collection.selectedCollection?._id
+  );
+  const { items, isLoadingItems } = useGetItemsInCollection(selectedCollectionId);
 
   return (
     <div className="content">
@@ -17,8 +25,10 @@ function CollectionPage() {
         {t('return')}
       </NavLink>
       <CollectionInfo />
+      <ItemsTable items={items} />
+      {isLoadingItems && <Loader />}
     </div>
   );
 }
 
-export default CollectionPage;
+export default memo(CollectionPage);

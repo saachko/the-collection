@@ -1,9 +1,9 @@
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit/dist/createAction';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 
 import { useCreateCollectionMutation } from 'redux/api/collectionApiSlice';
 import { useCreateCustomFieldMutation } from 'redux/api/customFieldApiSlice';
+import { setCollectionCreated } from 'redux/slices/successNotificationSlice';
 
 import { createCollectionImage } from 'utils/functions';
 
@@ -21,10 +21,6 @@ import { useAppDispatch } from './useRedux';
 const useCreateCollection = (
   currentUser: User | null,
   setCreationErrorShown: SetState<boolean>,
-  setCreationSuccessShown: ActionCreatorWithPayload<
-    boolean,
-    'successNotification/setCollectionCreated'
-  >,
   customFields: CustomFieldFormValuesWithId[]
 ) => {
   const dispatch = useAppDispatch();
@@ -83,14 +79,14 @@ const useCreateCollection = (
           await createCustomField(newField);
         });
       } else {
-        dispatch(setCreationSuccessShown(true));
+        dispatch(setCollectionCreated(true));
       }
     }
   }, [isSuccessCollectionCreation]);
 
   useEffect(() => {
     if (isSuccessFieldCreation) {
-      dispatch(setCreationSuccessShown(true));
+      dispatch(setCollectionCreated(true));
     }
   }, [isSuccessFieldCreation]);
 

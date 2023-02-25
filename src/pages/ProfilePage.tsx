@@ -1,9 +1,8 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-import { useLazyGetCollectionsByUserIdQuery } from 'redux/api/collectionApiSlice';
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import {
   setCollectionsByUser,
@@ -26,6 +25,7 @@ import SortToolbar from 'components/SortToolbar/SortToolbar';
 
 import { defaultSortButtons, sortByItemsQuantityButtons } from 'utils/constants';
 
+import useCollectionsByUser from 'hooks/useGetCollectionsByUser';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import UserInfo from '../components/UserInfo/UserInfo';
@@ -34,48 +34,21 @@ function ProfilePage() {
   const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const user = useAppSelector((state) => state.user.user);
   const collectionsByUser = useAppSelector((state) => state.collection.collectionsByUser);
-  const { t } = useTranslation('translation');
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const theme = useAppSelector((state) => state.filter.collectionsByUserThemeFilter);
   const collectionsSorting = useAppSelector(
     (state) => state.sort.collectionsByUserSorting
   );
+  const { t } = useTranslation('translation');
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const [
-    getCollectionsByUser,
-    {
-      data: collections,
-      isSuccess: isSuccessGetCollections,
-      isLoading: isGetCollectionsLoading,
-    },
-  ] = useLazyGetCollectionsByUserIdQuery();
-
-  useEffect(() => {
-    (async () => {
-      if (user) await getCollectionsByUser(user._id);
-    })();
-  }, [user]);
-
-  useEffect(() => {
-    if (collections && isSuccessGetCollections) {
-      dispatch(setCollectionsByUser(collections));
-    }
-  }, [isSuccessGetCollections]);
+  const { collections, isGetCollectionsLoading } = useCollectionsByUser(user);
 
   const navigateToNewCollectionPage = () => {
     dispatch(setSelectedUser(null));
     dispatch(setSelectedCollection(null));
     navigate('/new-collection');
   };
-
-  useEffect(
-    () => () => {
-      dispatch(setDefaultCollectionsByUserFilters());
-      dispatch(setDefaultCollectionsByUserSorting());
-    },
-    []
-  );
 
   if (!isLoggedIn) {
     return <Navigate to="/" />;

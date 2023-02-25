@@ -81,7 +81,7 @@
         "createdAt": "Registration date & time",
         "admin": "administrator",
         "blocked": "blocked",
-        "return": "Return to the users' table",
+        "return": "Return to the users table",
         "collections": "User's collections"
       },
       "sort": {

@@ -15,6 +15,7 @@ import apiSlice from './api/apiSlice';
 import adminReducer from './slices/adminSlice';
 import collectionReducer from './slices/collectionSlice';
 import filterReducer from './slices/filterSlice';
+import itemReducer from './slices/itemSlice';
 import authModalReducer from './slices/modalAuthSlice';
 import sortReducer from './slices/sortSlice';
 import successNotificationReducer from './slices/successNotificationSlice';
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   user: persistReducer(userConfig, userReducer),
   admin: adminReducer,
   collection: collectionReducer,
+  item: itemReducer,
   successNotification: successNotificationReducer,
 
   [apiSlice.reducerPath]: apiSlice.reducer,

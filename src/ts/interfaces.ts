@@ -109,11 +109,13 @@ interface CustomField extends DatabaseModel, CustomFieldRequestBody {}
 interface CustomFieldInItem {
   customFieldId: string;
   label: string;
+  type: string;
   value: string;
 }
 
 interface ItemFormValues {
   itemName: string;
+  itemImage: string;
   customFields: CustomFieldInItem[];
 }
 
@@ -140,6 +142,7 @@ interface CommentRequestBody {
   itemId: string;
   authorId: string;
   authorName: string;
+  authorAvatar: string;
   text: string;
 }
 
