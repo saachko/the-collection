@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
-const NewCollectionPage = lazy(() => import('pages/CollectionFormPage'));
+const NewCollectionPage = lazy(() => import('pages/NewCollectionPage'));
 const EditCollectionPage = lazy(() => import('pages/EditCollectionPage'));
 const CollectionPage = lazy(() => import('pages/CollectionPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage'));

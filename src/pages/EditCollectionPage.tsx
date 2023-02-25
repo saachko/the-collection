@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import CollectionEditForm from 'components/CollectionEditForm/CollectionEditForm';
 import Loader from 'components/Loader/Loader';
 
 import { useAppSelector } from 'hooks/useRedux';
-
-import CollectionFormPage from './CollectionFormPage';
 
 function EditCollectionPage() {
   const [isCollectionDataLoading, setCollectionDataLoading] = useState(true);
@@ -29,10 +28,10 @@ function EditCollectionPage() {
   }, [selectedCollection, user]);
 
   return (
-    <>
+    <div className="content">
       {isCollectionDataLoading && <Loader />}
-      <CollectionFormPage />
-    </>
+      <CollectionEditForm />
+    </div>
   );
 }
 

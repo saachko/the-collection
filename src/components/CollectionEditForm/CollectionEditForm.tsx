@@ -1,10 +1,8 @@
 import React, { memo, useState } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-import CollectionForm from 'components/CollectionForm/CollectionForm';
-import CustomFieldsForm from 'components/CustomFieldsForm/CustomFieldsForm';
 import Loader from 'components/Loader/Loader';
 import Notification from 'components/Notification/Notification';
 
@@ -12,13 +10,15 @@ import useCreateCollection from 'hooks/useCreateCollection';
 import { useAppSelector } from 'hooks/useRedux';
 import useUpdateCollection from 'hooks/useUpdateCollection';
 
-function CollectionFormPage() {
+import CollectionForm from './CollectionForm/CollectionForm';
+import CustomFieldsForm from './CustomFieldsForm/CustomFieldsForm';
+
+function CollectionEditForm() {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.user.user);
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const currentUser = selectedUser || user;
-  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const [isErrorShown, setErrorShown] = useState(false);
 
   const {
@@ -44,12 +44,8 @@ function CollectionFormPage() {
     }
     return submitCreation;
   };
-
-  if (!isLoggedIn) {
-    return <Navigate to="/" />;
-  }
   return (
-    <div className="content">
+    <>
       {isLoading && <Loader />}
       <NavLink to="" className="link mb-2" onClick={() => navigate(-1)}>
         {t('return')}
@@ -88,8 +84,8 @@ function CollectionFormPage() {
         isShown={isErrorShown}
         variant="danger"
       />
-    </div>
+    </>
   );
 }
 
-export default memo(CollectionFormPage);
+export default memo(CollectionEditForm);
