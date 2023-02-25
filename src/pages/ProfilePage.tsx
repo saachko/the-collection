@@ -61,24 +61,26 @@ function ProfilePage() {
         <Button className="secondary-button mt-2" onClick={navigateToNewCollectionPage}>
           {t('profilePage.newCollection')}
         </Button>
-        <div className="d-flex justify-content-end align-items-center gap-3 mb-1 mt-1 flex-md-row flex-column">
-          <ThemeFilter
-            allCollections={collections || null}
-            filteringList={collectionsByUser}
-            setList={setCollectionsByUser}
-            setThemeFilter={setCollectionsByUserThemeFilter}
-            setDefaultFilters={setDefaultCollectionsByUserFilters}
-            setDefaultSorting={setDefaultCollectionsByUserSorting}
-            theme={theme}
-          />
-          <SortToolbar
-            sortingCollectionsList={collectionsByUser}
-            sortingType={collectionsSorting}
-            sortButtons={[...sortByItemsQuantityButtons, ...defaultSortButtons]}
-            setCollectionsList={setCollectionsByUser}
-            setCollectionsSorting={setCollectionsByUserSortingType}
-          />
-        </div>
+        {collections && collections.length > 0 && (
+          <div className="d-flex justify-content-end align-items-center gap-3 mb-1 mt-1 flex-md-row flex-column">
+            <ThemeFilter
+              allCollections={collections || null}
+              filteringList={collectionsByUser}
+              setList={setCollectionsByUser}
+              setThemeFilter={setCollectionsByUserThemeFilter}
+              setDefaultFilters={setDefaultCollectionsByUserFilters}
+              setDefaultSorting={setDefaultCollectionsByUserSorting}
+              theme={theme}
+            />
+            <SortToolbar
+              sortingCollectionsList={collectionsByUser}
+              sortingType={collectionsSorting}
+              sortButtons={[...sortByItemsQuantityButtons, ...defaultSortButtons]}
+              setCollectionsList={setCollectionsByUser}
+              setCollectionsSorting={setCollectionsByUserSortingType}
+            />
+          </div>
+        )}
       </div>
       {collections && collections.length > 0 ? (
         <>

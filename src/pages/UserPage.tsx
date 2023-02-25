@@ -73,24 +73,26 @@ function UserPage() {
         <Button className="secondary-button mt-2" onClick={navigateToNewCollectionPage}>
           {t('profilePage.newCollection')}
         </Button>
-        <div className="d-flex justify-content-end align-items-center gap-3 mb-1 mt-1 flex-md-row flex-column">
-          <ThemeFilter
-            allCollections={collections || null}
-            filteringList={collectionsBySelectedUser}
-            setList={setCollectionsBySelectedUser}
-            setThemeFilter={setCollectionsBySelectedUserThemeFilter}
-            setDefaultFilters={setDefaultCollectionsBySelectedUserFilters}
-            setDefaultSorting={setDefaultCollectionsBySelectedUserSorting}
-            theme={theme}
-          />
-          <SortToolbar
-            sortingCollectionsList={collectionsBySelectedUser}
-            sortingType={collectionsSorting}
-            sortButtons={[...sortByItemsQuantityButtons, ...defaultSortButtons]}
-            setCollectionsList={setCollectionsBySelectedUser}
-            setCollectionsSorting={setCollectionsBySelectedUserSortingType}
-          />
-        </div>
+        {collections && collections.length > 0 && (
+          <div className="d-flex justify-content-end align-items-center gap-3 mb-1 mt-1 flex-md-row flex-column">
+            <ThemeFilter
+              allCollections={collections || null}
+              filteringList={collectionsBySelectedUser}
+              setList={setCollectionsBySelectedUser}
+              setThemeFilter={setCollectionsBySelectedUserThemeFilter}
+              setDefaultFilters={setDefaultCollectionsBySelectedUserFilters}
+              setDefaultSorting={setDefaultCollectionsBySelectedUserSorting}
+              theme={theme}
+            />
+            <SortToolbar
+              sortingCollectionsList={collectionsBySelectedUser}
+              sortingType={collectionsSorting}
+              sortButtons={[...sortByItemsQuantityButtons, ...defaultSortButtons]}
+              setCollectionsList={setCollectionsBySelectedUser}
+              setCollectionsSorting={setCollectionsBySelectedUserSortingType}
+            />
+          </div>
+        )}
       </div>
       {collections && collections.length > 0 ? (
         <>
