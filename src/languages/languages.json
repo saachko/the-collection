@@ -168,8 +168,10 @@
         "#": "#",
         "image": "Image",
         "name": "Item name",
-        "date": "Creation date",
-        "likes": "Likes"
+        "date": "Creation date & time",
+        "likes": "Likes",
+        "empty": "There're no items yet",
+        "newItem": "New item"
       }
     }
   },
@@ -342,8 +344,10 @@
         "#": "#",
         "image": "Изображение",
         "name": "Название",
-        "date": "Дата создания",
-        "likes": "Лайки"
+        "date": "Дата и время создания",
+        "likes": "Лайки",
+        "empty": "В коллекции пока ничего нет",
+        "newItem": "Новый элемент"
       }
     }
   }

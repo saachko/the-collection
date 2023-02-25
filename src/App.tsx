@@ -17,6 +17,7 @@ const CollectionsPage = lazy(() => import('pages/CollectionsPage'));
 const NewCollectionPage = lazy(() => import('pages/NewCollectionPage'));
 const EditCollectionPage = lazy(() => import('pages/EditCollectionPage'));
 const CollectionPage = lazy(() => import('pages/CollectionPage'));
+const NewItemPage = lazy(() => import('pages/NewItemPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage'));
 const UsersPage = lazy(() => import('pages/UsersPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
@@ -50,6 +51,7 @@ function App() {
               path="collections/:collectionId/edit"
               element={<EditCollectionPage />}
             />
+            <Route path="new-item" element={<NewItemPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="users/:userId" element={<UserPage />} />
