@@ -1,1 +1,53 @@
 @import '../../styles/variables.scss';
+
+.table {
+  color: var(--text-color);
+
+  th {
+    color: var(--title-color);
+  }
+
+  th {
+    vertical-align: top;
+  }
+
+  tbody {
+    tr {
+      height: 100px;
+      cursor: pointer;
+      transition: $transition;
+
+      &:hover,
+      &:active {
+        background-color: var(--background-secondary-color);
+
+        p {
+          color: var(--background-secondary-color);
+        }
+      }
+
+      td {
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.likes {
+  svg {
+    margin: -3px 0 0 5px;
+    color: var(--likes-color);
+  }
+}
+
+.image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-top: -17px;
+}
+
+.imagePlaceholder {
+  transition: color 0.2s linear;
+  color: var(--background-primary-color);
+}

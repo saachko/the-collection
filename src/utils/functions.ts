@@ -37,7 +37,7 @@ const createCollectionImage = (title: string | undefined, ownerId: string | unde
 const formatDate = (stringDate: string) => {
   const timestamp = Date.parse(stringDate);
   const date = new Date(timestamp);
-  return date.toLocaleString();
+  return date.toLocaleString('ru-RU');
 };
 
 const sortData = (

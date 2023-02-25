@@ -164,7 +164,12 @@
         "createdBy": "Created by ",
         "createdAt": "at",
         "collectionDeleteConfirm": "Are you sure you want to delete the collection?",
-        "error": "Unexpected error! Please try again later"
+        "error": "Unexpected error! Please try again later",
+        "#": "#",
+        "image": "Image",
+        "name": "Item name",
+        "date": "Creation date",
+        "likes": "Likes"
       }
     }
   },
@@ -333,7 +338,12 @@
         "createdBy": "Создал(а) ",
         "createdAt": "в",
         "collectionDeleteConfirm": "Вы уверены, что хотите удалить коллекцию?",
-        "error": "Ошибка! Пожалуйста, повторите попытку позже"
+        "error": "Ошибка! Пожалуйста, повторите попытку позже",
+        "#": "#",
+        "image": "Изображение",
+        "name": "Название",
+        "date": "Дата создания",
+        "likes": "Лайки"
       }
     }
   }
