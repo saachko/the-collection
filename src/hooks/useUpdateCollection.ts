@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 import { useUpdateCollectionByIdMutation } from 'redux/api/collectionApiSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
@@ -17,7 +16,6 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 import useUpdateCustomFields from './useUpdateCustomFields';
 
 const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
@@ -25,14 +23,6 @@ const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
   const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
   const { fieldsInCollection, isLoadingFields, startFieldsIds } =
     useCustomFieldsInCollection(selectedCollection?._id, setCustomFields);
-
-  const {
-    deleteUnnecessaryFields,
-    createNewCustomFields,
-    updateFields,
-    isLoadingCustomFieldUpdate,
-    isErrorCustomField,
-  } = useUpdateCustomFields(fieldsInCollection, customFields, selectedCollection);
 
   const [
     updateCollectionById,
@@ -60,13 +50,16 @@ const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
     }
   };
 
+  const { isLoadingCustomFieldUpdate, isErrorCustomField } = useUpdateCustomFields(
+    fieldsInCollection,
+    customFields,
+    selectedCollection,
+    updatedCollection
+  );
+
   useEffect(() => {
     if (updatedCollection && isSuccessCollectionUpdate) {
-      deleteUnnecessaryFields();
-      createNewCustomFields();
-      updateFields();
       dispatch(setSelectedCollection(updatedCollection));
-      navigate(-1);
     }
   }, [updatedCollection]);
 
