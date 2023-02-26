@@ -1,12 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Button, ButtonToolbar, Form } from 'react-bootstrap';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
-
-import { useCreateItemMutation } from 'redux/api/itemApiSlice';
-import { setItemCreated } from 'redux/slices/successNotificationSlice';
 
 import DragAndDropFileUploader from 'components/DragAndDropFileUploader/DragAndDropFileUploader';
 import Loader from 'components/Loader/Loader';
@@ -14,10 +11,11 @@ import Notification from 'components/Notification/Notification';
 
 import { createImage } from 'utils/functions';
 
-import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import useCreateItem from 'hooks/useCreateItem';
+import { useAppSelector } from 'hooks/useRedux';
 import useUpdateImage from 'hooks/useUpdateImage';
 
-import { CustomFieldInItem, ItemFormValues, ItemRequestBody } from 'ts/interfaces';
+import { ItemFormValues } from 'ts/interfaces';
 
 import CustomFieldsForm from './CustomFieldsForm/CustomFieldsForm';
 import styles from './ItemEditForm.module.scss';
@@ -26,14 +24,13 @@ import ValidationError from './ValidationError';
 function ItemEditForm() {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
-  const { customFieldsInItem, customFieldsValues, selectedItem } = useAppSelector(
-    (state) => state.item
-  );
+  const selectedItem = useAppSelector((state) => state.item.selectedItem);
   const [isErrorShown, setErrorShown] = useState(false);
+
+  const { submitForm, isLoadingItemCreation } = useCreateItem(setErrorShown);
 
   const defaultFormValues: ItemFormValues = {
     itemName: selectedItem?.itemName || '',
@@ -79,60 +76,6 @@ function ItemEditForm() {
       setValue('itemImage', '');
     }
   }, [isDefaultImage]);
-
-  const getItemCustomFields = () => {
-    if (customFieldsInItem && customFieldsInItem.length > 0) {
-      const itemCustomFields: CustomFieldInItem[] = customFieldsInItem.map(
-        (field, index) => ({
-          customFieldId: field._id,
-          label: field.label,
-          type: field.type,
-          value: customFieldsValues[index],
-        })
-      );
-      return itemCustomFields;
-    }
-    return [];
-  };
-
-  const [
-    createItem,
-    {
-      // DATA MAY BE NEEDED FOR TAGS CREATION
-      // data: newItem,
-      isLoading: isLoadingItemCreation,
-      isSuccess: isSuccessItemCreation,
-      isError: isErrorItemCreation,
-    },
-  ] = useCreateItemMutation();
-
-  useEffect(() => {
-    if (isSuccessItemCreation) {
-      dispatch(setItemCreated(true));
-    }
-  }, [isSuccessItemCreation]);
-
-  useEffect(() => {
-    if (isErrorItemCreation) {
-      setErrorShown(true);
-    }
-  }, [isErrorItemCreation]);
-
-  const submitForm: SubmitHandler<ItemFormValues> = async ({ ...formValues }) => {
-    if (selectedCollection) {
-      const newItemParams: ItemRequestBody = {
-        collectionId: selectedCollection._id,
-        collectionName: selectedCollection.title,
-        collectionTheme: selectedCollection.theme,
-        ownerId: selectedCollection.ownerId,
-        ownerName: selectedCollection.ownerName,
-        itemName: formValues.itemName,
-        itemImage: formValues.itemImage || createImage('marble', v4(), v4()),
-        customFields: getItemCustomFields(),
-      };
-      await createItem(newItemParams);
-    }
-  };
 
   return (
     <>

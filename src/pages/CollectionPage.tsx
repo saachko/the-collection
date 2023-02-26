@@ -40,7 +40,7 @@ function CollectionPage() {
         )}
       </div>
       {items && items.length > 0 ? (
-        <ItemsTable items={items} />
+        <ItemsTable items={items} collectionId={selectedCollection?._id} />
       ) : (
         <EmptyContainer title={t('empty')} text="" />
       )}

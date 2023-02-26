@@ -10,20 +10,21 @@ import { v4 } from 'uuid';
 import { defaultInputTypes } from 'utils/constants';
 import { formatDate } from 'utils/functions';
 
+import useCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
+
 import { Item } from 'ts/interfaces';
 
 import styles from './ItemsTable.module.scss';
 
 interface ItemsTableProps {
+  collectionId: string | undefined;
   items: Item[] | null;
 }
 
-function ItemsTable({ items }: ItemsTableProps) {
+function ItemsTable({ collectionId, items }: ItemsTableProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const defaultItemsTableHeadings = ['#', 'image', 'name', 'date'];
-  const itemsTableHeadings = items
-    ? items[0].customFields.map((field) => field.label)
-    : [];
+  const { fieldsInCollection } = useCustomFieldsInCollection(collectionId);
 
   return (
     <div>
@@ -36,9 +37,8 @@ function ItemsTable({ items }: ItemsTableProps) {
             <th className={styles.likes}>
               {t('likes')} <FaHeart />
             </th>
-            {itemsTableHeadings.map((heading) => (
-              <th key={v4()}>{heading}</th>
-            ))}
+            {fieldsInCollection &&
+              fieldsInCollection.map((field) => <th key={v4()}>{field.label}</th>)}
           </tr>
         </thead>
         <tbody>
