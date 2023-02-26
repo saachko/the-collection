@@ -193,7 +193,12 @@
         "yes": "Yes",
         "no": "No",
         "creationSuccess": "New item is created successfully",
-        "error": "Unexpected error! Please try again later"
+        "error": "Unexpected error! Please try again later",
+        "number": "number",
+        "string": "string",
+        "text": "markdown-enabled text",
+        "date": "date",
+        "checkbox": "boolean"
       }
     }
   },
@@ -391,7 +396,12 @@
         "yes": "Да",
         "no": "Нет",
         "creationSuccess": "Новый элемент коллекции успешно создан",
-        "error": "Ошибка! Пожалуйста, повторите попытку позже"
+        "error": "Ошибка! Пожалуйста, повторите попытку позже",
+        "number": "число",
+        "string": "строка",
+        "text": "текст с поддержкой markdown",
+        "date": "дата",
+        "checkbox": "логическое значение"
       }
     }
   }

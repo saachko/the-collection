@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
+import { setCollectionsThemeFilter } from 'redux/slices/filterSlice';
 
 import { formatDate } from 'utils/functions';
 
@@ -32,6 +33,11 @@ function CollectionCard({ collection }: CollectionCardProps) {
     )} ${formattedDate.slice(12)}`;
   };
 
+  const clickOnTheme = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    dispatch(setCollectionsThemeFilter(collection.theme));
+  };
+
   return (
     <Card
       className={styles.card}
@@ -52,9 +58,14 @@ function CollectionCard({ collection }: CollectionCardProps) {
       <Card.Body className="d-flex flex-column justify-content-between align-items-start gap-3">
         <div>
           <Card.Title className="mb-0">{collection.title}</Card.Title>
-          <Card.Text className={styles.theme}>
+          <Card.Link
+            className={styles.theme}
+            onClick={(event: React.MouseEvent<HTMLElement>) => {
+              clickOnTheme(event);
+            }}
+          >
             {t(`collections.${collection.theme}`)}
-          </Card.Text>
+          </Card.Link>
         </div>
         <Card.Text className={styles.quantity}>
           <em>

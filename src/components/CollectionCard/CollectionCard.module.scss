@@ -41,6 +41,16 @@
   padding: 0px 5px;
   border-radius: 3px;
   font-size: $fontSizeSmall;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: $transition;
+
+  &:hover {
+    color: var(--text-color);
+    transform: scale(1.1);
+    opacity: $hoverOpacity;
+    box-shadow: $hoverShadow;
+  }
 }
 
 .quantity {

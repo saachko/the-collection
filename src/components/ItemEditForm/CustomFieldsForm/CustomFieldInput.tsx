@@ -30,7 +30,9 @@ function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps)
 
   return (
     <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
-      <Form.Label>{field.label}</Form.Label>
+      <Form.Label>
+        {field.label} ({t(field.type)})
+      </Form.Label>
       {defaultInputTypes.includes(field.type) && (
         <Form.Control
           type={field.type}
