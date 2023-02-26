@@ -220,6 +220,8 @@ const customFieldsTypes: CustomFieldTypes[] = [
   'checkbox',
 ];
 
+const defaultInputTypes = ['string', 'number', 'date'];
+
 export {
   navLinks,
   privateLink,
@@ -236,4 +238,5 @@ export {
   customFieldsTypes,
   burgerMenuLinks,
   burgerMenuLinksLoggedIn,
+  defaultInputTypes,
 };

@@ -1,10 +1,13 @@
+import MDEditor from '@uiw/react-md-editor';
 import clsx from 'clsx';
 import React, { memo } from 'react';
 import { Image, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaHeart } from 'react-icons/fa';
+import { MdClose, MdDone } from 'react-icons/md';
 import { v4 } from 'uuid';
 
+import { defaultInputTypes } from 'utils/constants';
 import { formatDate } from 'utils/functions';
 
 import { Item } from 'ts/interfaces';
@@ -56,7 +59,20 @@ function ItemsTable({ items }: ItemsTableProps) {
               <td>{formatDate(item.createdAt)}</td>
               <td>{item.likes.length}</td>
               {item.customFields.map((field) => (
-                <td key={field.customFieldId}>{field.value}</td>
+                <td key={field.customFieldId}>
+                  {defaultInputTypes.includes(field.type) && `${field.value}`}
+                  {field.type === 'text' && (
+                    <MDEditor.Markdown source={field.value} className={styles.textarea} />
+                  )}
+                  {field.type === 'checkbox' &&
+                    (field.value === 'true' ? (
+                      <div className={styles.checkboxTrue}>
+                        <MdDone />
+                      </div>
+                    ) : (
+                      <MdClose />
+                    ))}
+                </td>
               ))}
             </tr>
           ))}

@@ -21,8 +21,13 @@
       &:active {
         background-color: var(--background-secondary-color);
 
-        p {
+        .imagePlaceholder {
           color: var(--background-secondary-color);
+        }
+
+        .textarea {
+          transition: $transition;
+          background-color: var(--background-secondary-color);
         }
       }
 
@@ -30,6 +35,17 @@
         vertical-align: middle;
       }
     }
+  }
+}
+
+.textarea {
+  transition: $transition;
+  background-color: var(--background-primary-color);
+}
+
+.checkboxTrue {
+  svg {
+    color: var(--primary-color);
   }
 }
 

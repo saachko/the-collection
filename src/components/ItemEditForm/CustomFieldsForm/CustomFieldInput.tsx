@@ -6,6 +6,8 @@ import { setCustomFieldsValues } from 'redux/slices/itemSlice';
 
 import MarkdownTextarea from 'components/MarkdownTextarea/MarkdownTextarea';
 
+import { defaultInputTypes } from 'utils/constants';
+
 import { useAppDispatch } from 'hooks/useRedux';
 
 import { CustomField } from 'ts/interfaces';
@@ -18,7 +20,6 @@ interface CustomFieldProps {
 
 function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
-  const inputTypes = ['string', 'number', 'date'];
   const dispatch = useAppDispatch();
 
   const setFieldValue = (newValue: string) => {
@@ -30,7 +31,7 @@ function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps)
   return (
     <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
       <Form.Label>{field.label}</Form.Label>
-      {inputTypes.includes(field.type) && (
+      {defaultInputTypes.includes(field.type) && (
         <Form.Control
           type={field.type}
           onChange={({ target }) => {
