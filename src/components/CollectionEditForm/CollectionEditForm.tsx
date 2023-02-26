@@ -67,15 +67,15 @@ function CollectionEditForm() {
             navigate(-1);
           }}
         >
-          {t('cancelCreation')}
+          {t('cancel')}
         </Button>
         <Button
           className="primary-button"
           type="submit"
           form="collectionForm"
-          disabled={isLoadingCreation}
+          disabled={isLoading}
         >
-          {t('confirmCreation')}
+          {t('confirm')}
         </Button>
       </ButtonToolbar>
       <Notification

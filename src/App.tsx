@@ -1,7 +1,10 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { setCollectionCreated } from 'redux/slices/successNotificationSlice';
+import {
+  setCollectionCreated,
+  setItemCreated,
+} from 'redux/slices/successNotificationSlice';
 
 import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
@@ -25,16 +28,16 @@ const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
   const isModalAuthShown = useAppSelector((state) => state.authModal.isShown);
-  const isCollectionCreated = useAppSelector(
-    (state) => state.successNotification.isCollectionCreated
+  const { isCollectionCreated, isItemCreated } = useAppSelector(
+    (state) => state.successNotification
   );
   const { isGetUserLoading } = useCheckUserOnAppStart();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isCollectionCreated) navigate(-1);
-  }, [isCollectionCreated]);
+    if (isCollectionCreated || isItemCreated) navigate(-1);
+  }, [isCollectionCreated, isItemCreated]);
 
   return (
     <>
@@ -51,7 +54,7 @@ function App() {
               path="collections/:collectionId/edit"
               element={<EditCollectionPage />}
             />
-            <Route path="new-item" element={<NewItemPage />} />
+            <Route path="collections/:collectionId/new-item" element={<NewItemPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="users/:userId" element={<UserPage />} />
@@ -62,6 +65,12 @@ function App() {
           message="collections.creationSuccess"
           closeNotification={() => dispatch(setCollectionCreated(false))}
           isShown={isCollectionCreated}
+          variant="primary"
+        />
+        <Notification
+          message="items.creationSuccess"
+          closeNotification={() => dispatch(setItemCreated(false))}
+          isShown={isItemCreated}
           variant="primary"
         />
       </Suspense>

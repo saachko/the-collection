@@ -48,10 +48,10 @@ const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
     if (selectedCollection) {
       const updatedCollectionBody: Collection = {
         ...selectedCollection,
-        title: formValues.title || '*(No description provided)*',
+        title: formValues.title,
         theme: formValues.theme || 'other',
         image: formValues.image || selectedCollection.image,
-        description: formValues.description,
+        description: formValues.description || '*(No description provided)*',
       };
       await updateCollectionById({
         collectionId: selectedCollection._id,

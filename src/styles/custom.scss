@@ -107,6 +107,7 @@ html[data-theme='dark'] {
 
 .form-check-label {
   color: var(--text-color);
+  cursor: pointer;
 }
 
 .form-check-input:checked {
@@ -118,6 +119,7 @@ html[data-theme='dark'] {
 .form-check-input:active,
 .form-check-input:focus {
   border-color: var(--primary-color);
+  cursor: pointer;
 }
 
 .form-check-input:focus {

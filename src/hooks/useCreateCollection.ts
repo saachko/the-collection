@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
+import { v4 } from 'uuid';
 
 import { useCreateCollectionMutation } from 'redux/api/collectionApiSlice';
 import { useCreateCustomFieldMutation } from 'redux/api/customFieldApiSlice';
 import { setCollectionCreated } from 'redux/slices/successNotificationSlice';
 
-import { createCollectionImage } from 'utils/functions';
+import { createImage } from 'utils/functions';
 
 import {
   CollectionFormValues,
@@ -56,8 +57,7 @@ const useCreateCollection = (
       title: formValues.title,
       description: formValues.description || '*(No description provided)*',
       theme: formValues.theme || 'other',
-      image:
-        formValues.image || createCollectionImage(formValues.title, currentUser?._id),
+      image: formValues.image || createImage('marble', v4(), currentUser?._id),
       ownerId: currentUser?._id,
       ownerName: currentUser?.username,
     };

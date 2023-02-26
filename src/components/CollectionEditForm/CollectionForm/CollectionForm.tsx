@@ -10,7 +10,7 @@ import Loader from 'components/Loader/Loader';
 import MarkdownTextarea from 'components/MarkdownTextarea/MarkdownTextarea';
 
 import { collectionThemes, selectStyles } from 'utils/constants';
-import { createCollectionImage } from 'utils/functions';
+import { createImage } from 'utils/functions';
 
 import { useAppSelector } from 'hooks/useRedux';
 import useUpdateImage from 'hooks/useUpdateImage';
@@ -48,7 +48,6 @@ function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
   } = useForm<CollectionFormValues>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
@@ -84,7 +83,7 @@ function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
 
   useEffect(() => {
     if (isDefaultImage) {
-      setValue('image', createCollectionImage(getValues('title') || v4(), ownerId));
+      setValue('image', createImage('marble', v4(), ownerId));
     } else {
       setValue('image', '');
     }

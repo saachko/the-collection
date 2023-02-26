@@ -8,7 +8,7 @@ import Loader from 'components/Loader/Loader';
 import ValidationError from 'components/ModalAuth/ValidationError';
 
 import { emailValidation, userAvatarBaseUrl } from 'utils/constants';
-import { createUserAvatar } from 'utils/functions';
+import { createImage } from 'utils/functions';
 
 import useUpdateImage from 'hooks/useUpdateImage';
 import useUpdateUser from 'hooks/useUpdateUser';
@@ -75,7 +75,7 @@ function UpdateUserForm({
 
   useEffect(() => {
     if (isDefaultAvatar) {
-      setValue('avatar', createUserAvatar(user?.username, user?.email));
+      setValue('avatar', createImage('beam', user?.username, user?.email));
     } else {
       setValue('avatar', '');
     }

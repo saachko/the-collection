@@ -14,4 +14,6 @@ type SortTypes =
 
 type CustomFieldTypes = 'number' | 'string' | 'text' | 'date' | 'checkbox' | '';
 
-export type { SetState, Themes, AuthModal, SortTypes, CustomFieldTypes };
+type ImageType = 'beam' | 'marble';
+
+export type { SetState, Themes, AuthModal, SortTypes, CustomFieldTypes, ImageType };

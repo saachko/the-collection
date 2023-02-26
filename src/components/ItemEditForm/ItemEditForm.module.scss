@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.itemFieldsContainer {
+  width: 40%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.customFieldsContainer {
+  width: 55%;
+}
+
+.note {
+  color: var(--text-color-light);
+  font-size: $fontSizeExtraSmall;
+  font-style: italic;
+}

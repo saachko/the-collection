@@ -14,10 +14,9 @@ interface ValidationErrorProps {
 
 function ValidationError({ errors, field }: ValidationErrorProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collections' });
-  const language = localStorage.getItem('i18nextLng');
 
   return (
-    <Form.Control.Feedback type="invalid" id={`${field}${language}`}>
+    <Form.Control.Feedback type="invalid">
       {errors[field]?.type === 'required' && `${t('required', { value: t(field) })}`}
       {errors[field]?.type === 'maxLength' &&
         `${t('maxLength', { value: t(field), count: field === 'title' ? 50 : 1000 })}`}

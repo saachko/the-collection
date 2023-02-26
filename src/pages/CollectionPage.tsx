@@ -31,7 +31,10 @@ function CollectionPage() {
       <CollectionInfo />
       <div className="d-flex justify-content-between align-items-center gap-3 mb-4 mt-2 flex-lg-row flex-column">
         {(isAdmin || userId === selectedCollection?.ownerId) && (
-          <Button className="secondary-button mt-2" onClick={() => navigate('/new-item')}>
+          <Button
+            className="secondary-button mt-2"
+            onClick={() => navigate(`/collections/${selectedCollection?._id}/new-item`)}
+          >
             {t('newItem')}
           </Button>
         )}

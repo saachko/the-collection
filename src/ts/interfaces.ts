@@ -116,15 +116,15 @@ interface CustomFieldInItem {
 interface ItemFormValues {
   itemName: string;
   itemImage: string;
-  customFields: CustomFieldInItem[];
 }
 
 interface ItemRequestBody extends ItemFormValues {
   collectionId: string;
   collectionName: string;
   collectionTheme: string;
-  ownerId: string;
-  ownerName: string;
+  ownerId: string | undefined;
+  ownerName: string | undefined;
+  customFields: CustomFieldInItem[];
 }
 
 interface Item extends DatabaseModel, ItemRequestBody {
@@ -172,6 +172,7 @@ export type {
   CustomFieldRequestBody,
   CustomFieldFormValues,
   CustomFieldFormValuesWithId,
+  CustomFieldInItem,
   Item,
   ItemRequestBody,
   ItemFormValues,

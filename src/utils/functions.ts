@@ -1,5 +1,5 @@
 import { Collection, ParsedToken, User } from 'ts/interfaces';
-import { SortTypes } from 'ts/types';
+import { ImageType, SortTypes } from 'ts/types';
 
 const parseJwt = (tokenToParse: string) => {
   const base64Url = tokenToParse.split('.')[1];
@@ -28,11 +28,12 @@ const checkToken = (userToken: string) => {
   }
 };
 
-const createUserAvatar = (username: string | undefined, email: string | undefined) =>
-  `https://source.boringavatars.com/beam/120/${username}%20${email}?colors=F97D58,CDDCEB,F9DBCF,33B99,5D70C5&square`;
-
-const createCollectionImage = (title: string | undefined, ownerId: string | undefined) =>
-  `https://source.boringavatars.com/marble/120/${title}%20${ownerId}?colors=F97D58,CDDCEB,F9DBCF,33B99,5D70C5&square`;
+const createImage = (
+  type: ImageType,
+  value1: string | undefined,
+  value2: string | undefined
+) =>
+  `https://source.boringavatars.com/${type}/120/${value1}%20${value2}?colors=F97D58,CDDCEB,F9DBCF,33B99,5D70C5&square`;
 
 const formatDate = (stringDate: string) => {
   const timestamp = Date.parse(stringDate);
@@ -100,8 +101,7 @@ const filterUsersByStatus = (filteringList: User[] | null) =>
 
 export {
   checkToken,
-  createUserAvatar,
-  createCollectionImage,
+  createImage,
   formatDate,
   sortData,
   filterUsersByRole,

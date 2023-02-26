@@ -53,7 +53,7 @@ function ItemsTable({ items }: ItemsTableProps) {
                 <p className={styles.imagePlaceholder}>itemImage</p>
               </td>
               <td>{item.itemName}</td>
-              <td>{formatDate(item.createdAt).slice(0, 10)}</td>
+              <td>{formatDate(item.createdAt)}</td>
               <td>{item.likes.length}</td>
               {item.customFields.map((field) => (
                 <td key={field.customFieldId}>{field.value}</td>

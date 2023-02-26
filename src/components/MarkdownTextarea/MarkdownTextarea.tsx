@@ -1,11 +1,9 @@
 import MDEditor from '@uiw/react-md-editor';
 import React, { memo } from 'react';
 
-import { SetState } from 'ts/types';
-
 interface MarkdownTextareaProps {
   value: string;
-  setValue: SetState<string>;
+  setValue: (value: string) => void;
 }
 
 function MarkdownTextarea({ value, setValue }: MarkdownTextareaProps) {

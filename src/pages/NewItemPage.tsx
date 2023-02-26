@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import ItemEditForm from 'components/ItemEditForm/ItemEditForm';
+
+import useGetCollectionFromLocation from 'hooks/useGetCollectionFromLocation';
+import { useAppSelector } from 'hooks/useRedux';
 
 function NewItemPage() {
-  return <div className="content">NewItemPage</div>;
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
+  useGetCollectionFromLocation();
+
+  if (!isLoggedIn) {
+    return <Navigate to="/" />;
+  }
+  return (
+    <div className="content">
+      <ItemEditForm />
+    </div>
+  );
 }
 
-export default NewItemPage;
+export default memo(NewItemPage);

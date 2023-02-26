@@ -4,13 +4,15 @@ import { CustomField, Item } from 'ts/interfaces';
 
 interface ItemState {
   itemsInCollection: Item[] | null;
-  customFieldsToItems: CustomField[] | null;
+  customFieldsInItem: CustomField[] | null;
+  customFieldsValues: string[];
   selectedItem: Item | null;
 }
 
 const initialState: ItemState = {
   itemsInCollection: null,
-  customFieldsToItems: null,
+  customFieldsInItem: null,
+  customFieldsValues: [],
   selectedItem: null,
 };
 
@@ -22,8 +24,12 @@ const itemSlice = createSlice({
       state.itemsInCollection = payload;
     },
 
-    setCustomFieldsToItems(state, { payload }: PayloadAction<CustomField[] | null>) {
-      state.customFieldsToItems = payload;
+    setCustomFieldsInItem(state, { payload }: PayloadAction<CustomField[] | null>) {
+      state.customFieldsInItem = payload;
+    },
+
+    setCustomFieldsValues(state, { payload }: PayloadAction<string[]>) {
+      state.customFieldsValues = payload;
     },
 
     setSelectedItem(state, { payload }: PayloadAction<Item | null>) {
@@ -32,6 +38,7 @@ const itemSlice = createSlice({
   },
 });
 
-export const { setItems, setCustomFieldsToItems, setSelectedItem } = itemSlice.actions;
+export const { setItems, setCustomFieldsInItem, setCustomFieldsValues, setSelectedItem } =
+  itemSlice.actions;
 
 export default itemSlice.reducer;

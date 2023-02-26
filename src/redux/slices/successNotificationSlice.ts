@@ -2,10 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface SuccessNotificationState {
   isCollectionCreated: boolean;
+  isItemCreated: boolean;
 }
 
 const initialState: SuccessNotificationState = {
   isCollectionCreated: false,
+  isItemCreated: false,
 };
 
 const successNotificationSlice = createSlice({
@@ -15,9 +17,13 @@ const successNotificationSlice = createSlice({
     setCollectionCreated(state, { payload }: PayloadAction<boolean>) {
       state.isCollectionCreated = payload;
     },
+
+    setItemCreated(state, { payload }: PayloadAction<boolean>) {
+      state.isItemCreated = payload;
+    },
   },
 });
 
-export const { setCollectionCreated } = successNotificationSlice.actions;
+export const { setCollectionCreated, setItemCreated } = successNotificationSlice.actions;
 
 export default successNotificationSlice.reducer;
