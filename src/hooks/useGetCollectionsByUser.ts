@@ -31,7 +31,7 @@ const useCollectionsByUser = (user: User | null) => {
     if (collections && isSuccessGetCollections) {
       dispatch(setCollectionsByUser(collections));
     }
-  }, [isSuccessGetCollections]);
+  }, [collections]);
 
   useEffect(
     () => () => {

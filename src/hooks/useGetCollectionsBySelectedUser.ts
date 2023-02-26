@@ -33,7 +33,7 @@ const useGetCollectionsBySelectedUser = (selectedUser: User | null) => {
     if (collections && isSuccessGetCollections) {
       dispatch(setCollectionsBySelectedUser(collections));
     }
-  }, [isSuccessGetCollections]);
+  }, [collections]);
 
   return { collections, isGetCollectionsLoading };
 };

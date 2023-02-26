@@ -30,7 +30,7 @@ const useGetUserFromLocation = (selectedUser: User | null) => {
     if (currentUser && isSuccessGetUser) {
       dispatch(setSelectedUser(currentUser));
     }
-  }, [isSuccessGetUser]);
+  }, [currentUser]);
 
   useEffect(() => {
     if (isErrorGetUser) {

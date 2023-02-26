@@ -68,7 +68,7 @@ const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
       dispatch(setSelectedCollection(updatedCollection));
       navigate(-1);
     }
-  }, [isSuccessCollectionUpdate]);
+  }, [updatedCollection]);
 
   useEffect(() => {
     if (isErrorCollectionUpdate || isErrorCustomField) {

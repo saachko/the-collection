@@ -43,7 +43,7 @@ const useGetAllCollections = () => {
         dispatch(setCollections(filteredData || null));
       }
     }
-  }, [isSuccessGetCollections]);
+  }, [allCollections]);
 
   return { allCollections, theme, isGetCollectionsLoading, collectionsSorting };
 };

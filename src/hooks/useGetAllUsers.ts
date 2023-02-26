@@ -37,7 +37,7 @@ const useGetAllUsers = () => {
         dispatch(setUsers(filteredData || null));
       }
     }
-  }, [isSuccessGetAllUsers]);
+  }, [allUsers]);
 
   return { isAdmin, usersSorting, allUsers, users, isGetAllUsersLoading };
 };

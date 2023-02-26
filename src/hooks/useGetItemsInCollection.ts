@@ -25,7 +25,7 @@ const useGetItemsInCollection = (collectionId: string | undefined) => {
     if (allItems && isSuccessGetItems) {
       dispatch(setItems(allItems));
     }
-  }, [isSuccessGetItems]);
+  }, [allItems]);
 
   return { items, isLoadingItems };
 };

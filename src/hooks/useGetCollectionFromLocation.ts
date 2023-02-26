@@ -36,7 +36,7 @@ const useGetCollectionFromLocation = () => {
     if (currentCollection && isSuccessGetCollection) {
       dispatch(setSelectedCollection(currentCollection));
     }
-  }, [isSuccessGetCollection]);
+  }, [currentCollection]);
 
   useEffect(() => {
     if (isErrorGetCollection) {
