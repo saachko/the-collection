@@ -12,6 +12,7 @@ import Notification from 'components/Notification/Notification';
 import { createImage } from 'utils/functions';
 
 import useCreateItem from 'hooks/useCreateItem';
+import useGetAllTags from 'hooks/useGetAllTags';
 import { useAppSelector } from 'hooks/useRedux';
 import useUpdateImage from 'hooks/useUpdateImage';
 
@@ -19,6 +20,7 @@ import { ItemFormValues } from 'ts/interfaces';
 
 import CustomFieldsForm from './CustomFieldsForm/CustomFieldsForm';
 import styles from './ItemEditForm.module.scss';
+import TagsInput from './TagsInput/TagsInput';
 import ValidationError from './ValidationError';
 
 function ItemEditForm() {
@@ -32,8 +34,8 @@ function ItemEditForm() {
   );
   const selectedItem = useAppSelector((state) => state.item.selectedItem);
   const [isErrorShown, setErrorShown] = useState(false);
-
-  const { submitForm, isLoadingItemCreation } = useCreateItem(setErrorShown);
+  const { isGetAllTagsLoading } = useGetAllTags();
+  const { submitForm, isLoadingNewItem } = useCreateItem(setErrorShown);
 
   const defaultFormValues: ItemFormValues = {
     itemName: selectedItem?.itemName || '',
@@ -79,6 +81,8 @@ function ItemEditForm() {
       setValue('itemImage', '');
     }
   }, [isDefaultImage]);
+  // CHANGE DISABLED CONDITION add || isLoadingUpdate ;
+  const isLoading = isLoadingNewItem || isItemCreated || isGetAllTagsLoading;
 
   return (
     <>
@@ -88,46 +92,48 @@ function ItemEditForm() {
       </NavLink>
       <h2>{selectedItem ? `${t('update')}` : `${t('create')}`}</h2>
       <div className="d-flex flex-wrap justify-content-between gap-2 flex-md-row flex-column">
-        <Form
-          id="itemForm"
-          aria-label="form"
-          noValidate
-          autoComplete="off"
-          className={styles.itemFieldsContainer}
-          onSubmit={handleSubmit(submitForm)}
-        >
-          <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
-            <Form.Label>{t('itemName')}</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder={t('itemNamePlaceholder')}
-              {...register('itemName', {
-                required: true,
-                maxLength: 50,
-                onChange: () => errors && clearErrors('itemName'),
-              })}
+        <div className={styles.itemFieldsContainer}>
+          <Form
+            id="itemForm"
+            aria-label="form"
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit(submitForm)}
+          >
+            <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
+              <Form.Label>{t('itemName')}</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={t('itemNamePlaceholder')}
+                {...register('itemName', {
+                  required: true,
+                  maxLength: 50,
+                  onChange: () => errors && clearErrors('itemName'),
+                })}
+              />
+              {errors.itemName && <ValidationError errors={errors} />}
+            </Form.Group>
+            <Form.Group className="mb-1 form-group" controlId="collectionFormImage">
+              <Form.Label>{t('itemImage')}</Form.Label>
+              <DragAndDropFileUploader
+                changeFile={changeImage}
+                name="itemImage"
+                fileName={image?.name}
+                caption={image ? 'items.file' : 'items.noFile'}
+                isDisabled={isDefaultImage}
+              />
+            </Form.Group>
+            <Form.Check
+              type="switch"
+              id="defaultImage"
+              label={t('defaultImage')}
+              checked={isDefaultImage}
+              onChange={() => setDefaultImage(!isDefaultImage)}
             />
-            {errors.itemName && <ValidationError errors={errors} />}
-          </Form.Group>
-          <Form.Group className="mb-1 form-group" controlId="collectionFormImage">
-            <Form.Label>{t('itemImage')}</Form.Label>
-            <DragAndDropFileUploader
-              changeFile={changeImage}
-              name="itemImage"
-              fileName={image?.name}
-              caption={image ? 'items.file' : 'items.noFile'}
-              isDisabled={isDefaultImage}
-            />
-          </Form.Group>
-          <Form.Check
-            type="switch"
-            id="defaultImage"
-            label={t('defaultImage')}
-            checked={isDefaultImage}
-            onChange={() => setDefaultImage(!isDefaultImage)}
-          />
-          <p className={styles.note}>{t('imageNote')}</p>
-        </Form>
+            <p className={styles.note}>{t('imageNote')}</p>
+          </Form>
+          <TagsInput />
+        </div>
         <CustomFieldsForm collectionId={selectedCollection?._id} />
       </div>
       <ButtonToolbar className="justify-content-center gap-5 mt-4 mb-3">
@@ -143,8 +149,7 @@ function ItemEditForm() {
           className="primary-button"
           type="submit"
           form="itemForm"
-          // CHANGE DISABLED CONDITION isLoading = isLoadingCreation || isLoadingUpdate || isItemCreated;
-          disabled={isLoadingItemCreation || isItemCreated}
+          disabled={isLoading}
         >
           {t('confirm')}
         </Button>

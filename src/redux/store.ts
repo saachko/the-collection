@@ -19,6 +19,7 @@ import itemReducer from './slices/itemSlice';
 import authModalReducer from './slices/modalAuthSlice';
 import sortReducer from './slices/sortSlice';
 import successNotificationReducer from './slices/successNotificationSlice';
+import tagReducer from './slices/tagSlice';
 import userReducer from './slices/userSlice';
 
 const persistConfig = {
@@ -42,6 +43,7 @@ const rootReducer = combineReducers({
   admin: adminReducer,
   collection: collectionReducer,
   item: itemReducer,
+  tag: tagReducer,
   successNotification: successNotificationReducer,
 
   [apiSlice.reducerPath]: apiSlice.reducer,

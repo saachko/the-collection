@@ -189,7 +189,7 @@
         "required": "Item name can't be empty",
         "maxLength": "Item name can't be more than 50 symbols",
         "noFields": "There're no custom fields in selected collection",
-        "prescription": "This collection has some custom fields. Please enter their values or leave unfilled which will mean that value is not provided.",
+        "prescription": "This collection has some custom fields. Please enter their values or leave unfilled which will mean that the value is not provided.",
         "yes": "Yes",
         "no": "No",
         "creationSuccess": "New item is created successfully",
@@ -198,7 +198,9 @@
         "string": "string",
         "text": "markdown-enabled text",
         "date": "date",
-        "checkbox": "boolean"
+        "checkbox": "boolean",
+        "tags": "Tags",
+        "tagsPlaceholder": "Select tags to the item"
       }
     }
   },
@@ -401,7 +403,9 @@
         "string": "строка",
         "text": "текст с поддержкой markdown",
         "date": "дата",
-        "checkbox": "логическое значение"
+        "checkbox": "логическое значение",
+        "tags": "Тэги",
+        "tagsPlaceholder": "Выберете тэги"
       }
     }
   }

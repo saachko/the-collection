@@ -3,6 +3,8 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import { setTagsFromInput } from 'redux/slices/tagSlice';
+
 import CollectionInfo from 'components/CollectionInfo/CollectionInfo';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import ItemsTable from 'components/ItemsTable/ItemsTable';
@@ -10,11 +12,12 @@ import Loader from 'components/Loader/Loader';
 
 import useGetCollectionFromLocation from 'hooks/useGetCollectionFromLocation';
 import useGetItemsInCollection from 'hooks/useGetItemsInCollection';
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 function CollectionPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   useGetCollectionFromLocation();
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
@@ -22,6 +25,11 @@ function CollectionPage() {
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
   const userId = useAppSelector((state) => state.user.token?.id);
   const { items, isLoadingItems } = useGetItemsInCollection(selectedCollection?._id);
+
+  const navigateToNewItemPage = () => {
+    dispatch(setTagsFromInput([]));
+    navigate(`/collections/${selectedCollection?._id}/new-item`);
+  };
 
   return (
     <div className="content">
@@ -31,10 +39,7 @@ function CollectionPage() {
       <CollectionInfo />
       <div className="d-flex justify-content-between align-items-center gap-3 mb-4 mt-2 flex-lg-row flex-column">
         {(isAdmin || userId === selectedCollection?.ownerId) && (
-          <Button
-            className="secondary-button mt-2"
-            onClick={() => navigate(`/collections/${selectedCollection?._id}/new-item`)}
-          >
+          <Button className="secondary-button mt-2" onClick={navigateToNewItemPage}>
             {t('newItem')}
           </Button>
         )}

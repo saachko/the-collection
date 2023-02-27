@@ -10,7 +10,9 @@ import { createImage } from 'utils/functions';
 import { CustomFieldInItem, ItemFormValues, ItemRequestBody } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
+import useCreateTag from './useCreateTag';
 import { useAppDispatch, useAppSelector } from './useRedux';
+import useUpdateTagWithNewItem from './useUpdateTagWithNewItem';
 
 const useCreateItem = (setErrorShown: SetState<boolean>) => {
   const selectedCollection = useAppSelector(
@@ -24,13 +26,15 @@ const useCreateItem = (setErrorShown: SetState<boolean>) => {
   const [
     createItem,
     {
-      // DATA MAY BE NEEDED FOR TAGS CREATION
-      // data: newItem,
+      data: newItem,
       isLoading: isLoadingItemCreation,
       isSuccess: isSuccessItemCreation,
       isError: isErrorItemCreation,
     },
   ] = useCreateItemMutation();
+
+  const { isLoadingTagCreation } = useCreateTag(newItem);
+  const { isLoadingTagUpdate } = useUpdateTagWithNewItem(newItem);
 
   useEffect(() => {
     if (isSuccessItemCreation) {
@@ -75,7 +79,10 @@ const useCreateItem = (setErrorShown: SetState<boolean>) => {
     }
   };
 
-  return { submitForm, isLoadingItemCreation };
+  const isLoadingNewItem =
+    isLoadingItemCreation || isLoadingTagCreation || isLoadingTagUpdate;
+
+  return { submitForm, isLoadingNewItem };
 };
 
 export default useCreateItem;

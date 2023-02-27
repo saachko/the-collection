@@ -98,9 +98,6 @@ const useUpdateCustomFields = (
     }
   }, [updatedCollection]);
 
-  // const isLoadingCustomFieldUpdate =
-  //   isLoadingFieldUpdate || isLoadingFieldDelete || isLoadingFieldCreation;
-
   const isErrorCustomField =
     isErrorFieldUpdate || isErrorFieldDelete || isErrorFieldCreation;
 
