@@ -20,6 +20,9 @@ function CollectionEditForm() {
   const selectedUser = useAppSelector((state) => state.admin.selectedUser);
   const currentUser = selectedUser || user;
   const [isErrorShown, setErrorShown] = useState(false);
+  const isCollectionCreated = useAppSelector(
+    (state) => state.successNotification.isCollectionCreated
+  );
 
   const {
     customFields,
@@ -36,7 +39,7 @@ function CollectionEditForm() {
     customFields
   );
 
-  const isLoading = isLoadingCreation || isLoadingUpdate;
+  const isLoading = isLoadingCreation || isLoadingUpdate || isCollectionCreated;
 
   const submitChanges = () => {
     if (selectedCollection) {

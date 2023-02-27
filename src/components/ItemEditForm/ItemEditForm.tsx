@@ -27,6 +27,9 @@ function ItemEditForm() {
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
+  const isItemCreated = useAppSelector(
+    (state) => state.successNotification.isItemCreated
+  );
   const selectedItem = useAppSelector((state) => state.item.selectedItem);
   const [isErrorShown, setErrorShown] = useState(false);
 
@@ -140,8 +143,8 @@ function ItemEditForm() {
           className="primary-button"
           type="submit"
           form="itemForm"
-          // CHANGE DISABLED CONDITION isLoading = isLoadingCreation || isLoadingUpdate;
-          disabled={isLoadingItemCreation}
+          // CHANGE DISABLED CONDITION isLoading = isLoadingCreation || isLoadingUpdate || isItemCreated;
+          disabled={isLoadingItemCreation || isItemCreated}
         >
           {t('confirm')}
         </Button>
