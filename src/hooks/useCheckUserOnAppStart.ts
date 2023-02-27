@@ -11,7 +11,12 @@ const useCheckUserOnAppStart = () => {
   const token = useAppSelector((state) => state.user.token);
   const [
     getUserById,
-    { data: currentUser, isSuccess: isSuccessGetUser, isLoading: isGetUserLoading },
+    {
+      data: currentUser,
+      isSuccess: isSuccessGetUser,
+      isLoading: isGetUserLoading,
+      isError: isErrorGetUser,
+    },
   ] = useLazyGetUserByIdQuery();
   const dispatch = useAppDispatch();
 
@@ -35,7 +40,13 @@ const useCheckUserOnAppStart = () => {
         dispatch(setUser(currentUser));
       }
     }
-  }, [isSuccessGetUser]);
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (isErrorGetUser) {
+      dispatch(setLoggedOut());
+    }
+  }, [isErrorGetUser]);
 
   return { isGetUserLoading };
 };
