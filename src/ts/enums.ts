@@ -9,9 +9,9 @@ enum Endpoints {
   items = 'items/',
   itemsInCollection = 'items/collection/',
   tags = 'tags/',
-  tagsToItem = 'tags/item',
+  tagsToItem = 'tags/item/',
   comments = 'comments/',
-  commentsToItem = 'comments/item',
+  commentsToItem = 'comments/item/',
 }
 
 enum Methods {

@@ -1,0 +1,26 @@
+@import '../../styles/variables.scss';
+
+.label {
+  width: 30%;
+  font-weight: $fontWeightBold;
+}
+
+.fieldValue {
+  width: 70%;
+}
+
+.textarea {
+  transition: $themeTransition;
+  background-color: var(--background-primary-color);
+}
+
+.checkboxTrue {
+  svg {
+    color: var(--primary-color);
+  }
+}
+
+.container {
+  border-top: 1px solid var(--lines-color);
+  border-bottom: 1px solid var(--lines-color);
+}

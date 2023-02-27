@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.tag {
+  background-color: var(--light-color);
+  padding: 3px 7px;
+  border-radius: 3px;
+  font-size: $fontSizeSmall;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: $transition;
+  cursor: pointer;
+  color: var(--secondary-color);
+
+  &:hover {
+    transform: scale(1.1);
+    opacity: $hoverOpacity;
+    box-shadow: $hoverShadow;
+  }
+}

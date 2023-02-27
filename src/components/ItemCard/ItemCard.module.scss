@@ -4,6 +4,7 @@
   min-height: 200px;
   transition: $themeTransition;
   background-color: var(--background-primary-color);
+  border-color: var(--lines-color);
 }
 
 .cardBody {
