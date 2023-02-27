@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import { setSelectedItem } from 'redux/slices/itemSlice';
 import { setTagsFromInput } from 'redux/slices/tagSlice';
 
 import CollectionInfo from 'components/CollectionInfo/CollectionInfo';
@@ -28,6 +29,7 @@ function CollectionPage() {
 
   const navigateToNewItemPage = () => {
     dispatch(setTagsFromInput([]));
+    dispatch(setSelectedItem(null));
     navigate(`/collections/${selectedCollection?._id}/new-item`);
   };
 

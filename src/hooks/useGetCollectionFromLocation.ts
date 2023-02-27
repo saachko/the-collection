@@ -44,7 +44,7 @@ const useGetCollectionFromLocation = () => {
     }
   }, [isErrorGetCollection]);
 
-  return { isCollectionLoading, isErrorGetCollection };
+  return { isCollectionLoading };
 };
 
 export default useGetCollectionFromLocation;

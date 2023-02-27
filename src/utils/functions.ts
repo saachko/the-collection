@@ -1,4 +1,6 @@
-import { Collection, ParsedToken, User } from 'ts/interfaces';
+import { TFunction } from 'i18next';
+
+import { Collection, Item, ParsedToken, User } from 'ts/interfaces';
 import { ImageType, SortTypes } from 'ts/types';
 
 const parseJwt = (tokenToParse: string) => {
@@ -39,6 +41,18 @@ const formatDate = (stringDate: string) => {
   const timestamp = Date.parse(stringDate);
   const date = new Date(timestamp);
   return date.toLocaleString('ru-RU');
+};
+
+const formatDateAndTime = (
+  elem: Item | Collection | null,
+  t: TFunction,
+  text: string
+) => {
+  if (elem) {
+    const formattedDate = formatDate(elem.createdAt);
+    return `${formattedDate.slice(0, 10)} ${t(text)} ${formattedDate.slice(12)}`;
+  }
+  return '';
 };
 
 const sortData = (
@@ -103,6 +117,7 @@ export {
   checkToken,
   createImage,
   formatDate,
+  formatDateAndTime,
   sortData,
   filterUsersByRole,
   filterUsersByStatus,

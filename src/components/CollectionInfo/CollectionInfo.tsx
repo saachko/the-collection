@@ -12,7 +12,7 @@ import EditDropdown from 'components/EditDropdown/EditDropdown';
 import Loader from 'components/Loader/Loader';
 import ErrorNotification from 'components/Notification/Notification';
 
-import { formatDate } from 'utils/functions';
+import { formatDateAndTime } from 'utils/functions';
 
 import useDeleteCollection from 'hooks/useDeleteCollection';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
@@ -31,14 +31,6 @@ function CollectionInfo() {
   );
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const formatDateAndTime = () => {
-    if (selectedCollection) {
-      const formattedDate = formatDate(selectedCollection.createdAt);
-      return `${formattedDate.slice(0, 10)} ${t('createdAt')} ${formattedDate.slice(12)}`;
-    }
-    return '';
-  };
 
   const { deleteCollection, isDeleteCollectionLoading } = useDeleteCollection(
     setDeleteErrorShown,
@@ -93,7 +85,7 @@ function CollectionInfo() {
           >
             <span>{selectedCollection?.ownerName} </span>
           </NavLink>
-          <span>{formatDateAndTime()}</span>
+          <span>{formatDateAndTime(selectedCollection, t, 'createdAt')}</span>
         </p>
 
         <MDEditor.Markdown source={selectedCollection?.description} />

@@ -1,0 +1,81 @@
+@import '../../styles/variables.scss';
+
+.card {
+  min-height: 200px;
+  transition: $themeTransition;
+  background-color: var(--background-primary-color);
+}
+
+.cardBody {
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: $fontSizeH3;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  color: var(--text-color-light);
+}
+
+.collectionLink {
+  color: var(--text-color-light);
+  transition: $transition;
+
+  &:hover {
+    color: var(--text-color-light);
+    opacity: $hoverOpacity;
+  }
+}
+
+.author,
+.author:hover {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+  cursor: default;
+}
+
+.authorLink {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
+}
+
+.skeleton,
+.image {
+  height: 100%;
+  width: 200px;
+  border-radius: var(--bs-card-inner-border-radius) 0 0 var(--bs-card-inner-border-radius);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.likes {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  svg {
+    color: var(--likes-color);
+    transition: $transition;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      opacity: $hoverOpacity;
+    }
+  }
+}

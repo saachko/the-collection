@@ -5,12 +5,16 @@ import { Image, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaHeart } from 'react-icons/fa';
 import { MdClose, MdDone } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
+
+import { setSelectedItem } from 'redux/slices/itemSlice';
 
 import { defaultInputTypes } from 'utils/constants';
 import { formatDate } from 'utils/functions';
 
 import useCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
+import { useAppDispatch } from 'hooks/useRedux';
 
 import { Item } from 'ts/interfaces';
 
@@ -25,6 +29,16 @@ function ItemsTable({ collectionId, items }: ItemsTableProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const defaultItemsTableHeadings = ['#', 'image', 'name', 'date'];
   const { fieldsInCollection } = useCustomFieldsInCollection(collectionId);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const selectItem = (itemId: string) => {
+    const selectedItem = items?.find((item) => item._id === itemId);
+    if (selectedItem) {
+      dispatch(setSelectedItem(selectedItem));
+      navigate(`/items/${itemId}`);
+    }
+  };
 
   return (
     <div>
@@ -43,7 +57,7 @@ function ItemsTable({ collectionId, items }: ItemsTableProps) {
         </thead>
         <tbody>
           {items?.map((item, index) => (
-            <tr key={item._id}>
+            <tr key={item._id} onClick={() => selectItem(item._id)}>
               <td>{index + 1}</td>
               <td className="position-relative">
                 <div

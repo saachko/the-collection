@@ -201,6 +201,12 @@
         "checkbox": "boolean",
         "tags": "Tags",
         "tagsPlaceholder": "Select tags to the item"
+      },
+      "itemPage": {
+        "return": "Return to the previous page",
+        "itemFrom": "from the collection ",
+        "createdBy": "Created by ",
+        "createdAt": "at"
       }
     }
   },
@@ -406,6 +412,12 @@
         "checkbox": "логическое значение",
         "tags": "Тэги",
         "tagsPlaceholder": "Выберете тэги"
+      },
+      "itemPage": {
+        "return": "Вернуться на предыдущую страницу",
+        "itemFrom": "из коллекции ",
+        "createdBy": "Создал(а) ",
+        "createdAt": "в"
       }
     }
   }

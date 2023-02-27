@@ -8,7 +8,7 @@ import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
 import { setCollectionsThemeFilter } from 'redux/slices/filterSlice';
 
-import { formatDate } from 'utils/functions';
+import { formatDateAndTime } from 'utils/functions';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -25,13 +25,6 @@ function CollectionCard({ collection }: CollectionCardProps) {
   const { t } = useTranslation('translation');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const formatDateAndTime = () => {
-    const formattedDate = formatDate(collection.createdAt);
-    return `${formattedDate.slice(0, 10)} ${t(
-      'collections.createdAt'
-    )} ${formattedDate.slice(12)}`;
-  };
 
   const clickOnTheme = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
@@ -90,7 +83,7 @@ function CollectionCard({ collection }: CollectionCardProps) {
             <span>{collection.ownerName}</span>
           </NavLink>
         </p>
-        <p>{formatDateAndTime()}</p>
+        <p>{formatDateAndTime(collection, t, 'collections.createdAt')}</p>
       </Card.Footer>
     </Card>
   );

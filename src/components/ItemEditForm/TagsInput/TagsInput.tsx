@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import CreatableSelect from 'react-select/creatable';
@@ -43,4 +43,4 @@ function TagsInput() {
   );
 }
 
-export default TagsInput;
+export default memo(TagsInput);
