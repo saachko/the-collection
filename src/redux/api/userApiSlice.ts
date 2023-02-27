@@ -21,7 +21,6 @@ const userApiSlice = apiSlice.injectEndpoints({
         url: `${Endpoints.users}${id}`,
         method: Methods.get,
       }),
-      providesTags: ['User'],
     }),
 
     deleteUserById: builder.mutation<User, string>({

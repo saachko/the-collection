@@ -22,6 +22,7 @@ const useGetAllUsers = () => {
     data: allUsers,
     isSuccess: isSuccessGetAllUsers,
     isLoading: isGetAllUsersLoading,
+    refetch,
   } = useGetAllUsersQuery(undefined, { skip: !isLoggedIn && !isAdmin });
 
   useEffect(() => {
@@ -38,6 +39,12 @@ const useGetAllUsers = () => {
       }
     }
   }, [allUsers]);
+
+  useEffect(() => {
+    if (isLoggedIn && isAdmin) {
+      refetch();
+    }
+  }, []);
 
   return { isAdmin, usersSorting, allUsers, users, isGetAllUsersLoading };
 };

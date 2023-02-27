@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -20,21 +20,16 @@ const useUpdateCustomFields = (
   collection: Collection | null,
   updatedCollection: Collection | undefined
 ) => {
+  const [isLoadingCustomFieldUpdate, setLoadingCustomFieldUpdate] = useState(false);
   const navigate = useNavigate();
-  const [
-    updateCustomFieldById,
-    { isLoading: isLoadingFieldUpdate, isError: isErrorFieldUpdate },
-  ] = useUpdateCustomFieldByIdMutation();
+  const [updateCustomFieldById, { isError: isErrorFieldUpdate }] =
+    useUpdateCustomFieldByIdMutation();
 
-  const [
-    deleteCustomFieldById,
-    { isLoading: isLoadingFieldDelete, isError: isErrorFieldDelete },
-  ] = useDeleteCustomFieldByIdMutation();
+  const [deleteCustomFieldById, { isError: isErrorFieldDelete }] =
+    useDeleteCustomFieldByIdMutation();
 
-  const [
-    createCustomField,
-    { isLoading: isLoadingFieldCreation, isError: isErrorFieldCreation },
-  ] = useCreateCustomFieldMutation();
+  const [createCustomField, { isError: isErrorFieldCreation }] =
+    useCreateCustomFieldMutation();
 
   const validatedCustomFields = customFields.filter((field) => field.label && field.type);
 
@@ -51,6 +46,7 @@ const useUpdateCustomFields = (
     } else {
       navigate(-1);
     }
+    setLoadingCustomFieldUpdate(false);
   };
 
   const createNewCustomFields = async () => {
@@ -96,13 +92,14 @@ const useUpdateCustomFields = (
   useEffect(() => {
     if (updatedCollection) {
       (async () => {
+        setLoadingCustomFieldUpdate(true);
         await updateFields();
       })();
     }
   }, [updatedCollection]);
 
-  const isLoadingCustomFieldUpdate =
-    isLoadingFieldUpdate || isLoadingFieldDelete || isLoadingFieldCreation;
+  // const isLoadingCustomFieldUpdate =
+  //   isLoadingFieldUpdate || isLoadingFieldDelete || isLoadingFieldCreation;
 
   const isErrorCustomField =
     isErrorFieldUpdate || isErrorFieldDelete || isErrorFieldCreation;
