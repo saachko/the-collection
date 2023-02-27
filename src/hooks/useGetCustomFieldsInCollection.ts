@@ -43,7 +43,7 @@ const useCustomFieldsInCollection = (
       const ids = fieldsInCollection.map((field) => field._id);
       setStartFieldsIds(ids);
       dispatch(setCustomFieldsInItem(fieldsInCollection));
-      const defaultFieldsValues = new Array(fieldsInCollection.length).fill('⎯');
+      const defaultFieldsValues = new Array(fieldsInCollection.length).fill('');
       dispatch(setCustomFieldsValues(defaultFieldsValues));
     }
   }, [fieldsInCollection]);

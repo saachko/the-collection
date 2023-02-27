@@ -60,9 +60,12 @@ function ItemsTable({ collectionId, items }: ItemsTableProps) {
               <td>{item.likes.length}</td>
               {item.customFields.map((field) => (
                 <td key={field.customFieldId}>
-                  {defaultInputTypes.includes(field.type) && `${field.value}`}
+                  {defaultInputTypes.includes(field.type) && (`${field.value}` || '⎯')}
                   {field.type === 'text' && (
-                    <MDEditor.Markdown source={field.value} className={styles.textarea} />
+                    <MDEditor.Markdown
+                      source={field.value || '⎯'}
+                      className={styles.textarea}
+                    />
                   )}
                   {field.type === 'checkbox' &&
                     (field.value === 'true' ? (
