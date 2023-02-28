@@ -24,7 +24,7 @@ import styles from './CollectionInfo.module.scss';
 function CollectionInfo() {
   const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
   const [isDeleteErrorShown, setDeleteErrorShown] = useState(false);
-  const { user, isAdmin } = useAppSelector((state) => state.user);
+  const { user, isAdmin, isLoggedIn } = useAppSelector((state) => state.user);
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
@@ -68,7 +68,7 @@ function CollectionInfo() {
               `${selectedCollection?.title}`
             )}
           </h2>
-          {(isAdmin || user?._id === selectedCollection?.ownerId) && (
+          {((isAdmin && isLoggedIn) || user?._id === selectedCollection?.ownerId) && (
             <div className={styles.dropdown}>
               <EditDropdown dropdownItems={editActions} />
             </div>
@@ -77,9 +77,9 @@ function CollectionInfo() {
         <p className={styles.createdInfo}>
           {t('createdBy')}
           <NavLink
-            to={isAdmin ? `/users/${selectedCollection?.ownerId}` : ''}
+            to={isAdmin && isLoggedIn ? `/users/${selectedCollection?.ownerId}` : ''}
             className={clsx(styles.author, {
-              [styles.authorLink]: isAdmin,
+              [styles.authorLink]: isAdmin && isLoggedIn,
             })}
             onClick={() => dispatch(setSelectedUser(null))}
           >

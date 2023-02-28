@@ -23,8 +23,7 @@ function CollectionPage() {
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
-  const isAdmin = useAppSelector((state) => state.user.isAdmin);
-  const userId = useAppSelector((state) => state.user.token?.id);
+  const { isAdmin, user, isLoggedIn } = useAppSelector((state) => state.user);
   const { items, isLoadingItems } = useGetItemsInCollection(selectedCollection?._id);
 
   const navigateToNewItemPage = () => {
@@ -40,7 +39,7 @@ function CollectionPage() {
       </NavLink>
       <CollectionInfo />
       <div className="d-flex justify-content-between align-items-center gap-3 mb-4 mt-2 flex-lg-row flex-column">
-        {(isAdmin || userId === selectedCollection?.ownerId) && (
+        {((isAdmin && isLoggedIn) || user?._id === selectedCollection?.ownerId) && (
           <Button className="secondary-button mt-2" onClick={navigateToNewItemPage}>
             {t('newItem')}
           </Button>

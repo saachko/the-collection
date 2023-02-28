@@ -31,7 +31,7 @@ function ItemCard({ item }: ItemCardProps) {
   const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
   const [isDeleteErrorShown, setDeleteErrorShown] = useState(false);
   const { t } = useTranslation('translation', { keyPrefix: 'itemPage' });
-  const { user, isAdmin } = useAppSelector((state) => state.user);
+  const { user, isAdmin, isLoggedIn } = useAppSelector((state) => state.user);
   const [imageVariant, setImageVariant] = useState('left');
   const windowSize = useWindowSize();
   const dispatch = useAppDispatch();
@@ -110,9 +110,9 @@ function ItemCard({ item }: ItemCardProps) {
           <Card.Text>
             {t('createdBy')}
             <NavLink
-              to={isAdmin ? `/users/${item?.ownerId}` : ''}
+              to={isAdmin && isLoggedIn ? `/users/${item?.ownerId}` : ''}
               className={clsx(styles.author, {
-                [styles.authorLink]: isAdmin,
+                [styles.authorLink]: isAdmin && isLoggedIn,
               })}
               onClick={() => {
                 dispatch(setSelectedUser(null));
@@ -128,11 +128,12 @@ function ItemCard({ item }: ItemCardProps) {
           {item?.likes.length}
         </div>
       </Card.Body>
-      {(isAdmin || user?._id === item?.ownerId) && currentPath !== '/search' && (
-        <div className={styles.dropdown}>
-          <EditDropdown dropdownItems={editActions} />
-        </div>
-      )}
+      {((isAdmin && isLoggedIn) || user?._id === item?.ownerId) &&
+        currentPath !== '/search' && (
+          <div className={styles.dropdown}>
+            <EditDropdown dropdownItems={editActions} />
+          </div>
+        )}
       {isDeleteItemLoading && <Loader />}
       <ConfirmNotification
         isShown={confirmDeleteNotification}

@@ -10,14 +10,14 @@ function EditCollectionPage() {
   const [isCollectionDataLoading, setCollectionDataLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAdmin, user } = useAppSelector((state) => state.user);
+  const { isAdmin, user, isLoggedIn } = useAppSelector((state) => state.user);
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
 
   useEffect(() => {
     if (selectedCollection && user) {
-      if (isAdmin || selectedCollection.ownerId === user._id) {
+      if ((isAdmin && isLoggedIn) || selectedCollection.ownerId === user._id) {
         setCollectionDataLoading(false);
       } else {
         navigate('/');

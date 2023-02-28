@@ -26,6 +26,7 @@ interface CollectionCardProps {
 
 function CollectionCard({ collection }: CollectionCardProps) {
   const isAdmin = useAppSelector((state) => state.user.isAdmin);
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const { t } = useTranslation('translation');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -86,9 +87,9 @@ function CollectionCard({ collection }: CollectionCardProps) {
         <p>
           {t('collections.createdBy')}
           <NavLink
-            to={isAdmin ? `/users/${collection.ownerId}` : ''}
+            to={isAdmin && isLoggedIn ? `/users/${collection.ownerId}` : ''}
             className={clsx(styles.author, {
-              [styles.authorLink]: isAdmin,
+              [styles.authorLink]: isAdmin && isLoggedIn,
             })}
             onClick={(event) => {
               event.stopPropagation();

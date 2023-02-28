@@ -10,12 +10,12 @@ function EditItemPage() {
   const [isItemDataLoading, setItemDataLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const { isAdmin, user } = useAppSelector((state) => state.user);
+  const { isAdmin, user, isLoggedIn } = useAppSelector((state) => state.user);
   const selectedItem = useAppSelector((state) => state.item.selectedItem);
 
   useEffect(() => {
     if (selectedItem && user) {
-      if (isAdmin || selectedItem.ownerId === user._id) {
+      if ((isAdmin && isLoggedIn) || selectedItem.ownerId === user._id) {
         setItemDataLoading(false);
       } else {
         navigate('/');
