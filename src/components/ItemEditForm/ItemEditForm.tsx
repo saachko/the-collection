@@ -126,15 +126,17 @@ function ItemEditForm() {
             <Form.Check
               type="switch"
               id="defaultImage"
-              label={t('defaultImage')}
+              label={selectedItem ? t('newDefaultImage') : t('defaultImage')}
               checked={isDefaultImage}
               onChange={() => setDefaultImage(!isDefaultImage)}
             />
-            <p className={styles.note}>{t('imageNote')}</p>
+            {!selectedItem && <p className={styles.note}>{t('imageNote')}</p>}
           </Form>
           <TagsInput />
         </div>
-        <CustomFieldsForm collectionId={selectedCollection?._id} />
+        <CustomFieldsForm
+          collectionId={selectedItem?.collectionId || selectedCollection?._id}
+        />
       </div>
       <ButtonToolbar className="justify-content-center gap-5 mt-4 mb-3">
         <Button

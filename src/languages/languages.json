@@ -155,7 +155,8 @@
         "fieldsNote": "Fields with empty labels or types won't be saved",
         "fieldsUpdateNote": "Fields with empty labels won't be saved. Types of already existing fields are immutable to prevent data loss",
         "creationSuccess": "New collection is created successfully",
-        "error": "Unexpected error! Please try again later"
+        "error": "Unexpected error! Please try again later",
+        "newDefaultImage": "new default image"
       },
       "collectionPage": {
         "return": "Return to the previous page",
@@ -200,7 +201,8 @@
         "date": "date",
         "checkbox": "boolean",
         "tags": "Tags",
-        "tagsPlaceholder": "Select tags to the item"
+        "tagsPlaceholder": "Select tags to the item",
+        "newDefaultImage": "new default image"
       },
       "itemPage": {
         "return": "Return to the previous page",
@@ -370,7 +372,8 @@
         "fieldsNote": "Поля с пустыми названиями или типами не будут сохранены",
         "fieldsUpdateNote": "Поля с пустыми названиями не будут сохранены. Типы уже существующих полей неизменяемы, чтобы предотвратить потерю данных",
         "creationSuccess": "Новая коллекция успешно создана",
-        "error": "Ошибка! Пожалуйста, повторите попытку позже"
+        "error": "Ошибка! Пожалуйста, повторите попытку позже",
+        "newDefaultImage": "новое стандартное изображение"
       },
       "collectionPage": {
         "return": "Вернуться на предыдущую страницу",
@@ -415,7 +418,8 @@
         "date": "дата",
         "checkbox": "логическое значение",
         "tags": "Тэги",
-        "tagsPlaceholder": "Выберете тэги"
+        "tagsPlaceholder": "Выберете тэги",
+        "newDefaultImage": "новое стандартное изображение"
       },
       "itemPage": {
         "return": "Вернуться на предыдущую страницу",

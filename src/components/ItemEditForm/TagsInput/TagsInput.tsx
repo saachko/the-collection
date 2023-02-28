@@ -24,7 +24,7 @@ function TagsInput() {
   };
 
   return (
-    <Form.Group className="mb-1 form-group">
+    <Form.Group className="mb-1 form-group mt-3">
       <Form.Label>{t('tags')}</Form.Label>
       <CreatableSelect
         isMulti

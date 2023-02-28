@@ -3,7 +3,7 @@ import React, { memo, useEffect, useState } from 'react';
 import { Card, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setSelectedItem } from 'redux/slices/itemSlice';
@@ -35,6 +35,7 @@ function ItemCard({ item }: ItemCardProps) {
   const [imageVariant, setImageVariant] = useState('left');
   const windowSize = useWindowSize();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -55,7 +56,7 @@ function ItemCard({ item }: ItemCardProps) {
     {
       id: '1',
       title: `${t('itemEdit')}`,
-      action: () => console.log('updated'),
+      action: () => navigate(`/items/${item?._id}/edit`),
     },
     {
       id: '2',

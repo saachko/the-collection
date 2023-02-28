@@ -6,13 +6,14 @@ import { setCustomFieldsInItem, setCustomFieldsValues } from 'redux/slices/itemS
 import { CustomFieldFormValuesWithId } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
-import { useAppDispatch } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
-const useCustomFieldsInCollection = (
+const useGetCustomFieldsInCollection = (
   collectionId: string | undefined,
   setCustomFields?: SetState<CustomFieldFormValuesWithId[]>
 ) => {
   const [startFieldsIds, setStartFieldsIds] = useState<string[]>([]);
+  const selectedItem = useAppSelector((state) => state.item.selectedItem);
   const dispatch = useAppDispatch();
 
   const [
@@ -43,12 +44,19 @@ const useCustomFieldsInCollection = (
       const ids = fieldsInCollection.map((field) => field._id);
       setStartFieldsIds(ids);
       dispatch(setCustomFieldsInItem(fieldsInCollection));
-      const defaultFieldsValues = new Array(fieldsInCollection.length).fill('');
-      dispatch(setCustomFieldsValues(defaultFieldsValues));
+      if (selectedItem) {
+        const itemFieldsValues = [...selectedItem.customFields].map(
+          (field) => field.value
+        );
+        dispatch(setCustomFieldsValues(itemFieldsValues));
+      } else {
+        const defaultFieldsValues = new Array(fieldsInCollection.length).fill('');
+        dispatch(setCustomFieldsValues(defaultFieldsValues));
+      }
     }
   }, [fieldsInCollection]);
 
   return { fieldsInCollection, isLoadingFields, startFieldsIds };
 };
 
-export default useCustomFieldsInCollection;
+export default useGetCustomFieldsInCollection;

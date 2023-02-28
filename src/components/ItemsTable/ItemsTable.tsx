@@ -13,7 +13,7 @@ import { setSelectedItem } from 'redux/slices/itemSlice';
 import { defaultInputTypes } from 'utils/constants';
 import { formatDate } from 'utils/functions';
 
-import useCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
+import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
 import { useAppDispatch } from 'hooks/useRedux';
 
 import { Item } from 'ts/interfaces';
@@ -28,7 +28,7 @@ interface ItemsTableProps {
 function ItemsTable({ collectionId, items }: ItemsTableProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const defaultItemsTableHeadings = ['#', 'image', 'name', 'date'];
-  const { fieldsInCollection } = useCustomFieldsInCollection(collectionId);
+  const { fieldsInCollection } = useGetCustomFieldsInCollection(collectionId);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

@@ -35,6 +35,7 @@ function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps)
       </Form.Label>
       {defaultInputTypes.includes(field.type) && (
         <Form.Control
+          value={fieldsValues[fieldIndex]}
           type={field.type}
           onChange={({ target }) => {
             setFieldValue(target.value);
@@ -51,6 +52,8 @@ function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps)
             type="switch"
             id="defaultImage"
             onChange={({ target }) => setFieldValue(`${target.checked}`)}
+            value={fieldsValues[fieldIndex]}
+            defaultChecked={fieldsValues[fieldIndex] === 'true'}
           />
           <em>{t('yes')}</em>
         </div>

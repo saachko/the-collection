@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import Loader from 'components/Loader/Loader';
 
-import useCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
+import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
 import { useAppSelector } from 'hooks/useRedux';
 
 import styles from '../ItemEditForm.module.scss';
@@ -18,7 +18,7 @@ function CustomFieldsForm({ collectionId }: CustomFieldsFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
   const customFieldsValues = useAppSelector((state) => state.item.customFieldsValues);
   const { fieldsInCollection, isLoadingFields } =
-    useCustomFieldsInCollection(collectionId);
+    useGetCustomFieldsInCollection(collectionId);
 
   return (
     <div className={styles.customFieldsContainer}>
