@@ -3,10 +3,18 @@
 .label {
   width: 30%;
   font-weight: $fontWeightBold;
+
+  @media (max-width: 575px) {
+    width: 100%;
+  }
 }
 
 .fieldValue {
   width: 70%;
+
+  @media (max-width: 575px) {
+    width: 100%;
+  }
 }
 
 .textarea {

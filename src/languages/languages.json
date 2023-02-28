@@ -206,7 +206,9 @@
         "return": "Return to the previous page",
         "itemFrom": "from the collection ",
         "createdBy": "Created by ",
-        "createdAt": "at"
+        "createdAt": "at",
+        "itemEdit": "Edit item",
+        "itemDelete": "Delete item"
       }
     }
   },
@@ -417,7 +419,9 @@
         "return": "Вернуться на предыдущую страницу",
         "itemFrom": "из коллекции ",
         "createdBy": "Создал(а) ",
-        "createdAt": "в"
+        "createdAt": "в",
+        "itemEdit": "Редактировать",
+        "itemDelete": "Удалить"
       }
     }
   }

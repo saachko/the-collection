@@ -10,7 +10,7 @@ interface TagsContainerProps {
 
 function TagsContainer({ tags }: TagsContainerProps) {
   return (
-    <div className="d-flex flex-wrap justify-content-around mt-3 mb-3">
+    <div className="d-flex gap-2 flex-wrap justify-content-around mt-3 mb-3">
       {tags &&
         tags.length > 0 &&
         tags.map((tag) => (

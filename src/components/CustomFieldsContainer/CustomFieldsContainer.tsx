@@ -18,7 +18,10 @@ function CustomFieldsContainer({ fields }: CustomFieldsContainerProps) {
       {fields &&
         fields.length > 0 &&
         fields.map((field) => (
-          <div key={field.customFieldId} className="d-flex gap-3 mb-3 mt-3">
+          <div
+            key={field.customFieldId}
+            className="d-flex gap-sm-3 mb-3 mt-3 flex-column flex-sm-row"
+          >
             <div className={styles.label}>{field.label}:</div>
             <div className={styles.fieldValue}>
               {defaultInputTypes.includes(field.type) && (`${field.value}` || '⎯')}
