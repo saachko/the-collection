@@ -95,12 +95,12 @@ const sortData = (
         break;
       case 'fromOldToNew':
         return [...data].sort((a, b) =>
-          formatDate(a.createdAt) > formatDate(b.createdAt) ? 1 : -1
+          Date.parse(a.createdAt) > Date.parse(b.createdAt) ? 1 : -1
         );
       case 'fromNewToOld':
       default:
         return [...data].sort((a, b) =>
-          formatDate(a.createdAt) < formatDate(b.createdAt) ? 1 : -1
+          Date.parse(a.createdAt) < Date.parse(b.createdAt) ? 1 : -1
         );
     }
   }
