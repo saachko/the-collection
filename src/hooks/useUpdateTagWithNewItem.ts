@@ -7,7 +7,8 @@ import { Item } from 'ts/interfaces';
 import { useAppSelector } from './useRedux';
 
 const useUpdateTagWithNewItem = (newItem: Item | undefined) => {
-  const { allTags, tagsFromInput } = useAppSelector((state) => state.tag);
+  const allTags = useAppSelector((state) => state.tag.allTags);
+  const tagsFromInput = useAppSelector((state) => state.tag.tagsFromInput);
   const tagsToUpdate = allTags?.filter((existingTag) =>
     tagsFromInput.some((tag) => existingTag._id === tag.value)
   );

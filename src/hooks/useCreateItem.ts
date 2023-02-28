@@ -63,7 +63,7 @@ const useCreateItem = (setErrorShown: SetState<boolean>) => {
     return [];
   };
 
-  const submitForm: SubmitHandler<ItemFormValues> = async ({ ...formValues }) => {
+  const submitCreation: SubmitHandler<ItemFormValues> = async ({ ...formValues }) => {
     if (selectedCollection) {
       const newItemParams: ItemRequestBody = {
         collectionId: selectedCollection._id,
@@ -82,7 +82,7 @@ const useCreateItem = (setErrorShown: SetState<boolean>) => {
   const isLoadingNewItem =
     isLoadingItemCreation || isLoadingTagCreation || isLoadingTagUpdate;
 
-  return { submitForm, isLoadingNewItem };
+  return { submitCreation, isLoadingNewItem };
 };
 
 export default useCreateItem;

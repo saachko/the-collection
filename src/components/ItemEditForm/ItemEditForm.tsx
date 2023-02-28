@@ -15,6 +15,7 @@ import useCreateItem from 'hooks/useCreateItem';
 import useGetAllTags from 'hooks/useGetAllTags';
 import { useAppSelector } from 'hooks/useRedux';
 import useUpdateImage from 'hooks/useUpdateImage';
+import useUpdateItem from 'hooks/useUpdateItem';
 
 import { ItemFormValues } from 'ts/interfaces';
 
@@ -35,7 +36,8 @@ function ItemEditForm() {
   const selectedItem = useAppSelector((state) => state.item.selectedItem);
   const [isErrorShown, setErrorShown] = useState(false);
   const { isGetAllTagsLoading } = useGetAllTags();
-  const { submitForm, isLoadingNewItem } = useCreateItem(setErrorShown);
+  const { submitCreation, isLoadingNewItem } = useCreateItem(setErrorShown);
+  const { submitUpdate, isLoadingItemUpdate } = useUpdateItem(setErrorShown);
 
   const defaultFormValues: ItemFormValues = {
     itemName: selectedItem?.itemName || '',
@@ -81,8 +83,16 @@ function ItemEditForm() {
       setValue('itemImage', '');
     }
   }, [isDefaultImage]);
-  // CHANGE DISABLED CONDITION add || isLoadingUpdate ;
-  const isLoading = isLoadingNewItem || isItemCreated || isGetAllTagsLoading;
+
+  const isLoading =
+    isLoadingNewItem || isItemCreated || isLoadingItemUpdate || isGetAllTagsLoading;
+
+  const submitForm = () => {
+    if (selectedItem) {
+      return submitUpdate;
+    }
+    return submitCreation;
+  };
 
   return (
     <>
@@ -98,7 +108,7 @@ function ItemEditForm() {
             aria-label="form"
             noValidate
             autoComplete="off"
-            onSubmit={handleSubmit(submitForm)}
+            onSubmit={handleSubmit(submitForm())}
           >
             <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
               <Form.Label>{t('itemName')}</Form.Label>

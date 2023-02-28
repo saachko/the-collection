@@ -5,7 +5,6 @@ import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import Loader from 'components/Loader/Loader';
 
 import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
-import { useAppSelector } from 'hooks/useRedux';
 
 import styles from '../ItemEditForm.module.scss';
 import CustomFieldInput from './CustomFieldInput';
@@ -16,22 +15,21 @@ interface CustomFieldsFormProps {
 
 function CustomFieldsForm({ collectionId }: CustomFieldsFormProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
-  const customFieldsValues = useAppSelector((state) => state.item.customFieldsValues);
-  const { fieldsInCollection, isLoadingFields } =
+  const { fieldsInCollection, isLoadingFields, itemFieldsValues } =
     useGetCustomFieldsInCollection(collectionId);
 
   return (
     <div className={styles.customFieldsContainer}>
+      {isLoadingFields && <Loader />}
       {fieldsInCollection && fieldsInCollection.length > 0 ? (
         <>
-          {isLoadingFields && <Loader />}
           <p>{t('prescription')}</p>
           {fieldsInCollection.map((field, index) => (
             <div key={field._id}>
               <CustomFieldInput
                 field={field}
                 fieldIndex={index}
-                fieldsValues={customFieldsValues}
+                fieldsValues={itemFieldsValues}
               />
             </div>
           ))}

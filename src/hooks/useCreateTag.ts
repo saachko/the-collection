@@ -6,7 +6,7 @@ import { Item } from 'ts/interfaces';
 
 import { useAppSelector } from './useRedux';
 
-const useCreateTag = (newItem: Item | undefined) => {
+const useCreateTag = (item: Item | undefined) => {
   const { allTags, tagsFromInput } = useAppSelector((state) => state.tag);
   const newTags = tagsFromInput.filter((tag) =>
     allTags?.every((existingTag) => existingTag._id !== tag.value)
@@ -15,16 +15,16 @@ const useCreateTag = (newItem: Item | undefined) => {
   const [createTag, { isLoading: isLoadingTagCreation }] = useCreateTagMutation();
 
   useEffect(() => {
-    if (newItem) {
+    if (item) {
       (async () => {
         await Promise.all(
           newTags.map(async (newTag) => {
-            await createTag({ label: newTag.label, items: [newItem._id] });
+            await createTag({ label: newTag.label, items: [item._id] });
           })
         );
       })();
     }
-  }, [newItem]);
+  }, [item]);
 
   return { isLoadingTagCreation };
 };

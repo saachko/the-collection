@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -8,7 +8,7 @@ import MarkdownTextarea from 'components/MarkdownTextarea/MarkdownTextarea';
 
 import { defaultInputTypes } from 'utils/constants';
 
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { CustomField } from 'ts/interfaces';
 
@@ -20,13 +20,15 @@ interface CustomFieldProps {
 
 function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
+  const [inputValue, setInputValue] = useState(fieldsValues[fieldIndex] || '');
+  const customFieldsValues = useAppSelector((state) => state.item.customFieldsValues);
   const dispatch = useAppDispatch();
 
-  const setFieldValue = (newValue: string) => {
-    const newFieldsValues = fieldsValues.slice();
-    newFieldsValues[fieldIndex] = newValue;
+  useEffect(() => {
+    const newFieldsValues = customFieldsValues.slice();
+    newFieldsValues[fieldIndex] = inputValue;
     dispatch(setCustomFieldsValues(newFieldsValues));
-  };
+  }, [inputValue]);
 
   return (
     <Form.Group className="mb-3 form-group" controlId="collectionFormTitle">
@@ -35,15 +37,13 @@ function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps)
       </Form.Label>
       {defaultInputTypes.includes(field.type) && (
         <Form.Control
-          value={fieldsValues[fieldIndex]}
+          value={inputValue}
           type={field.type}
-          onChange={({ target }) => {
-            setFieldValue(target.value);
-          }}
+          onChange={({ target }) => setInputValue(target.value)}
         />
       )}
       {field.type === 'text' && (
-        <MarkdownTextarea value={fieldsValues[fieldIndex]} setValue={setFieldValue} />
+        <MarkdownTextarea value={inputValue} setValue={setInputValue} />
       )}
       {field.type === 'checkbox' && (
         <div className="d-flex gap-2">
@@ -51,9 +51,9 @@ function CustomFieldInput({ field, fieldIndex, fieldsValues }: CustomFieldProps)
           <Form.Check
             type="switch"
             id="defaultImage"
-            onChange={({ target }) => setFieldValue(`${target.checked}`)}
-            value={fieldsValues[fieldIndex]}
-            defaultChecked={fieldsValues[fieldIndex] === 'true'}
+            onChange={({ target }) => setInputValue(`${target.checked}`)}
+            value={inputValue}
+            defaultChecked={inputValue === 'true'}
           />
           <em>{t('yes')}</em>
         </div>

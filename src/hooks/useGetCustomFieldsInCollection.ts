@@ -33,6 +33,10 @@ const useGetCustomFieldsInCollection = (
     }
   }, [collectionId]);
 
+  const itemFieldsValues = selectedItem
+    ? [...selectedItem.customFields].map((field) => field.value)
+    : [];
+
   useEffect(() => {
     if (fieldsInCollection && isSuccessGetFields) {
       const fields = fieldsInCollection.map((field) => ({
@@ -44,10 +48,7 @@ const useGetCustomFieldsInCollection = (
       const ids = fieldsInCollection.map((field) => field._id);
       setStartFieldsIds(ids);
       dispatch(setCustomFieldsInItem(fieldsInCollection));
-      if (selectedItem) {
-        const itemFieldsValues = [...selectedItem.customFields].map(
-          (field) => field.value
-        );
+      if (itemFieldsValues.length > 0) {
         dispatch(setCustomFieldsValues(itemFieldsValues));
       } else {
         const defaultFieldsValues = new Array(fieldsInCollection.length).fill('');
@@ -56,7 +57,7 @@ const useGetCustomFieldsInCollection = (
     }
   }, [fieldsInCollection]);
 
-  return { fieldsInCollection, isLoadingFields, startFieldsIds };
+  return { fieldsInCollection, isLoadingFields, startFieldsIds, itemFieldsValues };
 };
 
 export default useGetCustomFieldsInCollection;

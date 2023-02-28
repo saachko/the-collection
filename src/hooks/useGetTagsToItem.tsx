@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLazyGetTagsByItemIdQuery } from 'redux/api/tagApiSlice';
-import { setTagsFromInput } from 'redux/slices/tagSlice';
+import { setTagsFromInput, setTagsToItem } from 'redux/slices/tagSlice';
 
 import { SelectOption } from 'ts/interfaces';
 
@@ -22,6 +22,7 @@ const useGetTagsToItem = () => {
 
   useEffect(() => {
     if (tags) {
+      dispatch(setTagsToItem(tags));
       const modifiedTags: SelectOption[] = tags.map((tag) => ({
         value: tag._id,
         label: tag.label,
