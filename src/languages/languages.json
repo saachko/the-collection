@@ -208,7 +208,9 @@
         "createdBy": "Created by ",
         "createdAt": "at",
         "itemEdit": "Edit item",
-        "itemDelete": "Delete item"
+        "itemDelete": "Delete item",
+        "itemDeleteConfirm": "Are you sure you want to delete the item?",
+        "error": "Unexpected error! Please try again later"
       }
     }
   },
@@ -421,7 +423,9 @@
         "createdBy": "Создал(а) ",
         "createdAt": "в",
         "itemEdit": "Редактировать",
-        "itemDelete": "Удалить"
+        "itemDelete": "Удалить",
+        "itemDeleteConfirm": "Вы уверены, что хотите удалить элемент?",
+        "error": "Ошибка! Пожалуйста, повторите попытку позже"
       }
     }
   }

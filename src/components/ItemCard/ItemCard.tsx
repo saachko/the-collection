@@ -3,15 +3,19 @@ import React, { memo, useEffect, useState } from 'react';
 import { Card, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setSelectedItem } from 'redux/slices/itemSlice';
 
+import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 import EditDropdown from 'components/EditDropdown/EditDropdown';
+import Loader from 'components/Loader/Loader';
+import ErrorNotification from 'components/Notification/Notification';
 
 import { formatDateAndTime } from 'utils/functions';
 
+import useDeleteItem from 'hooks/useDeleteItem';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useWindowSize from 'hooks/useWindowSize';
 
@@ -24,11 +28,20 @@ interface ItemCardProps {
 }
 
 function ItemCard({ item }: ItemCardProps) {
+  const [confirmDeleteNotification, setConfirmDeleteNotification] = useState(false);
+  const [isDeleteErrorShown, setDeleteErrorShown] = useState(false);
   const { t } = useTranslation('translation', { keyPrefix: 'itemPage' });
   const { user, isAdmin } = useAppSelector((state) => state.user);
   const [imageVariant, setImageVariant] = useState('left');
   const windowSize = useWindowSize();
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const { deleteItem, isDeleteItemLoading } = useDeleteItem(
+    setDeleteErrorShown,
+    item?._id
+  );
 
   useEffect(() => {
     if (windowSize.width < 768) {
@@ -47,7 +60,7 @@ function ItemCard({ item }: ItemCardProps) {
     {
       id: '2',
       title: `${t('itemDelete')}`,
-      action: () => console.log('deleted'),
+      action: () => setConfirmDeleteNotification(true),
     },
   ];
 
@@ -114,11 +127,27 @@ function ItemCard({ item }: ItemCardProps) {
           {item?.likes.length}
         </div>
       </Card.Body>
-      {(isAdmin || user?._id === item?.ownerId) && (
+      {(isAdmin || user?._id === item?.ownerId) && currentPath !== '/search' && (
         <div className={styles.dropdown}>
           <EditDropdown dropdownItems={editActions} />
         </div>
       )}
+      {isDeleteItemLoading && <Loader />}
+      <ConfirmNotification
+        isShown={confirmDeleteNotification}
+        setShown={setConfirmDeleteNotification}
+        onConfirm={() => {
+          deleteItem();
+          setConfirmDeleteNotification(false);
+        }}
+        text={t('itemDeleteConfirm')}
+      />
+      <ErrorNotification
+        message="error"
+        closeNotification={() => setDeleteErrorShown(false)}
+        isShown={isDeleteErrorShown}
+        variant="danger"
+      />
     </Card>
   );
 }
