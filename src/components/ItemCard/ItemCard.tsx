@@ -16,6 +16,7 @@ import ErrorNotification from 'components/Notification/Notification';
 import { formatDateAndTime } from 'utils/functions';
 
 import useDeleteItem from 'hooks/useDeleteItem';
+import useLikeItem from 'hooks/useLikeItem';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import useWindowSize from 'hooks/useWindowSize';
 
@@ -43,6 +44,8 @@ function ItemCard({ item }: ItemCardProps) {
     setDeleteErrorShown,
     item?._id
   );
+
+  const { likeItem, removeLike } = useLikeItem(item);
 
   useEffect(() => {
     if (windowSize.width < 768) {
@@ -123,8 +126,16 @@ function ItemCard({ item }: ItemCardProps) {
             <span> {formatDateAndTime(item, t, 'createdAt')}</span>
           </Card.Text>
         </div>
-        <div className={styles.likes}>
-          {user && item?.likes.includes(user?._id) ? <FaHeart /> : <FaRegHeart />}
+        <div
+          className={clsx(styles.likes, {
+            [styles.likesHover]: isLoggedIn && user,
+          })}
+        >
+          {isLoggedIn && user && item?.likes.includes(user?._id) ? (
+            <FaHeart onClick={removeLike} />
+          ) : (
+            <FaRegHeart onClick={likeItem} />
+          )}
           {item?.likes.length}
         </div>
       </Card.Body>

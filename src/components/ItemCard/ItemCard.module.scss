@@ -100,7 +100,11 @@
   svg {
     color: var(--likes-color);
     transition: $transition;
+  }
+}
 
+.likesHover {
+  svg {
     &:hover {
       cursor: pointer;
       transform: scale(1.1);
