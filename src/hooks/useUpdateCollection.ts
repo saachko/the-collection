@@ -11,7 +11,7 @@ import {
 } from 'ts/interfaces';
 import { SetState } from 'ts/types';
 
-import useCustomFieldsInCollection from './useGetCustomFieldsInCollection';
+import useGetCustomFieldsInCollection from './useGetCustomFieldsInCollection';
 import { useAppDispatch, useAppSelector } from './useRedux';
 import useUpdateCustomFields from './useUpdateCustomFields';
 
@@ -22,7 +22,7 @@ const useUpdateCollection = (setUpdateErrorShown: SetState<boolean>) => {
   );
   const [customFields, setCustomFields] = useState<CustomFieldFormValuesWithId[]>([]);
   const { fieldsInCollection, isLoadingFields, startFieldsIds } =
-    useCustomFieldsInCollection(selectedCollection?._id, setCustomFields);
+    useGetCustomFieldsInCollection(selectedCollection?._id, setCustomFields);
 
   const [
     updateCollectionById,

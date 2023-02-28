@@ -148,11 +148,11 @@ function CollectionForm({ ownerId, submitForm }: CollectionFormProps) {
         <Form.Check
           type="switch"
           id="defaultImage"
-          label={t('defaultImage')}
+          label={selectedCollection ? t('newDefaultImage') : t('defaultImage')}
           checked={isDefaultImage}
           onChange={() => setDefaultImage(!isDefaultImage)}
         />
-        <p className={styles.note}>{t('imageNote')}</p>
+        {!selectedCollection && <p className={styles.note}>{t('imageNote')}</p>}
         <Form.Group className="mb-3 mt-3 form-group" controlId="collectionFormImage">
           <Form.Label>{t('description')}</Form.Label>
           <MarkdownTextarea value={description} setValue={setDescription} />
