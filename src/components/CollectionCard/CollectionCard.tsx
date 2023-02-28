@@ -2,11 +2,15 @@ import clsx from 'clsx';
 import React, { memo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
-import { setCollectionsThemeFilter } from 'redux/slices/filterSlice';
+import {
+  setCollectionsBySelectedUserThemeFilter,
+  setCollectionsByUserThemeFilter,
+  setCollectionsThemeFilter,
+} from 'redux/slices/filterSlice';
 
 import { formatDateAndTime } from 'utils/functions';
 
@@ -25,10 +29,21 @@ function CollectionCard({ collection }: CollectionCardProps) {
   const { t } = useTranslation('translation');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const currentLocation = location.pathname;
 
   const clickOnTheme = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
-    dispatch(setCollectionsThemeFilter(collection.theme));
+    switch (currentLocation) {
+      case '/collections':
+        dispatch(setCollectionsThemeFilter(collection.theme));
+        break;
+      case '/profile':
+        dispatch(setCollectionsByUserThemeFilter(collection.theme));
+        break;
+      default:
+        dispatch(setCollectionsBySelectedUserThemeFilter(collection.theme));
+    }
   };
 
   return (
