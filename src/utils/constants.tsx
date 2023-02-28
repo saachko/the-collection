@@ -164,6 +164,19 @@ const sortByItemsQuantityButtons: SortButton[] = [
   },
 ];
 
+const sortByLikesButtons: SortButton[] = [
+  {
+    id: 'fromLessToMore',
+    icon: <BsSortNumericDown />,
+    tooltip: 'lessMoreLikes',
+  },
+  {
+    id: 'fromMoreToLess',
+    icon: <BsSortNumericUp />,
+    tooltip: 'moreLessLikes',
+  },
+];
+
 const collectionThemes = [
   'books',
   'vinyl',
@@ -233,6 +246,7 @@ export {
   usersTableHeadings,
   defaultSortButtons,
   sortByItemsQuantityButtons,
+  sortByLikesButtons,
   collectionThemes,
   selectStyles,
   customFieldsTypes,

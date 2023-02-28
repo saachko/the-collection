@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { useLazyGetItemsByCollectionIdQuery } from 'redux/api/itemApiSlice';
 import { setItems } from 'redux/slices/itemSlice';
+import { setDefaultItemsSorting } from 'redux/slices/sortSlice';
 
 import { useAppDispatch, useAppSelector } from './useRedux';
 
@@ -24,6 +25,7 @@ const useGetItemsInCollection = (collectionId: string | undefined) => {
   useEffect(() => {
     if (allItems && isSuccessGetItems) {
       dispatch(setItems(allItems));
+      dispatch(setDefaultItemsSorting());
     }
   }, [allItems]);
 

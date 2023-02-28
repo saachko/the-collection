@@ -58,9 +58,10 @@ const formatDateAndTime = (
 const sortData = (
   sortType: SortTypes,
   userData?: User[] | null,
-  collectionData?: Collection[] | null
+  collectionData?: Collection[] | null,
+  itemData?: Item[] | null
 ) => {
-  const data = userData || collectionData;
+  const data = userData || collectionData || itemData;
   if (data) {
     switch (sortType) {
       case 'fromLessToMore':
@@ -69,12 +70,18 @@ const sortData = (
             (a, b) => a.itemsQuantity - b.itemsQuantity
           );
         }
+        if (itemData) {
+          return [...(data as Item[])].sort((a, b) => a.likes.length - b.likes.length);
+        }
         break;
       case 'fromMoreToLess':
         if (collectionData) {
           return [...(data as Collection[])].sort(
             (a, b) => b.itemsQuantity - a.itemsQuantity
           );
+        }
+        if (itemData) {
+          return [...(data as Item[])].sort((a, b) => b.likes.length - a.likes.length);
         }
         break;
       case 'fromAtoZ':
@@ -84,6 +91,9 @@ const sortData = (
         if (collectionData) {
           return [...(data as Collection[])].sort((a, b) => (a.title > b.title ? 1 : -1));
         }
+        if (itemData) {
+          return [...(data as Item[])].sort((a, b) => (a.itemName > b.itemName ? 1 : -1));
+        }
         break;
       case 'fromZtoA':
         if (userData) {
@@ -91,6 +101,9 @@ const sortData = (
         }
         if (collectionData) {
           return [...(data as Collection[])].sort((a, b) => (a.title < b.title ? 1 : -1));
+        }
+        if (itemData) {
+          return [...(data as Item[])].sort((a, b) => (a.itemName < b.itemName ? 1 : -1));
         }
         break;
       case 'fromOldToNew':

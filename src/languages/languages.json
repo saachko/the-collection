@@ -90,7 +90,9 @@
         "oldNew": "from old to new",
         "newOld": "from new to old",
         "moreLess": "from more items to less",
-        "lessMore": "from less items to more"
+        "lessMore": "from less items to more",
+        "moreLessLikes": "from more likes to less",
+        "lessMoreLikes": "from less likes to more"
       },
       "filter": {
         "admins": "show admins",
@@ -307,7 +309,9 @@
         "oldNew": "от старых к новым",
         "newOld": "от новых к старым",
         "moreLess": "по убыванию количества элементов",
-        "lessMore": "по возрастанию количества элементов"
+        "lessMore": "по возрастанию количества элементов",
+        "moreLessLikes": "по убыванию количества лайков",
+        "lessMoreLikes": "по возрастанию количества лайков"
       },
       "filter": {
         "admins": "показать администраторов",

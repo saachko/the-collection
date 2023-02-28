@@ -10,6 +10,9 @@ import CollectionInfo from 'components/CollectionInfo/CollectionInfo';
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
 import ItemsTable from 'components/ItemsTable/ItemsTable';
 import Loader from 'components/Loader/Loader';
+import SortToolbar from 'components/SortToolbar/SortToolbar';
+
+import { defaultSortButtons, sortByLikesButtons } from 'utils/constants';
 
 import useGetCollectionFromLocation from 'hooks/useGetCollectionFromLocation';
 import useGetItemsInCollection from 'hooks/useGetItemsInCollection';
@@ -23,6 +26,7 @@ function CollectionPage() {
   const selectedCollection = useAppSelector(
     (state) => state.collection.selectedCollection
   );
+  const itemsSorting = useAppSelector((state) => state.sort.itemsSorting);
   const { isAdmin, user, isLoggedIn } = useAppSelector((state) => state.user);
   const { items, isLoadingItems } = useGetItemsInCollection(selectedCollection?._id);
 
@@ -43,6 +47,15 @@ function CollectionPage() {
           <Button className="secondary-button mt-2" onClick={navigateToNewItemPage}>
             {t('newItem')}
           </Button>
+        )}
+        {items && items.length > 0 && (
+          <div className="d-flex justify-content-end align-items-center mb-1 mt-1">
+            <SortToolbar
+              sortingItemsList={items}
+              sortingType={itemsSorting}
+              sortButtons={[...sortByLikesButtons, ...defaultSortButtons]}
+            />
+          </div>
         )}
       </div>
       {items && items.length > 0 ? (

@@ -7,6 +7,7 @@ interface SortState {
   collectionsSorting: SortTypes;
   collectionsByUserSorting: SortTypes;
   collectionsBySelectedUserSorting: SortTypes;
+  itemsSorting: SortTypes;
 }
 
 const initialState: SortState = {
@@ -14,6 +15,7 @@ const initialState: SortState = {
   collectionsSorting: 'fromNewToOld',
   collectionsByUserSorting: 'fromNewToOld',
   collectionsBySelectedUserSorting: 'fromNewToOld',
+  itemsSorting: 'fromNewToOld',
 };
 
 const sortSlice = createSlice({
@@ -39,6 +41,10 @@ const sortSlice = createSlice({
       state.collectionsBySelectedUserSorting = payload;
     },
 
+    setItemsSortingType(state, { payload }: PayloadAction<SortTypes>) {
+      state.itemsSorting = payload;
+    },
+
     setDefaultUsersSorting(state) {
       state.usersSorting = 'fromNewToOld';
     },
@@ -54,6 +60,10 @@ const sortSlice = createSlice({
     setDefaultCollectionsBySelectedUserSorting(state) {
       state.collectionsBySelectedUserSorting = 'fromNewToOld';
     },
+
+    setDefaultItemsSorting(state) {
+      state.itemsSorting = 'fromNewToOld';
+    },
   },
 });
 
@@ -62,10 +72,12 @@ export const {
   setCollectionsSortingType,
   setCollectionsByUserSortingType,
   setCollectionsBySelectedUserSortingType,
+  setItemsSortingType,
   setDefaultUsersSorting,
   setDefaultCollectionsSorting,
   setDefaultCollectionsByUserSorting,
   setDefaultCollectionsBySelectedUserSorting,
+  setDefaultItemsSorting,
 } = sortSlice.actions;
 
 export default sortSlice.reducer;

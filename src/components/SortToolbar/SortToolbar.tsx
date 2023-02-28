@@ -6,13 +6,18 @@ import { useTranslation } from 'react-i18next';
 
 import { setUsers } from 'redux/slices/adminSlice';
 import { setCollections } from 'redux/slices/collectionSlice';
-import { setCollectionsSortingType, setUsersSortingType } from 'redux/slices/sortSlice';
+import { setItems } from 'redux/slices/itemSlice';
+import {
+  setCollectionsSortingType,
+  setItemsSortingType,
+  setUsersSortingType,
+} from 'redux/slices/sortSlice';
 
 import { sortData } from 'utils/functions';
 
 import { useAppDispatch } from 'hooks/useRedux';
 
-import { Collection, SortButton, User } from 'ts/interfaces';
+import { Collection, Item, SortButton, User } from 'ts/interfaces';
 import { SortTypes } from 'ts/types';
 
 import styles from './SortToolbar.module.scss';
@@ -20,6 +25,7 @@ import styles from './SortToolbar.module.scss';
 interface SortToolbarProps {
   sortingUserList?: User[] | null;
   sortingCollectionsList?: Collection[] | null;
+  sortingItemsList?: Item[] | null;
   sortingType: SortTypes;
   sortButtons: SortButton[];
   setCollectionsList?: ActionCreatorWithPayload<Collection[] | null>;
@@ -29,6 +35,7 @@ interface SortToolbarProps {
 function SortToolbar({
   sortingUserList,
   sortingCollectionsList,
+  sortingItemsList,
   sortingType,
   sortButtons,
   setCollectionsList,
@@ -38,7 +45,12 @@ function SortToolbar({
   const dispatch = useAppDispatch();
 
   const changeSortingType = (type: SortTypes) => {
-    const sortedData = sortData(type, sortingUserList, sortingCollectionsList);
+    const sortedData = sortData(
+      type,
+      sortingUserList,
+      sortingCollectionsList,
+      sortingItemsList
+    );
     if (sortingUserList) {
       dispatch(setUsersSortingType(type));
       dispatch(setUsers(sortedData as User[] | null));
@@ -46,6 +58,10 @@ function SortToolbar({
     if (sortingCollectionsList) {
       dispatch((setCollectionsSorting || setCollectionsSortingType)(type));
       dispatch((setCollectionsList || setCollections)(sortedData as Collection[] | null));
+    }
+    if (sortingItemsList) {
+      dispatch(setItemsSortingType(type));
+      dispatch(setItems(sortedData as Item[] | null));
     }
   };
 
@@ -75,6 +91,7 @@ function SortToolbar({
 SortToolbar.defaultProps = {
   sortingUserList: null,
   sortingCollectionsList: null,
+  sortingItemsList: null,
   setCollectionsList: setCollections,
   setCollectionsSorting: setCollectionsSortingType,
 };
