@@ -96,6 +96,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  color: var(--text-color);
 
   svg {
     color: var(--likes-color);
@@ -111,4 +112,8 @@
       opacity: $hoverOpacity;
     }
   }
+}
+
+.hidden {
+  display: none;
 }

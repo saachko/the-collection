@@ -42,6 +42,10 @@ function CollectionCard({ collection }: CollectionCardProps) {
       case '/profile':
         dispatch(setCollectionsByUserThemeFilter(collection.theme));
         break;
+      case '/':
+        dispatch(setCollectionsThemeFilter(collection.theme));
+        navigate('/collections');
+        break;
       default:
         dispatch(setCollectionsBySelectedUserThemeFilter(collection.theme));
     }

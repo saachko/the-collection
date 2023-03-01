@@ -6,6 +6,7 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { setSelectedUser } from 'redux/slices/adminSlice';
+import { setSelectedCollection } from 'redux/slices/collectionSlice';
 import { setSelectedItem } from 'redux/slices/itemSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
@@ -101,7 +102,9 @@ function ItemCard({ item }: ItemCardProps) {
                 <NavLink
                   to={`/collections/${item?.collectionId}`}
                   className={styles.collectionLink}
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    dispatch(setSelectedCollection(null));
                     dispatch(setSelectedItem(null));
                   }}
                 >
@@ -117,7 +120,8 @@ function ItemCard({ item }: ItemCardProps) {
               className={clsx(styles.author, {
                 [styles.authorLink]: isAdmin && isLoggedIn,
               })}
-              onClick={() => {
+              onClick={(event) => {
+                event.stopPropagation();
                 dispatch(setSelectedUser(null));
               }}
             >
@@ -141,7 +145,11 @@ function ItemCard({ item }: ItemCardProps) {
       </Card.Body>
       {((isAdmin && isLoggedIn) || user?._id === item?.ownerId) &&
         currentPath !== '/search' && (
-          <div className={styles.dropdown}>
+          <div
+            className={clsx(styles.dropdown, {
+              [styles.hidden]: !currentPath.includes('/items'),
+            })}
+          >
             <EditDropdown dropdownItems={editActions} />
           </div>
         )}
@@ -156,7 +164,7 @@ function ItemCard({ item }: ItemCardProps) {
         text={t('itemDeleteConfirm')}
       />
       <ErrorNotification
-        message="error"
+        message="itemPage.error"
         closeNotification={() => setDeleteErrorShown(false)}
         isShown={isDeleteErrorShown}
         variant="danger"
