@@ -39,6 +39,8 @@ function ColumnSorting({
     }
   }, [itemsSorting]);
 
+  const removeSymbols = (text: string) => text.replace(/[^A-Za-zа-яА-ЯЁё0-9]/g, '');
+
   const sortAscending = () => {
     if (items) {
       const list = [...items].sort((a, b) => {
@@ -52,6 +54,8 @@ function ColumnSorting({
             return Number(aField.value) - Number(bField.value);
           case 'date':
             return Date.parse(bField.value) - Date.parse(aField.value);
+          case 'text':
+            return removeSymbols(aField.value) > removeSymbols(bField.value) ? 1 : -1;
           default:
             return aField.value > bField.value ? 1 : -1;
         }
@@ -76,6 +80,8 @@ function ColumnSorting({
             return Number(bField.value) - Number(aField.value);
           case 'date':
             return Date.parse(aField.value) - Date.parse(bField.value);
+          case 'text':
+            return removeSymbols(aField.value) < removeSymbols(bField.value) ? 1 : -1;
           default:
             return aField.value < bField.value ? 1 : -1;
         }
