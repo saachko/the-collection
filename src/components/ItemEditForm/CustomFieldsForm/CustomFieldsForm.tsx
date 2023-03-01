@@ -2,25 +2,19 @@ import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
-import Loader from 'components/Loader/Loader';
 
-import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
+import { useAppSelector } from 'hooks/useRedux';
 
 import styles from '../ItemEditForm.module.scss';
 import CustomFieldInput from './CustomFieldInput';
 
-interface CustomFieldsFormProps {
-  collectionId: string | undefined;
-}
-
-function CustomFieldsForm({ collectionId }: CustomFieldsFormProps) {
+function CustomFieldsForm() {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
-  const { fieldsInCollection, isLoadingFields, itemFieldsValues } =
-    useGetCustomFieldsInCollection(collectionId);
+  const fieldsInCollection = useAppSelector((state) => state.item.customFieldsInItem);
+  const customFieldsValues = useAppSelector((state) => state.item.customFieldsValues);
 
   return (
     <div className={styles.customFieldsContainer}>
-      {isLoadingFields && <Loader />}
       {fieldsInCollection && fieldsInCollection.length > 0 ? (
         <>
           <p>{t('prescription')}</p>
@@ -29,7 +23,7 @@ function CustomFieldsForm({ collectionId }: CustomFieldsFormProps) {
               <CustomFieldInput
                 field={field}
                 fieldIndex={index}
-                fieldsValues={itemFieldsValues}
+                fieldsValues={customFieldsValues}
               />
             </div>
           ))}

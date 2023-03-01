@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { setSelectedItem } from 'redux/slices/itemSlice';
+import { setCustomFieldsInItem, setSelectedItem } from 'redux/slices/itemSlice';
 import { setTagsFromInput } from 'redux/slices/tagSlice';
 
 import CollectionInfo from 'components/CollectionInfo/CollectionInfo';
@@ -15,6 +15,7 @@ import SortToolbar from 'components/SortToolbar/SortToolbar';
 import { defaultSortButtons, sortByLikesButtons } from 'utils/constants';
 
 import useGetCollectionFromLocation from 'hooks/useGetCollectionFromLocation';
+import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
 import useGetItemsInCollection from 'hooks/useGetItemsInCollection';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -29,9 +30,11 @@ function CollectionPage() {
   const itemsSorting = useAppSelector((state) => state.sort.itemsSorting);
   const { isAdmin, user, isLoggedIn } = useAppSelector((state) => state.user);
   const { items, isLoadingItems } = useGetItemsInCollection(selectedCollection?._id);
+  const { fieldsInCollection } = useGetCustomFieldsInCollection(selectedCollection?._id);
 
   const navigateToNewItemPage = () => {
     dispatch(setTagsFromInput([]));
+    dispatch(setCustomFieldsInItem(fieldsInCollection || []));
     dispatch(setSelectedItem(null));
     navigate(`/collections/${selectedCollection?._id}/new-item`);
   };
@@ -59,7 +62,7 @@ function CollectionPage() {
         )}
       </div>
       {items && items.length > 0 ? (
-        <ItemsTable items={items} collectionId={selectedCollection?._id} />
+        <ItemsTable items={items} />
       ) : (
         <EmptyContainer title={t('empty')} text="" />
       )}

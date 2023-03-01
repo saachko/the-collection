@@ -27,9 +27,6 @@ import ValidationError from './ValidationError';
 function ItemEditForm() {
   const { t } = useTranslation('translation', { keyPrefix: 'items' });
   const navigate = useNavigate();
-  const selectedCollection = useAppSelector(
-    (state) => state.collection.selectedCollection
-  );
   const isItemCreated = useAppSelector(
     (state) => state.successNotification.isItemCreated
   );
@@ -144,9 +141,7 @@ function ItemEditForm() {
           </Form>
           <TagsInput />
         </div>
-        <CustomFieldsForm
-          collectionId={selectedItem?.collectionId || selectedCollection?._id}
-        />
+        <CustomFieldsForm />
       </div>
       <ButtonToolbar className="justify-content-center gap-5 mt-4 mb-3">
         <Button

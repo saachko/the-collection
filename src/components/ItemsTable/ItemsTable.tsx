@@ -8,13 +8,12 @@ import { MdClose, MdDone } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { v4 } from 'uuid';
 
-import { setSelectedItem } from 'redux/slices/itemSlice';
+import { setCustomFieldsValues, setSelectedItem } from 'redux/slices/itemSlice';
 
 import { defaultInputTypes } from 'utils/constants';
 import { formatDate } from 'utils/functions';
 
-import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
-import { useAppDispatch } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { Item } from 'ts/interfaces';
 
@@ -22,16 +21,15 @@ import ColumnSorting from './ColumnSorting/ColumnSorting';
 import styles from './ItemsTable.module.scss';
 
 interface ItemsTableProps {
-  collectionId: string | undefined;
   items: Item[] | null;
 }
 
-function ItemsTable({ collectionId, items }: ItemsTableProps) {
+function ItemsTable({ items }: ItemsTableProps) {
   const [activeAscSorting, setActiveAscSorting] = useState('');
   const [activeDescSorting, setActiveDescSorting] = useState('');
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const defaultItemsTableHeadings = ['#', 'image', 'name', 'date'];
-  const { fieldsInCollection } = useGetCustomFieldsInCollection(collectionId);
+  const fieldsInCollection = useAppSelector((state) => state.item.customFieldsInItem);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -39,6 +37,10 @@ function ItemsTable({ collectionId, items }: ItemsTableProps) {
     const selectedItem = items?.find((item) => item._id === itemId);
     if (selectedItem) {
       dispatch(setSelectedItem(selectedItem));
+      const itemFieldsValues = selectedItem
+        ? [...selectedItem.customFields].map((field) => field.value)
+        : [];
+      dispatch(setCustomFieldsValues(itemFieldsValues));
       navigate(`/items/${itemId}`);
     }
   };
