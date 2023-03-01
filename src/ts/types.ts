@@ -10,7 +10,8 @@ type SortTypes =
   | 'fromNewToOld'
   | 'fromOldToNew'
   | 'fromMoreToLess'
-  | 'fromLessToMore';
+  | 'fromLessToMore'
+  | '';
 
 type CustomFieldTypes = 'number' | 'string' | 'text' | 'date' | 'checkbox' | '';
 

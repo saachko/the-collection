@@ -1,6 +1,6 @@
 import MDEditor from '@uiw/react-md-editor';
 import clsx from 'clsx';
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import { Image, Table } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaHeart } from 'react-icons/fa';
@@ -18,6 +18,7 @@ import { useAppDispatch } from 'hooks/useRedux';
 
 import { Item } from 'ts/interfaces';
 
+import ColumnSorting from './ColumnSorting/ColumnSorting';
 import styles from './ItemsTable.module.scss';
 
 interface ItemsTableProps {
@@ -26,6 +27,8 @@ interface ItemsTableProps {
 }
 
 function ItemsTable({ collectionId, items }: ItemsTableProps) {
+  const [activeAscSorting, setActiveAscSorting] = useState('');
+  const [activeDescSorting, setActiveDescSorting] = useState('');
   const { t } = useTranslation('translation', { keyPrefix: 'collectionPage' });
   const defaultItemsTableHeadings = ['#', 'image', 'name', 'date'];
   const { fieldsInCollection } = useGetCustomFieldsInCollection(collectionId);
@@ -52,7 +55,21 @@ function ItemsTable({ collectionId, items }: ItemsTableProps) {
               {t('likes')} <FaHeart />
             </th>
             {fieldsInCollection &&
-              fieldsInCollection.map((field) => <th key={v4()}>{field.label}</th>)}
+              fieldsInCollection.map((field) => (
+                <th key={v4()}>
+                  <span className="d-flex align-items-start gap-1">
+                    {field.label}{' '}
+                    <ColumnSorting
+                      items={items}
+                      field={field}
+                      activeAsc={activeAscSorting}
+                      setActiveAsc={setActiveAscSorting}
+                      activeDesc={activeDescSorting}
+                      setActiveDesc={setActiveDescSorting}
+                    />
+                  </span>
+                </th>
+              ))}
           </tr>
         </thead>
         <tbody>
