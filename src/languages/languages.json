@@ -28,7 +28,8 @@
         "mainText": "The Collection app is a convenient way to manage your personal collections. You can create any collection you want, configure and add items in it and, of course, get inspired by other people's collections.",
         "browseButton": "Browse all collections",
         "noAccount": "Still don't have an account?",
-        "signup": "Sign Up"
+        "signup": "Sign Up",
+        "biggestCollections": "The biggest collections"
       },
       "auth": {
         "signIn": "Sign In",
@@ -247,7 +248,8 @@
         "mainText": "Приложение The Collection - это удобный способ управления личными коллекциями. Вы можете создавать коллекции, настраивать и добавлять в них элементы и, конечно же, вдохновляться коллекциями других.",
         "browseButton": "Посмотреть коллекции",
         "noAccount": "У вас всё ещё нет аккаунта?",
-        "signup": "Регистрация"
+        "signup": "Регистрация",
+        "biggestCollections": "Самые большие коллекции"
       },
       "auth": {
         "signIn": "Вход",

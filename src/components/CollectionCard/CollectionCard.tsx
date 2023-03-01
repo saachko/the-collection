@@ -49,7 +49,9 @@ function CollectionCard({ collection }: CollectionCardProps) {
 
   return (
     <Card
-      className={styles.card}
+      className={clsx(styles.card, {
+        [styles.cardHomePage]: currentLocation === '/',
+      })}
       onClick={() => {
         dispatch(setSelectedCollection(collection));
         navigate(`/collections/${collection._id}`);

@@ -19,6 +19,12 @@
   }
 }
 
+.cardHomePage:nth-child(4) {
+  @media (max-width: 1214px) and (min-width: 915px) {
+    display: none;
+  }
+}
+
 .cardFooter {
   border-color: var(--lines-color);
 
