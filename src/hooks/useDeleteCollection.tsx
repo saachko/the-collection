@@ -31,7 +31,7 @@ const useDeleteCollection = (
 
   useEffect(() => {
     if (isSuccessDeleteCollection) {
-      navigate(-1);
+      navigate('/collections');
       dispatch(setSelectedCollection(null));
     }
   }, [isSuccessDeleteCollection]);

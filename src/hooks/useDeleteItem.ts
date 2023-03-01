@@ -17,6 +17,7 @@ const useDeleteItem = (
   const [
     deleteItemById,
     {
+      data: deletedItem,
       isSuccess: isSuccessDeleteItem,
       isLoading: isDeleteItemLoading,
       isError: isDeleteItemError,
@@ -30,8 +31,8 @@ const useDeleteItem = (
   };
 
   useEffect(() => {
-    if (isSuccessDeleteItem) {
-      navigate(-1);
+    if (deletedItem && isSuccessDeleteItem) {
+      navigate(`/collections/${deletedItem.collectionId}`);
       dispatch(setSelectedItem(null));
     }
   }, [isSuccessDeleteItem]);
