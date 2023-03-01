@@ -7,6 +7,7 @@ interface ItemState {
   customFieldsInItem: CustomField[] | null;
   customFieldsValues: string[];
   selectedItem: Item | null;
+  lastAddedItems: Item[] | null;
 }
 
 const initialState: ItemState = {
@@ -14,6 +15,7 @@ const initialState: ItemState = {
   customFieldsInItem: null,
   customFieldsValues: [],
   selectedItem: null,
+  lastAddedItems: null,
 };
 
 const itemSlice = createSlice({
@@ -35,10 +37,19 @@ const itemSlice = createSlice({
     setSelectedItem(state, { payload }: PayloadAction<Item | null>) {
       state.selectedItem = payload;
     },
+
+    setLastAddedItems(state, { payload }: PayloadAction<Item[] | null>) {
+      state.lastAddedItems = payload;
+    },
   },
 });
 
-export const { setItems, setCustomFieldsInItem, setCustomFieldsValues, setSelectedItem } =
-  itemSlice.actions;
+export const {
+  setItems,
+  setCustomFieldsInItem,
+  setCustomFieldsValues,
+  setSelectedItem,
+  setLastAddedItems,
+} = itemSlice.actions;
 
 export default itemSlice.reducer;

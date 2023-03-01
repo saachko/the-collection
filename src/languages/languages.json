@@ -29,7 +29,8 @@
         "browseButton": "Browse all collections",
         "noAccount": "Still don't have an account?",
         "signup": "Sign Up",
-        "biggestCollections": "The biggest collections"
+        "biggestCollections": "The biggest collections",
+        "lastItems": "Recently added items"
       },
       "auth": {
         "signIn": "Sign In",
@@ -249,7 +250,8 @@
         "browseButton": "Посмотреть коллекции",
         "noAccount": "У вас всё ещё нет аккаунта?",
         "signup": "Регистрация",
-        "biggestCollections": "Самые большие коллекции"
+        "biggestCollections": "Самые большие коллекции",
+        "lastItems": "Недавно добавленные элементы"
       },
       "auth": {
         "signIn": "Вход",

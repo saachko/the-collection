@@ -14,15 +14,19 @@ const useLikeItem = (item: Item | null) => {
   const [updateItem, { data: updatedItem, isSuccess: isSuccessLike }] =
     useUpdateItemByIdMutation();
 
-  const likeItem = async () => {
+  const likeItem = async (event: React.MouseEvent<SVGElement, MouseEvent>) => {
     if (item && user) {
+      event.preventDefault();
+      event.stopPropagation();
       const newLikesList = [...item.likes, user._id];
       await updateItem({ itemId: item._id, body: { ...item, likes: newLikesList } });
     }
   };
 
-  const removeLike = async () => {
+  const removeLike = async (event: React.MouseEvent<SVGElement, MouseEvent>) => {
     if (item && user) {
+      event.preventDefault();
+      event.stopPropagation();
       const newLikesList = item.likes.filter((id) => id !== user._id);
       await updateItem({ itemId: item._id, body: { ...item, likes: newLikesList } });
     }

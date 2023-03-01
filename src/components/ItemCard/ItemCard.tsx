@@ -132,9 +132,9 @@ function ItemCard({ item }: ItemCardProps) {
           })}
         >
           {isLoggedIn && user && item?.likes.includes(user?._id) ? (
-            <FaHeart onClick={removeLike} />
+            <FaHeart onClick={(event) => removeLike(event)} />
           ) : (
-            <FaRegHeart onClick={likeItem} />
+            <FaRegHeart onClick={(event) => likeItem(event)} />
           )}
           {item?.likes.length}
         </div>
