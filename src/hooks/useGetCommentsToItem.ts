@@ -7,8 +7,14 @@ import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useGetCommentsToItem = () => {
   const selectedItem = useAppSelector((state) => state.item.selectedItem);
-  const [getComments, { data: commentsToItem, isSuccess: isSuccessGetComments }] =
-    useLazyGetCommentsByItemIdQuery();
+  const [
+    getComments,
+    {
+      data: commentsToItem,
+      isSuccess: isSuccessGetComments,
+      isLoading: isLoadingGetComments,
+    },
+  ] = useLazyGetCommentsByItemIdQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -24,6 +30,8 @@ const useGetCommentsToItem = () => {
       dispatch(setCommentsToItem(commentsToItem));
     }
   }, [commentsToItem]);
+
+  return { isLoadingGetComments };
 };
 
 export default useGetCommentsToItem;

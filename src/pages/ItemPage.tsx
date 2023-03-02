@@ -8,6 +8,7 @@ import CommentTextarea from 'components/CommentTextarea/CommentTextarea';
 import CommentsContainer from 'components/CommentsContainer/CommentsContainer';
 import CustomFieldsContainer from 'components/CustomFieldsContainer/CustomFieldsContainer';
 import ItemCard from 'components/ItemCard/ItemCard';
+import Loader from 'components/Loader/Loader';
 import TagsContainer from 'components/TagsContainer/TagsContainer';
 
 import useGetCommentsToItem from 'hooks/useGetCommentsToItem';
@@ -20,12 +21,13 @@ function ItemPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'itemPage' });
   const navigate = useNavigate();
   useGetItemFromLocation();
+  const isLoggedIn = useAppSelector((state) => state.user.isLoggedIn);
   const selectedItem = useAppSelector((state) => state.item.selectedItem);
   const { fieldsInCollection } = useGetCustomFieldsInCollection(
     selectedItem?.collectionId
   );
   const { tags } = useGetTagsToItem();
-  useGetCommentsToItem();
+  const { isLoadingGetComments } = useGetCommentsToItem();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -47,7 +49,8 @@ function ItemPage() {
       <TagsContainer tags={tags} />
       <CustomFieldsContainer fields={selectedItem?.customFields} />
       <CommentsContainer />
-      <CommentTextarea />
+      {isLoadingGetComments && <Loader />}
+      {isLoggedIn && <CommentTextarea />}
     </div>
   );
 }

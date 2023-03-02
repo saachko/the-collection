@@ -12,7 +12,7 @@ function CommentsContainer() {
   const commentsToItem = useAppSelector((state) => state.item.commentsToItem);
 
   return (
-    <div className="d-flex flex-column gap-2 mt-3 mb-3">
+    <div className="d-flex flex-column gap-2 mt-3 mb-2">
       {commentsToItem && commentsToItem.length ? (
         commentsToItem.map((comment) => (
           <CommentItem key={comment._id} comment={comment} />

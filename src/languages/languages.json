@@ -219,7 +219,8 @@
         "error": "Unexpected error! Please try again later",
         "commentsOn": "comments on ",
         "noComments": "There're no comments yet",
-        "commentDeleteConfirm": "Are you sure you want to delete the comment?"
+        "commentDeleteConfirm": "Are you sure you want to delete the comment?",
+        "commentPlaceholder": "Leave a comment..."
       }
     }
   },
@@ -443,7 +444,8 @@
         "error": "Ошибка! Пожалуйста, повторите попытку позже",
         "commentsOn": "комментирует ",
         "noComments": "Комментариев пока что нет",
-        "commentDeleteConfirm": "Вы уверены, что хотите удалить комментарий?"
+        "commentDeleteConfirm": "Вы уверены, что хотите удалить комментарий?",
+        "commentPlaceholder": "Оставьте комментарий..."
       }
     }
   }
