@@ -16,6 +16,7 @@ import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection
 import useGetItemFromLocation from 'hooks/useGetItemFromLocation';
 import useGetTagsToItem from 'hooks/useGetTagsToItem';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
+import useSubscribeOnCommentsChanges from 'hooks/useSubscribeOnCommentsChanges';
 
 function ItemPage() {
   const { t } = useTranslation('translation', { keyPrefix: 'itemPage' });
@@ -29,6 +30,7 @@ function ItemPage() {
   const { tags } = useGetTagsToItem();
   const { isLoadingGetComments } = useGetCommentsToItem();
   const dispatch = useAppDispatch();
+  useSubscribeOnCommentsChanges();
 
   useEffect(() => {
     if (fieldsInCollection) {

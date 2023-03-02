@@ -17,4 +17,14 @@ type CustomFieldTypes = 'number' | 'string' | 'text' | 'date' | 'checkbox' | '';
 
 type ImageType = 'beam' | 'marble';
 
-export type { SetState, Themes, AuthModal, SortTypes, CustomFieldTypes, ImageType };
+type ChangedCommentType = 'newComment' | 'deletedComment';
+
+export type {
+  SetState,
+  Themes,
+  AuthModal,
+  SortTypes,
+  CustomFieldTypes,
+  ImageType,
+  ChangedCommentType,
+};

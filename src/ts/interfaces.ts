@@ -1,4 +1,4 @@
-import { CustomFieldTypes, SortTypes } from './types';
+import { ChangedCommentType, CustomFieldTypes, SortTypes } from './types';
 
 interface DatabaseModel {
   _id: string;
@@ -148,6 +148,11 @@ interface CommentRequestBody {
 
 interface Comment extends DatabaseModel, CommentRequestBody {}
 
+interface ChangedComment {
+  comment: Comment;
+  type: ChangedCommentType;
+}
+
 interface SelectOption {
   value: string;
   label: string;
@@ -180,5 +185,6 @@ export type {
   TagRequestBody,
   Comment,
   CommentRequestBody,
+  ChangedComment,
   SelectOption,
 };

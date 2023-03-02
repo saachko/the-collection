@@ -1,5 +1,5 @@
 import { Endpoints, Methods } from 'ts/enums';
-import { Comment, CommentRequestBody } from 'ts/interfaces';
+import { ChangedComment, Comment, CommentRequestBody } from 'ts/interfaces';
 
 import apiSlice from './apiSlice';
 
@@ -67,12 +67,21 @@ const commentApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Comment'],
     }),
+
+    getChangedComment: builder.query<ChangedComment, void>({
+      query: () => ({
+        url: `${Endpoints.comments}`,
+        method: Methods.get,
+      }),
+      providesTags: ['Comment'],
+    }),
   }),
 });
 
 export const {
   useLazyGetCommentByIdQuery,
   useLazyGetCommentsByItemIdQuery,
+  useLazyGetChangedCommentQuery,
   useCreateCommentMutation,
   useDeleteCommentByIdMutation,
   useUpdateCommentByIdMutation,
