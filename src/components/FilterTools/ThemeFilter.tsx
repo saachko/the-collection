@@ -91,6 +91,7 @@ function ThemeFilter({
         styles={selectStyles}
         className={clsx('react-select-container', styles.themeFilter)}
         classNamePrefix="react-select"
+        noOptionsMessage={() => `${t('filter.noOptions')}`}
       />
     </div>
   );

@@ -101,7 +101,8 @@
         "blocked": "show blocked users",
         "noFilter": "show all users",
         "noUsersResult": "No users found",
-        "noCollectionsResult": "No collections found"
+        "noCollectionsResult": "No collections found",
+        "noOptions": "No options"
       },
       "collections": {
         "empty": "There're no collections yet.",
@@ -326,7 +327,8 @@
         "blocked": "показать заблокированных",
         "noFilter": "показать всех пользователей",
         "noUsersResult": "Пользователи отсутствуют",
-        "noCollectionsResult": "Коллекции отсутствуют"
+        "noCollectionsResult": "Коллекции отсутствуют",
+        "noOptions": "Нет совпадений"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",
