@@ -6,6 +6,7 @@ import ButtonControls from './ButtonControls';
 import styles from './Header.module.scss';
 import HeaderNavbar from './HeaderNavbar';
 import LanguageSwitcher from './LanguageSwitcher';
+import SearchButton from './SearchButton';
 import ThemeSwitcher from './ThemeSwitcher';
 
 function Header() {
@@ -15,6 +16,7 @@ function Header() {
         <HeaderNavbar />
         <div className={styles.controls}>
           <ThemeSwitcher />
+          <SearchButton />
           <LanguageSwitcher />
           <ButtonControls />
           <BurgerMenu />

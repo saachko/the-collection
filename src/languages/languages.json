@@ -102,7 +102,8 @@
         "noFilter": "show all users",
         "noUsersResult": "No users found",
         "noCollectionsResult": "No collections found",
-        "noOptions": "No options"
+        "noOptions": "No options",
+        "searchPlaceholder": "Find items..."
       },
       "collections": {
         "empty": "There're no collections yet.",
@@ -328,7 +329,8 @@
         "noFilter": "показать всех пользователей",
         "noUsersResult": "Пользователи отсутствуют",
         "noCollectionsResult": "Коллекции отсутствуют",
-        "noOptions": "Нет совпадений"
+        "noOptions": "Нет совпадений",
+        "searchPlaceholder": "Найти элементы..."
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",

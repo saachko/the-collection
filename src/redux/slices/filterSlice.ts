@@ -6,6 +6,8 @@ interface FilterState {
   collectionsThemeFilter: string;
   collectionsByUserThemeFilter: string;
   collectionsBySelectedUserThemeFilter: string;
+  searchValue: string;
+  offcanvasShown: boolean;
 }
 
 const initialState: FilterState = {
@@ -14,6 +16,8 @@ const initialState: FilterState = {
   collectionsThemeFilter: '',
   collectionsByUserThemeFilter: '',
   collectionsBySelectedUserThemeFilter: '',
+  searchValue: '',
+  offcanvasShown: false,
 };
 
 const filterSlice = createSlice({
@@ -56,6 +60,14 @@ const filterSlice = createSlice({
     setDefaultCollectionsBySelectedUserFilters(state) {
       state.collectionsBySelectedUserThemeFilter = '';
     },
+
+    setSearchValue(state, { payload }: PayloadAction<string>) {
+      state.searchValue = payload;
+    },
+
+    setOffcanvasShown(state, { payload }: PayloadAction<boolean>) {
+      state.offcanvasShown = payload;
+    },
   },
 });
 
@@ -69,6 +81,8 @@ export const {
   setDefaultCollectionsFilters,
   setDefaultCollectionsByUserFilters,
   setDefaultCollectionsBySelectedUserFilters,
+  setSearchValue,
+  setOffcanvasShown,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

@@ -208,3 +208,12 @@ html[data-theme='dark'] {
     max-width: 100%;
   }
 }
+
+.offcanvas,
+.offcanvas-xxl,
+.offcanvas-xl,
+.offcanvas-lg,
+.offcanvas-md,
+.offcanvas-sm {
+  --bs-offcanvas-height: 70px;
+}
