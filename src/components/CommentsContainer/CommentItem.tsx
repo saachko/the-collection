@@ -2,13 +2,16 @@ import clsx from 'clsx';
 import React, { memo, useState } from 'react';
 import { Card, CloseButton, Image } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
+import { setSelectedUser } from 'redux/slices/adminSlice';
 
 import ConfirmNotification from 'components/ConfirmNotification/ConfirmNotification';
 
 import { formatDateAndTime } from 'utils/functions';
 
 import useDeleteComment from 'hooks/useDeleteComment';
-import { useAppSelector } from 'hooks/useRedux';
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 import { Comment } from 'ts/interfaces';
 
@@ -24,6 +27,8 @@ function CommentItem({ comment }: CommentItemProps) {
   const { t } = useTranslation('translation', { keyPrefix: 'itemPage' });
   const { isAdmin, isLoggedIn, user } = useAppSelector((state) => state.user);
   const { deleteComment } = useDeleteComment(comment._id);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const confirmDeletion = () => {
     setConfirmDeleteNotification(false);
@@ -31,6 +36,13 @@ function CommentItem({ comment }: CommentItemProps) {
     setTimeout(() => {
       deleteComment();
     }, 300);
+  };
+
+  const navigateToUserPage = () => {
+    if (isAdmin && isLoggedIn) {
+      dispatch(setSelectedUser(null));
+      navigate(`/users/${comment.authorId}`);
+    }
   };
 
   return (
@@ -42,12 +54,26 @@ function CommentItem({ comment }: CommentItemProps) {
         })}
       >
         <div className="d-flex gap-3">
-          <div className="avatar-sm position-relative">
+          <div
+            className={clsx('avatar-sm position-relative', {
+              [styles.linkToUser]: isAdmin && isLoggedIn,
+            })}
+            onClick={navigateToUserPage}
+            aria-hidden="true"
+          >
             <div className="avatar-sm loading-skeleton position-absolute" />
             <Image src={comment.authorAvatar} className="avatar-sm position-absolute" />
           </div>
           <div>
-            <p className={styles.author}>{comment.authorName}</p>
+            <p
+              className={clsx(styles.author, {
+                [styles.linkToUser]: isAdmin && isLoggedIn,
+              })}
+              onClick={navigateToUserPage}
+              aria-hidden="true"
+            >
+              {comment.authorName}
+            </p>
             <p className={styles.date}>
               {t('commentsOn')}
               {formatDateAndTime(comment, t, 'createdAt')}

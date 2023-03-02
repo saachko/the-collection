@@ -21,6 +21,7 @@
   margin: 0;
   word-break: break-word;
   padding-right: 30px;
+  color: var(--title-color);
 }
 
 .date {
@@ -51,4 +52,13 @@
 
 .deletedComment {
   animation: disappear 0.5s 1;
+}
+
+.linkToUser {
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--text-color);
+  }
 }
