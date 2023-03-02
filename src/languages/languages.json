@@ -216,7 +216,10 @@
         "itemEdit": "Edit item",
         "itemDelete": "Delete item",
         "itemDeleteConfirm": "Are you sure you want to delete the item?",
-        "error": "Unexpected error! Please try again later"
+        "error": "Unexpected error! Please try again later",
+        "commentsOn": "comments on ",
+        "noComments": "There're no comments yet",
+        "commentDeleteConfirm": "Are you sure you want to delete the comment?"
       }
     }
   },
@@ -437,7 +440,10 @@
         "itemEdit": "Редактировать",
         "itemDelete": "Удалить",
         "itemDeleteConfirm": "Вы уверены, что хотите удалить элемент?",
-        "error": "Ошибка! Пожалуйста, повторите попытку позже"
+        "error": "Ошибка! Пожалуйста, повторите попытку позже",
+        "commentsOn": "комментирует ",
+        "noComments": "Комментариев пока что нет",
+        "commentDeleteConfirm": "Вы уверены, что хотите удалить комментарий?"
       }
     }
   }

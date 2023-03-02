@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 
-import { Collection, Item, ParsedToken, User } from 'ts/interfaces';
+import { Collection, Comment, Item, ParsedToken, User } from 'ts/interfaces';
 import { ImageType, SortTypes } from 'ts/types';
 
 const parseJwt = (tokenToParse: string) => {
@@ -44,7 +44,7 @@ const formatDate = (stringDate: string) => {
 };
 
 const formatDateAndTime = (
-  elem: Item | Collection | null,
+  elem: Item | Collection | Comment | null,
   t: TFunction,
   text: string
 ) => {

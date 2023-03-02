@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { CustomField, Item } from 'ts/interfaces';
+import { Comment, CustomField, Item } from 'ts/interfaces';
 
 interface ItemState {
   itemsInCollection: Item[] | null;
@@ -8,6 +8,7 @@ interface ItemState {
   customFieldsValues: string[];
   selectedItem: Item | null;
   lastAddedItems: Item[] | null;
+  commentsToItem: Comment[] | null;
 }
 
 const initialState: ItemState = {
@@ -16,6 +17,7 @@ const initialState: ItemState = {
   customFieldsValues: [],
   selectedItem: null,
   lastAddedItems: null,
+  commentsToItem: null,
 };
 
 const itemSlice = createSlice({
@@ -41,6 +43,10 @@ const itemSlice = createSlice({
     setLastAddedItems(state, { payload }: PayloadAction<Item[] | null>) {
       state.lastAddedItems = payload;
     },
+
+    setCommentsToItem(state, { payload }: PayloadAction<Comment[] | null>) {
+      state.commentsToItem = payload;
+    },
   },
 });
 
@@ -50,6 +56,7 @@ export const {
   setCustomFieldsValues,
   setSelectedItem,
   setLastAddedItems,
+  setCommentsToItem,
 } = itemSlice.actions;
 
 export default itemSlice.reducer;

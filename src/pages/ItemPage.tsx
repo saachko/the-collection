@@ -4,10 +4,13 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { setCustomFieldsInItem, setCustomFieldsValues } from 'redux/slices/itemSlice';
 
+import CommentTextarea from 'components/CommentTextarea/CommentTextarea';
+import CommentsContainer from 'components/CommentsContainer/CommentsContainer';
 import CustomFieldsContainer from 'components/CustomFieldsContainer/CustomFieldsContainer';
 import ItemCard from 'components/ItemCard/ItemCard';
 import TagsContainer from 'components/TagsContainer/TagsContainer';
 
+import useGetCommentsToItem from 'hooks/useGetCommentsToItem';
 import useGetCustomFieldsInCollection from 'hooks/useGetCustomFieldsInCollection';
 import useGetItemFromLocation from 'hooks/useGetItemFromLocation';
 import useGetTagsToItem from 'hooks/useGetTagsToItem';
@@ -22,6 +25,7 @@ function ItemPage() {
     selectedItem?.collectionId
   );
   const { tags } = useGetTagsToItem();
+  useGetCommentsToItem();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -42,6 +46,8 @@ function ItemPage() {
       <ItemCard item={selectedItem} />
       <TagsContainer tags={tags} />
       <CustomFieldsContainer fields={selectedItem?.customFields} />
+      <CommentsContainer />
+      <CommentTextarea />
     </div>
   );
 }
