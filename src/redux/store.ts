@@ -17,6 +17,7 @@ import collectionReducer from './slices/collectionSlice';
 import filterReducer from './slices/filterSlice';
 import itemReducer from './slices/itemSlice';
 import authModalReducer from './slices/modalAuthSlice';
+import searchReducer from './slices/searchSlice';
 import sortReducer from './slices/sortSlice';
 import successNotificationReducer from './slices/successNotificationSlice';
 import tagReducer from './slices/tagSlice';
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   authModal: authModalReducer,
   sort: sortReducer,
   filter: filterReducer,
+  search: searchReducer,
   user: persistReducer(userConfig, userReducer),
   admin: adminReducer,
   collection: collectionReducer,

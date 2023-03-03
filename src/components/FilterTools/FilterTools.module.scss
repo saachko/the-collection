@@ -59,3 +59,27 @@
     }
   }
 }
+
+.searchButton {
+  width: 50px;
+  background-color: var(--transparent);
+  border: none;
+  margin-left: 10px;
+  margin-top: -3px;
+
+  svg {
+    font-size: $fontSizeH3;
+    color: var(--primary-color);
+    transition: $transition;
+  }
+
+  &:hover svg {
+    color: var(--primary-color-light);
+    transform: scale(1.1);
+  }
+
+  &:disabled svg {
+    color: var(--light-color);
+    transform: scale(1);
+  }
+}

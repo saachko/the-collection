@@ -13,6 +13,9 @@ import ModalAuth from 'components/ModalAuth/ModalAuth';
 import Notification from 'components/Notification/Notification';
 
 import useCheckUserOnAppStart from 'hooks/useCheckUserOnAppStart';
+import useGetAllCollections from 'hooks/useGetAllCollections';
+import useGetAllComments from 'hooks/useGetAllComments';
+import useGetAllItems from 'hooks/useGetAllItems';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const HomePage = lazy(() => import('pages/HomePage'));
@@ -26,6 +29,7 @@ const EditItemPage = lazy(() => import('pages/EditItemPage'));
 const ProfilePage = lazy(() => import('pages/ProfilePage'));
 const UsersPage = lazy(() => import('pages/UsersPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
+const SearchPage = lazy(() => import('pages/SearchPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
@@ -36,6 +40,15 @@ function App() {
   const { isGetUserLoading } = useCheckUserOnAppStart();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { isGetAllItemsLoading } = useGetAllItems();
+  const { isGetCollectionsLoading } = useGetAllCollections();
+  const { isGetCommentsLoading } = useGetAllComments();
+
+  const isLoading =
+    isGetUserLoading ||
+    isGetAllItemsLoading ||
+    isGetCollectionsLoading ||
+    isGetCommentsLoading;
 
   useEffect(() => {
     if (isCollectionCreated || isItemCreated) navigate(-1);
@@ -45,7 +58,6 @@ function App() {
     <>
       <Header />
       <Suspense fallback={<Loader />}>
-        {isGetUserLoading && <Loader />}
         <main>
           <Routes>
             <Route index path="/" element={<HomePage />} />
@@ -62,6 +74,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="users" element={<UsersPage />} />
             <Route path="users/:userId" element={<UserPage />} />
+            <Route path="search" element={<SearchPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
@@ -77,6 +90,7 @@ function App() {
           isShown={isItemCreated}
           variant="primary"
         />
+        {isLoading && <Loader />}
       </Suspense>
       <Footer />
       {isModalAuthShown && <ModalAuth />}

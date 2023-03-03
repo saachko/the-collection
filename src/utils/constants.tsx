@@ -1,3 +1,4 @@
+import { MeiliSearch } from 'meilisearch';
 import React from 'react';
 import { AiFillGithub, AiFillLinkedin, AiTwotoneMail } from 'react-icons/ai';
 import {
@@ -235,6 +236,11 @@ const customFieldsTypes: CustomFieldTypes[] = [
 
 const defaultInputTypes = ['string', 'number', 'date'];
 
+const meiliSearchClient = new MeiliSearch({
+  host: import.meta.env.VITE_MEILISEARCH_HOST,
+  apiKey: import.meta.env.VITE_MEILISEARCH_API_KEY,
+});
+
 export {
   navLinks,
   privateLink,
@@ -253,4 +259,5 @@ export {
   burgerMenuLinks,
   burgerMenuLinksLoggedIn,
   defaultInputTypes,
+  meiliSearchClient,
 };

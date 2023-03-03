@@ -11,6 +11,7 @@ enum Endpoints {
   tags = 'tags/',
   tagsToItem = 'tags/item/',
   comments = 'comments/',
+  commentsAll = 'comments/all',
   commentsToItem = 'comments/item/',
 }
 

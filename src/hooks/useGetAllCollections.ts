@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
 import { setCollections } from 'redux/slices/collectionSlice';
 
+import { meiliSearchClient } from 'utils/constants';
 import { sortData } from 'utils/functions';
 
 import { Collection } from 'ts/interfaces';
@@ -14,6 +15,7 @@ const useGetAllCollections = () => {
   const collectionsSorting = useAppSelector((state) => state.sort.collectionsSorting);
   const theme = useAppSelector((state) => state.filter.collectionsThemeFilter);
   const dispatch = useAppDispatch();
+  const index = meiliSearchClient.index('collections');
 
   const [
     getAllCollections,
@@ -32,6 +34,10 @@ const useGetAllCollections = () => {
 
   useEffect(() => {
     if (allCollections && isSuccessGetCollections) {
+      (async () => {
+        const collections = allCollections.map((element, ind) => ({ id: ind, element }));
+        await index.addDocuments(collections);
+      })();
       const sortedData = sortData(
         collectionsSorting,
         null,

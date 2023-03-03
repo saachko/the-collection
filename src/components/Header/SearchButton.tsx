@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 
-import { setOffcanvasShown } from 'redux/slices/filterSlice';
+import { setOffcanvasShown } from 'redux/slices/searchSlice';
 
 import SearchBar from 'components/FilterTools/SearchBar';
 
@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 import styles from './Header.module.scss';
 
 function SearchButton() {
-  const offcanvasShown = useAppSelector((state) => state.filter.offcanvasShown);
+  const offcanvasShown = useAppSelector((state) => state.search.offcanvasShown);
   const dispatch = useAppDispatch();
 
   return (

@@ -5,7 +5,7 @@ import { GrFormClose } from 'react-icons/gr';
 import { IoMdSend } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
-import { setOffcanvasShown, setSearchValue } from 'redux/slices/filterSlice';
+import { setOffcanvasShown, setSearchValue } from 'redux/slices/searchSlice';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -13,7 +13,7 @@ import styles from './FilterTools.module.scss';
 
 function SearchBar() {
   const { t } = useTranslation('translation', { keyPrefix: 'filter' });
-  const searchValue = useAppSelector((state) => state.filter.searchValue);
+  const searchValue = useAppSelector((state) => state.search.searchValue);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

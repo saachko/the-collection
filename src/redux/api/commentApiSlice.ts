@@ -5,6 +5,23 @@ import apiSlice from './apiSlice';
 
 const commentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getAllComments: builder.query<Comment[], void>({
+      query: () => ({
+        url: `${Endpoints.commentsAll}`,
+        method: Methods.get,
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map((comments) => ({
+                type: 'Comment' as const,
+                id: comments._id,
+              })),
+              'Comment',
+            ]
+          : ['Comment'],
+    }),
+
     getCommentById: builder.query<Comment, string>({
       query: (commentId: string) => ({
         url: `${Endpoints.comments}${commentId}`,
@@ -82,6 +99,7 @@ export const {
   useLazyGetCommentByIdQuery,
   useLazyGetCommentsByItemIdQuery,
   useLazyGetChangedCommentQuery,
+  useLazyGetAllCommentsQuery,
   useCreateCommentMutation,
   useDeleteCommentByIdMutation,
   useUpdateCommentByIdMutation,

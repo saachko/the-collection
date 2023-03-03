@@ -57,13 +57,22 @@
   }
 }
 
-.themeButton {
+.themeButton,
+.searchButton {
   border: none;
   background-color: var(--transparent);
   transition: $transition;
 
   &:hover {
     opacity: $hoverOpacity;
+  }
+}
+
+.searchButton {
+  svg {
+    font-size: 25px;
+    color: var(--text-color);
+    transition: $transition;
   }
 }
 
@@ -86,5 +95,11 @@
 .buttonControls {
   @media (max-width: 768px) {
     display: none;
+  }
+}
+
+.searchWrapper {
+  div {
+    background-color: var(--background-primary-color);
   }
 }
