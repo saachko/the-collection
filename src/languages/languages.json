@@ -180,7 +180,8 @@
         "date": "Creation date & time",
         "likes": "Likes",
         "empty": "There're no items yet",
-        "newItem": "New item"
+        "newItem": "New item",
+        "csv": "Export to CSV"
       },
       "items": {
         "return": "Return to the previous page",
@@ -415,7 +416,8 @@
         "date": "Дата и время создания",
         "likes": "Лайки",
         "empty": "В коллекции пока ничего нет",
-        "newItem": "Новый элемент"
+        "newItem": "Новый элемент",
+        "csv": "Экспорт в CSV"
       },
       "items": {
         "return": "Вернуться на предыдущую страницу",

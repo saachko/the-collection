@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.csvLink {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    color: var(--text-color);
+    opacity: $hoverOpacity;
+  }
+
+  &:active {
+    color: var(--button-color);
+  }
+}
