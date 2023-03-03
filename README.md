@@ -8,6 +8,13 @@
 
 > **Attention!** The backend is deployed on a free service render.com, so when you run the application for the first time, you need to wait a little bit. Thank you 🙏
 
+<img width="1440" alt="Снимок экрана 2023-03-03 в 11 23 12" src="https://user-images.githubusercontent.com/95384801/222669675-c05758e7-cfaa-415b-85f1-c909065f9c52.png">
+
+<img width="1440" alt="Снимок экрана 2023-03-03 в 11 23 24" src="https://user-images.githubusercontent.com/95384801/222669686-fd1c3abe-7840-4883-8f88-ad7161b63c4f.png">
+
+<img width="1440" alt="Снимок экрана 2023-03-03 в 11 25 12" src="https://user-images.githubusercontent.com/95384801/222669727-24c8f8f0-b1a3-48cf-887c-0750a3e0786f.png">
+
+
 ## Usage
 
 Nonauthenticated used have read-only access. Authenticated users have access to everythng except "admin area". Admin area give administators abilities to manage users.
