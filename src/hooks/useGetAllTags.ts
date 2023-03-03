@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useGetAllTagsQuery } from 'redux/api/tagApiSlice';
-import { setAllTags } from 'redux/slices/tagSlice';
+import { setAllTags, setPopularTags } from 'redux/slices/tagSlice';
 
 import { SelectOption } from 'ts/interfaces';
 
@@ -26,6 +26,10 @@ const useGetAllTags = () => {
         label: tag.label,
       }));
       setTagOptions(modifiedTags);
+      const popularTags = [...tags]
+        .sort((a, b) => b.items.length - a.items.length)
+        .slice(0, 12);
+      dispatch(setPopularTags(popularTags));
     }
   }, [tags]);
 

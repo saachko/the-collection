@@ -16,6 +16,7 @@ import useCheckUserOnAppStart from 'hooks/useCheckUserOnAppStart';
 import useGetAllCollections from 'hooks/useGetAllCollections';
 import useGetAllComments from 'hooks/useGetAllComments';
 import useGetAllItems from 'hooks/useGetAllItems';
+import useGetAllTags from 'hooks/useGetAllTags';
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
 const HomePage = lazy(() => import('pages/HomePage'));
@@ -43,12 +44,14 @@ function App() {
   const { isGetAllItemsLoading } = useGetAllItems();
   const { isGetCollectionsLoading } = useGetAllCollections();
   const { isGetCommentsLoading } = useGetAllComments();
+  const { isGetAllTagsLoading } = useGetAllTags();
 
   const isLoading =
     isGetUserLoading ||
     isGetAllItemsLoading ||
     isGetCollectionsLoading ||
-    isGetCommentsLoading;
+    isGetCommentsLoading ||
+    isGetAllTagsLoading;
 
   useEffect(() => {
     if (isCollectionCreated || isItemCreated) navigate(-1);

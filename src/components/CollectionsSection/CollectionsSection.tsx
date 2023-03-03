@@ -30,7 +30,7 @@ function CollectionsSection() {
     <section className={styles.section}>
       {biggestCollections && biggestCollections?.length > 0 && (
         <>
-          <h2>{t('biggestCollections')}</h2>
+          <h3>{t('biggestCollections')}</h3>
           <CollectionCardsContainer collections={biggestCollections} />
         </>
       )}

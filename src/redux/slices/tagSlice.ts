@@ -6,12 +6,14 @@ interface TagState {
   allTags: Tag[] | null;
   tagsToItem: Tag[] | null;
   tagsFromInput: SelectOption[];
+  popularTags: Tag[] | null;
 }
 
 const initialState: TagState = {
   allTags: null,
   tagsToItem: null,
   tagsFromInput: [],
+  popularTags: null,
 };
 
 const tagSlice = createSlice({
@@ -29,9 +31,14 @@ const tagSlice = createSlice({
     setTagsFromInput(state, { payload }: PayloadAction<SelectOption[]>) {
       state.tagsFromInput = payload;
     },
+
+    setPopularTags(state, { payload }: PayloadAction<Tag[] | null>) {
+      state.popularTags = payload;
+    },
   },
 });
 
-export const { setAllTags, setTagsToItem, setTagsFromInput } = tagSlice.actions;
+export const { setAllTags, setTagsToItem, setTagsFromInput, setPopularTags } =
+  tagSlice.actions;
 
 export default tagSlice.reducer;

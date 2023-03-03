@@ -30,7 +30,8 @@
         "noAccount": "Still don't have an account?",
         "signup": "Sign Up",
         "biggestCollections": "The biggest collections",
-        "lastItems": "Recently added items"
+        "lastItems": "Recently added items",
+        "popularTags": "Popular tags"
       },
       "auth": {
         "signIn": "Sign In",
@@ -262,7 +263,8 @@
         "noAccount": "У вас всё ещё нет аккаунта?",
         "signup": "Регистрация",
         "biggestCollections": "Самые большие коллекции",
-        "lastItems": "Недавно добавленные элементы"
+        "lastItems": "Недавно добавленные элементы",
+        "popularTags": "Популярные тэги"
       },
       "auth": {
         "signIn": "Вход",

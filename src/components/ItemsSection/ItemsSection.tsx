@@ -15,7 +15,7 @@ function ItemsSection() {
     <section className={styles.section}>
       {lastAddedItems && (
         <>
-          <h2 className="m-0 align-self-start">{t('lastItems')}</h2>
+          <h3 className="m-0 align-self-start">{t('lastItems')}</h3>
           <ItemCardsContainer items={lastAddedItems} />
         </>
       )}

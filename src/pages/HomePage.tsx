@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import CollectionsSection from 'components/CollectionsSection/CollectionsSection';
 import ItemsSection from 'components/ItemsSection/ItemsSection';
 import SignUpSection from 'components/SignUpSection/SignUpSection';
+import TagsSection from 'components/TagsSection/TagsSection';
 import WelcomeSection from 'components/WelcomeSection/WelcomeSection';
 
 import { useAppSelector } from 'hooks/useRedux';
@@ -15,7 +16,7 @@ function HomePage() {
       <WelcomeSection />
       <CollectionsSection />
       <ItemsSection />
-      {/* <TagsSection /> */}
+      <TagsSection />
       {!isLoggedIn && <SignUpSection />}
     </div>
   );
