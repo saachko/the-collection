@@ -20,7 +20,7 @@ const useGetAllItems = () => {
   useEffect(() => {
     if (allItems && isSuccessGetAllItems) {
       (async () => {
-        const items = allItems.map((element, ind) => ({ id: ind, element }));
+        const items = allItems.map((element, ind) => ({ id: `${ind}`, element }));
         dispatch(setMeilisearchItems(items));
         await itemsIndex.addDocuments(items);
       })();

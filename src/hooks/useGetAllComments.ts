@@ -28,7 +28,7 @@ const useGetAllComments = () => {
   useEffect(() => {
     if (allComments && isSuccessGetComments) {
       (async () => {
-        const comments = allComments.map((element, ind) => ({ id: ind, element }));
+        const comments = allComments.map((element, ind) => ({ id: `${ind}`, element }));
         dispatch(setMeilisearchComments(comments));
         await commentsIndex.addDocuments(comments);
       })();

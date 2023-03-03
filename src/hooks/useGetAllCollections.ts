@@ -35,7 +35,10 @@ const useGetAllCollections = () => {
   useEffect(() => {
     if (allCollections && isSuccessGetCollections) {
       (async () => {
-        const collections = allCollections.map((element, ind) => ({ id: ind, element }));
+        const collections = allCollections.map((element, ind) => ({
+          id: `${ind}`,
+          element,
+        }));
         dispatch(setMeilisearchCollections(collections));
         await collectionsIndex.addDocuments(collections);
       })();
