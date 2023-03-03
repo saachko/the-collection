@@ -53,7 +53,7 @@ function CollectionPage() {
               {t('newItem')}
             </Button>
           )}
-          <CsvButton />
+          {items && items?.length > 0 && <CsvButton />}
         </ButtonToolbar>
         {items && items.length > 0 && (
           <div className="d-flex justify-content-end align-items-center mb-1 mt-1">
