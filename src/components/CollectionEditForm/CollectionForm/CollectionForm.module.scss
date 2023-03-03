@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.container {
+  width: 40%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.note {
+  color: var(--text-color-light);
+  font-size: $fontSizeExtraSmall;
+  font-style: italic;
+}

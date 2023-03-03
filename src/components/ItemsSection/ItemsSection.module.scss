@@ -1,0 +1,11 @@
+@import '../../styles/variables.scss';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  border-bottom: 1px solid var(--lines-color);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}

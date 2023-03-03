@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.modalBackground {
+  background-color: var(--background-primary-color);
+}
+
+.modalHeader {
+  border: 1px solid var(--lines-color);
+}
+
+.modalBody {
+  border-radius: 0 0 calc(0.5rem - 1px) calc(0.5rem - 1px);
+  border: 1px solid var(--lines-color);
+}

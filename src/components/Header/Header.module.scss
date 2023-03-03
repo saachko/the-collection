@@ -1,0 +1,105 @@
+@import '../../styles/variables.scss';
+
+.headerContent {
+  grid-area: headerContent;
+  padding: $paddingPage;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  gap: 10px;
+
+  @media (max-width: 1080px) {
+    flex-direction: column;
+    height: 130px;
+    gap: 0;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    height: 80px;
+    gap: 10px;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    height: 130px;
+    gap: 0;
+  }
+
+  .headerNav {
+    @media (max-width: 1080px) {
+      width: 100%;
+      padding-bottom: 0;
+      padding-top: 0;
+
+      .headerNavLink {
+        padding: 5px 0;
+      }
+    }
+  }
+}
+
+.headerNavLink {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: $transition;
+  padding: 15px 0;
+
+  &:hover,
+  &:active,
+  &.active {
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.themeButton,
+.searchButton {
+  border: none;
+  background-color: var(--transparent);
+  transition: $transition;
+
+  &:hover {
+    opacity: $hoverOpacity;
+  }
+}
+
+.searchButton {
+  svg {
+    font-size: 25px;
+    color: var(--text-color);
+    transition: $transition;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  @media (max-width: 1080px) {
+    width: calc(100vw - 15px);
+    justify-content: end;
+    padding: 0 10px;
+  }
+
+  @media (max-width: 576px) {
+    justify-content: space-between;
+  }
+}
+
+.buttonControls {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.searchWrapper {
+  div {
+    background-color: var(--background-primary-color);
+  }
+}

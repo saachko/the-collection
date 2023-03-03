@@ -1,0 +1,61 @@
+html[data-theme='light'] {
+  --primary-color: #ff7549;
+  --primary-color-light: #f9dbcf;
+  --secondary-color: #233b99;
+  --secondary-color-light: #475bb4;
+  --danger-alert: #f8d7da;
+  --light-color: #cddceb;
+  --background-primary-color: #ffffff;
+  --background-secondary-color: #f0efec;
+  --lines-color: #dad9d6;
+  --title-color: #181a3f;
+  --text-color: #555671;
+  --text-color-light: #c5c5cd;
+  --text-color-button: #ffffff;
+  --likes-color: #f15f72;
+  --transparent: transparent;
+}
+
+html[data-theme='dark'] {
+  --primary-color: #ed8c6c;
+  --primary-color-light: #8d7a73;
+  --secondary-color: #3953b9;
+  --secondary-color-light: #5d70c5;
+  --danger-alert: #c03942;
+  --light-color: #c3cbd1;
+  --background-primary-color: #2e353e;
+  --background-secondary-color: #444c56;
+  --lines-color: #6d6d6c;
+  --title-color: #ececec;
+  --text-color: #d2d2d2;
+  --text-color-light: #57575c;
+  --text-color-button: #ffffff;
+  --likes-color: #f48f9d;
+  --transparent: transparent;
+}
+
+$fontInter: 'Inter', sans-serif;
+$fontArvo: 'Arvo', serif;
+
+$fontSizeH1: 54px;
+$fontSizeH2: 40px;
+$fontSizeH3: 36px;
+$fontSizeH4: 28px;
+$fontSizeButton: 20px;
+$fontSizeText: 18px;
+$fontSizeSmall: 16px;
+$fontSizeExtraSmall: 12px;
+
+$fontWeightLight: 300;
+$fontWeightRegular: 400;
+$fontWeightMedium: 500;
+$fontWeightBold: 700;
+
+$paddingPage: 10px 15px;
+
+$transition: all 0.2s ease-out;
+$themeTransition: background-color 0.2s linear;
+$hoverOpacity: 0.8;
+$hoverScale: scale(1.02);
+$hoverShadow: 0px 10px 13px var(--background-secondary-color);
+$activeOpacity: 0.5;

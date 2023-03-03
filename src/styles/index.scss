@@ -1,0 +1,89 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+@import './custom.scss';
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-weight: $fontWeightRegular;
+  font-size: $fontSizeText;
+  font-family: $fontInter;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  background-color: var(--background-primary-color);
+  transition: $themeTransition;
+  color: var(--text-color);
+  min-height: 100vh;
+  display: grid;
+  grid-template: auto 1fr auto / 1fr minmax(300px, 1440px) 1fr;
+  grid-template-areas:
+    'header header header'
+    'main main main'
+    'footer footer footer';
+}
+
+header {
+  grid-area: header;
+  display: grid;
+  grid-template: auto / 1fr minmax(300px, 1440px) 1fr;
+  grid-template-areas: '. headerContent .';
+  border-bottom: 1px solid var(--lines-color);
+}
+
+main {
+  grid-area: main;
+  display: grid;
+  grid-template: auto / 1fr minmax(300px, 1440px) 1fr;
+  grid-template-areas: '. content .';
+}
+
+footer {
+  grid-area: footer;
+  display: grid;
+  grid-template: auto / 1fr minmax(300px, 1440px) 1fr;
+  grid-template-areas: '. footerContent .';
+  border-top: 1px solid var(--lines-color);
+}
+
+p {
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $fontWeightBold;
+  color: var(--title-color);
+}
+
+h1 {
+  font-size: $fontSizeH1;
+}
+
+h2 {
+  font-size: $fontSizeH2;
+}
+
+h3 {
+  font-size: $fontSizeH3;
+}
+
+h4,
+h5,
+h6 {
+  font-size: $fontSizeH4;
+}

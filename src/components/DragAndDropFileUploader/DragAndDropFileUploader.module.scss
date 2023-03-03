@@ -1,0 +1,35 @@
+@import '../../styles/variables.scss';
+
+.fileUploader {
+  div span {
+    color: var(--text-color);
+
+    &:nth-child(2) {
+      max-width: 110px;
+    }
+  }
+
+  label {
+    border-color: var(--primary-color);
+    min-width: 250px;
+    max-width: 100%;
+  }
+
+  svg {
+    path {
+      fill: var(--primary-color);
+    }
+  }
+
+  p {
+    color: var(--text-color);
+    font-size: $fontSizeExtraSmall;
+    text-align: right;
+  }
+
+  div span:nth-child(2) {
+    @media (max-width: 360px) {
+      display: none;
+    }
+  }
+}

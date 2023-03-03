@@ -1,0 +1,64 @@
+@import '../../styles/variables.scss';
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card {
+  background-color: var(--background-primary-color);
+  border-color: var(--lines-color);
+  position: relative;
+  animation: appear 0.3s 1;
+}
+
+.author {
+  font-weight: $fontWeightBold;
+  margin: 0;
+  word-break: break-word;
+  padding-right: 30px;
+  color: var(--title-color);
+}
+
+.date {
+  font-size: $fontSizeExtraSmall;
+  color: var(--text-color-light);
+  margin: 0 0 10px;
+}
+
+.text {
+  margin: 0;
+  font-size: $fontSizeSmall;
+}
+
+.deleteButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.deletedComment {
+  animation: disappear 0.5s 1;
+}
+
+.linkToUser {
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--text-color);
+  }
+}

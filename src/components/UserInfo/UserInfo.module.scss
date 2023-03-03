@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.infoContainer {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--lines-color);
+}
+
+.title {
+  margin-bottom: 0;
+  word-break: break-word;
+
+  @media (max-width: 768px) {
+    font-size: $fontSizeH2;
+  }
+}
+
+.blockedIcon {
+  color: var(--primary-color);
+}

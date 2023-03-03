@@ -1,0 +1,46 @@
+@import '../../styles/variables.scss';
+
+.card {
+  background-color: var(--background-primary-color);
+  border: none;
+
+  div {
+    @media (max-width: 420px) {
+      padding-left: 0;
+    }
+  }
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.avatarWrapper {
+  @media (max-width: 420px) {
+    display: none;
+  }
+}
+
+.sendButton {
+  width: 50px;
+  background-color: var(--transparent);
+  border: none;
+
+  svg {
+    font-size: $fontSizeH3;
+    color: var(--primary-color);
+    transition: $transition;
+  }
+
+  &:hover svg {
+    color: var(--primary-color-light);
+    transform: scale(1.1);
+  }
+
+  &:disabled svg {
+    color: var(--light-color);
+    transform: scale(1);
+  }
+}

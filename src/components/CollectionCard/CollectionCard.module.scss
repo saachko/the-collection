@@ -1,0 +1,87 @@
+@import '../../styles/variables.scss';
+
+.card {
+  height: 100%;
+  cursor: pointer;
+  transition: $transition;
+  background-color: var(--background-primary-color);
+  border-color: var(--lines-color);
+
+  &:hover {
+    transform: $hoverScale;
+    box-shadow: $hoverShadow;
+  }
+
+  img {
+    width: 283.18px;
+    height: 283.18px;
+    object-fit: cover;
+  }
+}
+
+.cardHomePage:nth-child(4) {
+  @media (max-width: 1214px) and (min-width: 915px) {
+    display: none;
+  }
+}
+
+.cardFooter {
+  border-color: var(--lines-color);
+
+  p {
+    margin: 0;
+    font-size: $fontSizeExtraSmall;
+  }
+}
+
+.title {
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+.skeleton {
+  width: 100%;
+  height: 283.18px;
+  border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
+}
+
+.theme {
+  margin-bottom: 8px;
+  display: inline-block;
+  background-color: var(--primary-color-light);
+  padding: 0px 5px;
+  border-radius: 3px;
+  font-size: $fontSizeSmall;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: $transition;
+
+  &:hover {
+    color: var(--text-color);
+    transform: scale(1.1);
+    opacity: $hoverOpacity;
+    box-shadow: $hoverShadow;
+  }
+}
+
+.quantity {
+  font-size: $fontSizeSmall;
+}
+
+.author,
+.author:hover {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+}
+
+.authorLink {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--secondary-color);
+  }
+}
