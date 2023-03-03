@@ -9,18 +9,3 @@
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-
-.link {
-  text-decoration: none;
-  width: 100%;
-  cursor: pointer;
-}
-
-.card {
-  transition: $transition;
-
-  &:hover {
-    transform: $hoverScale;
-    box-shadow: $hoverShadow;
-  }
-}

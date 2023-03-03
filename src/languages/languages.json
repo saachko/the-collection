@@ -223,6 +223,11 @@
         "noComments": "There're no comments yet",
         "commentDeleteConfirm": "Are you sure you want to delete the comment?",
         "commentPlaceholder": "Leave a comment..."
+      },
+      "searchPage": {
+        "foundInCollection": "Here are the items from the collections in descriptions of which the text was found:",
+        "foundInComments": "Here are the items in comments of which the text was found:",
+        "noResults": "No items found"
       }
     }
   },
@@ -450,6 +455,11 @@
         "noComments": "Комментариев пока что нет",
         "commentDeleteConfirm": "Вы уверены, что хотите удалить комментарий?",
         "commentPlaceholder": "Оставьте комментарий..."
+      },
+      "searchPage": {
+        "foundInCollection": "Элементы из коллекций, в описаниях которых был найден текст:",
+        "foundInComments": "Элементы, у которых текст был найден в комментариях:",
+        "noResults": "Элементы не найдены"
       }
     }
   }

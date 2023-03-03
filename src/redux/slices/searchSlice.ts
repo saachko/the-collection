@@ -7,6 +7,9 @@ interface SearchState {
   offcanvasShown: boolean;
   allComments: Comment[] | null;
   allItems: Item[] | null;
+  foundInItems: Item[];
+  foundInCollections: Item[];
+  foundInComments: Item[];
 }
 
 const initialState: SearchState = {
@@ -14,6 +17,9 @@ const initialState: SearchState = {
   offcanvasShown: false,
   allComments: null,
   allItems: null,
+  foundInItems: [],
+  foundInCollections: [],
+  foundInComments: [],
 };
 
 const searchSlice = createSlice({
@@ -35,10 +41,37 @@ const searchSlice = createSlice({
     setAllItems(state, { payload }: PayloadAction<Item[] | null>) {
       state.allItems = payload;
     },
+
+    setFoundInItems(state, { payload }: PayloadAction<Item[]>) {
+      state.foundInItems = payload;
+    },
+
+    setFoundInCollections(state, { payload }: PayloadAction<Item[]>) {
+      state.foundInCollections = payload;
+    },
+
+    setFoundInComments(state, { payload }: PayloadAction<Item[]>) {
+      state.foundInComments = payload;
+    },
+
+    resetSearchResults(state) {
+      state.searchValue = '';
+      state.foundInItems = [];
+      state.foundInCollections = [];
+      state.foundInComments = [];
+    },
   },
 });
 
-export const { setSearchValue, setOffcanvasShown, setAllComments, setAllItems } =
-  searchSlice.actions;
+export const {
+  setSearchValue,
+  setOffcanvasShown,
+  setAllComments,
+  setAllItems,
+  setFoundInItems,
+  setFoundInCollections,
+  setFoundInComments,
+  resetSearchResults,
+} = searchSlice.actions;
 
 export default searchSlice.reducer;

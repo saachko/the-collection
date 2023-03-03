@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.link {
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card {
+  transition: $transition;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: $hoverShadow;
+  }
+}

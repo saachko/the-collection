@@ -28,8 +28,12 @@ function CollectionsSection() {
 
   return (
     <section className={styles.section}>
-      <h2>{t('biggestCollections')}</h2>
-      <CollectionCardsContainer collections={biggestCollections} />
+      {biggestCollections && biggestCollections?.length > 0 && (
+        <>
+          <h2>{t('biggestCollections')}</h2>
+          <CollectionCardsContainer collections={biggestCollections} />
+        </>
+      )}
     </section>
   );
 }
