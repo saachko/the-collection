@@ -14,7 +14,7 @@ import {
   setSearchValue,
 } from 'redux/slices/searchSlice';
 
-import { meiliSearchClient } from 'utils/constants';
+import { collectionsIndex, commentsIndex, itemsIndex } from 'utils/constants';
 
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux';
 
@@ -26,9 +26,6 @@ function SearchBar() {
   const allItems = useAppSelector((state) => state.search.allItems);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const itemsIndex = meiliSearchClient.index('items');
-  const collectionsIndex = meiliSearchClient.index('collections');
-  const commentsIndex = meiliSearchClient.index('comments');
 
   const searchItems = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

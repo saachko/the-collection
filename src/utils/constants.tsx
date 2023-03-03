@@ -241,6 +241,10 @@ const meiliSearchClient = new MeiliSearch({
   apiKey: import.meta.env.VITE_MEILISEARCH_API_KEY,
 });
 
+const itemsIndex = meiliSearchClient.index('items');
+const collectionsIndex = meiliSearchClient.index('collections');
+const commentsIndex = meiliSearchClient.index('comments');
+
 export {
   navLinks,
   privateLink,
@@ -259,5 +263,7 @@ export {
   burgerMenuLinks,
   burgerMenuLinksLoggedIn,
   defaultInputTypes,
-  meiliSearchClient,
+  itemsIndex,
+  collectionsIndex,
+  commentsIndex,
 };

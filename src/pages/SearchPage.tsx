@@ -26,12 +26,6 @@ function SearchPage() {
             <ItemCardsContainer items={foundInCollections} />
           </div>
         )}
-        {foundInCollections.length > 0 && (
-          <div>
-            <h4>{t('foundInCollection')}</h4>
-            <ItemCardsContainer items={foundInCollections} />
-          </div>
-        )}
         {foundInComments.length > 0 && (
           <div>
             <h4>{t('foundInComments')}</h4>

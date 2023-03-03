@@ -4,19 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import { useDeleteCollectionByIdMutation } from 'redux/api/collectionApiSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
 
+import { collectionsIndex } from 'utils/constants';
+
 import { SetState } from 'ts/types';
 
-import { useAppDispatch } from './useRedux';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 const useDeleteCollection = (
   setDeleteErrorShown: SetState<boolean>,
   collectionId: string | undefined
 ) => {
+  const meilisearchCollections = useAppSelector(
+    (state) => state.search.meilisearchCollections
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [
     deleteCollectionById,
     {
+      data: deletedCollection,
       isSuccess: isSuccessDeleteCollection,
       isLoading: isDeleteCollectionLoading,
       isError: isDeleteCollectionError,
@@ -30,11 +36,17 @@ const useDeleteCollection = (
   };
 
   useEffect(() => {
-    if (isSuccessDeleteCollection) {
+    if (deletedCollection && isSuccessDeleteCollection) {
+      const meilisearchId = meilisearchCollections.filter(
+        (meiliCollection) => meiliCollection.element._id === deletedCollection._id
+      )[0].id;
+      (async () => {
+        await collectionsIndex.deleteDocument(meilisearchId);
+      })();
       navigate('/collections');
       dispatch(setSelectedCollection(null));
     }
-  }, [isSuccessDeleteCollection]);
+  }, [deletedCollection]);
 
   useEffect(() => {
     if (isDeleteCollectionError) {

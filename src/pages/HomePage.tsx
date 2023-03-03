@@ -15,6 +15,7 @@ function HomePage() {
       <WelcomeSection />
       <CollectionsSection />
       <ItemsSection />
+      {/* <TagsSection /> */}
       {!isLoggedIn && <SignUpSection />}
     </div>
   );

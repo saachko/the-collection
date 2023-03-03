@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { Comment, Item } from 'ts/interfaces';
+import { Collection, Comment, Item } from 'ts/interfaces';
 
 interface SearchState {
   searchValue: string;
@@ -10,6 +10,9 @@ interface SearchState {
   foundInItems: Item[];
   foundInCollections: Item[];
   foundInComments: Item[];
+  meilisearchItems: Array<{ id: string; element: Item }>;
+  meilisearchCollections: Array<{ id: string; element: Collection }>;
+  meilisearchComments: Array<{ id: string; element: Comment }>;
 }
 
 const initialState: SearchState = {
@@ -20,6 +23,9 @@ const initialState: SearchState = {
   foundInItems: [],
   foundInCollections: [],
   foundInComments: [],
+  meilisearchItems: [],
+  meilisearchCollections: [],
+  meilisearchComments: [],
 };
 
 const searchSlice = createSlice({
@@ -60,6 +66,27 @@ const searchSlice = createSlice({
       state.foundInCollections = [];
       state.foundInComments = [];
     },
+
+    setMeilisearchItems(
+      state,
+      { payload }: PayloadAction<Array<{ id: string; element: Item }>>
+    ) {
+      state.meilisearchItems = payload;
+    },
+
+    setMeilisearchCollections(
+      state,
+      { payload }: PayloadAction<Array<{ id: string; element: Collection }>>
+    ) {
+      state.meilisearchCollections = payload;
+    },
+
+    setMeilisearchComments(
+      state,
+      { payload }: PayloadAction<Array<{ id: string; element: Comment }>>
+    ) {
+      state.meilisearchComments = payload;
+    },
   },
 });
 
@@ -72,6 +99,9 @@ export const {
   setFoundInCollections,
   setFoundInComments,
   resetSearchResults,
+  setMeilisearchItems,
+  setMeilisearchCollections,
+  setMeilisearchComments,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
