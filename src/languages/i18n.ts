@@ -17,7 +17,7 @@ i18n
     resources: languages,
     fallbackLng: 'en',
     returnNull: false,
-    debug: true,
+    debug: false,
     detection: {
       order: ['localStorage'],
       caches: ['localStorage'],
