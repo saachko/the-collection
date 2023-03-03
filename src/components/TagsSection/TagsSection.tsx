@@ -11,8 +11,12 @@ function TagsSection() {
 
   return (
     <section className="mb-4">
-      <h3>{t('popularTags')}</h3>
-      {popularTags && <TagsContainer tags={popularTags} />}
+      {popularTags && popularTags.length > 0 && (
+        <>
+          <h3>{t('popularTags')}</h3>
+          <TagsContainer tags={popularTags} />
+        </>
+      )}
     </section>
   );
 }
