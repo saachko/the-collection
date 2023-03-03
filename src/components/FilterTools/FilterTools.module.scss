@@ -36,6 +36,17 @@
   width: 270px;
 }
 
+.tagFilterWrapper {
+  display: flex;
+  margin-left: -16px;
+}
+
+.tagFilter {
+  width: 270px;
+  margin-top: 19px;
+  margin-bottom: 15px;
+}
+
 .resetCollectionsFilter {
   background-color: var(--transparent);
   border: none;

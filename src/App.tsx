@@ -31,6 +31,7 @@ const ProfilePage = lazy(() => import('pages/ProfilePage'));
 const UsersPage = lazy(() => import('pages/UsersPage'));
 const UserPage = lazy(() => import('pages/UserPage'));
 const SearchPage = lazy(() => import('pages/SearchPage'));
+const FilterByTagPage = lazy(() => import('pages/FilterByTagPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
             <Route path="users" element={<UsersPage />} />
             <Route path="users/:userId" element={<UserPage />} />
             <Route path="search" element={<SearchPage />} />
+            <Route path="tags" element={<FilterByTagPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

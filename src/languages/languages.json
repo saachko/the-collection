@@ -104,7 +104,8 @@
         "noUsersResult": "No users found",
         "noCollectionsResult": "No collections found",
         "noOptions": "No options",
-        "searchPlaceholder": "Find items..."
+        "searchPlaceholder": "Find items...",
+        "tagPlaceholder": "Select tag"
       },
       "collections": {
         "empty": "There're no collections yet.",
@@ -228,7 +229,8 @@
       "searchPage": {
         "foundInCollection": "Here are the items from the collections in descriptions of which the text was found:",
         "foundInComments": "Here are the items in comments of which the text was found:",
-        "noResults": "No items found"
+        "noResults": "No items found",
+        "searchedQuantity": "Total items found:"
       }
     }
   },
@@ -337,7 +339,8 @@
         "noUsersResult": "Пользователи отсутствуют",
         "noCollectionsResult": "Коллекции отсутствуют",
         "noOptions": "Нет совпадений",
-        "searchPlaceholder": "Найти элементы..."
+        "searchPlaceholder": "Найти элементы...",
+        "tagPlaceholder": "Выберите тэг"
       },
       "collections": {
         "empty": "Коллекций пока что нет. Создайте первую!",
@@ -461,7 +464,8 @@
       "searchPage": {
         "foundInCollection": "Элементы из коллекций, в описаниях которых был найден текст:",
         "foundInComments": "Элементы, у которых текст был найден в комментариях:",
-        "noResults": "Элементы не найдены"
+        "noResults": "Элементы не найдены",
+        "searchedQuantity": "Найдено элементов:"
       }
     }
   }

@@ -12,12 +12,20 @@ function SearchPage() {
   const foundInItems = useAppSelector((state) => state.search.foundInItems);
   const foundInCollections = useAppSelector((state) => state.search.foundInCollections);
   const foundInComments = useAppSelector((state) => state.search.foundInComments);
+  const searchedItems = [...foundInItems, ...foundInCollections, ...foundInComments];
 
   return (
     <div className="content">
       <div className="d-flex justify-content-end">
         <SearchBar />
       </div>
+      {searchedItems.length > 0 && (
+        <div className="d-flex justify-content-end">
+          <p>
+            {t('searchedQuantity')} {searchedItems.length}
+          </p>
+        </div>
+      )}
       <div className="d-flex flex-column gap-4">
         {foundInItems.length > 0 && <ItemCardsContainer items={foundInItems} />}
         {foundInCollections.length > 0 && (

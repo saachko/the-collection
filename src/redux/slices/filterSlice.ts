@@ -1,11 +1,15 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
+import { Item } from 'ts/interfaces';
+
 interface FilterState {
   usersFilterAdmins: boolean;
   usersFilterBlocked: boolean;
   collectionsThemeFilter: string;
   collectionsByUserThemeFilter: string;
   collectionsBySelectedUserThemeFilter: string;
+  filterTag: string;
+  itemsFilteredByTag: Item[];
 }
 
 const initialState: FilterState = {
@@ -14,6 +18,8 @@ const initialState: FilterState = {
   collectionsThemeFilter: '',
   collectionsByUserThemeFilter: '',
   collectionsBySelectedUserThemeFilter: '',
+  filterTag: '',
+  itemsFilteredByTag: [],
 };
 
 const filterSlice = createSlice({
@@ -56,6 +62,14 @@ const filterSlice = createSlice({
     setDefaultCollectionsBySelectedUserFilters(state) {
       state.collectionsBySelectedUserThemeFilter = '';
     },
+
+    setFilterTag(state, { payload }: PayloadAction<string>) {
+      state.filterTag = payload;
+    },
+
+    setItemsFilteredByTag(state, { payload }: PayloadAction<Item[]>) {
+      state.itemsFilteredByTag = payload;
+    },
   },
 });
 
@@ -69,6 +83,8 @@ export const {
   setDefaultCollectionsFilters,
   setDefaultCollectionsByUserFilters,
   setDefaultCollectionsBySelectedUserFilters,
+  setFilterTag,
+  setItemsFilteredByTag,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
