@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDeleteCollectionByIdMutation } from 'redux/api/collectionApiSlice';
 import { setSelectedCollection } from 'redux/slices/collectionSlice';
 
-import { collectionsIndex } from 'utils/constants';
-
 import { SetState } from 'ts/types';
 
+import useGetAllCollections from './useGetAllCollections';
+import useGetAllComments from './useGetAllComments';
+import useGetAllItems from './useGetAllItems';
 import { useAppDispatch } from './useRedux';
 
 const useDeleteCollection = (
@@ -16,6 +17,9 @@ const useDeleteCollection = (
 ) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { getAllComments } = useGetAllComments();
+  const { getAllItems } = useGetAllItems();
+  const { getAllCollections } = useGetAllCollections();
   const [
     deleteCollectionById,
     {
@@ -35,7 +39,9 @@ const useDeleteCollection = (
   useEffect(() => {
     if (deletedCollection && isSuccessDeleteCollection) {
       (async () => {
-        await collectionsIndex.deleteDocument(deletedCollection._id);
+        await getAllComments();
+        await getAllItems();
+        await getAllCollections();
       })();
       navigate('/collections');
       dispatch(setSelectedCollection(null));

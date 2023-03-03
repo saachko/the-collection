@@ -54,7 +54,13 @@ const useGetAllCollections = () => {
     }
   }, [allCollections]);
 
-  return { allCollections, theme, isGetCollectionsLoading, collectionsSorting };
+  return {
+    getAllCollections,
+    allCollections,
+    theme,
+    isGetCollectionsLoading,
+    collectionsSorting,
+  };
 };
 
 export default useGetAllCollections;

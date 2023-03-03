@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDeleteItemByIdMutation } from 'redux/api/itemApiSlice';
 import { setSelectedItem } from 'redux/slices/itemSlice';
 
-import { itemsIndex } from 'utils/constants';
-
 import { SetState } from 'ts/types';
 
+import useGetAllComments from './useGetAllComments';
+import useGetAllItems from './useGetAllItems';
 import { useAppDispatch } from './useRedux';
 
 const useDeleteItem = (
@@ -16,6 +16,8 @@ const useDeleteItem = (
 ) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { getAllComments } = useGetAllComments();
+  const { getAllItems } = useGetAllItems();
   const [
     deleteItemById,
     {
@@ -35,7 +37,8 @@ const useDeleteItem = (
   useEffect(() => {
     if (deletedItem && isSuccessDeleteItem) {
       (async () => {
-        await itemsIndex.deleteDocument(deletedItem._id);
+        await getAllComments();
+        await getAllItems();
       })();
       navigate(`/collections/${deletedItem.collectionId}`);
       dispatch(setSelectedItem(null));

@@ -72,7 +72,7 @@ function CollectionCard({ collection }: CollectionCardProps) {
       </div>
       <Card.Body className="d-flex flex-column justify-content-between align-items-start gap-3">
         <div>
-          <Card.Title className="mb-0">{collection.title}</Card.Title>
+          <Card.Title className={styles.title}>{collection.title}</Card.Title>
           <Card.Link
             className={styles.theme}
             onClick={(event: React.MouseEvent<HTMLElement>) => {

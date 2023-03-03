@@ -2,11 +2,12 @@ import { useEffect } from 'react';
 
 import { useDeleteCommentByIdMutation } from 'redux/api/commentApiSlice';
 
-import { commentsIndex } from 'utils/constants';
+import useGetAllComments from './useGetAllComments';
 
 const useDeleteComment = (commentId: string) => {
   const [deleteCommentById, { data: deletedComment, isSuccess: isSuccessDeleteComment }] =
     useDeleteCommentByIdMutation();
+  const { getAllComments } = useGetAllComments();
 
   const deleteComment = async () => {
     await deleteCommentById(commentId);
@@ -15,7 +16,7 @@ const useDeleteComment = (commentId: string) => {
   useEffect(() => {
     if (deletedComment && isSuccessDeleteComment) {
       (async () => {
-        await commentsIndex.deleteDocument(deletedComment._id);
+        await getAllComments();
       })();
     }
   }, [deletedComment]);

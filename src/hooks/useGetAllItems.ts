@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useGetAllItemsQuery } from 'redux/api/itemApiSlice';
+import { useLazyGetAllItemsQuery } from 'redux/api/itemApiSlice';
 import { setLastAddedItems } from 'redux/slices/itemSlice';
 import { setAllItems } from 'redux/slices/searchSlice';
 
@@ -10,12 +10,16 @@ import { useAppDispatch } from './useRedux';
 
 const useGetAllItems = () => {
   const dispatch = useAppDispatch();
-  const {
-    data: allItems,
-    isSuccess: isSuccessGetAllItems,
-    isLoading: isGetAllItemsLoading,
-    refetch,
-  } = useGetAllItemsQuery();
+  const [
+    getAllItems,
+    { data: allItems, isSuccess: isSuccessGetAllItems, isLoading: isGetAllItemsLoading },
+  ] = useLazyGetAllItemsQuery();
+
+  useEffect(() => {
+    (async () => {
+      await getAllItems();
+    })();
+  }, []);
 
   useEffect(() => {
     if (allItems && isSuccessGetAllItems) {
@@ -30,11 +34,7 @@ const useGetAllItems = () => {
     }
   }, [allItems]);
 
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  return { isGetAllItemsLoading };
+  return { getAllItems, isGetAllItemsLoading };
 };
 
 export default useGetAllItems;

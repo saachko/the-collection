@@ -9,7 +9,6 @@ import { useAppDispatch } from './useRedux';
 
 const useGetAllComments = () => {
   const dispatch = useAppDispatch();
-
   const [
     getAllComments,
     {
@@ -36,7 +35,7 @@ const useGetAllComments = () => {
     }
   }, [allComments]);
 
-  return { isGetCommentsLoading };
+  return { getAllComments, isGetCommentsLoading };
 };
 
 export default useGetAllComments;
