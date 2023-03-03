@@ -4,10 +4,7 @@ import { useDeleteCommentByIdMutation } from 'redux/api/commentApiSlice';
 
 import { commentsIndex } from 'utils/constants';
 
-import { useAppSelector } from './useRedux';
-
 const useDeleteComment = (commentId: string) => {
-  const meilisearchComments = useAppSelector((state) => state.search.meilisearchComments);
   const [deleteCommentById, { data: deletedComment, isSuccess: isSuccessDeleteComment }] =
     useDeleteCommentByIdMutation();
 
@@ -17,11 +14,8 @@ const useDeleteComment = (commentId: string) => {
 
   useEffect(() => {
     if (deletedComment && isSuccessDeleteComment) {
-      const meilisearchId = meilisearchComments.filter(
-        (meiliComment) => meiliComment.element._id === deletedComment._id
-      )[0].id;
       (async () => {
-        await commentsIndex.deleteDocument(meilisearchId);
+        await commentsIndex.deleteDocument(deletedComment._id);
       })();
     }
   }, [deletedComment]);

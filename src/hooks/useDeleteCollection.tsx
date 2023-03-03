@@ -8,15 +8,12 @@ import { collectionsIndex } from 'utils/constants';
 
 import { SetState } from 'ts/types';
 
-import { useAppDispatch, useAppSelector } from './useRedux';
+import { useAppDispatch } from './useRedux';
 
 const useDeleteCollection = (
   setDeleteErrorShown: SetState<boolean>,
   collectionId: string | undefined
 ) => {
-  const meilisearchCollections = useAppSelector(
-    (state) => state.search.meilisearchCollections
-  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [
@@ -37,11 +34,8 @@ const useDeleteCollection = (
 
   useEffect(() => {
     if (deletedCollection && isSuccessDeleteCollection) {
-      const meilisearchId = meilisearchCollections.filter(
-        (meiliCollection) => meiliCollection.element._id === deletedCollection._id
-      )[0].id;
       (async () => {
-        await collectionsIndex.deleteDocument(meilisearchId);
+        await collectionsIndex.deleteDocument(deletedCollection._id);
       })();
       navigate('/collections');
       dispatch(setSelectedCollection(null));

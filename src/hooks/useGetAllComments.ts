@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLazyGetAllCommentsQuery } from 'redux/api/commentApiSlice';
-import { setAllComments, setMeilisearchComments } from 'redux/slices/searchSlice';
+import { setAllComments } from 'redux/slices/searchSlice';
 
 import { commentsIndex } from 'utils/constants';
 
@@ -28,8 +28,8 @@ const useGetAllComments = () => {
   useEffect(() => {
     if (allComments && isSuccessGetComments) {
       (async () => {
-        const comments = allComments.map((element, ind) => ({ id: `${ind}`, element }));
-        dispatch(setMeilisearchComments(comments));
+        const comments = allComments.map((element) => ({ id: element._id, element }));
+        await commentsIndex.deleteAllDocuments();
         await commentsIndex.addDocuments(comments);
       })();
       dispatch(setAllComments(allComments));

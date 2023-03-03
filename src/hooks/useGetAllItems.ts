@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useGetAllItemsQuery } from 'redux/api/itemApiSlice';
 import { setLastAddedItems } from 'redux/slices/itemSlice';
-import { setAllItems, setMeilisearchItems } from 'redux/slices/searchSlice';
+import { setAllItems } from 'redux/slices/searchSlice';
 
 import { itemsIndex } from 'utils/constants';
 
@@ -20,8 +20,8 @@ const useGetAllItems = () => {
   useEffect(() => {
     if (allItems && isSuccessGetAllItems) {
       (async () => {
-        const items = allItems.map((element, ind) => ({ id: `${ind}`, element }));
-        dispatch(setMeilisearchItems(items));
+        const items = allItems.map((element) => ({ id: element._id, element }));
+        await itemsIndex.deleteAllDocuments();
         await itemsIndex.addDocuments(items);
       })();
       dispatch(setAllItems(allItems));

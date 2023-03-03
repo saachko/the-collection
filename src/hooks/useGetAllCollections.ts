@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
 import { setCollections } from 'redux/slices/collectionSlice';
-import { setMeilisearchCollections } from 'redux/slices/searchSlice';
 
 import { collectionsIndex } from 'utils/constants';
 import { sortData } from 'utils/functions';
@@ -35,11 +34,11 @@ const useGetAllCollections = () => {
   useEffect(() => {
     if (allCollections && isSuccessGetCollections) {
       (async () => {
-        const collections = allCollections.map((element, ind) => ({
-          id: `${ind}`,
+        const collections = allCollections.map((element) => ({
+          id: element._id,
           element,
         }));
-        dispatch(setMeilisearchCollections(collections));
+        await collectionsIndex.deleteAllDocuments();
         await collectionsIndex.addDocuments(collections);
       })();
       const sortedData = sortData(
