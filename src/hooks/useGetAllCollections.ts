@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
-import { setCollections } from 'redux/slices/collectionSlice';
+import { setBiggestCollections, setCollections } from 'redux/slices/collectionSlice';
 
 import { collectionsIndex } from 'utils/constants';
 import { sortData } from 'utils/functions';
@@ -51,6 +51,15 @@ const useGetAllCollections = () => {
         const filteredData = sortedData.filter((element) => element.theme === theme);
         dispatch(setCollections(filteredData || null));
       }
+    }
+  }, [allCollections]);
+
+  useEffect(() => {
+    if (allCollections) {
+      const biggestCollectionsList = [...allCollections]
+        .sort((a, b) => b.itemsQuantity - a.itemsQuantity)
+        .slice(0, 4);
+      dispatch(setBiggestCollections(biggestCollectionsList));
     }
   }, [allCollections]);
 
