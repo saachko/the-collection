@@ -14,12 +14,11 @@
 
 <img width="1440" alt="Снимок экрана 2023-03-03 в 11 25 12" src="https://user-images.githubusercontent.com/95384801/222669727-24c8f8f0-b1a3-48cf-887c-0750a3e0786f.png">
 
-
 ## Usage
 
 Nonauthenticated used have read-only access. Authenticated users have access to everythng except "admin area". Admin area give administators abilities to manage users.
 
-Every user has a personal page, which allow to manage list of own collections (add/remove/edit). Collection can be managed (edit/add/remove) only by the owner (creator) or admin. Collection allows to define arbitrary number of custom fields, which will be filled for each item in this collection.
+Every user has a personal page, which allow to manage list of own collections (add/remove/edit). Collection can be managed (edit/add/remove) only by the owner (creator) or admin. Collection allows to define arbitrary number of custom fields, which will be filled for each item in this collection. The collection with all its items and custom fields can be exported to CSV-file.
 
 Every page provides access to full-text search over whole site with items as a result, also you can filter items by tags.
 
@@ -47,6 +46,7 @@ The app supports 2 languages: English and Russian and two visual themes - dark a
 - clsx
 - i18next
 - meilisearch
+- react-csv
 - react-drag-drop-files
 - firebase cloud storage
 - vite
