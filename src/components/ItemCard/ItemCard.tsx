@@ -143,16 +143,15 @@ function ItemCard({ item }: ItemCardProps) {
           {item?.likes.length}
         </div>
       </Card.Body>
-      {((isAdmin && isLoggedIn) || user?._id === item?.ownerId) &&
-        currentPath !== '/search' && (
-          <div
-            className={clsx(styles.dropdown, {
-              [styles.hidden]: !currentPath.includes('/items'),
-            })}
-          >
-            <EditDropdown dropdownItems={editActions} />
-          </div>
-        )}
+      {((isAdmin && isLoggedIn) || user?._id === item?.ownerId) && (
+        <div
+          className={clsx(styles.dropdown, {
+            [styles.hidden]: !currentPath.includes('/items'),
+          })}
+        >
+          <EditDropdown dropdownItems={editActions} />
+        </div>
+      )}
       {isDeleteItemLoading && <Loader />}
       <ConfirmNotification
         isShown={confirmDeleteNotification}

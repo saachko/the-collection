@@ -140,7 +140,7 @@ function UpdateUserForm({
             onChange={() => setDefaultAvatar(!isDefaultAvatar)}
           />
         )}
-        <ButtonToolbar className="justify-content-end gap-2 mt-4 mb-3">
+        <ButtonToolbar className="justify-content-sm-end justify-content-center gap-2 mt-4 mb-3">
           <Button className="secondary-button" onClick={() => setModalShown(false)}>
             {t('auth.cancelButton')}
           </Button>

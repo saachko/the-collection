@@ -110,7 +110,7 @@ function AuthForm({ submitForm, isInputDisabled, isButtonDisabled }: AuthFormPro
         />
         {errors.password && <ValidationError errors={errors} field="password" />}
       </Form.Group>
-      <ButtonToolbar className="justify-content-end gap-2 mt-5 mb-3">
+      <ButtonToolbar className="justify-content-sm-end justify-content-center gap-2 mt-5 mb-3">
         <Button className="secondary-button" onClick={() => dispatch(closeModal())}>
           {t('cancelButton')}
         </Button>
