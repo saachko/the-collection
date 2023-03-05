@@ -54,15 +54,17 @@ function CommentItem({ comment }: CommentItemProps) {
         })}
       >
         <div className="d-flex gap-3">
-          <div
-            className={clsx('avatar-sm position-relative', {
-              [styles.linkToUser]: isAdmin && isLoggedIn,
-            })}
-            onClick={navigateToUserPage}
-            aria-hidden="true"
-          >
-            <div className="avatar-sm loading-skeleton position-absolute" />
-            <Image src={comment.authorAvatar} className="avatar-sm position-absolute" />
+          <div className="avatar-sm">
+            <div
+              className={clsx('avatar-sm position-relative', {
+                [styles.linkToUser]: isAdmin && isLoggedIn,
+              })}
+              onClick={navigateToUserPage}
+              aria-hidden="true"
+            >
+              <div className="avatar-sm loading-skeleton position-absolute" />
+              <Image src={comment.authorAvatar} className="avatar-sm position-absolute" />
+            </div>
           </div>
           <div>
             <p
