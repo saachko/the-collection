@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { memo } from 'react';
+import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -54,4 +54,4 @@ function ConfirmNotification({
   );
 }
 
-export default memo(ConfirmNotification);
+export default ConfirmNotification;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { GrFormClose } from 'react-icons/gr';
@@ -89,4 +89,4 @@ function SearchBar() {
   );
 }
 
-export default memo(SearchBar);
+export default SearchBar;

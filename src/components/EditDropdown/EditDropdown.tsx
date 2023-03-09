@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
 
@@ -31,4 +31,4 @@ function EditDropdown({ dropdownItems }: EditDropdownProps) {
   );
 }
 
-export default memo(EditDropdown);
+export default EditDropdown;

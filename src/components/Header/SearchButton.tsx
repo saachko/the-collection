@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 
@@ -37,4 +37,4 @@ function SearchButton() {
   );
 }
 
-export default memo(SearchButton);
+export default SearchButton;

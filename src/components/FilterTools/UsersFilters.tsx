@@ -1,6 +1,6 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import clsx from 'clsx';
-import React, { memo } from 'react';
+import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock, AiFillStar } from 'react-icons/ai';
@@ -113,4 +113,4 @@ function UsersFilters({ allUsers, filteringList, setList }: UsersFiltersProps) {
   );
 }
 
-export default memo(UsersFilters);
+export default UsersFilters;

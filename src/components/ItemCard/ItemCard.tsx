@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
@@ -172,4 +172,4 @@ function ItemCard({ item }: ItemCardProps) {
   );
 }
 
-export default memo(ItemCard);
+export default ItemCard;

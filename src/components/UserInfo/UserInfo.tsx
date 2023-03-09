@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, OverlayTrigger, Placeholder, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { AiFillLock } from 'react-icons/ai';
@@ -133,4 +133,4 @@ function UserInfo({ avatar, username, roles }: UserInfoProps) {
   );
 }
 
-export default memo(UserInfo);
+export default UserInfo;

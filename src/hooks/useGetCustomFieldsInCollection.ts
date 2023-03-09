@@ -33,7 +33,7 @@ const useGetCustomFieldsInCollection = (
   }, [collectionId]);
 
   useEffect(() => {
-    if (fieldsInCollection && fieldsInCollection.length > 0 && isSuccessGetFields) {
+    if (fieldsInCollection && isSuccessGetFields) {
       const fields = fieldsInCollection.map((field) => ({
         id: field._id,
         type: field.type,

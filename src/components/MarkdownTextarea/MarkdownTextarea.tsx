@@ -1,5 +1,5 @@
 import MDEditor from '@uiw/react-md-editor';
-import React, { memo } from 'react';
+import React from 'react';
 
 interface MarkdownTextareaProps {
   value: string;
@@ -20,4 +20,4 @@ function MarkdownTextarea({ value, setValue }: MarkdownTextareaProps) {
   );
 }
 
-export default memo(MarkdownTextarea);
+export default MarkdownTextarea;

@@ -1,6 +1,6 @@
 import MDEditor from '@uiw/react-md-editor';
 import clsx from 'clsx';
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { Image, Placeholder } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -110,4 +110,4 @@ function CollectionInfo() {
   );
 }
 
-export default memo(CollectionInfo);
+export default CollectionInfo;

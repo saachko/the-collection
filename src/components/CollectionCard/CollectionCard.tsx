@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { memo } from 'react';
+import React from 'react';
 import { Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -111,4 +111,4 @@ function CollectionCard({ collection }: CollectionCardProps) {
   );
 }
 
-export default memo(CollectionCard);
+export default CollectionCard;

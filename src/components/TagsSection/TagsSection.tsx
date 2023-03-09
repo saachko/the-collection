@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import TagsContainer from 'components/TagsContainer/TagsContainer';
@@ -21,4 +21,4 @@ function TagsSection() {
   );
 }
 
-export default memo(TagsSection);
+export default TagsSection;

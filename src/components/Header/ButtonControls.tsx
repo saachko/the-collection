@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -65,4 +65,4 @@ function ButtonControls() {
   );
 }
 
-export default memo(ButtonControls);
+export default ButtonControls;
