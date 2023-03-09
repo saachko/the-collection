@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { setSelectedItem } from 'redux/slices/itemSlice';
@@ -42,4 +42,4 @@ function ItemCardsContainer({ items }: ItemCardsContainerProps) {
   );
 }
 
-export default memo(ItemCardsContainer);
+export default ItemCardsContainer;

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, CloseButton, Image } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -100,4 +100,4 @@ function CommentItem({ comment }: CommentItemProps) {
   );
 }
 
-export default memo(CommentItem);
+export default CommentItem;

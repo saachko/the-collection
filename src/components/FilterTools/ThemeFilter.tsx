@@ -1,6 +1,6 @@
 import { ActionCreatorWithPayload, ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 import clsx from 'clsx';
-import React, { memo, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GrFormClose } from 'react-icons/gr';
 import ReactSelect from 'react-select';
@@ -103,4 +103,4 @@ ThemeFilter.defaultProps = {
   setDefaultSorting: setDefaultCollectionsSorting,
 };
 
-export default memo(ThemeFilter);
+export default ThemeFilter;

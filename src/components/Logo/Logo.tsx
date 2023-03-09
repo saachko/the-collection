@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,4 +22,4 @@ function Logo() {
   );
 }
 
-export default memo(Logo);
+export default Logo;

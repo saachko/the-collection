@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { setFilterTag } from 'redux/slices/filterSlice';
@@ -39,4 +39,4 @@ function TagsContainer({ tags }: TagsContainerProps) {
   );
 }
 
-export default memo(TagsContainer);
+export default TagsContainer;

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldErrors } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -18,12 +18,12 @@ function ValidationError({ errors, field }: ValidationErrorProps) {
 
   return (
     <Form.Control.Feedback type="invalid" id={`${field}${language}`}>
-      {errors[field]?.type === 'required' && `${t('required', { value: t(field) })}`}
-      {errors[field]?.type === 'minLength' && `${t('minLength', { value: t(field) })}`}
-      {errors[field]?.type === 'maxLength' && `${t('maxLength', { value: t(field) })}`}
+      {errors[field]?.type &&
+        errors[field]?.type !== 'pattern' &&
+        `${t(`${errors[field]?.type}`, { value: t(field) })}`}
       {field === 'email' && errors[field]?.type === 'pattern' && `${t('patternEmail')}`}
     </Form.Control.Feedback>
   );
 }
 
-export default memo(ValidationError);
+export default ValidationError;

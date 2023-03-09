@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import EmptyContainer from 'components/EmptyContainer/EmptyContainer';
@@ -24,4 +24,4 @@ function CommentsContainer() {
   );
 }
 
-export default memo(CommentsContainer);
+export default CommentsContainer;

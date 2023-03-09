@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { CSVLink } from 'react-csv';
 import { useTranslation } from 'react-i18next';
@@ -72,4 +72,4 @@ function CsvButton() {
   );
 }
 
-export default memo(CsvButton);
+export default CsvButton;

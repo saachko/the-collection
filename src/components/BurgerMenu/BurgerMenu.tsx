@@ -34,6 +34,13 @@ function BurgerMenu() {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('translation');
 
+  const submitLogout = () => {
+    dispatch(setSelectedUser(null));
+    dispatch(setDefaultUsersSorting());
+    dispatch(setDefaultUsersFilters());
+    dispatch(setLoggedOut());
+  };
+
   const handleOnClick = (
     actionId: string,
     path?: string,
@@ -53,13 +60,6 @@ function BurgerMenu() {
       }
       case 'logout': {
         setConfirmLogOutNotification(true);
-        break;
-      }
-      case 'submitLogout': {
-        dispatch(setSelectedUser(null));
-        dispatch(setDefaultUsersSorting());
-        dispatch(setDefaultUsersFilters());
-        dispatch(setLoggedOut());
         break;
       }
       default: {
@@ -128,7 +128,7 @@ function BurgerMenu() {
       <ConfirmNotification
         isShown={confirmLogOutNotification}
         setShown={setConfirmLogOutNotification}
-        onConfirm={() => handleOnClick('submitLogout')}
+        onConfirm={submitLogout}
         text={t('header.confirmLogOut')}
       />
     </>

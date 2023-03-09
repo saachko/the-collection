@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Form, Image } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { IoMdSend } from 'react-icons/io';
@@ -63,4 +63,4 @@ function CommentTextarea() {
   );
 }
 
-export default memo(CommentTextarea);
+export default CommentTextarea;

@@ -1,6 +1,6 @@
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import clsx from 'clsx';
-import React, { memo } from 'react';
+import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
@@ -96,4 +96,4 @@ SortToolbar.defaultProps = {
   setCollectionsSorting: setCollectionsSortingType,
 };
 
-export default memo(SortToolbar);
+export default SortToolbar;
