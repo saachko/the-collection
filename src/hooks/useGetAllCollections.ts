@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { useLazyGetAllCollectionsQuery } from 'redux/api/collectionApiSlice';
+
 import { setBiggestCollections, setCollections } from 'redux/slices/collectionSlice';
 
 import { collectionsIndex } from 'utils/constants';
